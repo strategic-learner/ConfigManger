@@ -1,0 +1,74 @@
+﻿@model MVC02.Models.App
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>App</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ITIL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ITIL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.abbr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.abbr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.createDT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.createDT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.createUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.createUser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.updateDT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.updateDT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.updateUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.updateUser)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

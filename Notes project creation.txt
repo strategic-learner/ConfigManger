@@ -1,0 +1,47 @@
+"MVC02" 2016.11.05 22:43
+ASP.NET web application
+=======================================================
+ASP.NET 4.5.2 Templates
+MVC5=true
+NoAuthentication
+Add folders and core references for:
+	Webforms=false
+	MVC=true
+	Web API=true
+add unit tests=false
+Azure=false
+
+
+
+=== comparison from last template ==================================================
+App_Start
+	+IdentityConfig.cs
+	+Startup.Auth.cs
+Controllers
+	+AccountController.cs
+	+ManageController.cs
+Models
+	+AccountViewModels.cs
+	+IdentityModels.cs
+	+ManageViewModels.cs
+Views
+	+Account
+	+Manage
++Startup.cs
+Web.config
+	+  <connectionStrings>    <add name="DefaultConnection" connectionString="Data Source=(LocalDb)\MSSQLLocalDB; ... </connectionStrings>
+
+
+
+
+
+
+EF6
+Microsoft.AspNet.Identity.EntityFramework
+Di
+//--Repo
+//--Uow
+OWIN
+
+
+ 
