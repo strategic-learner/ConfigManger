@@ -1,0 +1,1445 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Edmx Version="3.0" xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <Runtime>
+    <ConceptualModels>
+      <Schema Namespace="MVC02.Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="App" customannotation:ClrType="MVC02.Models.App, MVC02, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="ITIL" Type="Int32" Nullable="false" />
+          <Property Name="abbr" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="descr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="createDT" Type="DateTime" Nullable="false" />
+          <Property Name="createUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="updateDT" Type="DateTime" Nullable="false" />
+          <Property Name="updateUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Configs" Relationship="Self.Config_App" FromRole="Config_App_Target" ToRole="Config_App_Source" />
+          <NavigationProperty Name="Executables" Relationship="Self.Executable_App" FromRole="Executable_App_Target" ToRole="Executable_App_Source" />
+          <NavigationProperty Name="Plans" Relationship="Self.App_Plans" FromRole="App_Plans_Source" ToRole="App_Plans_Target" />
+        </EntityType>
+        <EntityType Name="Config" customannotation:ClrType="MVC02.Models.Config, MVC02, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="jobID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppID" Type="Guid" Nullable="false" />
+          <Property Name="ParamVersionID" Type="Guid" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="DescriptonShort" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DescriptonFull" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="effDT" Type="DateTime" Nullable="false" />
+          <Property Name="trmDT" Type="DateTime" Nullable="false" />
+          <Property Name="createDT" Type="DateTime" Nullable="false" />
+          <Property Name="createUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="updateDT" Type="DateTime" Nullable="false" />
+          <Property Name="updateUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="App" Relationship="Self.Config_App" FromRole="Config_App_Source" ToRole="Config_App_Target" />
+          <NavigationProperty Name="ConfigParams" Relationship="Self.ConfigParam_Config" FromRole="ConfigParam_Config_Target" ToRole="ConfigParam_Config_Source" />
+          <NavigationProperty Name="Executables" Relationship="Self.Config_Executables" FromRole="Config_Executables_Source" ToRole="Config_Executables_Target" />
+          <NavigationProperty Name="JPlanLOBs" Relationship="Self.Config_JPlanLOBs" FromRole="Config_JPlanLOBs_Source" ToRole="Config_JPlanLOBs_Target" />
+          <NavigationProperty Name="ParamVersion" Relationship="Self.Config_ParamVersion" FromRole="Config_ParamVersion_Source" ToRole="Config_ParamVersion_Target" />
+          <NavigationProperty Name="Plans" Relationship="Self.Config_Plans" FromRole="Config_Plans_Source" ToRole="Config_Plans_Target" />
+        </EntityType>
+        <EntityType Name="ConfigParam" customannotation:ClrType="MVC02.Models.ConfigParam, MVC02, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Abstract="true">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="ConfigID" Type="Guid" Nullable="false" />
+          <Property Name="effDT" Type="DateTime" Nullable="false" />
+          <Property Name="trmDT" Type="DateTime" Nullable="false" />
+          <Property Name="ParamDefinitionsID" Type="Guid" Nullable="false" />
+          <Property Name="isRefOnly" Type="Boolean" Nullable="false" />
+          <Property Name="value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="valueUseageComments" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="createDT" Type="DateTime" Nullable="false" />
+          <Property Name="createUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="updateDT" Type="DateTime" Nullable="false" />
+          <Property Name="updateUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Config" Relationship="Self.ConfigParam_Config" FromRole="ConfigParam_Config_Source" ToRole="ConfigParam_Config_Target" />
+          <NavigationProperty Name="ParamDefinitions" Relationship="Self.ConfigParam_ParamDefinitions" FromRole="ConfigParam_ParamDefinitions_Source" ToRole="ConfigParam_ParamDefinitions_Target" />
+        </EntityType>
+        <EntityType Name="ParamDefinition" customannotation:ClrType="MVC02.Models.ParamDefinition, MVC02, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="ParamVersionID" Type="Guid" Nullable="false" />
+          <Property Name="ParamSequence" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParamTypeID" Type="Guid" Nullable="false" />
+          <Property Name="variableName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="intendedUse" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="createDT" Type="DateTime" Nullable="false" />
+          <Property Name="createUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="updateDT" Type="DateTime" Nullable="false" />
+          <Property Name="updateUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ConfigParams" Relationship="Self.ConfigParam_ParamDefinitions" FromRole="ConfigParam_ParamDefinitions_Target" ToRole="ConfigParam_ParamDefinitions_Source" />
+          <NavigationProperty Name="ParamType" Relationship="Self.ParamDefinition_ParamType" FromRole="ParamDefinition_ParamType_Source" ToRole="ParamDefinition_ParamType_Target" />
+          <NavigationProperty Name="ParamVersion" Relationship="Self.ParamDefinition_ParamVersion" FromRole="ParamDefinition_ParamVersion_Source" ToRole="ParamDefinition_ParamVersion_Target" />
+        </EntityType>
+        <EntityType Name="ParamType" customannotation:ClrType="MVC02.Models.ParamType, MVC02, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="createDT" Type="DateTime" Nullable="false" />
+          <Property Name="createUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="updateDT" Type="DateTime" Nullable="false" />
+          <Property Name="updateUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ParamDefinitions" Relationship="Self.ParamDefinition_ParamType" FromRole="ParamDefinition_ParamType_Target" ToRole="ParamDefinition_ParamType_Source" />
+        </EntityType>
+        <EntityType Name="ParamVersion" customannotation:ClrType="MVC02.Models.ParamVersion, MVC02, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Version" Type="Single" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="createDT" Type="DateTime" Nullable="false" />
+          <Property Name="createUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="updateDT" Type="DateTime" Nullable="false" />
+          <Property Name="updateUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Configs" Relationship="Self.Config_ParamVersion" FromRole="Config_ParamVersion_Target" ToRole="Config_ParamVersion_Source" />
+          <NavigationProperty Name="Executables" Relationship="Self.Executable_ParamVersion" FromRole="Executable_ParamVersion_Target" ToRole="Executable_ParamVersion_Source" />
+          <NavigationProperty Name="ParamDefinitions" Relationship="Self.ParamDefinition_ParamVersion" FromRole="ParamDefinition_ParamVersion_Target" ToRole="ParamDefinition_ParamVersion_Source" />
+        </EntityType>
+        <EntityType Name="Executable" customannotation:ClrType="MVC02.Models.Executable, MVC02, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="ParamVersionID" Type="Guid" Nullable="false" />
+          <Property Name="AppID" Type="Guid" Nullable="false" />
+          <Property Name="nameWExtension" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="createDT" Type="DateTime" Nullable="false" />
+          <Property Name="createUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="updateDT" Type="DateTime" Nullable="false" />
+          <Property Name="updateUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="App" Relationship="Self.Executable_App" FromRole="Executable_App_Source" ToRole="Executable_App_Target" />
+          <NavigationProperty Name="Configs" Relationship="Self.Config_Executables" FromRole="Config_Executables_Target" ToRole="Config_Executables_Source" />
+          <NavigationProperty Name="ParamVersion" Relationship="Self.Executable_ParamVersion" FromRole="Executable_ParamVersion_Source" ToRole="Executable_ParamVersion_Target" />
+          <NavigationProperty Name="PathServers" Relationship="Self.Executable_PathServers" FromRole="Executable_PathServers_Source" ToRole="Executable_PathServers_Target" />
+          <NavigationProperty Name="PrimaryFunctions" Relationship="Self.Executable_PrimaryFunctions" FromRole="Executable_PrimaryFunctions_Source" ToRole="Executable_PrimaryFunctions_Target" />
+        </EntityType>
+        <EntityType Name="PathServer" customannotation:ClrType="MVC02.Models.PathServer, MVC02, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="server" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="path" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="createDT" Type="DateTime" Nullable="false" />
+          <Property Name="createUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="updateDT" Type="DateTime" Nullable="false" />
+          <Property Name="updateUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Executables" Relationship="Self.Executable_PathServers" FromRole="Executable_PathServers_Target" ToRole="Executable_PathServers_Source" />
+          <NavigationProperty Name="PathShare" Relationship="Self.PathServer_PathShare" FromRole="PathServer_PathShare_Source" ToRole="PathServer_PathShare_Target" />
+        </EntityType>
+        <EntityType Name="PathShare" customannotation:ClrType="MVC02.Models.PathShare, MVC02, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="share" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="path" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="createDT" Type="DateTime" Nullable="false" />
+          <Property Name="createUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="updateDT" Type="DateTime" Nullable="false" />
+          <Property Name="updateUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PathServer" Relationship="Self.PathServer_PathShare" FromRole="PathServer_PathShare_Target" ToRole="PathServer_PathShare_Source" />
+        </EntityType>
+        <EntityType Name="PrimaryFunction" customannotation:ClrType="MVC02.Models.PrimaryFunction, MVC02, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="abbr" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="createDT" Type="DateTime" Nullable="false" />
+          <Property Name="createUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="updateDT" Type="DateTime" Nullable="false" />
+          <Property Name="updateUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Executables" Relationship="Self.Executable_PrimaryFunctions" FromRole="Executable_PrimaryFunctions_Target" ToRole="Executable_PrimaryFunctions_Source" />
+        </EntityType>
+        <EntityType Name="ConfigParamDEV1" customannotation:ClrType="MVC02.Models.ConfigParamDEV1, MVC02, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" BaseType="Self.ConfigParam" />
+        <EntityType Name="ConfigParamDEV2" customannotation:ClrType="MVC02.Models.ConfigParamDEV2, MVC02, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" BaseType="Self.ConfigParam" />
+        <EntityType Name="ConfigParamPROD" customannotation:ClrType="MVC02.Models.ConfigParamPROD, MVC02, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" BaseType="Self.ConfigParam" />
+        <EntityType Name="ConfigParamQA1" customannotation:ClrType="MVC02.Models.ConfigParamQA1, MVC02, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" BaseType="Self.ConfigParam" />
+        <EntityType Name="ConfigParamQA2" customannotation:ClrType="MVC02.Models.ConfigParamQA2, MVC02, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" BaseType="Self.ConfigParam" />
+        <EntityType Name="ConfigParamSTG1" customannotation:ClrType="MVC02.Models.ConfigParamSTG1, MVC02, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" BaseType="Self.ConfigParam" />
+        <EntityType Name="ConfigParamSTG2" customannotation:ClrType="MVC02.Models.ConfigParamSTG2, MVC02, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" BaseType="Self.ConfigParam" />
+        <EntityType Name="JPlanLOB" customannotation:ClrType="MVC02.Models.JPlanLOB, MVC02, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="planID" Type="Guid" Nullable="false" />
+          <Property Name="LineOfBusinessID" Type="Guid" Nullable="false" />
+          <Property Name="createDT" Type="DateTime" Nullable="false" />
+          <Property Name="createUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="updateDT" Type="DateTime" Nullable="false" />
+          <Property Name="updateUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Configs" Relationship="Self.Config_JPlanLOBs" FromRole="Config_JPlanLOBs_Target" ToRole="Config_JPlanLOBs_Source" />
+          <NavigationProperty Name="LineOfBusiness" Relationship="Self.LineOfBusiness_JPlanLOB" FromRole="LineOfBusiness_JPlanLOB_Target" ToRole="LineOfBusiness_JPlanLOB_Source" />
+          <NavigationProperty Name="Plans" Relationship="Self.Plan_JPlanLOB" FromRole="Plan_JPlanLOB_Target" ToRole="Plan_JPlanLOB_Source" />
+        </EntityType>
+        <EntityType Name="LineOfBusiness" customannotation:ClrType="MVC02.Models.LineOfBusiness, MVC02, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="abbr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="descr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="createDT" Type="DateTime" Nullable="false" />
+          <Property Name="createUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="updateDT" Type="DateTime" Nullable="false" />
+          <Property Name="updateUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="JPlanLOB" Relationship="Self.LineOfBusiness_JPlanLOB" FromRole="LineOfBusiness_JPlanLOB_Source" ToRole="LineOfBusiness_JPlanLOB_Target" />
+        </EntityType>
+        <EntityType Name="Plan" customannotation:ClrType="MVC02.Models.Plan, MVC02, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="abbr" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="descr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="createDT" Type="DateTime" Nullable="false" />
+          <Property Name="createUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="updateDT" Type="DateTime" Nullable="false" />
+          <Property Name="updateUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Apps" Relationship="Self.App_Plans" FromRole="App_Plans_Target" ToRole="App_Plans_Source" />
+          <NavigationProperty Name="Configs" Relationship="Self.Config_Plans" FromRole="Config_Plans_Target" ToRole="Config_Plans_Source" />
+          <NavigationProperty Name="JPlanLOB" Relationship="Self.Plan_JPlanLOB" FromRole="Plan_JPlanLOB_Source" ToRole="Plan_JPlanLOB_Target" />
+        </EntityType>
+        <Association Name="Config_App">
+          <End Role="Config_App_Source" Type="Self.Config" Multiplicity="*" />
+          <End Role="Config_App_Target" Type="Self.App" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Config_App_Target">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Config_App_Source">
+              <PropertyRef Name="AppID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ConfigParam_Config">
+          <End Role="ConfigParam_Config_Source" Type="Self.ConfigParam" Multiplicity="*" />
+          <End Role="ConfigParam_Config_Target" Type="Self.Config" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="ConfigParam_Config_Target">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ConfigParam_Config_Source">
+              <PropertyRef Name="ConfigID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ParamDefinition_ParamType">
+          <End Role="ParamDefinition_ParamType_Source" Type="Self.ParamDefinition" Multiplicity="*" />
+          <End Role="ParamDefinition_ParamType_Target" Type="Self.ParamType" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="ParamDefinition_ParamType_Target">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ParamDefinition_ParamType_Source">
+              <PropertyRef Name="ParamTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Executable_App">
+          <End Role="Executable_App_Source" Type="Self.Executable" Multiplicity="*" />
+          <End Role="Executable_App_Target" Type="Self.App" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Executable_App_Target">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Executable_App_Source">
+              <PropertyRef Name="AppID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Executable_ParamVersion">
+          <End Role="Executable_ParamVersion_Source" Type="Self.Executable" Multiplicity="*" />
+          <End Role="Executable_ParamVersion_Target" Type="Self.ParamVersion" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Executable_ParamVersion_Target">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Executable_ParamVersion_Source">
+              <PropertyRef Name="ParamVersionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PathServer_PathShare">
+          <End Role="PathServer_PathShare_Source" Type="Self.PathServer" Multiplicity="*" />
+          <End Role="PathServer_PathShare_Target" Type="Self.PathShare" Multiplicity="*" />
+        </Association>
+        <Association Name="Executable_PathServers">
+          <End Role="Executable_PathServers_Source" Type="Self.Executable" Multiplicity="*" />
+          <End Role="Executable_PathServers_Target" Type="Self.PathServer" Multiplicity="*" />
+        </Association>
+        <Association Name="Executable_PrimaryFunctions">
+          <End Role="Executable_PrimaryFunctions_Source" Type="Self.Executable" Multiplicity="*" />
+          <End Role="Executable_PrimaryFunctions_Target" Type="Self.PrimaryFunction" Multiplicity="*" />
+        </Association>
+        <Association Name="ParamDefinition_ParamVersion">
+          <End Role="ParamDefinition_ParamVersion_Source" Type="Self.ParamDefinition" Multiplicity="*" />
+          <End Role="ParamDefinition_ParamVersion_Target" Type="Self.ParamVersion" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="ParamDefinition_ParamVersion_Target">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ParamDefinition_ParamVersion_Source">
+              <PropertyRef Name="ParamVersionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ConfigParam_ParamDefinitions">
+          <End Role="ConfigParam_ParamDefinitions_Source" Type="Self.ConfigParam" Multiplicity="*" />
+          <End Role="ConfigParam_ParamDefinitions_Target" Type="Self.ParamDefinition" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="ConfigParam_ParamDefinitions_Target">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ConfigParam_ParamDefinitions_Source">
+              <PropertyRef Name="ParamDefinitionsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Config_Executables">
+          <End Role="Config_Executables_Source" Type="Self.Config" Multiplicity="*" />
+          <End Role="Config_Executables_Target" Type="Self.Executable" Multiplicity="*" />
+        </Association>
+        <Association Name="LineOfBusiness_JPlanLOB">
+          <End Role="LineOfBusiness_JPlanLOB_Source" Type="Self.LineOfBusiness" Multiplicity="1" />
+          <End Role="LineOfBusiness_JPlanLOB_Target" Type="Self.JPlanLOB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LineOfBusiness_JPlanLOB_Source">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LineOfBusiness_JPlanLOB_Target">
+              <PropertyRef Name="LineOfBusinessID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Plan_JPlanLOB">
+          <End Role="Plan_JPlanLOB_Source" Type="Self.Plan" Multiplicity="1" />
+          <End Role="Plan_JPlanLOB_Target" Type="Self.JPlanLOB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan_JPlanLOB_Source">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Plan_JPlanLOB_Target">
+              <PropertyRef Name="planID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Config_JPlanLOBs">
+          <End Role="Config_JPlanLOBs_Source" Type="Self.Config" Multiplicity="*" />
+          <End Role="Config_JPlanLOBs_Target" Type="Self.JPlanLOB" Multiplicity="*" />
+        </Association>
+        <Association Name="Config_ParamVersion">
+          <End Role="Config_ParamVersion_Source" Type="Self.Config" Multiplicity="*" />
+          <End Role="Config_ParamVersion_Target" Type="Self.ParamVersion" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Config_ParamVersion_Target">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Config_ParamVersion_Source">
+              <PropertyRef Name="ParamVersionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Config_Plans">
+          <End Role="Config_Plans_Source" Type="Self.Config" Multiplicity="*" />
+          <End Role="Config_Plans_Target" Type="Self.Plan" Multiplicity="*" />
+        </Association>
+        <Association Name="App_Plans">
+          <End Role="App_Plans_Source" Type="Self.App" Multiplicity="*" />
+          <End Role="App_Plans_Target" Type="Self.Plan" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="MVC02Context" customannotation:UseClrTypes="true">
+          <EntitySet Name="app" EntityType="Self.App" />
+          <EntitySet Name="config" EntityType="Self.Config" />
+          <EntitySet Name="ConfigParams" EntityType="Self.ConfigParam" />
+          <EntitySet Name="paramDefinitions" EntityType="Self.ParamDefinition" />
+          <EntitySet Name="paramType" EntityType="Self.ParamType" />
+          <EntitySet Name="paramVersion" EntityType="Self.ParamVersion" />
+          <EntitySet Name="executable" EntityType="Self.Executable" />
+          <EntitySet Name="pathServer" EntityType="Self.PathServer" />
+          <EntitySet Name="pathShare" EntityType="Self.PathShare" />
+          <EntitySet Name="executableFunctions" EntityType="Self.PrimaryFunction" />
+          <EntitySet Name="JPlanLOBs" EntityType="Self.JPlanLOB" />
+          <EntitySet Name="LineOfBusinesses" EntityType="Self.LineOfBusiness" />
+          <EntitySet Name="plan" EntityType="Self.Plan" />
+          <AssociationSet Name="Config_App" Association="Self.Config_App">
+            <End Role="Config_App_Source" EntitySet="config" />
+            <End Role="Config_App_Target" EntitySet="app" />
+          </AssociationSet>
+          <AssociationSet Name="ConfigParam_Config" Association="Self.ConfigParam_Config">
+            <End Role="ConfigParam_Config_Source" EntitySet="ConfigParams" />
+            <End Role="ConfigParam_Config_Target" EntitySet="config" />
+          </AssociationSet>
+          <AssociationSet Name="ParamDefinition_ParamType" Association="Self.ParamDefinition_ParamType">
+            <End Role="ParamDefinition_ParamType_Source" EntitySet="paramDefinitions" />
+            <End Role="ParamDefinition_ParamType_Target" EntitySet="paramType" />
+          </AssociationSet>
+          <AssociationSet Name="Executable_App" Association="Self.Executable_App">
+            <End Role="Executable_App_Source" EntitySet="executable" />
+            <End Role="Executable_App_Target" EntitySet="app" />
+          </AssociationSet>
+          <AssociationSet Name="Executable_ParamVersion" Association="Self.Executable_ParamVersion">
+            <End Role="Executable_ParamVersion_Source" EntitySet="executable" />
+            <End Role="Executable_ParamVersion_Target" EntitySet="paramVersion" />
+          </AssociationSet>
+          <AssociationSet Name="PathServer_PathShare" Association="Self.PathServer_PathShare">
+            <End Role="PathServer_PathShare_Source" EntitySet="pathServer" />
+            <End Role="PathServer_PathShare_Target" EntitySet="pathShare" />
+          </AssociationSet>
+          <AssociationSet Name="Executable_PathServers" Association="Self.Executable_PathServers">
+            <End Role="Executable_PathServers_Source" EntitySet="executable" />
+            <End Role="Executable_PathServers_Target" EntitySet="pathServer" />
+          </AssociationSet>
+          <AssociationSet Name="Executable_PrimaryFunctions" Association="Self.Executable_PrimaryFunctions">
+            <End Role="Executable_PrimaryFunctions_Source" EntitySet="executable" />
+            <End Role="Executable_PrimaryFunctions_Target" EntitySet="executableFunctions" />
+          </AssociationSet>
+          <AssociationSet Name="ParamDefinition_ParamVersion" Association="Self.ParamDefinition_ParamVersion">
+            <End Role="ParamDefinition_ParamVersion_Source" EntitySet="paramDefinitions" />
+            <End Role="ParamDefinition_ParamVersion_Target" EntitySet="paramVersion" />
+          </AssociationSet>
+          <AssociationSet Name="ConfigParam_ParamDefinitions" Association="Self.ConfigParam_ParamDefinitions">
+            <End Role="ConfigParam_ParamDefinitions_Source" EntitySet="ConfigParams" />
+            <End Role="ConfigParam_ParamDefinitions_Target" EntitySet="paramDefinitions" />
+          </AssociationSet>
+          <AssociationSet Name="Config_Executables" Association="Self.Config_Executables">
+            <End Role="Config_Executables_Source" EntitySet="config" />
+            <End Role="Config_Executables_Target" EntitySet="executable" />
+          </AssociationSet>
+          <AssociationSet Name="LineOfBusiness_JPlanLOB" Association="Self.LineOfBusiness_JPlanLOB">
+            <End Role="LineOfBusiness_JPlanLOB_Source" EntitySet="LineOfBusinesses" />
+            <End Role="LineOfBusiness_JPlanLOB_Target" EntitySet="JPlanLOBs" />
+          </AssociationSet>
+          <AssociationSet Name="Plan_JPlanLOB" Association="Self.Plan_JPlanLOB">
+            <End Role="Plan_JPlanLOB_Source" EntitySet="plan" />
+            <End Role="Plan_JPlanLOB_Target" EntitySet="JPlanLOBs" />
+          </AssociationSet>
+          <AssociationSet Name="Config_JPlanLOBs" Association="Self.Config_JPlanLOBs">
+            <End Role="Config_JPlanLOBs_Source" EntitySet="config" />
+            <End Role="Config_JPlanLOBs_Target" EntitySet="JPlanLOBs" />
+          </AssociationSet>
+          <AssociationSet Name="Config_ParamVersion" Association="Self.Config_ParamVersion">
+            <End Role="Config_ParamVersion_Source" EntitySet="config" />
+            <End Role="Config_ParamVersion_Target" EntitySet="paramVersion" />
+          </AssociationSet>
+          <AssociationSet Name="Config_Plans" Association="Self.Config_Plans">
+            <End Role="Config_Plans_Source" EntitySet="config" />
+            <End Role="Config_Plans_Target" EntitySet="plan" />
+          </AssociationSet>
+          <AssociationSet Name="App_Plans" Association="Self.App_Plans">
+            <End Role="App_Plans_Source" EntitySet="app" />
+            <End Role="App_Plans_Target" EntitySet="plan" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </ConceptualModels>
+    <Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CodeFirstDatabase" CdmEntityContainer="MVC02Context">
+          <EntitySetMapping Name="app">
+            <EntityTypeMapping TypeName="MVC02.Models.App">
+              <MappingFragment StoreEntitySet="App">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ITIL" ColumnName="ITIL" />
+                <ScalarProperty Name="abbr" ColumnName="abbr" />
+                <ScalarProperty Name="descr" ColumnName="descr" />
+                <ScalarProperty Name="createDT" ColumnName="createDT" />
+                <ScalarProperty Name="createUser" ColumnName="createUser" />
+                <ScalarProperty Name="updateDT" ColumnName="updateDT" />
+                <ScalarProperty Name="updateUser" ColumnName="updateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="config">
+            <EntityTypeMapping TypeName="MVC02.Models.Config">
+              <MappingFragment StoreEntitySet="Config">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="jobID" ColumnName="jobID" />
+                <ScalarProperty Name="AppID" ColumnName="AppID" />
+                <ScalarProperty Name="ParamVersionID" ColumnName="ParamVersionID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="DescriptonShort" ColumnName="DescriptonShort" />
+                <ScalarProperty Name="DescriptonFull" ColumnName="DescriptonFull" />
+                <ScalarProperty Name="effDT" ColumnName="effDT" />
+                <ScalarProperty Name="trmDT" ColumnName="trmDT" />
+                <ScalarProperty Name="createDT" ColumnName="createDT" />
+                <ScalarProperty Name="createUser" ColumnName="createUser" />
+                <ScalarProperty Name="updateDT" ColumnName="updateDT" />
+                <ScalarProperty Name="updateUser" ColumnName="updateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConfigParams">
+            <EntityTypeMapping TypeName="IsTypeOf(MVC02.Models.ConfigParam)">
+              <MappingFragment StoreEntitySet="ConfigParam">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ConfigID" ColumnName="ConfigID" />
+                <ScalarProperty Name="effDT" ColumnName="effDT" />
+                <ScalarProperty Name="trmDT" ColumnName="trmDT" />
+                <ScalarProperty Name="ParamDefinitionsID" ColumnName="ParamDefinitionsID" />
+                <ScalarProperty Name="isRefOnly" ColumnName="isRefOnly" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="valueUseageComments" ColumnName="valueUseageComments" />
+                <ScalarProperty Name="createDT" ColumnName="createDT" />
+                <ScalarProperty Name="createUser" ColumnName="createUser" />
+                <ScalarProperty Name="updateDT" ColumnName="updateDT" />
+                <ScalarProperty Name="updateUser" ColumnName="updateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="MVC02.Models.ConfigParamDEV1">
+              <MappingFragment StoreEntitySet="ConfigParam">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <Condition Value="ConfigParamDEV1" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="MVC02.Models.ConfigParamDEV2">
+              <MappingFragment StoreEntitySet="ConfigParam">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <Condition Value="ConfigParamDEV2" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="MVC02.Models.ConfigParamPROD">
+              <MappingFragment StoreEntitySet="ConfigParam">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <Condition Value="ConfigParamPROD" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="MVC02.Models.ConfigParamQA1">
+              <MappingFragment StoreEntitySet="ConfigParam">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <Condition Value="ConfigParamQA1" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="MVC02.Models.ConfigParamQA2">
+              <MappingFragment StoreEntitySet="ConfigParam">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <Condition Value="ConfigParamQA2" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="MVC02.Models.ConfigParamSTG1">
+              <MappingFragment StoreEntitySet="ConfigParam">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <Condition Value="ConfigParamSTG1" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="MVC02.Models.ConfigParamSTG2">
+              <MappingFragment StoreEntitySet="ConfigParam">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <Condition Value="ConfigParamSTG2" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="paramDefinitions">
+            <EntityTypeMapping TypeName="MVC02.Models.ParamDefinition">
+              <MappingFragment StoreEntitySet="ParamDefinition">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ParamVersionID" ColumnName="ParamVersionID" />
+                <ScalarProperty Name="ParamSequence" ColumnName="ParamSequence" />
+                <ScalarProperty Name="ParamTypeID" ColumnName="ParamTypeID" />
+                <ScalarProperty Name="variableName" ColumnName="variableName" />
+                <ScalarProperty Name="intendedUse" ColumnName="intendedUse" />
+                <ScalarProperty Name="createDT" ColumnName="createDT" />
+                <ScalarProperty Name="createUser" ColumnName="createUser" />
+                <ScalarProperty Name="updateDT" ColumnName="updateDT" />
+                <ScalarProperty Name="updateUser" ColumnName="updateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="paramType">
+            <EntityTypeMapping TypeName="MVC02.Models.ParamType">
+              <MappingFragment StoreEntitySet="ParamType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="createDT" ColumnName="createDT" />
+                <ScalarProperty Name="createUser" ColumnName="createUser" />
+                <ScalarProperty Name="updateDT" ColumnName="updateDT" />
+                <ScalarProperty Name="updateUser" ColumnName="updateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="paramVersion">
+            <EntityTypeMapping TypeName="MVC02.Models.ParamVersion">
+              <MappingFragment StoreEntitySet="ParamVersion">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="createDT" ColumnName="createDT" />
+                <ScalarProperty Name="createUser" ColumnName="createUser" />
+                <ScalarProperty Name="updateDT" ColumnName="updateDT" />
+                <ScalarProperty Name="updateUser" ColumnName="updateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="executable">
+            <EntityTypeMapping TypeName="MVC02.Models.Executable">
+              <MappingFragment StoreEntitySet="Executable">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ParamVersionID" ColumnName="ParamVersionID" />
+                <ScalarProperty Name="AppID" ColumnName="AppID" />
+                <ScalarProperty Name="nameWExtension" ColumnName="nameWExtension" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="createDT" ColumnName="createDT" />
+                <ScalarProperty Name="createUser" ColumnName="createUser" />
+                <ScalarProperty Name="updateDT" ColumnName="updateDT" />
+                <ScalarProperty Name="updateUser" ColumnName="updateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pathServer">
+            <EntityTypeMapping TypeName="MVC02.Models.PathServer">
+              <MappingFragment StoreEntitySet="PathServer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="server" ColumnName="server" />
+                <ScalarProperty Name="path" ColumnName="path" />
+                <ScalarProperty Name="createDT" ColumnName="createDT" />
+                <ScalarProperty Name="createUser" ColumnName="createUser" />
+                <ScalarProperty Name="updateDT" ColumnName="updateDT" />
+                <ScalarProperty Name="updateUser" ColumnName="updateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pathShare">
+            <EntityTypeMapping TypeName="MVC02.Models.PathShare">
+              <MappingFragment StoreEntitySet="PathShare">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="share" ColumnName="share" />
+                <ScalarProperty Name="path" ColumnName="path" />
+                <ScalarProperty Name="createDT" ColumnName="createDT" />
+                <ScalarProperty Name="createUser" ColumnName="createUser" />
+                <ScalarProperty Name="updateDT" ColumnName="updateDT" />
+                <ScalarProperty Name="updateUser" ColumnName="updateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="executableFunctions">
+            <EntityTypeMapping TypeName="MVC02.Models.PrimaryFunction">
+              <MappingFragment StoreEntitySet="PrimaryFunction">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="abbr" ColumnName="abbr" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="createDT" ColumnName="createDT" />
+                <ScalarProperty Name="createUser" ColumnName="createUser" />
+                <ScalarProperty Name="updateDT" ColumnName="updateDT" />
+                <ScalarProperty Name="updateUser" ColumnName="updateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JPlanLOBs">
+            <EntityTypeMapping TypeName="MVC02.Models.JPlanLOB">
+              <MappingFragment StoreEntitySet="JPlanLOB">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="planID" ColumnName="planID" />
+                <ScalarProperty Name="LineOfBusinessID" ColumnName="LineOfBusinessID" />
+                <ScalarProperty Name="createDT" ColumnName="createDT" />
+                <ScalarProperty Name="createUser" ColumnName="createUser" />
+                <ScalarProperty Name="updateDT" ColumnName="updateDT" />
+                <ScalarProperty Name="updateUser" ColumnName="updateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LineOfBusinesses">
+            <EntityTypeMapping TypeName="MVC02.Models.LineOfBusiness">
+              <MappingFragment StoreEntitySet="LineOfBusiness">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="abbr" ColumnName="abbr" />
+                <ScalarProperty Name="descr" ColumnName="descr" />
+                <ScalarProperty Name="createDT" ColumnName="createDT" />
+                <ScalarProperty Name="createUser" ColumnName="createUser" />
+                <ScalarProperty Name="updateDT" ColumnName="updateDT" />
+                <ScalarProperty Name="updateUser" ColumnName="updateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="plan">
+            <EntityTypeMapping TypeName="MVC02.Models.Plan">
+              <MappingFragment StoreEntitySet="Plan">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="abbr" ColumnName="abbr" />
+                <ScalarProperty Name="descr" ColumnName="descr" />
+                <ScalarProperty Name="createDT" ColumnName="createDT" />
+                <ScalarProperty Name="createUser" ColumnName="createUser" />
+                <ScalarProperty Name="updateDT" ColumnName="updateDT" />
+                <ScalarProperty Name="updateUser" ColumnName="updateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="PathServer_PathShare" TypeName="MVC02.Models.PathServer_PathShare" StoreEntitySet="PathServerPathShare">
+            <EndProperty Name="PathServer_PathShare_Source">
+              <ScalarProperty Name="ID" ColumnName="pathServer" />
+            </EndProperty>
+            <EndProperty Name="PathServer_PathShare_Target">
+              <ScalarProperty Name="ID" ColumnName="pathShare" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Executable_PathServers" TypeName="MVC02.Models.Executable_PathServers" StoreEntitySet="ExecutablePathServer">
+            <EndProperty Name="Executable_PathServers_Source">
+              <ScalarProperty Name="ID" ColumnName="pathServer" />
+            </EndProperty>
+            <EndProperty Name="Executable_PathServers_Target">
+              <ScalarProperty Name="ID" ColumnName="executable" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Executable_PrimaryFunctions" TypeName="MVC02.Models.Executable_PrimaryFunctions" StoreEntitySet="ExecutablePrimaryFunction">
+            <EndProperty Name="Executable_PrimaryFunctions_Source">
+              <ScalarProperty Name="ID" ColumnName="primaryFunction" />
+            </EndProperty>
+            <EndProperty Name="Executable_PrimaryFunctions_Target">
+              <ScalarProperty Name="ID" ColumnName="executable" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Config_Executables" TypeName="MVC02.Models.Config_Executables" StoreEntitySet="ConfigExecutable">
+            <EndProperty Name="Config_Executables_Source">
+              <ScalarProperty Name="ID" ColumnName="executable" />
+            </EndProperty>
+            <EndProperty Name="Config_Executables_Target">
+              <ScalarProperty Name="ID" ColumnName="config" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Config_JPlanLOBs" TypeName="MVC02.Models.Config_JPlanLOBs" StoreEntitySet="ConfigJPlanLOB">
+            <EndProperty Name="Config_JPlanLOBs_Source">
+              <ScalarProperty Name="ID" ColumnName="jPlanLOB" />
+            </EndProperty>
+            <EndProperty Name="Config_JPlanLOBs_Target">
+              <ScalarProperty Name="ID" ColumnName="config" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Config_Plans" TypeName="MVC02.Models.Config_Plans" StoreEntitySet="ConfigPlan">
+            <EndProperty Name="Config_Plans_Source">
+              <ScalarProperty Name="ID" ColumnName="plan" />
+            </EndProperty>
+            <EndProperty Name="Config_Plans_Target">
+              <ScalarProperty Name="ID" ColumnName="config" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="App_Plans" TypeName="MVC02.Models.App_Plans" StoreEntitySet="AppPlan">
+            <EndProperty Name="App_Plans_Source">
+              <ScalarProperty Name="ID" ColumnName="app" />
+            </EndProperty>
+            <EndProperty Name="App_Plans_Target">
+              <ScalarProperty Name="ID" ColumnName="plan" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </Mappings>
+    <StorageModels>
+      <Schema Namespace="CodeFirstDatabaseSchema" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="App">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ITIL" Type="int" Nullable="false" />
+          <Property Name="abbr" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="descr" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="createDT" Type="datetime" Nullable="false" />
+          <Property Name="createUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="updateDT" Type="datetime" Nullable="false" />
+          <Property Name="updateUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Config">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="jobID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AppID" Type="uniqueidentifier" customannotation:Index="{ Name: IX_AppID, Order: 0 }" Nullable="false" />
+          <Property Name="ParamVersionID" Type="uniqueidentifier" customannotation:Index="{ Name: IX_ParamVersionID, Order: 0 }" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="DescriptonShort" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="DescriptonFull" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="effDT" Type="datetime" Nullable="false" />
+          <Property Name="trmDT" Type="datetime" Nullable="false" />
+          <Property Name="createDT" Type="datetime" Nullable="false" />
+          <Property Name="createUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="updateDT" Type="datetime" Nullable="false" />
+          <Property Name="updateUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigParam">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ConfigID" Type="uniqueidentifier" customannotation:Index="{ Name: IX_ConfigID, Order: 0 }" Nullable="false" />
+          <Property Name="effDT" Type="datetime" Nullable="false" />
+          <Property Name="trmDT" Type="datetime" Nullable="false" />
+          <Property Name="ParamDefinitionsID" Type="uniqueidentifier" customannotation:Index="{ Name: IX_ParamDefinitionsID, Order: 0 }" Nullable="false" />
+          <Property Name="isRefOnly" Type="bit" Nullable="false" />
+          <Property Name="value" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="valueUseageComments" Type="nvarchar" MaxLength="100" Nullable="true" />
+          <Property Name="createDT" Type="datetime" Nullable="false" />
+          <Property Name="createUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="updateDT" Type="datetime" Nullable="false" />
+          <Property Name="updateUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ParamDefinition">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParamVersionID" Type="uniqueidentifier" customannotation:Index="{ Name: NDX_PKey, Order: 1, IsUnique: True }" Nullable="false" />
+          <Property Name="ParamSequence" Type="int" customannotation:Index="{ Name: NDX_PKey, Order: 2, IsUnique: True }" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParamTypeID" Type="uniqueidentifier" customannotation:Index="{ Name: IX_ParamTypeID, Order: 0 }" Nullable="false" />
+          <Property Name="variableName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="intendedUse" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="createDT" Type="datetime" Nullable="false" />
+          <Property Name="createUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="updateDT" Type="datetime" Nullable="false" />
+          <Property Name="updateUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ParamType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="type" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="createDT" Type="datetime" Nullable="false" />
+          <Property Name="createUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="updateDT" Type="datetime" Nullable="false" />
+          <Property Name="updateUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ParamVersion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Version" Type="real" customannotation:Index="{ Name: NDX_PKey, Order: 1, IsUnique: True }" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="createDT" Type="datetime" Nullable="false" />
+          <Property Name="createUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="updateDT" Type="datetime" Nullable="false" />
+          <Property Name="updateUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Executable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParamVersionID" Type="uniqueidentifier" customannotation:Index="{ Name: IX_ParamVersionID, Order: 0 }" Nullable="false" />
+          <Property Name="AppID" Type="uniqueidentifier" customannotation:Index="{ Name: NDX_AppID_NameWExtension, Order: 1, IsUnique: True }" Nullable="false" />
+          <Property Name="nameWExtension" Type="nvarchar" customannotation:Index="{ Name: NDX_AppID_NameWExtension, Order: 2, IsUnique: True }" MaxLength="256" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="createDT" Type="datetime" Nullable="false" />
+          <Property Name="createUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="updateDT" Type="datetime" Nullable="false" />
+          <Property Name="updateUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PathServer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="server" Type="nvarchar" customannotation:Index="{ Name: NDX_PKey, Order: 1, IsUnique: True }" MaxLength="256" Nullable="false" />
+          <Property Name="path" Type="nvarchar" customannotation:Index="{ Name: NDX_PKey, Order: 2, IsUnique: True }" MaxLength="256" Nullable="true" />
+          <Property Name="createDT" Type="datetime" Nullable="false" />
+          <Property Name="createUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="updateDT" Type="datetime" Nullable="false" />
+          <Property Name="updateUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PathShare">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="share" Type="nvarchar" customannotation:Index="{ Name: NDX_PKey, Order: 1, IsUnique: True }" MaxLength="256" Nullable="false" />
+          <Property Name="path" Type="nvarchar" customannotation:Index="{ Name: NDX_PKey, Order: 2, IsUnique: True }" MaxLength="256" Nullable="true" />
+          <Property Name="createDT" Type="datetime" Nullable="false" />
+          <Property Name="createUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="updateDT" Type="datetime" Nullable="false" />
+          <Property Name="updateUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PrimaryFunction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="abbr" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="createDT" Type="datetime" Nullable="false" />
+          <Property Name="createUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="updateDT" Type="datetime" Nullable="false" />
+          <Property Name="updateUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JPlanLOB">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="planID" Type="uniqueidentifier" customannotation:Index="{ Name: IX_planID, Order: 0 }" Nullable="false" />
+          <Property Name="LineOfBusinessID" Type="uniqueidentifier" customannotation:Index="{ Name: IX_LineOfBusinessID, Order: 0 }" Nullable="false" />
+          <Property Name="createDT" Type="datetime" Nullable="false" />
+          <Property Name="createUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="updateDT" Type="datetime" Nullable="false" />
+          <Property Name="updateUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LineOfBusiness">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="abbr" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="descr" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="createDT" Type="datetime" Nullable="false" />
+          <Property Name="createUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="updateDT" Type="datetime" Nullable="false" />
+          <Property Name="updateUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Plan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="abbr" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="descr" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="createDT" Type="datetime" Nullable="false" />
+          <Property Name="createUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="updateDT" Type="datetime" Nullable="false" />
+          <Property Name="updateUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PathServerPathShare">
+          <Key>
+            <PropertyRef Name="pathServer" />
+            <PropertyRef Name="pathShare" />
+          </Key>
+          <Property Name="pathServer" Type="uniqueidentifier" customannotation:Index="{ Name: IX_pathServer, Order: 0 }" Nullable="false" />
+          <Property Name="pathShare" Type="uniqueidentifier" customannotation:Index="{ Name: IX_pathShare, Order: 0 }" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExecutablePathServer">
+          <Key>
+            <PropertyRef Name="pathServer" />
+            <PropertyRef Name="executable" />
+          </Key>
+          <Property Name="pathServer" Type="uniqueidentifier" customannotation:Index="{ Name: IX_pathServer, Order: 0 }" Nullable="false" />
+          <Property Name="executable" Type="uniqueidentifier" customannotation:Index="{ Name: IX_executable, Order: 0 }" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExecutablePrimaryFunction">
+          <Key>
+            <PropertyRef Name="primaryFunction" />
+            <PropertyRef Name="executable" />
+          </Key>
+          <Property Name="primaryFunction" Type="uniqueidentifier" customannotation:Index="{ Name: IX_primaryFunction, Order: 0 }" Nullable="false" />
+          <Property Name="executable" Type="uniqueidentifier" customannotation:Index="{ Name: IX_executable, Order: 0 }" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigExecutable">
+          <Key>
+            <PropertyRef Name="executable" />
+            <PropertyRef Name="config" />
+          </Key>
+          <Property Name="executable" Type="uniqueidentifier" customannotation:Index="{ Name: IX_executable, Order: 0 }" Nullable="false" />
+          <Property Name="config" Type="uniqueidentifier" customannotation:Index="{ Name: IX_config, Order: 0 }" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigJPlanLOB">
+          <Key>
+            <PropertyRef Name="jPlanLOB" />
+            <PropertyRef Name="config" />
+          </Key>
+          <Property Name="jPlanLOB" Type="uniqueidentifier" customannotation:Index="{ Name: IX_jPlanLOB, Order: 0 }" Nullable="false" />
+          <Property Name="config" Type="uniqueidentifier" customannotation:Index="{ Name: IX_config, Order: 0 }" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigPlan">
+          <Key>
+            <PropertyRef Name="plan" />
+            <PropertyRef Name="config" />
+          </Key>
+          <Property Name="plan" Type="uniqueidentifier" customannotation:Index="{ Name: IX_plan, Order: 0 }" Nullable="false" />
+          <Property Name="config" Type="uniqueidentifier" customannotation:Index="{ Name: IX_config, Order: 0 }" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AppPlan">
+          <Key>
+            <PropertyRef Name="app" />
+            <PropertyRef Name="plan" />
+          </Key>
+          <Property Name="app" Type="uniqueidentifier" customannotation:Index="{ Name: IX_app, Order: 0 }" Nullable="false" />
+          <Property Name="plan" Type="uniqueidentifier" customannotation:Index="{ Name: IX_plan, Order: 0 }" Nullable="false" />
+        </EntityType>
+        <Association Name="Config_App">
+          <End Role="App" Type="Self.App" Multiplicity="1" />
+          <End Role="Config" Type="Self.Config" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Config">
+              <PropertyRef Name="AppID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ConfigParam_Config">
+          <End Role="Config" Type="Self.Config" Multiplicity="1" />
+          <End Role="ConfigParam" Type="Self.ConfigParam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Config">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ConfigParam">
+              <PropertyRef Name="ConfigID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ParamDefinition_ParamType">
+          <End Role="ParamType" Type="Self.ParamType" Multiplicity="1" />
+          <End Role="ParamDefinition" Type="Self.ParamDefinition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParamType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ParamDefinition">
+              <PropertyRef Name="ParamTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Executable_App">
+          <End Role="App" Type="Self.App" Multiplicity="1" />
+          <End Role="Executable" Type="Self.Executable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Executable">
+              <PropertyRef Name="AppID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Executable_ParamVersion">
+          <End Role="ParamVersion" Type="Self.ParamVersion" Multiplicity="1" />
+          <End Role="Executable" Type="Self.Executable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParamVersion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Executable">
+              <PropertyRef Name="ParamVersionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PathServer_PathShare_Source">
+          <End Role="PathServer" Type="Self.PathServer" Multiplicity="1" />
+          <End Role="PathServerPathShare" Type="Self.PathServerPathShare" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PathServer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PathServerPathShare">
+              <PropertyRef Name="pathServer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PathServer_PathShare_Target">
+          <End Role="PathShare" Type="Self.PathShare" Multiplicity="1" />
+          <End Role="PathServerPathShare" Type="Self.PathServerPathShare" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PathShare">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PathServerPathShare">
+              <PropertyRef Name="pathShare" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Executable_PathServers_Source">
+          <End Role="Executable" Type="Self.Executable" Multiplicity="1" />
+          <End Role="ExecutablePathServer" Type="Self.ExecutablePathServer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Executable">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ExecutablePathServer">
+              <PropertyRef Name="pathServer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Executable_PathServers_Target">
+          <End Role="PathServer" Type="Self.PathServer" Multiplicity="1" />
+          <End Role="ExecutablePathServer" Type="Self.ExecutablePathServer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PathServer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ExecutablePathServer">
+              <PropertyRef Name="executable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Executable_PrimaryFunctions_Source">
+          <End Role="Executable" Type="Self.Executable" Multiplicity="1" />
+          <End Role="ExecutablePrimaryFunction" Type="Self.ExecutablePrimaryFunction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Executable">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ExecutablePrimaryFunction">
+              <PropertyRef Name="primaryFunction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Executable_PrimaryFunctions_Target">
+          <End Role="PrimaryFunction" Type="Self.PrimaryFunction" Multiplicity="1" />
+          <End Role="ExecutablePrimaryFunction" Type="Self.ExecutablePrimaryFunction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PrimaryFunction">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ExecutablePrimaryFunction">
+              <PropertyRef Name="executable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ParamDefinition_ParamVersion">
+          <End Role="ParamVersion" Type="Self.ParamVersion" Multiplicity="1" />
+          <End Role="ParamDefinition" Type="Self.ParamDefinition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParamVersion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ParamDefinition">
+              <PropertyRef Name="ParamVersionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ConfigParam_ParamDefinitions">
+          <End Role="ParamDefinition" Type="Self.ParamDefinition" Multiplicity="1" />
+          <End Role="ConfigParam" Type="Self.ConfigParam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParamDefinition">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ConfigParam">
+              <PropertyRef Name="ParamDefinitionsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Config_Executables_Source">
+          <End Role="Config" Type="Self.Config" Multiplicity="1" />
+          <End Role="ConfigExecutable" Type="Self.ConfigExecutable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Config">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ConfigExecutable">
+              <PropertyRef Name="executable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Config_Executables_Target">
+          <End Role="Executable" Type="Self.Executable" Multiplicity="1" />
+          <End Role="ConfigExecutable" Type="Self.ConfigExecutable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Executable">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ConfigExecutable">
+              <PropertyRef Name="config" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LineOfBusiness_JPlanLOB">
+          <End Role="LineOfBusiness" Type="Self.LineOfBusiness" Multiplicity="1" />
+          <End Role="JPlanLOB" Type="Self.JPlanLOB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LineOfBusiness">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JPlanLOB">
+              <PropertyRef Name="LineOfBusinessID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Plan_JPlanLOB">
+          <End Role="Plan" Type="Self.Plan" Multiplicity="1" />
+          <End Role="JPlanLOB" Type="Self.JPlanLOB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JPlanLOB">
+              <PropertyRef Name="planID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Config_JPlanLOBs_Source">
+          <End Role="Config" Type="Self.Config" Multiplicity="1" />
+          <End Role="ConfigJPlanLOB" Type="Self.ConfigJPlanLOB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Config">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ConfigJPlanLOB">
+              <PropertyRef Name="jPlanLOB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Config_JPlanLOBs_Target">
+          <End Role="JPlanLOB" Type="Self.JPlanLOB" Multiplicity="1" />
+          <End Role="ConfigJPlanLOB" Type="Self.ConfigJPlanLOB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JPlanLOB">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ConfigJPlanLOB">
+              <PropertyRef Name="config" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Config_ParamVersion">
+          <End Role="ParamVersion" Type="Self.ParamVersion" Multiplicity="1" />
+          <End Role="Config" Type="Self.Config" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParamVersion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Config">
+              <PropertyRef Name="ParamVersionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Config_Plans_Source">
+          <End Role="Config" Type="Self.Config" Multiplicity="1" />
+          <End Role="ConfigPlan" Type="Self.ConfigPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Config">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ConfigPlan">
+              <PropertyRef Name="plan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Config_Plans_Target">
+          <End Role="Plan" Type="Self.Plan" Multiplicity="1" />
+          <End Role="ConfigPlan" Type="Self.ConfigPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ConfigPlan">
+              <PropertyRef Name="config" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="App_Plans_Source">
+          <End Role="App" Type="Self.App" Multiplicity="1" />
+          <End Role="AppPlan" Type="Self.AppPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppPlan">
+              <PropertyRef Name="app" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="App_Plans_Target">
+          <End Role="Plan" Type="Self.Plan" Multiplicity="1" />
+          <End Role="AppPlan" Type="Self.AppPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppPlan">
+              <PropertyRef Name="plan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CodeFirstDatabase">
+          <EntitySet Name="App" EntityType="Self.App" Schema="dbo" Table="Apps" />
+          <EntitySet Name="Config" EntityType="Self.Config" Schema="dbo" Table="Configs" />
+          <EntitySet Name="ConfigParam" EntityType="Self.ConfigParam" Schema="dbo" Table="ConfigParams" />
+          <EntitySet Name="ParamDefinition" EntityType="Self.ParamDefinition" Schema="dbo" Table="ParamDefinitions" />
+          <EntitySet Name="ParamType" EntityType="Self.ParamType" Schema="dbo" Table="ParamTypes" />
+          <EntitySet Name="ParamVersion" EntityType="Self.ParamVersion" Schema="dbo" Table="ParamVersions" />
+          <EntitySet Name="Executable" EntityType="Self.Executable" Schema="dbo" Table="Executables" />
+          <EntitySet Name="PathServer" EntityType="Self.PathServer" Schema="dbo" Table="PathServers" />
+          <EntitySet Name="PathShare" EntityType="Self.PathShare" Schema="dbo" Table="PathShares" />
+          <EntitySet Name="PrimaryFunction" EntityType="Self.PrimaryFunction" Schema="dbo" Table="PrimaryFunctions" />
+          <EntitySet Name="JPlanLOB" EntityType="Self.JPlanLOB" Schema="dbo" Table="J_Plan_LOB" />
+          <EntitySet Name="LineOfBusiness" EntityType="Self.LineOfBusiness" Schema="dbo" Table="LineOfBusinesses" />
+          <EntitySet Name="Plan" EntityType="Self.Plan" Schema="dbo" Table="Plans" />
+          <EntitySet Name="PathServerPathShare" EntityType="Self.PathServerPathShare" Schema="dbo" Table="J_PathServer_PathShare" />
+          <EntitySet Name="ExecutablePathServer" EntityType="Self.ExecutablePathServer" Schema="dbo" Table="J_Executable_PathServer" />
+          <EntitySet Name="ExecutablePrimaryFunction" EntityType="Self.ExecutablePrimaryFunction" Schema="dbo" Table="J_Executable_PrimaryFunction" />
+          <EntitySet Name="ConfigExecutable" EntityType="Self.ConfigExecutable" Schema="dbo" Table="J_Config_Executable" />
+          <EntitySet Name="ConfigJPlanLOB" EntityType="Self.ConfigJPlanLOB" Schema="dbo" Table="J_Config_JPlanLOB" />
+          <EntitySet Name="ConfigPlan" EntityType="Self.ConfigPlan" Schema="dbo" Table="J_Config_Plan" />
+          <EntitySet Name="AppPlan" EntityType="Self.AppPlan" Schema="dbo" Table="J_App_Plan" />
+          <AssociationSet Name="Config_App" Association="Self.Config_App">
+            <End Role="App" EntitySet="App" />
+            <End Role="Config" EntitySet="Config" />
+          </AssociationSet>
+          <AssociationSet Name="ConfigParam_Config" Association="Self.ConfigParam_Config">
+            <End Role="Config" EntitySet="Config" />
+            <End Role="ConfigParam" EntitySet="ConfigParam" />
+          </AssociationSet>
+          <AssociationSet Name="ParamDefinition_ParamType" Association="Self.ParamDefinition_ParamType">
+            <End Role="ParamType" EntitySet="ParamType" />
+            <End Role="ParamDefinition" EntitySet="ParamDefinition" />
+          </AssociationSet>
+          <AssociationSet Name="Executable_App" Association="Self.Executable_App">
+            <End Role="App" EntitySet="App" />
+            <End Role="Executable" EntitySet="Executable" />
+          </AssociationSet>
+          <AssociationSet Name="Executable_ParamVersion" Association="Self.Executable_ParamVersion">
+            <End Role="ParamVersion" EntitySet="ParamVersion" />
+            <End Role="Executable" EntitySet="Executable" />
+          </AssociationSet>
+          <AssociationSet Name="PathServer_PathShare_Source" Association="Self.PathServer_PathShare_Source">
+            <End Role="PathServer" EntitySet="PathServer" />
+            <End Role="PathServerPathShare" EntitySet="PathServerPathShare" />
+          </AssociationSet>
+          <AssociationSet Name="PathServer_PathShare_Target" Association="Self.PathServer_PathShare_Target">
+            <End Role="PathShare" EntitySet="PathShare" />
+            <End Role="PathServerPathShare" EntitySet="PathServerPathShare" />
+          </AssociationSet>
+          <AssociationSet Name="Executable_PathServers_Source" Association="Self.Executable_PathServers_Source">
+            <End Role="Executable" EntitySet="Executable" />
+            <End Role="ExecutablePathServer" EntitySet="ExecutablePathServer" />
+          </AssociationSet>
+          <AssociationSet Name="Executable_PathServers_Target" Association="Self.Executable_PathServers_Target">
+            <End Role="PathServer" EntitySet="PathServer" />
+            <End Role="ExecutablePathServer" EntitySet="ExecutablePathServer" />
+          </AssociationSet>
+          <AssociationSet Name="Executable_PrimaryFunctions_Source" Association="Self.Executable_PrimaryFunctions_Source">
+            <End Role="Executable" EntitySet="Executable" />
+            <End Role="ExecutablePrimaryFunction" EntitySet="ExecutablePrimaryFunction" />
+          </AssociationSet>
+          <AssociationSet Name="Executable_PrimaryFunctions_Target" Association="Self.Executable_PrimaryFunctions_Target">
+            <End Role="PrimaryFunction" EntitySet="PrimaryFunction" />
+            <End Role="ExecutablePrimaryFunction" EntitySet="ExecutablePrimaryFunction" />
+          </AssociationSet>
+          <AssociationSet Name="ParamDefinition_ParamVersion" Association="Self.ParamDefinition_ParamVersion">
+            <End Role="ParamVersion" EntitySet="ParamVersion" />
+            <End Role="ParamDefinition" EntitySet="ParamDefinition" />
+          </AssociationSet>
+          <AssociationSet Name="ConfigParam_ParamDefinitions" Association="Self.ConfigParam_ParamDefinitions">
+            <End Role="ParamDefinition" EntitySet="ParamDefinition" />
+            <End Role="ConfigParam" EntitySet="ConfigParam" />
+          </AssociationSet>
+          <AssociationSet Name="Config_Executables_Source" Association="Self.Config_Executables_Source">
+            <End Role="Config" EntitySet="Config" />
+            <End Role="ConfigExecutable" EntitySet="ConfigExecutable" />
+          </AssociationSet>
+          <AssociationSet Name="Config_Executables_Target" Association="Self.Config_Executables_Target">
+            <End Role="Executable" EntitySet="Executable" />
+            <End Role="ConfigExecutable" EntitySet="ConfigExecutable" />
+          </AssociationSet>
+          <AssociationSet Name="LineOfBusiness_JPlanLOB" Association="Self.LineOfBusiness_JPlanLOB">
+            <End Role="LineOfBusiness" EntitySet="LineOfBusiness" />
+            <End Role="JPlanLOB" EntitySet="JPlanLOB" />
+          </AssociationSet>
+          <AssociationSet Name="Plan_JPlanLOB" Association="Self.Plan_JPlanLOB">
+            <End Role="Plan" EntitySet="Plan" />
+            <End Role="JPlanLOB" EntitySet="JPlanLOB" />
+          </AssociationSet>
+          <AssociationSet Name="Config_JPlanLOBs_Source" Association="Self.Config_JPlanLOBs_Source">
+            <End Role="Config" EntitySet="Config" />
+            <End Role="ConfigJPlanLOB" EntitySet="ConfigJPlanLOB" />
+          </AssociationSet>
+          <AssociationSet Name="Config_JPlanLOBs_Target" Association="Self.Config_JPlanLOBs_Target">
+            <End Role="JPlanLOB" EntitySet="JPlanLOB" />
+            <End Role="ConfigJPlanLOB" EntitySet="ConfigJPlanLOB" />
+          </AssociationSet>
+          <AssociationSet Name="Config_ParamVersion" Association="Self.Config_ParamVersion">
+            <End Role="ParamVersion" EntitySet="ParamVersion" />
+            <End Role="Config" EntitySet="Config" />
+          </AssociationSet>
+          <AssociationSet Name="Config_Plans_Source" Association="Self.Config_Plans_Source">
+            <End Role="Config" EntitySet="Config" />
+            <End Role="ConfigPlan" EntitySet="ConfigPlan" />
+          </AssociationSet>
+          <AssociationSet Name="Config_Plans_Target" Association="Self.Config_Plans_Target">
+            <End Role="Plan" EntitySet="Plan" />
+            <End Role="ConfigPlan" EntitySet="ConfigPlan" />
+          </AssociationSet>
+          <AssociationSet Name="App_Plans_Source" Association="Self.App_Plans_Source">
+            <End Role="App" EntitySet="App" />
+            <End Role="AppPlan" EntitySet="AppPlan" />
+          </AssociationSet>
+          <AssociationSet Name="App_Plans_Target" Association="Self.App_Plans_Target">
+            <End Role="Plan" EntitySet="Plan" />
+            <End Role="AppPlan" EntitySet="AppPlan" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </StorageModels>
+  </Runtime>
+  <Designer>
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="ProcessDependentTemplatesOnSave" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <Diagrams >
+      <Diagram DiagramId="c7127288ad244d419fb9aefbf3643a5b" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="MVC02.Models.App" Width="1.5" PointX="10.25" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVC02.Models.Config" Width="1.5" PointX="8.25" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVC02.Models.ConfigParam" Width="1.5" PointX="8.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVC02.Models.ParamDefinition" Width="1.5" PointX="6.125" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVC02.Models.ParamType" Width="1.5" PointX="4.125" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVC02.Models.ParamVersion" Width="1.5" PointX="6.125" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVC02.Models.Executable" Width="1.5" PointX="8.25" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVC02.Models.PathServer" Width="1.5" PointX="6.125" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVC02.Models.PathShare" Width="1.5" PointX="4.125" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVC02.Models.PrimaryFunction" Width="1.5" PointX="10.25" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVC02.Models.ConfigParamDEV1" Width="1.75" PointX="10" PointY="9" IsExpanded="false" />
+        <EntityTypeShape EntityType="MVC02.Models.ConfigParamDEV2" Width="1.75" PointX="10" PointY="9.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="MVC02.Models.ConfigParamPROD" Width="1.75" PointX="10" PointY="6.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="MVC02.Models.ConfigParamQA1" Width="1.75" PointX="10" PointY="8.375" IsExpanded="false" />
+        <EntityTypeShape EntityType="MVC02.Models.ConfigParamQA2" Width="1.75" PointX="10" PointY="7.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="MVC02.Models.ConfigParamSTG1" Width="1.75" PointX="10" PointY="6.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="MVC02.Models.ConfigParamSTG2" Width="1.75" PointX="10" PointY="7.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="MVC02.Models.JPlanLOB" Width="1.5" PointX="12.375" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVC02.Models.LineOfBusiness" Width="1.5" PointX="14.375" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVC02.Models.Plan" Width="1.5" PointX="10.25" PointY="11.125" IsExpanded="true" />
+        <InheritanceConnector EntityType="MVC02.Models.ConfigParamDEV1" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="MVC02.Models.ConfigParamDEV2" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="MVC02.Models.ConfigParamPROD" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="MVC02.Models.ConfigParamQA1" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="MVC02.Models.ConfigParamQA2" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="MVC02.Models.ConfigParamSTG1" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="MVC02.Models.ConfigParamSTG2" ManuallyRouted="false" />
+        <AssociationConnector Association="MVC02.Models.Config_App" ManuallyRouted="false" />
+        <AssociationConnector Association="MVC02.Models.ConfigParam_Config" ManuallyRouted="false" />
+        <AssociationConnector Association="MVC02.Models.ParamDefinition_ParamType" ManuallyRouted="false" />
+        <AssociationConnector Association="MVC02.Models.Executable_App" ManuallyRouted="false" />
+        <AssociationConnector Association="MVC02.Models.Executable_ParamVersion" ManuallyRouted="false" />
+        <AssociationConnector Association="MVC02.Models.PathServer_PathShare" ManuallyRouted="false" />
+        <AssociationConnector Association="MVC02.Models.Executable_PathServers" ManuallyRouted="false" />
+        <AssociationConnector Association="MVC02.Models.Executable_PrimaryFunctions" ManuallyRouted="false" />
+        <AssociationConnector Association="MVC02.Models.ParamDefinition_ParamVersion" ManuallyRouted="false" />
+        <AssociationConnector Association="MVC02.Models.ConfigParam_ParamDefinitions" ManuallyRouted="false" />
+        <AssociationConnector Association="MVC02.Models.Config_Executables" ManuallyRouted="false" />
+        <AssociationConnector Association="MVC02.Models.LineOfBusiness_JPlanLOB" ManuallyRouted="false" />
+        <AssociationConnector Association="MVC02.Models.Plan_JPlanLOB" ManuallyRouted="false" />
+        <AssociationConnector Association="MVC02.Models.Config_JPlanLOBs" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="MVC02.Models.Config_ParamVersion" ManuallyRouted="false" />
+        <AssociationConnector Association="MVC02.Models.Config_Plans" ManuallyRouted="false" />
+        <AssociationConnector Association="MVC02.Models.App_Plans" ManuallyRouted="false" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</Edmx>
