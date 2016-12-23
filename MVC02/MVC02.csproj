@@ -238,6 +238,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\edmxSnapshots\MVC02Context v0.5.Designer.cs" />
+    <Compile Include="Models\edmxSnapshots\MVC02Context v0.51.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MVC02Context v0.5.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\edmxSnapshots\MVC02Context v0.6.Designer.cs" />
+    <Compile Include="Models\edmxSnapshots\MVC02Context v0.61.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MVC02Context v0.6.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\entConfig.cs" />
     <Compile Include="Models\entJ_Plan_LOB.cs" />
     <Compile Include="Models\entLineOfBusiness.cs" />
@@ -283,6 +295,14 @@
     <EntityDeploy Include="MVC02Context v0.5.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MVC02Context v0.5.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="Models\edmxSnapshots\MVC02Context v0.5.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MVC02Context v0.51.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="Models\edmxSnapshots\MVC02Context v0.6.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MVC02Context v0.61.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
