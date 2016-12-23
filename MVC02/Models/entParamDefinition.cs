@@ -29,20 +29,24 @@ namespace MVC02.Models
 
         [Required]
         [Index("NDX_PKey" , 2 , IsUnique = true)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ParamSequence { get; set; }
         
         [Required]
         public Guid ParamTypeID { get; set; }  //data type for validations
 
         [Required]
+        [MaxLength(50)]
         public string variableName { get; set; }
 
         [Required]
-        public string howToUse { get; set; } //Specify intended usage of the ConfigParam's value
+        [MaxLength(500)]
+        public string intendedUse { get; set; } //Specify intended usage of the ConfigParam's value
 
         //[Required]
         //public  { get; set; }
-        #region NavigationProperties
+
+            #region NavigationProperties
         public virtual ParamVersion ParamVersion { get; set; }
         public virtual ParamType ParamType { get; set; }
         public virtual ICollection<ConfigParam> ConfigParams { get; set; }
@@ -53,13 +57,15 @@ namespace MVC02.Models
 		public DateTime createDT { get; set; }
 
 		[Required]
-		public string createUser { get; set; }
+        [MaxLength(20)]
+        public string createUser { get; set; }
 
 		[Required]
 		public DateTime updateDT { get; set; }
 
 		[Required]
-		public string updateUser { get; set; }
+        [MaxLength(20)]
+        public string updateUser { get; set; }
 
 
 

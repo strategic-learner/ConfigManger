@@ -23,15 +23,20 @@ namespace MVC02.Models {
 
 
 		[Required]
-		public string abbr { get; set; }
+        [MaxLength(4)]
+        public string abbr { get; set; }
 
 		[Required]
-		public string descr { get; set; }
+        [MaxLength(50)]
+        public string descr { get; set; }
 
 
         #region NavigationProperties
+
         public virtual ICollection<App> Apps { get; set; }
         public virtual ICollection<Config> Configs { get; set; }
+        public virtual ICollection<JPlanLOB> JPlanLOB { get; set; }
+
         #endregion
 
 
@@ -39,13 +44,15 @@ namespace MVC02.Models {
 		public DateTime createDT { get; set; }
 
 		[Required]
-		public string createUser { get; set; }
+        [MaxLength(20)]
+        public string createUser { get; set; }
 
 		[Required]
 		public DateTime updateDT { get; set; }
 
 		[Required]
-		public string updateUser { get; set; }
+        [MaxLength(20)]
+        public string updateUser { get; set; }
 
 		
 	}

@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using MVC02.Users;
+using static MVC02.AppConstants.AppConstants;
 
 namespace MVC02.Models
 	{
@@ -23,6 +24,10 @@ namespace MVC02.Models
         public ConfigParam( string user )
             {
             //this.PROPERTY = new HashSet<ENTITYCLASS>();
+
+            effDT = DateTime.Now;
+            trmDT = defaultEndDate();
+
             createDT = DateTime.Now;
             createUser = user;
             updateDT = DateTime.Now;
@@ -48,9 +53,11 @@ namespace MVC02.Models
         public bool isRefOnly { get; set; }
 
         [Required]
+        [Column(TypeName = "NVarchar(MAX)")]
         public string value { get; set; }
 
-        public string valueComments { get; set; }
+        [MaxLength(100)]
+        public string valueUseageComments { get; set; }
 
 
         #region NavigationProperties
@@ -65,12 +72,14 @@ namespace MVC02.Models
         public DateTime createDT { get; set; }
 
         [Required]
+        [MaxLength(20)]
         public string createUser { get; set; }
 
         [Required]
         public DateTime updateDT { get; set; }
 
         [Required]
+        [MaxLength(20)]
         public string updateUser { get; set; }
 
 

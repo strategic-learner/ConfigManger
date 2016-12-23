@@ -35,18 +35,27 @@ namespace MVC02.Models
         //[Required]
         //public  { get; set; }
 
+        #region Navigation Properties
+
+        public virtual ICollection<PathServer> PathServer { get; set; }
+
+        #endregion
+
+
 
         [Required]
 		public DateTime createDT { get; set; }
 
 		[Required]
-		public string createUser { get; set; }
+        [MaxLength(20)]
+        public string createUser { get; set; }
 
 		[Required]
 		public DateTime updateDT { get; set; }
 
 		[Required]
-		public string updateUser { get; set; }
+        [MaxLength(20)]
+        public string updateUser { get; set; }
 
 
 

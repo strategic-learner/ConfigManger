@@ -43,6 +43,14 @@ namespace MVC02.Models {
                    ap.ToTable("J_Config_Executable");
                });
 
+            modelBuilder.Entity<Config>()
+               .HasMany(c => c.JPlanLOBs)
+               .WithMany(jpl => jpl.Configs)
+               .Map(ap => {
+                   ap.MapLeftKey("jPlanLOB");
+                   ap.MapRightKey("config");
+                   ap.ToTable("J_Config_JPlanLOB");
+               });
 
             modelBuilder.Entity<Executable>()
                .HasMany(e => e.PathServers)
@@ -53,14 +61,23 @@ namespace MVC02.Models {
                    ap.ToTable("J_Executable_PathServer");
                });
 
-             modelBuilder.Entity<Executable>()
-               .HasMany(e => e.PrimaryFunctions)
-               .WithMany(pf => pf.Executables)
-               .Map(ap => {
-                   ap.MapLeftKey("primaryFunction");
-                   ap.MapRightKey("executable");
-                   ap.ToTable("J_Executable_PrimaryFunction");
-               });
+            modelBuilder.Entity<Executable>()
+              .HasMany(e => e.PrimaryFunctions)
+              .WithMany(pf => pf.Executables)
+              .Map(ap => {
+                  ap.MapLeftKey("primaryFunction");
+                  ap.MapRightKey("executable");
+                  ap.ToTable("J_Executable_PrimaryFunction");
+              });
+
+            modelBuilder.Entity<PathServer>()
+              .HasMany(srv => srv.PathShare)
+              .WithMany(shr => shr.PathServer)
+              .Map(ap => {
+                  ap.MapLeftKey("pathServer");
+                  ap.MapRightKey("pathShare");
+                  ap.ToTable("J_PathServer_PathShare");
+              });
 
             modelBuilder.Entity<Config>()
                .HasRequired(c => c.App)
@@ -75,7 +92,7 @@ namespace MVC02.Models {
               .WithMany(cp => cp.ConfigParams);
 
             modelBuilder.Entity<Executable>()
-              .HasRequired(e => e.ParamVersion)  //wanted to change this to be HasOptional while adding here, but EF (or maybe just EF PowerTools?) was fighting the change from [Required] decoration
+              .HasRequired(e => e.ParamVersion)  //wanted to change this to HasOptional while adding to fluent, but EF (or maybe just EF PowerTools?) was fighting the change even after removing the [Required] decoration in entity model
               .WithMany(pv => pv.Executables);
 
             modelBuilder.Entity<Executable>()

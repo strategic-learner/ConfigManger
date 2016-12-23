@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using MVC02.Users;
+using static MVC02.AppConstants.AppConstants;
 
 namespace MVC02.Models
 	{
@@ -14,6 +15,10 @@ namespace MVC02.Models
 		public Config(string user)
 			{
             //this.PROPERTY = new HashSet<ENTITYCLASS>();
+
+            effDT = DateTime.Now;
+            trmDT = defaultEndDate();
+
             createDT = DateTime.Now;
             createUser = user;
             updateDT = DateTime.Now;
@@ -37,9 +42,12 @@ namespace MVC02.Models
         public bool Active { get; set; }
 
         [Required]
+        [MinLength(8)]
+        [MaxLength(25)]
         public string DescriptonShort { get; set; }
 
         [Required]
+        [MaxLength(100)]
         public string DescriptonFull { get; set; }
 
         [Required]
@@ -55,6 +63,7 @@ namespace MVC02.Models
         public virtual ICollection<Plan> Plans { get; set; }
         public virtual ICollection<ConfigParam> ConfigParams { get; set; }
         public virtual ICollection<Executable> Executables { get; set; }
+        public virtual ICollection<JPlanLOB> JPlanLOBs { get; set; }
         public virtual App App { get; set; }
         public virtual ParamVersion ParamVersion { get; set; }
 
@@ -65,13 +74,15 @@ namespace MVC02.Models
 		public DateTime createDT { get; set; }
 
 		[Required]
-		public string createUser { get; set; }
+        [MaxLength(20)]
+        public string createUser { get; set; }
 
 		[Required]
 		public DateTime updateDT { get; set; }
 
 		[Required]
-		public string updateUser { get; set; }
+        [MaxLength(20)]
+        public string updateUser { get; set; }
 
 
         private Config() { }

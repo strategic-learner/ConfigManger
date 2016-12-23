@@ -26,10 +26,12 @@ namespace MVC02.Models {
 		public int ITIL { get; set; }
 
 		[Required]
-		public string abbr { get; set; }
+        [MaxLength(3)]
+        public string abbr { get; set; }
 
 		[Required]
-		public string descr { get; set; }
+        [MaxLength(100)]
+        public string descr { get; set; }
 
 
         #region Navigation Properties
@@ -46,13 +48,15 @@ namespace MVC02.Models {
 		public DateTime createDT { get; set; }
 
 		[Required]
-		public string createUser { get; set; }
+        [MaxLength(20)]
+        public string createUser { get; set; }
 
 		[Required]
 		public DateTime updateDT { get; set; }
 
 		[Required]
-		public string updateUser { get; set; }
+        [MaxLength(20)]
+        public string updateUser { get; set; }
 
 }
 }

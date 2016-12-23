@@ -24,13 +24,16 @@ namespace MVC02.Models
 		public Guid ID { get; set; }
 
         [Required]
+        [MaxLength(15)]
         public string type { get; set; }
 
         //[Required]
         //public  { get; set; }
 
         #region NavigationProperties
+
         public virtual ICollection<ParamDefinition> ParamDefinitions { get; set; }
+        
         #endregion
 
 
@@ -38,13 +41,15 @@ namespace MVC02.Models
 		public DateTime createDT { get; set; }
 
 		[Required]
-		public string createUser { get; set; }
+        [MaxLength(20)]
+        public string createUser { get; set; }
 
 		[Required]
 		public DateTime updateDT { get; set; }
 
 		[Required]
-		public string updateUser { get; set; }
+        [MaxLength(20)]
+        public string updateUser { get; set; }
 
 
 

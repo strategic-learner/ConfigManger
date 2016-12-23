@@ -38,7 +38,7 @@ namespace MVC02.Models
         #region Navigation Properties
 
         public virtual ICollection<Executable> Executables { get; set; }
-
+        public virtual ICollection<PathShare> PathShare { get; set; }
         #endregion
 
 
@@ -46,13 +46,15 @@ namespace MVC02.Models
 		public DateTime createDT { get; set; }
 
 		[Required]
-		public string createUser { get; set; }
+        [MaxLength(20)]
+        public string createUser { get; set; }
 
 		[Required]
 		public DateTime updateDT { get; set; }
 
 		[Required]
-		public string updateUser { get; set; }
+        [MaxLength(20)]
+        public string updateUser { get; set; }
 
 
 

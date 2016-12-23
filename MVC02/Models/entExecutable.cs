@@ -32,18 +32,17 @@ namespace MVC02.Models
 
         [Required]
         [Index("NDX_AppID_NameWExtension" , 2 , IsUnique = true)]
-
         [MaxLength(256)]
         public string nameWExtension { get; set; }
 
         [Required]
+        [MaxLength(100)]
         public string description { get; set; }
 
         //[Required]
         //public  { get; set; }
 
         #region NavigationProperties
-        [Required]
         public virtual ICollection<PrimaryFunction> PrimaryFunctions { get; set; }
         public virtual ICollection<PathServer> PathServers { get; set; }
         public virtual ICollection<Config> Configs { get; set; }
@@ -56,13 +55,15 @@ namespace MVC02.Models
 		public DateTime createDT { get; set; }
 
 		[Required]
-		public string createUser { get; set; }
+        [MaxLength(20)]
+        public string createUser { get; set; }
 
 		[Required]
 		public DateTime updateDT { get; set; }
 
 		[Required]
-		public string updateUser { get; set; }
+        [MaxLength(20)]
+        public string updateUser { get; set; }
 
 
 
