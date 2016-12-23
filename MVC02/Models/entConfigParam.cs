@@ -47,7 +47,7 @@ namespace MVC02.Models
         public DateTime trmDT { get; set; }
 
         [Required]
-        public Guid ParamDefinitionsID { get; set; }
+        public Guid ParamDefinitionID { get; set; }
 
         [Required]
         public bool isRefOnly { get; set; }
@@ -63,7 +63,7 @@ namespace MVC02.Models
         #region NavigationProperties
 
         public virtual Config Config { get; set; }
-        public virtual ParamDefinition ParamDefinitions { get; set; }
+        public virtual ParamDefinition ParamDefinition { get; set; }
 
         #endregion
 

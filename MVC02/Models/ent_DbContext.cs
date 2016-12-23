@@ -9,8 +9,13 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 namespace MVC02.Models {
 	public class MVC02Context : DbContext {
 		public MVC02Context() : base("MVC02") 
-			{	}
-		protected override void OnModelCreating(DbModelBuilder modelBuilder) 
+			{
+            #if DEBUG
+            Database.Log = Console.WriteLine;
+            #endif
+            }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder) 
 			{
             //modelBuilder.HasDefaultSchema("special");
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
@@ -108,7 +113,7 @@ namespace MVC02.Models {
               .WithMany(pt => pt.ParamDefinitions);
 
             modelBuilder.Entity<ConfigParam>()
-              .HasRequired(cp => cp.ParamDefinitions)
+              .HasRequired(cp => cp.ParamDefinition)
               .WithMany(pd => pd.ConfigParams);
 
             }
@@ -116,6 +121,7 @@ namespace MVC02.Models {
 
         public DbSet<App> app { get; set; }
         public DbSet<Config> config { get; set; }
+
         //public DbSet<ConfigParams> configParams { get; set; }
         public DbSet<ConfigParamPROD> configParamsPROD { get; set; }
         public DbSet<ConfigParamQA1> configParamsQA1 { get; set; }
@@ -123,6 +129,8 @@ namespace MVC02.Models {
         public DbSet<ConfigParamSTG1> configParamsSTG1 { get; set; }
 
         public DbSet<Executable> executable { get; set; }
+        public DbSet<JPlanLOB> jPlanLOB { get; set; }
+        public DbSet<LineOfBusiness> lineOfBusiness { get; set; }
         public DbSet<PrimaryFunction> executableFunctions { get; set; }
         public DbSet<ParamDefinition> paramDefinitions { get; set; }
         public DbSet<ParamType> paramType { get; set; }
@@ -130,7 +138,6 @@ namespace MVC02.Models {
         public DbSet<PathServer> pathServer { get; set; }
         public DbSet<PathShare> pathShare { get; set; }
         public DbSet<Plan> plan { get; set; }
-        //public DbSet<>  { get; set; }
 
         }
     }
