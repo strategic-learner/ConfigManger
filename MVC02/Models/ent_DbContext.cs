@@ -24,27 +24,36 @@ namespace MVC02.Models {
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
 
 
-            //clear 'domain' separation
-            modelBuilder.Entity<ConfigParamPROD>()
-            .ToTable("ConfigParam" , schemaName: "AD");
+            ////clear 'domain' separation
+            //modelBuilder.Entity<ConfigParamPROD>()
+            //.ToTable("ConfigParam" , schemaName: "AD");
 
-            modelBuilder.Entity<ConfigParamDEV1>()
-            .ToTable("ConfigParam" , schemaName: "DEV1");
+            //modelBuilder.Entity<ConfigParamDEV1>()
+            //.ToTable("ConfigParam" , schemaName: "DEV1");
 
-            modelBuilder.Entity<ConfigParamDEV2>()
-            .ToTable("ConfigParam" , schemaName: "DEV2");
+            //modelBuilder.Entity<ConfigParamDEV2>()
+            //.ToTable("ConfigParam" , schemaName: "DEV2");
 
-            modelBuilder.Entity<ConfigParamQA1>()
-            .ToTable("ConfigParam" , schemaName: "QA1");
+            //modelBuilder.Entity<ConfigParamQA1>()
+            //.ToTable("ConfigParam" , schemaName: "QA1");
 
-            modelBuilder.Entity<ConfigParamQA2>()
-            .ToTable("ConfigParam" , schemaName: "QA2");
+            //modelBuilder.Entity<ConfigParamQA2>()
+            //.ToTable("ConfigParam" , schemaName: "QA2");
 
-            modelBuilder.Entity<ConfigParamSTG1>()
-            .ToTable("ConfigParam" , schemaName: "STG1");
+            //modelBuilder.Entity<ConfigParamSTG1>()
+            //.ToTable("ConfigParam" , schemaName: "STG1");
 
-            modelBuilder.Entity<ConfigParamSTG2>()
-            .ToTable("ConfigParam" , schemaName: "STG2");
+            //modelBuilder.Entity<ConfigParamSTG2>()
+            //.ToTable("ConfigParam" , schemaName: "STG2");
+
+            modelBuilder.Entity<ConfigParam>()
+              .HasRequired(cp => cp.Config)
+              .WithMany(c => c.ConfigParams);
+
+            modelBuilder.Entity<ConfigParam>()
+              .HasRequired(cp => cp.ParamDefinition)
+              .WithMany(pd => pd.ConfigParams);
+
 
 
 
@@ -119,11 +128,6 @@ namespace MVC02.Models {
               .HasRequired(c => c.ParamVersion)
               .WithMany(pv => pv.Configs);
 
-            //modelBuilder.Entity<ConfigParam>()
-            //  .HasRequired(cp => cp.Config)
-            //  .WithMany(cp => cp.ConfigParams);
-
-
             modelBuilder.Entity<Executable>()
               .HasRequired(e => e.ParamVersion)  //wanted to change this to HasOptional while adding to fluent, but EF (or maybe just EF PowerTools?) was fighting the change even after removing the [Required] decoration in entity model
               .WithMany(pv => pv.Executables);
@@ -141,13 +145,6 @@ namespace MVC02.Models {
               .WithMany(pt => pt.ParamDefinitions);
 
 
-            //modelBuilder.Entity<ConfigParam>()
-            //  .HasRequired(cp => cp.Config)
-            //  .WithMany(cp => cp.ConfigParams);
-
-            //modelBuilder.Entity<ConfigParam>()
-            //  .HasRequired(cp => cp.ParamDefinition)
-            //  .WithMany(pd => pd.ConfigParams);
 
             }
 
@@ -155,11 +152,14 @@ namespace MVC02.Models {
         public DbSet<App> app { get; set; }
         public DbSet<Config> config { get; set; }
 
-        //public DbSet<ConfigParams> configParams { get; set; }
-        public DbSet<ConfigParamPROD> configParamsPROD { get; set; }
-        public DbSet<ConfigParamQA1> configParamsQA1 { get; set; }
-        public DbSet<ConfigParamDEV1> configParamsDev1 { get; set; }
-        public DbSet<ConfigParamSTG1> configParamsSTG1 { get; set; }
+        public DbSet<ConfigParam> configParam { get; set; }
+        //public DbSet<ConfigParamPROD> configParamPROD { get; set; }
+        //public DbSet<ConfigParamQA1> configParamQA1 { get; set; }
+        //public DbSet<ConfigParamQA2> configParamQA1 { get; set; }
+        //public DbSet<ConfigParamDEV1> configParamDev1 { get; set; }
+        //public DbSet<ConfigParamDEV2> configParamDev1 { get; set; }
+        //public DbSet<ConfigParamSTG1> configParamSTG1 { get; set; }
+        //public DbSet<ConfigParamSTG2> configParamSTG1 { get; set; }
 
         public DbSet<Executable> executable { get; set; }
         public DbSet<JPlanLOB> jPlanLOB { get; set; }

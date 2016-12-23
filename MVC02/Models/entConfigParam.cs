@@ -10,13 +10,13 @@ using static MVC02.AppConstants.AppConstants;
 
 namespace MVC02.Models
 	{
-    public class ConfigParamQA1 : ConfigParam { }
-    public class ConfigParamQA2 : ConfigParam { }
-    public class ConfigParamDEV1 : ConfigParam { }
-    public class ConfigParamDEV2 : ConfigParam { }
-    public class ConfigParamSTG1 : ConfigParam { }
-    public class ConfigParamSTG2 : ConfigParam { }
-    public class ConfigParamPROD : ConfigParam { }
+    //public class ConfigParamQA1 : ConfigParam { }
+    //public class ConfigParamQA2 : ConfigParam { }
+    //public class ConfigParamDEV1 : ConfigParam { }
+    //public class ConfigParamDEV2 : ConfigParam { }
+    //public class ConfigParamSTG1 : ConfigParam { }
+    //public class ConfigParamSTG2 : ConfigParam { }
+    //public class ConfigParamPROD : ConfigParam { }
 
 
     public class ConfigParam   //Abstract may have serious performance impact - may need to compose not inherit
