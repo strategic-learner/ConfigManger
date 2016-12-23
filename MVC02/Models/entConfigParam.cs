@@ -19,7 +19,7 @@ namespace MVC02.Models
     public class ConfigParamPROD : ConfigParam { }
 
 
-    public abstract class ConfigParam
+    public class ConfigParam   //Abstract may have serious performance impact - may need to compose not inherit
         {
         public ConfigParam( string user )
             {
@@ -47,7 +47,7 @@ namespace MVC02.Models
         public DateTime trmDT { get; set; }
 
         [Required]
-        public Guid ParamDefinitionID { get; set; }
+        public Guid ParamDefinitionsID { get; set; }
 
         [Required]
         public bool isRefOnly { get; set; }

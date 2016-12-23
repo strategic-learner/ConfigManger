@@ -17,9 +17,36 @@ namespace MVC02.Models {
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder) 
 			{
-            //modelBuilder.HasDefaultSchema("special");
+            modelBuilder.HasDefaultSchema("AD");
+
+            //very little if anything should ever be deleted - mostly deactivated (ConfigParam data is notable exception)
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+
+
+            //clear 'domain' separation
+            modelBuilder.Entity<ConfigParamPROD>()
+            .ToTable("ConfigParam" , schemaName: "AD");
+
+            modelBuilder.Entity<ConfigParamDEV1>()
+            .ToTable("ConfigParam" , schemaName: "DEV1");
+
+            modelBuilder.Entity<ConfigParamDEV2>()
+            .ToTable("ConfigParam" , schemaName: "DEV2");
+
+            modelBuilder.Entity<ConfigParamQA1>()
+            .ToTable("ConfigParam" , schemaName: "QA1");
+
+            modelBuilder.Entity<ConfigParamQA2>()
+            .ToTable("ConfigParam" , schemaName: "QA2");
+
+            modelBuilder.Entity<ConfigParamSTG1>()
+            .ToTable("ConfigParam" , schemaName: "STG1");
+
+            modelBuilder.Entity<ConfigParamSTG2>()
+            .ToTable("ConfigParam" , schemaName: "STG2");
+
+
 
             modelBuilder.Entity<App>()
 			   .HasMany(a => a.Plans)
@@ -92,9 +119,10 @@ namespace MVC02.Models {
               .HasRequired(c => c.ParamVersion)
               .WithMany(pv => pv.Configs);
 
-            modelBuilder.Entity<ConfigParam>()
-              .HasRequired(cp => cp.Config)
-              .WithMany(cp => cp.ConfigParams);
+            //modelBuilder.Entity<ConfigParam>()
+            //  .HasRequired(cp => cp.Config)
+            //  .WithMany(cp => cp.ConfigParams);
+
 
             modelBuilder.Entity<Executable>()
               .HasRequired(e => e.ParamVersion)  //wanted to change this to HasOptional while adding to fluent, but EF (or maybe just EF PowerTools?) was fighting the change even after removing the [Required] decoration in entity model
@@ -112,9 +140,14 @@ namespace MVC02.Models {
               .HasRequired(pd => pd.ParamType)
               .WithMany(pt => pt.ParamDefinitions);
 
-            modelBuilder.Entity<ConfigParam>()
-              .HasRequired(cp => cp.ParamDefinition)
-              .WithMany(pd => pd.ConfigParams);
+
+            //modelBuilder.Entity<ConfigParam>()
+            //  .HasRequired(cp => cp.Config)
+            //  .WithMany(cp => cp.ConfigParams);
+
+            //modelBuilder.Entity<ConfigParam>()
+            //  .HasRequired(cp => cp.ParamDefinition)
+            //  .WithMany(pd => pd.ConfigParams);
 
             }
 
@@ -140,4 +173,5 @@ namespace MVC02.Models {
         public DbSet<Plan> plan { get; set; }
 
         }
+
     }
