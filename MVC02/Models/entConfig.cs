@@ -61,7 +61,13 @@ namespace MVC02.Models
 
         [Required]
         public virtual ICollection<Plan> Plans { get; set; }
-        public virtual ICollection<ConfigParam> ConfigParams { get; set; }
+        public virtual ICollection<ConfigParamPROD> ConfigParamsPROD { get; set; }
+        public virtual ICollection<ConfigParamSTG1> ConfigParamsSTG1 { get; set; }
+        public virtual ICollection<ConfigParamSTG2> ConfigParamsSTG2 { get; set; }
+        public virtual ICollection<ConfigParamQA1> ConfigParamsQA1 { get; set; }
+        public virtual ICollection<ConfigParamQA2> ConfigParamsQA2 { get; set; }
+        public virtual ICollection<ConfigParamDEV1> ConfigParamsDEV1 { get; set; }
+        public virtual ICollection<ConfigParamDEV2> ConfigParamsDEV2 { get; set; }
         public virtual ICollection<Executable> Executables { get; set; }
         public virtual ICollection<JPlanLOB> JPlanLOBs { get; set; }
         public virtual App App { get; set; }

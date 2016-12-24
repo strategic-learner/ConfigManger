@@ -10,21 +10,65 @@ using static MVC02.AppConstants.AppConstants;
 
 namespace MVC02.Models
 	{
-    //public class ConfigParamQA1 : ConfigParam { }
-    //public class ConfigParamQA2 : ConfigParam { }
-    //public class ConfigParamDEV1 : ConfigParam { }
-    //public class ConfigParamDEV2 : ConfigParam { }
-    //public class ConfigParamSTG1 : ConfigParam { }
-    //public class ConfigParamSTG2 : ConfigParam { }
-    //public class ConfigParamPROD : ConfigParam { }
 
-
-    public class ConfigParam   //Abstract may have serious performance impact - may need to compose not inherit
+    public interface IConfigParam  //Class inheritance w/wo Abstract may have serious performance impact - need to compose not inherit
         {
-        public ConfigParam( string user )
-            {
-            //this.PROPERTY = new HashSet<ENTITYCLASS>();
 
+        [Key]
+        Guid ID { get; set; }
+
+        [Required]
+        Guid ConfigID { get; set; }
+
+        [Required]
+        DateTime effDT { get; set; }
+
+        [Required]
+        DateTime trmDT { get; set; }
+
+        [Required]
+        Guid ParamDefinitionsID { get; set; }
+
+        [Required]
+        bool isRefOnly { get; set; }
+
+        [Required]
+        [Column(TypeName = "NVarchar(MAX)")]
+        string value { get; set; }
+
+        [MaxLength(100)]
+        string valueUseageComments { get; set; }
+
+
+        #region NavigationProperties
+
+        Config Config { get; set; }
+        ParamDefinition ParamDefinition { get; set; }
+
+        #endregion
+
+
+        [Required]
+        DateTime createDT { get; set; }
+
+        [Required]
+        [MaxLength(20)]
+        string createUser { get; set; }
+
+        [Required]
+        DateTime updateDT { get; set; }
+
+        [Required]
+        [MaxLength(20)]
+        string updateUser { get; set; }
+
+        }
+
+
+    public class ConfigParamPROD : IConfigParam
+        {
+        public ConfigParamPROD( string user )
+            {
             effDT = DateTime.Now;
             trmDT = defaultEndDate();
 
@@ -83,9 +127,477 @@ namespace MVC02.Models
         public string updateUser { get; set; }
 
 
-        protected ConfigParam() { }
+        protected ConfigParamPROD() { }
 
         }
+
+    public class ConfigParamSTG1 : IConfigParam
+        {
+        public ConfigParamSTG1( string user )
+            {
+            effDT = DateTime.Now;
+            trmDT = defaultEndDate();
+
+            createDT = DateTime.Now;
+            createUser = user;
+            updateDT = DateTime.Now;
+            updateUser = user;
+            }
+
+        [Key]
+        public Guid ID { get; set; }
+
+        [Required]
+        public Guid ConfigID { get; set; }
+
+        [Required]
+        public DateTime effDT { get; set; }
+
+        [Required]
+        public DateTime trmDT { get; set; }
+
+        [Required]
+        public Guid ParamDefinitionsID { get; set; }
+
+        [Required]
+        public bool isRefOnly { get; set; }
+
+        [Required]
+        [Column(TypeName = "NVarchar(MAX)")]
+        public string value { get; set; }
+
+        [MaxLength(100)]
+        public string valueUseageComments { get; set; }
+
+
+        #region NavigationProperties
+
+        public virtual Config Config { get; set; }
+        public virtual ParamDefinition ParamDefinition { get; set; }
+
+        #endregion
+
+
+        [Required]
+        public DateTime createDT { get; set; }
+
+        [Required]
+        [MaxLength(20)]
+        public string createUser { get; set; }
+
+        [Required]
+        public DateTime updateDT { get; set; }
+
+        [Required]
+        [MaxLength(20)]
+        public string updateUser { get; set; }
+
+
+        protected ConfigParamSTG1() { }
+
+        }
+
+    public class ConfigParamSTG2 : IConfigParam
+        {
+        public ConfigParamSTG2( string user )
+            {
+            effDT = DateTime.Now;
+            trmDT = defaultEndDate();
+
+            createDT = DateTime.Now;
+            createUser = user;
+            updateDT = DateTime.Now;
+            updateUser = user;
+            }
+
+        [Key]
+        public Guid ID { get; set; }
+
+        [Required]
+        public Guid ConfigID { get; set; }
+
+        [Required]
+        public DateTime effDT { get; set; }
+
+        [Required]
+        public DateTime trmDT { get; set; }
+
+        [Required]
+        public Guid ParamDefinitionsID { get; set; }
+
+        [Required]
+        public bool isRefOnly { get; set; }
+
+        [Required]
+        [Column(TypeName = "NVarchar(MAX)")]
+        public string value { get; set; }
+
+        [MaxLength(100)]
+        public string valueUseageComments { get; set; }
+
+
+        #region NavigationProperties
+
+        public virtual Config Config { get; set; }
+        public virtual ParamDefinition ParamDefinition { get; set; }
+
+        #endregion
+
+
+        [Required]
+        public DateTime createDT { get; set; }
+
+        [Required]
+        [MaxLength(20)]
+        public string createUser { get; set; }
+
+        [Required]
+        public DateTime updateDT { get; set; }
+
+        [Required]
+        [MaxLength(20)]
+        public string updateUser { get; set; }
+
+
+        protected ConfigParamSTG2() { }
+
+        }
+
+    public class ConfigParamQA1 : IConfigParam
+        {
+        public ConfigParamQA1( string user )
+            {
+            effDT = DateTime.Now;
+            trmDT = defaultEndDate();
+
+            createDT = DateTime.Now;
+            createUser = user;
+            updateDT = DateTime.Now;
+            updateUser = user;
+            }
+
+        [Key]
+        public Guid ID { get; set; }
+
+        [Required]
+        public Guid ConfigID { get; set; }
+
+        [Required]
+        public DateTime effDT { get; set; }
+
+        [Required]
+        public DateTime trmDT { get; set; }
+
+        [Required]
+        public Guid ParamDefinitionsID { get; set; }
+
+        [Required]
+        public bool isRefOnly { get; set; }
+
+        [Required]
+        [Column(TypeName = "NVarchar(MAX)")]
+        public string value { get; set; }
+
+        [MaxLength(100)]
+        public string valueUseageComments { get; set; }
+
+
+        #region NavigationProperties
+
+        public virtual Config Config { get; set; }
+        public virtual ParamDefinition ParamDefinition { get; set; }
+
+        #endregion
+
+
+        [Required]
+        public DateTime createDT { get; set; }
+
+        [Required]
+        [MaxLength(20)]
+        public string createUser { get; set; }
+
+        [Required]
+        public DateTime updateDT { get; set; }
+
+        [Required]
+        [MaxLength(20)]
+        public string updateUser { get; set; }
+
+
+        protected ConfigParamQA1() { }
+
+        }
+
+    public class ConfigParamQA2 : IConfigParam
+        {
+        public ConfigParamQA2( string user )
+            {
+            effDT = DateTime.Now;
+            trmDT = defaultEndDate();
+
+            createDT = DateTime.Now;
+            createUser = user;
+            updateDT = DateTime.Now;
+            updateUser = user;
+            }
+
+        [Key]
+        public Guid ID { get; set; }
+
+        [Required]
+        public Guid ConfigID { get; set; }
+
+        [Required]
+        public DateTime effDT { get; set; }
+
+        [Required]
+        public DateTime trmDT { get; set; }
+
+        [Required]
+        public Guid ParamDefinitionsID { get; set; }
+
+        [Required]
+        public bool isRefOnly { get; set; }
+
+        [Required]
+        [Column(TypeName = "NVarchar(MAX)")]
+        public string value { get; set; }
+
+        [MaxLength(100)]
+        public string valueUseageComments { get; set; }
+
+
+        #region NavigationProperties
+
+        public virtual Config Config { get; set; }
+        public virtual ParamDefinition ParamDefinition { get; set; }
+
+        #endregion
+
+
+        [Required]
+        public DateTime createDT { get; set; }
+
+        [Required]
+        [MaxLength(20)]
+        public string createUser { get; set; }
+
+        [Required]
+        public DateTime updateDT { get; set; }
+
+        [Required]
+        [MaxLength(20)]
+        public string updateUser { get; set; }
+
+
+        protected ConfigParamQA2() { }
+
+        }
+
+    public class ConfigParamDEV1 : IConfigParam
+        {
+        public ConfigParamDEV1( string user )
+            {
+            effDT = DateTime.Now;
+            trmDT = defaultEndDate();
+
+            createDT = DateTime.Now;
+            createUser = user;
+            updateDT = DateTime.Now;
+            updateUser = user;
+            }
+
+        [Key]
+        public Guid ID { get; set; }
+
+        [Required]
+        public Guid ConfigID { get; set; }
+
+        [Required]
+        public DateTime effDT { get; set; }
+
+        [Required]
+        public DateTime trmDT { get; set; }
+
+        [Required]
+        public Guid ParamDefinitionsID { get; set; }
+
+        [Required]
+        public bool isRefOnly { get; set; }
+
+        [Required]
+        [Column(TypeName = "NVarchar(MAX)")]
+        public string value { get; set; }
+
+        [MaxLength(100)]
+        public string valueUseageComments { get; set; }
+
+
+        #region NavigationProperties
+
+        public virtual Config Config { get; set; }
+        public virtual ParamDefinition ParamDefinition { get; set; }
+
+        #endregion
+
+
+        [Required]
+        public DateTime createDT { get; set; }
+
+        [Required]
+        [MaxLength(20)]
+        public string createUser { get; set; }
+
+        [Required]
+        public DateTime updateDT { get; set; }
+
+        [Required]
+        [MaxLength(20)]
+        public string updateUser { get; set; }
+
+
+        protected ConfigParamDEV1() { }
+
+        }
+
+    public class ConfigParamDEV2 : IConfigParam
+        {
+        public ConfigParamDEV2( string user )
+            {
+            effDT = DateTime.Now;
+            trmDT = defaultEndDate();
+
+            createDT = DateTime.Now;
+            createUser = user;
+            updateDT = DateTime.Now;
+            updateUser = user;
+            }
+
+        [Key]
+        public Guid ID { get; set; }
+
+        [Required]
+        public Guid ConfigID { get; set; }
+
+        [Required]
+        public DateTime effDT { get; set; }
+
+        [Required]
+        public DateTime trmDT { get; set; }
+
+        [Required]
+        public Guid ParamDefinitionsID { get; set; }
+
+        [Required]
+        public bool isRefOnly { get; set; }
+
+        [Required]
+        [Column(TypeName = "NVarchar(MAX)")]
+        public string value { get; set; }
+
+        [MaxLength(100)]
+        public string valueUseageComments { get; set; }
+
+
+        #region NavigationProperties
+
+        public virtual Config Config { get; set; }
+        public virtual ParamDefinition ParamDefinition { get; set; }
+
+        #endregion
+
+
+        [Required]
+        public DateTime createDT { get; set; }
+
+        [Required]
+        [MaxLength(20)]
+        public string createUser { get; set; }
+
+        [Required]
+        public DateTime updateDT { get; set; }
+
+        [Required]
+        [MaxLength(20)]
+        public string updateUser { get; set; }
+
+
+        protected ConfigParamDEV2() { }
+
+        }
+
+
+
+    #region original class
+    //public class ConfigParam   //Class inheritance w/wo Abstract may have serious performance impact - need to compose not inherit
+    //    {
+    //    public ConfigParam( string user )
+    //        {
+    //        //this.PROPERTY = new HashSet<ENTITYCLASS>();
+
+    //        effDT = DateTime.Now;
+    //        trmDT = defaultEndDate();
+
+    //        createDT = DateTime.Now;
+    //        createUser = user;
+    //        updateDT = DateTime.Now;
+    //        updateUser = user;
+    //        }
+
+    //    [Key]
+    //    public Guid ID { get; set; }
+
+    //    [Required]
+    //    public Guid ConfigID { get; set; }
+
+    //    [Required]
+    //    public DateTime effDT { get; set; }
+
+    //    [Required]
+    //    public DateTime trmDT { get; set; }
+
+    //    [Required]
+    //    public Guid ParamDefinitionsID { get; set; }
+
+    //    [Required]
+    //    public bool isRefOnly { get; set; }
+
+    //    [Required]
+    //    [Column(TypeName = "NVarchar(MAX)")]
+    //    public string value { get; set; }
+
+    //    [MaxLength(100)]
+    //    public string valueUseageComments { get; set; }
+
+
+    //    #region NavigationProperties
+
+    //    public virtual Config Config { get; set; }
+    //    public virtual ParamDefinition ParamDefinition { get; set; }
+
+    //    #endregion
+
+
+    //    [Required]
+    //    public DateTime createDT { get; set; }
+
+    //    [Required]
+    //    [MaxLength(20)]
+    //    public string createUser { get; set; }
+
+    //    [Required]
+    //    public DateTime updateDT { get; set; }
+
+    //    [Required]
+    //    [MaxLength(20)]
+    //    public string updateUser { get; set; }
+
+
+    //    protected ConfigParam() { }
+
+    //    }
+    #endregion
 
 
     }

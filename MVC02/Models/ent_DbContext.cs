@@ -6,65 +6,121 @@ using System.Data.Entity;
 using MVC02.Models;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
-namespace MVC02.Models {
-	public class MVC02Context : DbContext {
-		public MVC02Context() : base("MVC02") 
-			{
-            #if DEBUG
+namespace MVC02.Models
+    {
+    public class MVC02Context : DbContext
+        {
+        public MVC02Context() : base("MVC02")
+            {
+#if DEBUG
             Database.Log = Console.WriteLine;
-            #endif
+#endif
             }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder) 
-			{
+        protected override void OnModelCreating( DbModelBuilder modelBuilder )
+            {
             modelBuilder.HasDefaultSchema("AD");
 
-            //very little if anything should ever be deleted - mostly deactivated (ConfigParam data is notable exception)
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            //very little if anything should ever be deleted - mostly deactivated (ConfigParam data is an exception, but no dependency concern)
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
 
+            ////Schemas for clear environment 'domain' separation
+            modelBuilder.Entity<ConfigParamPROD>()
+                .ToTable("ConfigParam" , schemaName: "AD");
 
-            ////clear 'domain' separation
-            //modelBuilder.Entity<ConfigParamPROD>()
-            //.ToTable("ConfigParam" , schemaName: "AD");
+            modelBuilder.Entity<ConfigParamPROD>()
+                .HasRequired(cp => cp.Config)
+                .WithMany(c => c.ConfigParamsPROD);
 
-            //modelBuilder.Entity<ConfigParamDEV1>()
-            //.ToTable("ConfigParam" , schemaName: "DEV1");
+            modelBuilder.Entity<ConfigParamPROD>()
+                .HasRequired(cp => cp.ParamDefinition)
+                .WithMany(pd => pd.ConfigParamsPROD);
 
-            //modelBuilder.Entity<ConfigParamDEV2>()
-            //.ToTable("ConfigParam" , schemaName: "DEV2");
 
-            //modelBuilder.Entity<ConfigParamQA1>()
-            //.ToTable("ConfigParam" , schemaName: "QA1");
+            modelBuilder.Entity<ConfigParamSTG1>()
+                .ToTable("ConfigParam" , schemaName: "STG1");
 
-            //modelBuilder.Entity<ConfigParamQA2>()
-            //.ToTable("ConfigParam" , schemaName: "QA2");
+            modelBuilder.Entity<ConfigParamSTG1>()
+                .HasRequired(cp => cp.Config)
+                .WithMany(c => c.ConfigParamsSTG1);
 
-            //modelBuilder.Entity<ConfigParamSTG1>()
-            //.ToTable("ConfigParam" , schemaName: "STG1");
+            modelBuilder.Entity<ConfigParamSTG1>()
+                .HasRequired(cp => cp.ParamDefinition)
+                .WithMany(pd => pd.ConfigParamsSTG1);
 
-            //modelBuilder.Entity<ConfigParamSTG2>()
-            //.ToTable("ConfigParam" , schemaName: "STG2");
 
-            modelBuilder.Entity<ConfigParam>()
-              .HasRequired(cp => cp.Config)
-              .WithMany(c => c.ConfigParams);
+            modelBuilder.Entity<ConfigParamSTG2>()
+                .ToTable("ConfigParam" , schemaName: "STG2");
 
-            modelBuilder.Entity<ConfigParam>()
-              .HasRequired(cp => cp.ParamDefinition)
-              .WithMany(pd => pd.ConfigParams);
+            modelBuilder.Entity<ConfigParamSTG2>()
+                .HasRequired(cp => cp.ParamDefinition)
+                .WithMany(pd => pd.ConfigParamsSTG2);
+
+            modelBuilder.Entity<ConfigParamSTG2>()
+                .HasRequired(cp => cp.Config)
+                .WithMany(c => c.ConfigParamsSTG2);
+
+
+            modelBuilder.Entity<ConfigParamQA1>()
+                .ToTable("ConfigParam" , schemaName: "QA1");
+
+            modelBuilder.Entity<ConfigParamQA1>()
+                .HasRequired(cp => cp.Config)
+                .WithMany(c => c.ConfigParamsQA1);
+
+            modelBuilder.Entity<ConfigParamQA1>()
+                .HasRequired(cp => cp.ParamDefinition)
+                .WithMany(pd => pd.ConfigParamsQA1);
+
+
+            modelBuilder.Entity<ConfigParamQA2>()
+                .ToTable("ConfigParam" , schemaName: "QA2");
+
+			modelBuilder.Entity<ConfigParamQA2>()
+                .HasRequired(cp => cp.Config)
+                .WithMany(c => c.ConfigParamsQA2);
+
+			modelBuilder.Entity<ConfigParamQA2>()
+                .HasRequired(cp => cp.ParamDefinition)
+			    .WithMany(pd => pd.ConfigParamsQA2);
+
+
+            modelBuilder.Entity<ConfigParamDEV1>()
+                .ToTable("ConfigParam" , schemaName: "DEV1");
+
+            modelBuilder.Entity<ConfigParamDEV1>()
+                .HasRequired(cp => cp.Config)
+                .WithMany(c => c.ConfigParamsDEV1);
+
+            modelBuilder.Entity<ConfigParamDEV1>()
+                .HasRequired(cp => cp.ParamDefinition)
+                .WithMany(pd => pd.ConfigParamsDEV1);
+
+
+            modelBuilder.Entity<ConfigParamDEV2>()
+                .ToTable("ConfigParam" , schemaName: "DEV2");
+
+            modelBuilder.Entity<ConfigParamDEV2>()
+                .HasRequired(cp => cp.ParamDefinition)
+                .WithMany(pd => pd.ConfigParamsDEV2);
+
+            modelBuilder.Entity<ConfigParamDEV2>()
+                .HasRequired(cp => cp.Config)
+                .WithMany(c => c.ConfigParamsDEV2);
 
 
 
 
             modelBuilder.Entity<App>()
-			   .HasMany(a => a.Plans)
-			   .WithMany(p => p.Apps)
-			   .Map(ap => {
-				   ap.MapLeftKey("app");
-				   ap.MapRightKey("plan");
-				   ap.ToTable("J_App_Plan");
-			   });
+               .HasMany(a => a.Plans)
+               .WithMany(p => p.Apps)
+               .Map(ap => {
+                   ap.MapLeftKey("app");
+                   ap.MapRightKey("plan");
+                   ap.ToTable("J_App_Plan");
+               });
 
             modelBuilder.Entity<Config>()
                .HasMany(c => c.Plans)
@@ -152,14 +208,14 @@ namespace MVC02.Models {
         public DbSet<App> app { get; set; }
         public DbSet<Config> config { get; set; }
 
-        public DbSet<ConfigParam> configParam { get; set; }
-        //public DbSet<ConfigParamPROD> configParamPROD { get; set; }
-        //public DbSet<ConfigParamQA1> configParamQA1 { get; set; }
-        //public DbSet<ConfigParamQA2> configParamQA1 { get; set; }
-        //public DbSet<ConfigParamDEV1> configParamDev1 { get; set; }
-        //public DbSet<ConfigParamDEV2> configParamDev1 { get; set; }
-        //public DbSet<ConfigParamSTG1> configParamSTG1 { get; set; }
-        //public DbSet<ConfigParamSTG2> configParamSTG1 { get; set; }
+        public DbSet<ConfigParamPROD> configParamPROD { get; set; }
+        public DbSet<ConfigParamSTG1> configParamSTG1 { get; set; }
+        public DbSet<ConfigParamSTG2> configParamSTG2 { get; set; }
+        public DbSet<ConfigParamQA1> configParamQA1 { get; set; }
+        public DbSet<ConfigParamQA2> configParamQA2 { get; set; }
+        public DbSet<ConfigParamDEV1> configParamDev1 { get; set; }
+        public DbSet<ConfigParamDEV2> configParamDev2 { get; set; }
+
 
         public DbSet<Executable> executable { get; set; }
         public DbSet<JPlanLOB> jPlanLOB { get; set; }

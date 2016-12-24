@@ -49,7 +49,13 @@ namespace MVC02.Models
             #region NavigationProperties
         public virtual ParamVersion ParamVersion { get; set; }
         public virtual ParamType ParamType { get; set; }
-        public virtual ICollection<ConfigParam> ConfigParams { get; set; }
+        public virtual ICollection<ConfigParamPROD> ConfigParamsPROD { get; set; }
+        public virtual ICollection<ConfigParamSTG1> ConfigParamsSTG1 { get; set; }
+        public virtual ICollection<ConfigParamSTG2> ConfigParamsSTG2 { get; set; }
+        public virtual ICollection<ConfigParamQA1> ConfigParamsQA1 { get; set; }
+        public virtual ICollection<ConfigParamQA2> ConfigParamsQA2 { get; set; }
+        public virtual ICollection<ConfigParamDEV1> ConfigParamsDEV1 { get; set; }
+        public virtual ICollection<ConfigParamDEV2> ConfigParamsDEV2 { get; set; }
         #endregion
 
 
