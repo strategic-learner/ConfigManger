@@ -37,8 +37,8 @@ namespace MVC02.Models
 
         #region Navigation Properties
 
-        public virtual ICollection<Executable> Executables { get; set; }
-        public virtual ICollection<PathShare> PathShare { get; set; }
+        public ICollection<Executable> Executables { get; set; }
+        public ICollection<PathShare> PathShare { get; set; }
         #endregion
 
 

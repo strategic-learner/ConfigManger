@@ -60,18 +60,18 @@ namespace MVC02.Models
         #region NavigationProperties
 
         [Required]
-        public virtual ICollection<Plan> Plans { get; set; }
-        public virtual ICollection<ConfigParamPROD> ConfigParamsPROD { get; set; }
-        public virtual ICollection<ConfigParamSTG1> ConfigParamsSTG1 { get; set; }
-        public virtual ICollection<ConfigParamSTG2> ConfigParamsSTG2 { get; set; }
-        public virtual ICollection<ConfigParamQA1> ConfigParamsQA1 { get; set; }
-        public virtual ICollection<ConfigParamQA2> ConfigParamsQA2 { get; set; }
-        public virtual ICollection<ConfigParamDEV1> ConfigParamsDEV1 { get; set; }
-        public virtual ICollection<ConfigParamDEV2> ConfigParamsDEV2 { get; set; }
-        public virtual ICollection<Executable> Executables { get; set; }
-        public virtual ICollection<JPlanLOB> JPlanLOBs { get; set; }
-        public virtual App App { get; set; }
-        public virtual ParamVersion ParamVersion { get; set; }
+        public ICollection<Plan> Plans { get; set; }
+        public ICollection<ConfigParamPROD> ConfigParamsPROD { get; set; }
+        public ICollection<ConfigParamSTG1> ConfigParamsSTG1 { get; set; }
+        public ICollection<ConfigParamSTG2> ConfigParamsSTG2 { get; set; }
+        public ICollection<ConfigParamQA1> ConfigParamsQA1 { get; set; }
+        public ICollection<ConfigParamQA2> ConfigParamsQA2 { get; set; }
+        public ICollection<ConfigParamDEV1> ConfigParamsDEV1 { get; set; }
+        public ICollection<ConfigParamDEV2> ConfigParamsDEV2 { get; set; }
+        public ICollection<Executable> Executables { get; set; }
+        public ICollection<JPlanLOB> JPlanLOBs { get; set; }
+        public App App { get; set; }
+        public ParamVersion ParamVersion { get; set; }
 
         #endregion
 

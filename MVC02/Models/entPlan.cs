@@ -33,9 +33,9 @@ namespace MVC02.Models {
 
         #region NavigationProperties
 
-        public virtual ICollection<App> Apps { get; set; }
-        public virtual ICollection<Config> Configs { get; set; }
-        public virtual ICollection<JPlanLOB> JPlanLOB { get; set; }
+        public ICollection<App> Apps { get; set; }
+        public ICollection<Config> Configs { get; set; }
+        public ICollection<JPlanLOB> JPlanLOB { get; set; }
 
         #endregion
 

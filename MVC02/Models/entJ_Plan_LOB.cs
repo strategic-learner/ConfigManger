@@ -36,9 +36,9 @@ namespace MVC02.Models
 
 
         #region NavigationProperties
-        public virtual Plan Plans { get; set; }
-        public virtual LineOfBusiness LineOfBusiness { get; set; }
-        public virtual ICollection<Config> Configs { get; set; }
+        public Plan Plans { get; set; }
+        public LineOfBusiness LineOfBusiness { get; set; }
+        public ICollection<Config> Configs { get; set; }
         #endregion
 
 

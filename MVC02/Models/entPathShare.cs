@@ -37,7 +37,7 @@ namespace MVC02.Models
 
         #region Navigation Properties
 
-        public virtual ICollection<PathServer> PathServer { get; set; }
+        public ICollection<PathServer> PathServer { get; set; }
 
         #endregion
 

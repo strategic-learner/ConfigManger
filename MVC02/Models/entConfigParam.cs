@@ -106,8 +106,8 @@ namespace MVC02.Models
 
         #region NavigationProperties
 
-        public virtual Config Config { get; set; }
-        public virtual ParamDefinition ParamDefinition { get; set; }
+        public Config Config { get; set; }
+        public ParamDefinition ParamDefinition { get; set; }
 
         #endregion
 
@@ -172,8 +172,8 @@ namespace MVC02.Models
 
         #region NavigationProperties
 
-        public virtual Config Config { get; set; }
-        public virtual ParamDefinition ParamDefinition { get; set; }
+        public Config Config { get; set; }
+        public ParamDefinition ParamDefinition { get; set; }
 
         #endregion
 
@@ -238,8 +238,8 @@ namespace MVC02.Models
 
         #region NavigationProperties
 
-        public virtual Config Config { get; set; }
-        public virtual ParamDefinition ParamDefinition { get; set; }
+        public Config Config { get; set; }
+        public ParamDefinition ParamDefinition { get; set; }
 
         #endregion
 
@@ -304,8 +304,8 @@ namespace MVC02.Models
 
         #region NavigationProperties
 
-        public virtual Config Config { get; set; }
-        public virtual ParamDefinition ParamDefinition { get; set; }
+        public Config Config { get; set; }
+        public ParamDefinition ParamDefinition { get; set; }
 
         #endregion
 
@@ -370,8 +370,8 @@ namespace MVC02.Models
 
         #region NavigationProperties
 
-        public virtual Config Config { get; set; }
-        public virtual ParamDefinition ParamDefinition { get; set; }
+        public Config Config { get; set; }
+        public ParamDefinition ParamDefinition { get; set; }
 
         #endregion
 
@@ -436,8 +436,8 @@ namespace MVC02.Models
 
         #region NavigationProperties
 
-        public virtual Config Config { get; set; }
-        public virtual ParamDefinition ParamDefinition { get; set; }
+        public Config Config { get; set; }
+        public ParamDefinition ParamDefinition { get; set; }
 
         #endregion
 
@@ -502,8 +502,8 @@ namespace MVC02.Models
 
         #region NavigationProperties
 
-        public virtual Config Config { get; set; }
-        public virtual ParamDefinition ParamDefinition { get; set; }
+        public Config Config { get; set; }
+        public ParamDefinition ParamDefinition { get; set; }
 
         #endregion
 
@@ -573,8 +573,8 @@ namespace MVC02.Models
 
     //    #region NavigationProperties
 
-    //    public virtual Config Config { get; set; }
-    //    public virtual ParamDefinition ParamDefinition { get; set; }
+    //    public Config Config { get; set; }
+    //    public ParamDefinition ParamDefinition { get; set; }
 
     //    #endregion
 

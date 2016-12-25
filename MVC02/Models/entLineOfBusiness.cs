@@ -35,7 +35,7 @@ namespace MVC02.Models
         #region NavigationProperties
 
         [Required]
-        public virtual ICollection<JPlanLOB> JPlanLOB { get; set; }
+        public ICollection<JPlanLOB> JPlanLOB { get; set; }
 
         #endregion
 

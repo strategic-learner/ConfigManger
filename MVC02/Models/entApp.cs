@@ -37,9 +37,9 @@ namespace MVC02.Models {
         #region Navigation Properties
 
         [Required]
-		public virtual ICollection<Plan> Plans  { get; set; }
-        public virtual ICollection<Config> Configs { get; set; }
-        public virtual ICollection<Executable> Executables { get; set; }
+		public ICollection<Plan> Plans  { get; set; }
+        public ICollection<Config> Configs { get; set; }
+        public ICollection<Executable> Executables { get; set; }
 
         #endregion
 

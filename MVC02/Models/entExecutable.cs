@@ -43,11 +43,11 @@ namespace MVC02.Models
         //public  { get; set; }
 
         #region NavigationProperties
-        public virtual ICollection<PrimaryFunction> PrimaryFunctions { get; set; }
-        public virtual ICollection<PathServer> PathServers { get; set; }
-        public virtual ICollection<Config> Configs { get; set; }
-        public virtual ParamVersion ParamVersion { get; set; }
-        public virtual App App { get; set; }
+        public ICollection<PrimaryFunction> PrimaryFunctions { get; set; }
+        public ICollection<PathServer> PathServers { get; set; }
+        public ICollection<Config> Configs { get; set; }
+        public ParamVersion ParamVersion { get; set; }
+        public App App { get; set; }
         #endregion
 
 

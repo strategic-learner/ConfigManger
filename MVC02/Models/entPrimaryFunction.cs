@@ -36,7 +36,7 @@ namespace MVC02.Models
 
         #region NavigationProperties
 
-        public virtual ICollection<Executable> Executables { get; set; }
+        public ICollection<Executable> Executables { get; set; }
 
         #endregion
 

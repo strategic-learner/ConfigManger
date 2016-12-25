@@ -32,7 +32,7 @@ namespace MVC02.Models
 
         #region NavigationProperties
 
-        public virtual ICollection<ParamDefinition> ParamDefinitions { get; set; }
+        public ICollection<ParamDefinition> ParamDefinitions { get; set; }
         
         #endregion
 
