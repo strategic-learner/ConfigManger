@@ -12,9 +12,9 @@ namespace MVC02.Models
         {
         public MVC02Context() : base("MVC02")
             {
-#if DEBUG
+            #if DEBUG
             Database.Log = Console.WriteLine;
-#endif
+            #endif
             }
 
         protected override void OnModelCreating( DbModelBuilder modelBuilder )
