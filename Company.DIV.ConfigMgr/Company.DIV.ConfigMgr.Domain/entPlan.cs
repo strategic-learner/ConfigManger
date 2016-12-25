@@ -13,9 +13,9 @@ namespace Company.DIV.ConfigMgr.Domain
 		public Plan() {
 			this.Apps = new HashSet<App>();
             createDT = DateTime.Now;
-            createUser = MockUsers.Mock1();
+            createUser = MockUsers.defaultUser;
             updateDT = DateTime.Now;
-            updateUser = MockUsers.Mock1();
+            updateUser = MockUsers.defaultUser;
 
             }
 

@@ -15,9 +15,9 @@ namespace Company.DIV.ConfigMgr.Domain
             //this.PROPERTY = new HashSet<ENTITYCLASS>();
 
             createDT = DateTime.Now;
-            createUser = user;
+            createUser = MockUsers.defaultUser;
             updateDT = DateTime.Now;
-            updateUser = user;
+            updateUser = MockUsers.defaultUser;
             }
 
         [Key]

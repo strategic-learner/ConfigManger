@@ -11,6 +11,9 @@ namespace Company.DIV.ConfigMgr.Users
     /// </summary>
     public class MockUsers
         {
+
+        public static String defaultUser { get; } = "defaultUser";
+
         public static string Mock1()
             {
             return "Mock User1";

@@ -20,9 +20,9 @@ namespace Company.DIV.ConfigMgr.Domain
             trmDT = DataConstants.defaultEndDate;
 
             createDT = DateTime.Now;
-            createUser = user;
+            createUser = MockUsers.defaultUser;
             updateDT = DateTime.Now;
-            updateUser = user;
+            updateUser = MockUsers.defaultUser;
             }
 
 

@@ -12,9 +12,9 @@ namespace Company.DIV.ConfigMgr.Domain
 		public App() {
 			this.Plans = new HashSet<Plan>();
             createDT = DateTime.Now;
-            createUser = MockUsers.Mock1();
+            createUser = MockUsers.defaultUser;
             updateDT = DateTime.Now;
-            updateUser = MockUsers.Mock1();
+            updateUser = MockUsers.defaultUser;
             }
 
         [Key]
