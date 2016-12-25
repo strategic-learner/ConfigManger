@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataConstants.cs" />
-    <Compile Include="ent_DbContext.cs" />
+    <Compile Include="ConfigMgrContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

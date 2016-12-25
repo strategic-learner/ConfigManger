@@ -9,9 +9,9 @@ using Company.DIV.ConfigMgr.Domain;
 
 namespace Company.DIV.ConfigMgr.Data
     {
-    public class MVC02Context : DbContext
+    public class ConfigMgrContext : DbContext
         {
-        public MVC02Context() : base("ConfigMgr")
+        public ConfigMgrContext() : base("ConfigMgr")
             {
             #if DEBUG
             Database.Log = Console.WriteLine;
