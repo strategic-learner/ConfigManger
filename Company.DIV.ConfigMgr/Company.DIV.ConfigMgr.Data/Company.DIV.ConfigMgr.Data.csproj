@@ -87,8 +87,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataConstants.cs" />
-    <Compile Include="ConfigMgrContext.cs" />
+    <Compile Include="AppDAO.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="_Context.cs" />
+    <Compile Include="IDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -9,7 +9,7 @@ using Company.DIV.ConfigMgr.Domain;
 
 namespace Company.DIV.ConfigMgr.Data
     {
-    public class ConfigMgrContext : DbContext
+    internal class ConfigMgrContext : DbContext
         {
         public ConfigMgrContext() : base("ConfigMgr")
             {
@@ -27,7 +27,8 @@ namespace Company.DIV.ConfigMgr.Data
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
 
-            ////Schemas for clear environment 'domain' separation
+
+            ////Schemas for clear environment 'domain' separation within the db
             modelBuilder.Entity<ConfigParamPROD>()
                 .ToTable("ConfigParam" , schemaName: "AD");
 
@@ -110,7 +111,6 @@ namespace Company.DIV.ConfigMgr.Data
             modelBuilder.Entity<ConfigParamDEV2>()
                 .HasRequired(cp => cp.Config)
                 .WithMany(c => c.ConfigParamsDEV2);
-
 
 
 
@@ -200,8 +200,6 @@ namespace Company.DIV.ConfigMgr.Data
             modelBuilder.Entity<ParamDefinition>()
               .HasRequired(pd => pd.ParamType)
               .WithMany(pt => pt.ParamDefinitions);
-
-
 
             }
 
