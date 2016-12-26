@@ -24,5 +24,12 @@ namespace Company.DIV.ConfigMgr.Data
             seedData.data(context);
             }
         }
-
+    internal class ConfigMgrCreateDatabaseIfNotExistsInitializer :  CreateDatabaseIfNotExists<ConfigMgrContext>
+        {
+        protected override void Seed( ConfigMgrContext context )
+            {
+            SeedData seedData = new SeedData();
+            seedData.data(context);
+            }
+        }
     }

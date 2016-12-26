@@ -5,14 +5,22 @@ using System.Web;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using Company.DIV.ConfigMgr.Domain;
-//using Company.DIV.ConfigMgr.Data.DataConstants; defaultEndDate
+
+
 
 namespace Company.DIV.ConfigMgr.Data
     {
     internal class ConfigMgrContext : DbContext
         {
-        public ConfigMgrContext() : base("ConfigMgr")
+        public ConfigMgrContext() :
+        //base("ConfigMgr")
+        base(System.Configuration.ConfigurationManager.ConnectionStrings["ConfigMgr"].ConnectionString)
+        //base("name=ConfigMgr")
+        //base("ConfigMgrContext")
+
             {
+            this.Configuration.LazyLoadingEnabled = false;
+            
             #if DEBUG
             Database.Log = Console.WriteLine;
             #endif

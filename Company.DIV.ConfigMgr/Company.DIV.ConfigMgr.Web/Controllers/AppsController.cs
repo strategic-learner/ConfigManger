@@ -20,7 +20,24 @@ namespace Company.DIV.ConfigMgr.Web.Controllers
         // GET: Apps
         public ActionResult Index()
         {
-            IQueryable<App> apps = dao.GetAll();
+            @"(<<< PingPong errors!?>>>
+                 ping{
+                IEnumerable<App> apps = dao.GetAll();
+                //Exception Details: System.InvalidOperationException: The operation cannot be completed because the DbContext has been disposed.
+                //Line 38: @foreach(var item in Model)
+                //ConfigMgr.Web\Views\apps\Index.cshtml
+                }
+
+            pong{
+                IQueryable<App> apps = dao.GetAll();
+                List<App> apps = dao.GetAll().ToList();
+                //Exception Details: System.InvalidOperationException: The operation cannot be completed because the DbContext has been disposed.
+                //Line 23:             List<App> apps = dao.GetAll().ToList();
+                //ConfigMgr.Web\Controllers\AppsController.cs    Line: 23 
+                }
+            )";
+
+            ICollection<App> apps = dao.GetAll().ToList();
             return View(apps);
         }
 
@@ -50,7 +67,7 @@ namespace Company.DIV.ConfigMgr.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ITIL,abbr,descr,createDT,createUser,updateDT,updateUser")] App app)
+        public ActionResult Create([Bind(Include = "ID,ITIL,abbr,description,createDT,createUser,updateDT,updateUser")] App app)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +99,7 @@ namespace Company.DIV.ConfigMgr.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,ITIL,abbr,descr,createDT,createUser,updateDT,updateUser")] App app)
+        public ActionResult Edit([Bind(Include = "ID,ITIL,abbr,description,createDT,createUser,updateDT,updateUser")] App app)
         {
             if (ModelState.IsValid)
             {

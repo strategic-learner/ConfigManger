@@ -12,7 +12,8 @@ namespace Company.DIV.ConfigMgr.Data
         public static void Main()
             {
             #if DEBUG
-            Database.SetInitializer<ConfigMgrContext>(new ConfigMgrDropCreateAlwaysInitializer());
+            Database.SetInitializer<ConfigMgrContext>(new ConfigMgrCreateDatabaseIfNotExistsInitializer());
+            //Database.SetInitializer<ConfigMgrContext>(new ConfigMgrDropCreateAlwaysInitializer());
             //Database.SetInitializer<ConfigMgrContext>(new ConfigMgrDropCreateIfModelChangesInitializer());
             #endif
             }
