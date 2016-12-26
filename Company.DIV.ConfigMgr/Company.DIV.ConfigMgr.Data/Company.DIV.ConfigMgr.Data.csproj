@@ -118,6 +118,10 @@
     <Compile Include="Migrations\201612260714089_EmptyDbSetCreateIfNotExists.Designer.cs">
       <DependentUpon>201612260714089_EmptyDbSetCreateIfNotExists.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612260729158_Initial.cs" />
+    <Compile Include="Migrations\201612260729158_Initial.Designer.cs">
+      <DependentUpon>201612260729158_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="_Context.cs" />
     <Compile Include="IDAO.cs" />
@@ -154,10 +158,14 @@
   <ItemGroup>
     <Content Include="MigrationSqlScripts\MigrationsHist.txt" />
     <Content Include="MigrationSqlScripts\Update-Database EmptyDbSetCreateIfNotExists.sql" />
+    <Content Include="MigrationSqlScripts\Update-Database Initial.sql" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201612260714089_EmptyDbSetCreateIfNotExists.resx">
       <DependentUpon>201612260714089_EmptyDbSetCreateIfNotExists.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612260729158_Initial.resx">
+      <DependentUpon>201612260729158_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
