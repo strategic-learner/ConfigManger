@@ -13,6 +13,7 @@ namespace Company.DIV.ConfigMgr.Domain
         {
         public ParamDefinition( string user )
             {
+            ID = new Guid();
             //this.PROPERTY = new HashSet<ENTITYCLASS>();
             createDT = DateTime.Now;
             createUser = MockUsers.defaultUser;

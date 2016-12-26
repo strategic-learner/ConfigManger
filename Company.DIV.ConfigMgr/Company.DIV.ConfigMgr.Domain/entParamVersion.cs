@@ -11,8 +11,9 @@ namespace Company.DIV.ConfigMgr.Domain
     {
 	public class ParamVersion
 		{
-		public ParamVersion( string user )
+		public ParamVersion()
             {
+            ID = new Guid();
             //this.PROPERTY = new HashSet<ENTITYCLASS>();
             createDT = DateTime.Now;
             createUser = MockUsers.defaultUser;
@@ -25,7 +26,7 @@ namespace Company.DIV.ConfigMgr.Domain
 
         [Required]
         [Index("NDX_PKey" , 1 , IsUnique = true)] 
-        public float Version { get; set; }
+        public float version { get; set; }
 
         [Required]
         [MaxLength(100)]
@@ -57,7 +58,7 @@ namespace Company.DIV.ConfigMgr.Domain
 
 
 
-        private ParamVersion() { }
+        //private ParamVersion() { }
 
         }
     }

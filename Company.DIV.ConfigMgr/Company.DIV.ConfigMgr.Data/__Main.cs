@@ -11,13 +11,10 @@ namespace Company.DIV.ConfigMgr.Data
         {
         public static void Main()
             {
-#if DEBUG
+            #if DEBUG
             Database.SetInitializer<ConfigMgrContext>(new ConfigMgrDropCreateAlwaysInitializer());
-            //Database.SetInitializer(new ConfigMgrInitializer());
-#else
-            Database.SetInitializer<ConfigMgrContext>(new ConfigMgrDropCreateAlwaysInitialize());
-#endif
-
+            //Database.SetInitializer<ConfigMgrContext>(new ConfigMgrDropCreateIfModelChangesInitializer());
+            #endif
             }
         }
     }

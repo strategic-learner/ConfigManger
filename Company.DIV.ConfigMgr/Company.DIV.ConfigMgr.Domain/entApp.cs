@@ -10,6 +10,7 @@ namespace Company.DIV.ConfigMgr.Domain
     {
 	public class App {
 		public App() {
+            ID = new Guid();
 			this.Plans = new HashSet<Plan>();
             createDT = DateTime.Now;
             createUser = MockUsers.defaultUser;
@@ -32,7 +33,7 @@ namespace Company.DIV.ConfigMgr.Domain
 
 		[Required]
         [MaxLength(100)]
-        public string descr { get; set; }
+        public string description { get; set; }
 
 
         #region Navigation Properties
