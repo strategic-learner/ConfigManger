@@ -114,6 +114,11 @@
   <ItemGroup>
     <Compile Include="AppDAO.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Migrations\201612260714089_EmptyDbSetCreateIfNotExists.cs" />
+    <Compile Include="Migrations\201612260714089_EmptyDbSetCreateIfNotExists.Designer.cs">
+      <DependentUpon>201612260714089_EmptyDbSetCreateIfNotExists.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="_Context.cs" />
     <Compile Include="IDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -147,7 +152,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MigrationSqlScripts\Update-Database -TargetMigration%3bEmpty.sql" />
+    <Content Include="MigrationSqlScripts\MigrationsHist.txt" />
+    <Content Include="MigrationSqlScripts\Update-Database EmptyDbSetCreateIfNotExists.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201612260714089_EmptyDbSetCreateIfNotExists.resx">
+      <DependentUpon>201612260714089_EmptyDbSetCreateIfNotExists.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

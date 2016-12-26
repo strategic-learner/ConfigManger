@@ -1,0 +1,18 @@
+﻿
+
+PM> Enable-Migrations -Project Company.DIV.ConfigMgr.Data -Verbose
+
+PM> Add-Migration -Project Company.DIV.ConfigMgr.Data -Verbose EmptyDbSetCreateIfNotExists
+	Using StartUp project 'Company.DIV.ConfigMgr.Data'.
+	Scaffolding migration 'EmptyDbSetCreateIfNotExists'.
+	The Designer Code for this migration file includes a snapshot of your current Code First model. This snapshot is used to calculate the changes to your model when you scaffold the next migration. If you make additional changes to your model that you want to include in this migration, then you can re-scaffold it by running 'Add-Migration EmptyDbSetCreateIfNotExists' again.
+	Target database is: 'ConfigMgr' (DataSource: (localdb)\MSSQLLocalDB_PR, Provider: System.Data.SqlClient, Origin: UserCode).
+
+PM> Update-Database -Project Company.DIV.ConfigMgr.Data -Verbose -Script
+	Using StartUp project 'Company.DIV.ConfigMgr.Data'.
+	Target database is: 'ConfigMgr' (DataSource: (localdb)\MSSQLLocalDB_PR, Provider: System.Data.SqlClient, Origin: UserCode).
+	Applying explicit migrations: [201612260714089_EmptyDbSetCreateIfNotExists].
+	Applying explicit migration: 201612260714089_EmptyDbSetCreateIfNotExists.
+
+PM> 
+
