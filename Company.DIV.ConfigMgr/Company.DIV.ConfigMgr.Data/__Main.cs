@@ -12,6 +12,7 @@ namespace Company.DIV.ConfigMgr.Data
         public static void Main()
             {
             #if DEBUG
+            ///designtime helper - use whichever is needed
             Database.SetInitializer<ConfigMgrContext>(new ConfigMgrCreateDatabaseIfNotExistsInitializer());
             //Database.SetInitializer<ConfigMgrContext>(new ConfigMgrDropCreateAlwaysInitializer());
             //Database.SetInitializer<ConfigMgrContext>(new ConfigMgrDropCreateIfModelChangesInitializer());
