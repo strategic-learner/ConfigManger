@@ -1,4 +1,20 @@
-﻿
+﻿======================================================================================
+EF6 Ninja edition - 
+& http://stackoverflow.com/questions/19138650/entity-framework-migrations-generate-sql-script-of-current-database-model
+
+NEXT TIME TRY THIS:
+
+PM> Update-Database -Script -SourceMigration $InitialDatabase
+
+OR if *not*  targeting the current migration
+PM> Update-Database -Script -SourceMigration $InitialDatabase -TargetMigration: [MigrationName]
+
+Also for very first migration without/before model
+PM> Add-Migration NameOfBlankMigration -IgnoreChanges
+
+======================================================================================
+
+
 
 PM> Enable-Migrations -Project Company.DIV.ConfigMgr.Data -Verbose
 

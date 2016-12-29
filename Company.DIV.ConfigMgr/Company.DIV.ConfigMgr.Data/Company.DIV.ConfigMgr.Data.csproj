@@ -156,7 +156,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MigrationSqlScripts\MigrationsHist.txt" />
+    <Content Include="MigrationSqlScripts\_MigrationsHist.txt" />
     <Content Include="MigrationSqlScripts\Update-Database EmptyDbSetCreateIfNotExists.sql" />
     <Content Include="MigrationSqlScripts\Update-Database Initial.sql" />
   </ItemGroup>
