@@ -37,8 +37,8 @@ namespace Company.DIV.ConfigMgr.Data
 
 
             ////Schemas for clear environment 'domain' separation within the db
-            modelBuilder.Entity<ConfigParamPROD>()
-                .ToTable("ConfigParam" , schemaName: "AD");
+            modelBuilder.Entity<ConfigParamPROD>()  
+                .ToTable("ConfigParam" , schemaName: "PROD"); //Add views in each db to remap Schema back to [AD]
 
             modelBuilder.Entity<ConfigParamPROD>()
                 .HasRequired(cp => cp.Config)
