@@ -10,6 +10,7 @@ namespace Company.DIV.ConfigMgr.Data.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            ContextKey = "MainModel";
         }
 
         protected override void Seed(Company.DIV.ConfigMgr.Data.ConfigMgrContext context)
