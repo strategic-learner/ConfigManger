@@ -24,11 +24,11 @@ namespace Company.DIV.ConfigMgr.Domain
 		public Guid ID { get; set; }
 
         [Required]
-        [Index("NDX_PKey" , 1 , IsUnique = true)]
+        [Index("NDX_PKey" , 1 , IsUnique = true , IsClustered = false)]
         [StringLength(256)]
         public string server { get; set; }
 
-        [Index("NDX_PKey" , 2 , IsUnique = true)]
+        [Index("NDX_PKey" , 2 , IsUnique = true , IsClustered = false)]
         [StringLength(256)]
         public string path { get; set; }
 

@@ -25,7 +25,7 @@ namespace Company.DIV.ConfigMgr.Domain
 		public Guid ID { get; set; }
 
         [Required]
-        [Index("NDX_PKey" , 1 , IsUnique = true)] 
+        [Index("NDX_PKey" , 1 , IsUnique = true , IsClustered = false)] 
         public float version { get; set; }
 
         [Required]

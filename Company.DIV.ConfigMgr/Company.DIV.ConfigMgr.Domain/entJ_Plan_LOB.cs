@@ -26,12 +26,17 @@ namespace Company.DIV.ConfigMgr.Domain
 
             }
 
-        [Key]
-        public Guid ID { get; set; }
+        //[Key]
+        //public Guid ID { get; set; }
 
+        ??? [Key]
         [Required]
+        ??? [Index("NDX_PK" , 1 , IsUnique = true , IsClustered = false)]
         public Guid planID { get; set; }
+
+        ??? [Key]
         [Required]
+        ??? [Index("NDX_PK" , 2 , IsUnique = true , IsClustered = false)]
         public Guid LineOfBusinessID { get; set; }
 
 

@@ -27,11 +27,11 @@ namespace Company.DIV.ConfigMgr.Domain
         public Guid ParamVersionID { get; set; }
 
         [Required]
-        [Index("NDX_AppID_NameWExtension" , 1 , IsUnique = true)] 
+        [Index("NDX_AppID_NameWExtension" , 1 , IsUnique = true , IsClustered = false)] 
         public Guid AppID { get; set; }
 
         [Required]
-        [Index("NDX_AppID_NameWExtension" , 2 , IsUnique = true)]
+        [Index("NDX_AppID_NameWExtension" , 2 , IsUnique = true , IsClustered = false)]
         [MaxLength(256)]
         public string nameWExtension { get; set; }
 

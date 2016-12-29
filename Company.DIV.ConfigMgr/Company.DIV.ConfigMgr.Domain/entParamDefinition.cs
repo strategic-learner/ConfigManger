@@ -25,11 +25,11 @@ namespace Company.DIV.ConfigMgr.Domain
         public Guid ID { get; set; }
 
         [Required]
-        [Index("NDX_PKey" , 1 , IsUnique = true)] 
+        [Index("NDX_PKey" , 1 , IsUnique = true, IsClustered =false)] 
         public Guid ParamVersionID { get; set; }
 
         [Required]
-        [Index("NDX_PKey" , 2 , IsUnique = true)]
+        [Index("NDX_PKey" , 2 , IsUnique = true , IsClustered = false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ParamSequence { get; set; }
         
