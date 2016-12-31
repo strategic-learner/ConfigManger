@@ -26,15 +26,15 @@ namespace Company.DIV.ConfigMgr.Domain
 
             }
 
-        [Key] // refactor?
+        [Key]  //Refactor???
         public Guid ID { get; set; }
 
-        //??? [Key] refactor?
+        //[Key]  //Refactor???
         [Required]
         [Index("NDX_PK" , 1 , IsUnique = true , IsClustered = false)]
         public Guid planID { get; set; }
 
-        //??? [Key] refactor?
+        //[Key]  //Refactor???
         [Required]
         [Index("NDX_PK" , 2 , IsUnique = true , IsClustered = false)]
         public Guid LineOfBusinessID { get; set; }
