@@ -8,20 +8,19 @@ using Company.DIV.ConfigMgr.Domain;
 
 namespace Company.DIV.ConfigMgr.Data
     {
-    public interface IAppDAO : IDAO<App> { }
-
-    public class AppDAO : IAppDAO
+    public class AppDAO : IDAO<App>
         {
 
         public IQueryable<App> GetAll()
             {
-            //This pattern disposes the DbContext BEFORE the controller can use it!!!???
-            //using ( ConfigMgrContext db = new ConfigMgrContext() )
-            //    { 
-            ConfigMgrContext db = new ConfigMgrContext();
-                return db.app.AsNoTracking();
-                //}
+            IQueryable<App> iqApp;
+            using ( ConfigMgrContext db = new ConfigMgrContext() )
+                {
+                iqApp = db.app.AsNoTracking().ToList().AsQueryable();
+                return iqApp;
+                }
             }
+
 
         public App findByID( Guid? id )
             {
