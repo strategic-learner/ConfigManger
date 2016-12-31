@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Company.DIV.ConfigMgr.Data
     {
 
-    public interface IDAO<T> : IDisposable
+    public interface IDAO<T> //: IDisposable
         {
         IQueryable<T> GetAll();
         T findByID( Guid? id );

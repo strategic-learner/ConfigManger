@@ -8,7 +8,11 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain
     {
-	public class App {
+    public interface IApp { }
+
+
+    public class App : IApp
+        {
 		public App() {
             ID = new Guid();
 			this.Plans = new HashSet<Plan>();
