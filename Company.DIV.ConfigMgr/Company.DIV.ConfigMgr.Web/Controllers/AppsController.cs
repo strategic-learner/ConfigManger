@@ -14,8 +14,6 @@ namespace Company.DIV.ConfigMgr.Web.Controllers
 {
     public class AppsController : Controller
     {
-        //private ConfigMgrContext db = new ConfigMgrContext();
-        //private AppDAO dao = new AppDAO();
         private AppDAO dao;
         
         public AppsController( AppDAO appDAO )

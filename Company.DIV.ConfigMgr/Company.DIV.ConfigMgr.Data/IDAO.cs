@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 namespace Company.DIV.ConfigMgr.Data
     {
 
-    public interface IDAO<T> //: IDisposable
+    public interface IDAO<T> : IDisposable
         {
         IQueryable<T> GetAll();
         T findByID( Guid? id );
         void Insert( T entity );
         void Update( T entity );
         void Delete ( Guid? id );
+        void Dispose();
         }
     }

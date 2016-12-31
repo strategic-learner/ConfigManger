@@ -13,11 +13,11 @@ namespace Company.DIV.ConfigMgr.Data
 
         public IQueryable<App> GetAll()
             {
-            IQueryable<App> iqApp;
+            //IQueryable<App> iqApp;
             using ( ConfigMgrContext db = new ConfigMgrContext() )
                 {
-                iqApp = db.app.AsNoTracking().ToList().AsQueryable();
-                return iqApp;
+                //iqApp = db.app.AsNoTracking().ToList().AsQueryable();
+                return db.app.AsNoTracking().ToList().AsQueryable();
                 }
             }
 
