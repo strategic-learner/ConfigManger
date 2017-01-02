@@ -123,6 +123,7 @@
       <DependentUpon>201612260729158_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="SnapshotsEFPowerTools\MVC02Context.ViewsFromConcreteSansKeyConfigParams.cs" />
     <Compile Include="_Context.cs" />
     <Compile Include="IDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -134,9 +135,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SnapshotsEFPowerTools\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Company.DIV.ConfigMgr.Domain\Company.DIV.ConfigMgr.Domain.csproj">
       <Project>{746b9027-53a0-43d1-adf1-f07dfc8e1d95}</Project>
