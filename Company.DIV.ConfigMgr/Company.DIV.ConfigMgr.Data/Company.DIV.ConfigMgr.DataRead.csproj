@@ -119,7 +119,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="_Context.cs" />
-    <Compile Include="IDAO.cs" />
+    <Compile Include="Contracts\IDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="_Initializer.cs" />
     <Compile Include="_SeedData.cs" />
@@ -133,9 +133,9 @@
     <Folder Include="SnapshotsEFPowerTools\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Company.DIV.ConfigMgr.Domain\Company.DIV.ConfigMgr.DomainRead.csproj">
+    <ProjectReference Include="..\Company.DIV.ConfigMgr.Domain\Company.DIV.ConfigMgr.Domain.csproj">
       <Project>{746b9027-53a0-43d1-adf1-f07dfc8e1d95}</Project>
-      <Name>Company.DIV.ConfigMgr.DomainRead</Name>
+      <Name>Company.DIV.ConfigMgr.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

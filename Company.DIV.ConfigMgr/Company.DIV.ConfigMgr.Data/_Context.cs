@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using Company.DIV.ConfigMgr.Domain;
+using Company.DIV.ConfigMgr.Domain.Read;
 
 
 

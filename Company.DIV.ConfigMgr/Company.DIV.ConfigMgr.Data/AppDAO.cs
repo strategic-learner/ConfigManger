@@ -4,7 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Company.DIV.ConfigMgr.Domain;
+using Company.DIV.ConfigMgr.Domain.Read;
 
 namespace Company.DIV.ConfigMgr.DataRead
     {

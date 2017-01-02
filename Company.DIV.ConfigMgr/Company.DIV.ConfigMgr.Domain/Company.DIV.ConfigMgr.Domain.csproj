@@ -7,7 +7,7 @@
     <ProjectGuid>{746B9027-53A0-43D1-ADF1-F07DFC8E1D95}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Company.DIV.ConfigMgr.DomainRead</RootNamespace>
+    <RootNamespace>Company.DIV.ConfigMgr.Domain</RootNamespace>
     <AssemblyName>Company.DIV.ConfigMgr.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -85,20 +85,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="dataConstants.cs" />
-    <Compile Include="entApp.cs" />
-    <Compile Include="entConfig.cs" />
-    <Compile Include="entConfigParam.cs" />
-    <Compile Include="entExecutable.cs" />
-    <Compile Include="entJ_Plan_LOB.cs" />
-    <Compile Include="entLineOfBusiness.cs" />
-    <Compile Include="entParamDefinition.cs" />
-    <Compile Include="entParamType.cs" />
-    <Compile Include="entParamVersion.cs" />
-    <Compile Include="entPathServer.cs" />
-    <Compile Include="entPathShare.cs" />
-    <Compile Include="entPlan.cs" />
-    <Compile Include="entPrimaryFunction.cs" />
+    <Compile Include="Contracts\dataConstants.cs" />
+    <Compile Include="Read\entApp.cs" />
+    <Compile Include="Read\entConfig.cs" />
+    <Compile Include="Read\entConfigParam.cs" />
+    <Compile Include="Read\entExecutable.cs" />
+    <Compile Include="Read\entJ_Plan_LOB.cs" />
+    <Compile Include="Read\entLineOfBusiness.cs" />
+    <Compile Include="Read\entParamDefinition.cs" />
+    <Compile Include="Read\entParamType.cs" />
+    <Compile Include="Read\entParamVersion.cs" />
+    <Compile Include="Read\entPathServer.cs" />
+    <Compile Include="Read\entPathShare.cs" />
+    <Compile Include="Read\entPlan.cs" />
+    <Compile Include="Read\entPrimaryFunction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -109,6 +109,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Write\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

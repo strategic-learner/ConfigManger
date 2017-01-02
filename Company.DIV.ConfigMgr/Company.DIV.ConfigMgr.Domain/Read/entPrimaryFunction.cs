@@ -7,11 +7,11 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Company.DIV.ConfigMgr.Users;
 
-namespace Company.DIV.ConfigMgr.Domain
+namespace Company.DIV.ConfigMgr.Domain.Read
     {
-	public class PathShare
+	public class PrimaryFunction
 		{
-		public PathShare( string user )
+		public PrimaryFunction( string user )
             {
             //this.PROPERTY = new HashSet<ENTITYCLASS>();
             createDT = DateTime.Now;
@@ -24,23 +24,21 @@ namespace Company.DIV.ConfigMgr.Domain
 		public Guid ID { get; set; }
         
         [Required]
-        [Index("NDX_PKey" , 1 , IsUnique = true , IsClustered = false)]
-        [StringLength(256)]
-        public string share { get; set; }
+        [MaxLength(3)]
+        public string abbr { get; set; }
 
-        [Index("NDX_PKey" , 2 , IsUnique = true , IsClustered = false)]
-        [StringLength(256)]
-        public string path { get; set; }
+        [Required]
+        [MaxLength(50)]
+        public string description { get; set; }
 
         //[Required]
         //public  { get; set; }
 
-        #region Navigation Properties
+        #region NavigationProperties
 
-        public ICollection<PathServer> PathServer { get; set; }
+        public ICollection<Executable> Executables { get; set; }
 
         #endregion
-
 
 
         [Required]
@@ -59,7 +57,6 @@ namespace Company.DIV.ConfigMgr.Domain
 
 
 
-        private PathShare() { }
-
+        private PrimaryFunction() { }
         }
-    }
+	}

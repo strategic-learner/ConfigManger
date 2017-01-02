@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Company.DIV.ConfigMgr.Users;
 
-namespace Company.DIV.ConfigMgr.Domain
+namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public interface IApp { }
-
-
-    public class App : IApp
-        {
-		public App() {
+	public class ParamVersion
+		{
+		public ParamVersion()
+            {
             ID = new Guid();
-			this.Plans = new HashSet<Plan>();
+            //this.PROPERTY = new HashSet<ENTITYCLASS>();
             createDT = DateTime.Now;
             createUser = MockUsers.defaultUser;
             updateDT = DateTime.Now;
@@ -25,28 +24,21 @@ namespace Company.DIV.ConfigMgr.Domain
         [Key]
 		public Guid ID { get; set; }
 
-        /// <summary>
-        /// value predefined by business
-        /// </summary>
-		[Required]
-		public int ITIL { get; set; }
+        [Required]
+        [Index("NDX_PKey" , 1 , IsUnique = true , IsClustered = false)] 
+        public float version { get; set; }
 
-		[Required]
-        [MaxLength(3)]
-        public string abbr { get; set; }
-
-		[Required]
+        [Required]
         [MaxLength(100)]
         public string description { get; set; }
 
+        //[Required]
+        //public  { get; set; }
 
-        #region Navigation Properties
-
-        [Required]
-		public ICollection<Plan> Plans  { get; set; }
-        public ICollection<Config> Configs { get; set; }
+        #region NavigationProperties
         public ICollection<Executable> Executables { get; set; }
-
+        public ICollection<Config> Configs { get; set; }
+        public ICollection<ParamDefinition> ParamDefinitions { get; set; }
         #endregion
 
 
@@ -64,5 +56,9 @@ namespace Company.DIV.ConfigMgr.Domain
         [MaxLength(20)]
         public string updateUser { get; set; }
 
-}
-}
+
+
+        //private ParamVersion() { }
+
+        }
+    }

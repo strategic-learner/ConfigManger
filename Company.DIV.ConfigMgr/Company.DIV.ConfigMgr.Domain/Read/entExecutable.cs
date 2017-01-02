@@ -7,13 +7,12 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Company.DIV.ConfigMgr.Users;
 
-namespace Company.DIV.ConfigMgr.Domain
+namespace Company.DIV.ConfigMgr.Domain.Read
     {
-	public class ParamVersion
+	public class Executable
 		{
-		public ParamVersion()
+        public Executable( string user )
             {
-            ID = new Guid();
             //this.PROPERTY = new HashSet<ENTITYCLASS>();
             createDT = DateTime.Now;
             createUser = MockUsers.defaultUser;
@@ -24,9 +23,17 @@ namespace Company.DIV.ConfigMgr.Domain
         [Key]
 		public Guid ID { get; set; }
 
+        [Required] //wanted this to be Optional for early phase, but EF (or maybe just EF PowerTools?) was fighting me
+        public Guid ParamVersionID { get; set; }
+
         [Required]
-        [Index("NDX_PKey" , 1 , IsUnique = true , IsClustered = false)] 
-        public float version { get; set; }
+        [Index("NDX_AppID_NameWExtension" , 1 , IsUnique = true , IsClustered = false)] 
+        public Guid AppID { get; set; }
+
+        [Required]
+        [Index("NDX_AppID_NameWExtension" , 2 , IsUnique = true , IsClustered = false)]
+        [MaxLength(256)]
+        public string nameWExtension { get; set; }
 
         [Required]
         [MaxLength(100)]
@@ -36,9 +43,11 @@ namespace Company.DIV.ConfigMgr.Domain
         //public  { get; set; }
 
         #region NavigationProperties
-        public ICollection<Executable> Executables { get; set; }
+        public ICollection<PrimaryFunction> PrimaryFunctions { get; set; }
+        public ICollection<PathServer> PathServers { get; set; }
         public ICollection<Config> Configs { get; set; }
-        public ICollection<ParamDefinition> ParamDefinitions { get; set; }
+        public ParamVersion ParamVersion { get; set; }
+        public App App { get; set; }
         #endregion
 
 
@@ -58,7 +67,6 @@ namespace Company.DIV.ConfigMgr.Domain
 
 
 
-        //private ParamVersion() { }
-
+        private Executable() { }
         }
-    }
+	}
