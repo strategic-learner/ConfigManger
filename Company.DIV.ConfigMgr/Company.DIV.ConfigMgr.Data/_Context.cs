@@ -13,9 +13,10 @@ namespace Company.DIV.ConfigMgr.Data
     internal class ConfigMgrContext : DbContext
         {
         public ConfigMgrContext() :
+        base("name=ConfigMgr") //--HOLY WTW: PowerTools can only find the connString with this!!!???
+        //base(System.Configuration.ConfigurationManager.ConnectionStrings["ConfigMgr"].ConnectionString)  //--HOLY WTW: PowerTools can NOT find the connString with this!!!??? //Throws "object reference not set to an instance of an object" in a dialog box
+        //http://thedatafarm.com/data-access/entity-framework-power-tool-tips-to-view-model-a-feature-i-depend-on/
         //base("ConfigMgr")
-        base(System.Configuration.ConfigurationManager.ConnectionStrings["ConfigMgr"].ConnectionString)
-        //base("name=ConfigMgr")
         //base("ConfigMgrContext")
 
             {
