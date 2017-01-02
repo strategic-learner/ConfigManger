@@ -8,10 +8,12 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-	public class Plan {
+    public class Plan
+        {
 
-		public Plan() {
-			this.Apps = new HashSet<App>();
+        public Plan( string user )
+            {
+            this.Apps = new HashSet<App>();
             createDT = DateTime.Now;
             createUser = MockUsers.defaultUser;
             updateDT = DateTime.Now;
@@ -20,14 +22,14 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             }
 
         [Key]
-		public Guid ID { get; set; }
+        public Guid ID { get; set; }
 
 
-		[Required]
+        [Required]
         [MaxLength(4)]
         public string abbr { get; set; }
 
-		[Required]
+        [Required]
         [MaxLength(50)]
         public string descr { get; set; }
 
@@ -42,19 +44,21 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
 
         [Required]
-		public DateTime createDT { get; set; }
+        public DateTime createDT { get; set; }
 
-		[Required]
+        [Required]
         [MaxLength(20)]
         public string createUser { get; set; }
 
-		[Required]
-		public DateTime updateDT { get; set; }
+        [Required]
+        public DateTime updateDT { get; set; }
 
-		[Required]
+        [Required]
         [MaxLength(20)]
         public string updateUser { get; set; }
 
-		
-	}
+        public Plan() { }
+
+    }
+
 }

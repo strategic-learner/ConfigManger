@@ -10,7 +10,7 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-	public class Config
+	public class Config : IConfig
 		{
 		public Config(string user)
 			{

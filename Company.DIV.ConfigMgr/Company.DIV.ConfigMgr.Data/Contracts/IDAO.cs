@@ -14,6 +14,6 @@ namespace Company.DIV.ConfigMgr.DataRead
         void Insert( T entity );
         void Update( T entity );
         void Delete ( Guid? id );
-        void Dispose();
+        //void Dispose();
         }
     }

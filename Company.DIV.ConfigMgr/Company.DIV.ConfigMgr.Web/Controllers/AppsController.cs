@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Company.DIV.ConfigMgr.DataRead;
-using Company.DIV.ConfigMgr.Domain;
+using Company.DIV.ConfigMgr.Domain.Read;
 
 
 namespace Company.DIV.ConfigMgr.Web.Controllers

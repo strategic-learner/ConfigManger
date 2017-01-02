@@ -8,12 +8,10 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public interface IApp { }
-
-
     public class App : IApp
         {
-		public App() {
+		public App( string user )
+            {
             ID = new Guid();
 			this.Plans = new HashSet<Plan>();
             createDT = DateTime.Now;
@@ -64,5 +62,6 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         [MaxLength(20)]
         public string updateUser { get; set; }
 
-}
+        private App() { }
+    }
 }

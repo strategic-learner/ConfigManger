@@ -11,7 +11,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     {
 	public class ParamVersion
 		{
-		public ParamVersion()
+		public ParamVersion(string user)
             {
             ID = new Guid();
             //this.PROPERTY = new HashSet<ENTITYCLASS>();
@@ -58,7 +58,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
 
 
-        //private ParamVersion() { }
+        private ParamVersion() { }
 
         }
     }
