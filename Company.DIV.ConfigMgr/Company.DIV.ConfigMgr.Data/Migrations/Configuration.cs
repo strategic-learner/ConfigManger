@@ -8,9 +8,10 @@ namespace Company.DIV.ConfigMgr.DataRead.Migrations
     internal sealed class Configuration : DbMigrationsConfiguration<Company.DIV.ConfigMgr.DataRead.ConfigMgrContext>
     {
         public Configuration()
-        {
+            {
             AutomaticMigrationsEnabled = false;
-        }
+            ContextKey = "MainModel";
+            }
 
         protected override void Seed(Company.DIV.ConfigMgr.DataRead.ConfigMgrContext context)
         {
