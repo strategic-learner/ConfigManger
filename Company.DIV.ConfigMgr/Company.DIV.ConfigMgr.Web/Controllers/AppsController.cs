@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Company.DIV.ConfigMgr.Data;
+using Company.DIV.ConfigMgr.DataRead;
 using Company.DIV.ConfigMgr.Domain;
 
 

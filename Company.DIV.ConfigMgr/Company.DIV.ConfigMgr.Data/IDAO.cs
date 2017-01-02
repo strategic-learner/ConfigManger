@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Company.DIV.ConfigMgr.Data
+namespace Company.DIV.ConfigMgr.DataRead
     {
 
     public interface IDAO<T> : IDisposable

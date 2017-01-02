@@ -5,9 +5,9 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.DIV.ConfigMgr.Web", "Company.DIV.ConfigMgr.Web\Company.DIV.ConfigMgr.Web.csproj", "{565E4D58-426C-485A-93AC-9329725622A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.DIV.ConfigMgr.Data", "Company.DIV.ConfigMgr.Data\Company.DIV.ConfigMgr.Data.csproj", "{0B410303-FD22-4E81-8ED8-6B58088E6667}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.DIV.ConfigMgr.DataRead", "Company.DIV.ConfigMgr.Data\Company.DIV.ConfigMgr.DataRead.csproj", "{0B410303-FD22-4E81-8ED8-6B58088E6667}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.DIV.ConfigMgr.Domain", "Company.DIV.ConfigMgr.Domain\Company.DIV.ConfigMgr.Domain.csproj", "{746B9027-53A0-43D1-ADF1-F07DFC8E1D95}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.DIV.ConfigMgr.DomainRead", "Company.DIV.ConfigMgr.Domain\Company.DIV.ConfigMgr.DomainRead.csproj", "{746B9027-53A0-43D1-ADF1-F07DFC8E1D95}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.DIV.ConfigMgr.Users", "Company.DIV.ConfigMgr.Users\Company.DIV.ConfigMgr.Users.csproj", "{D893E906-4BCB-4CD3-9D25-A4BBC97DBF96}"
 EndProject

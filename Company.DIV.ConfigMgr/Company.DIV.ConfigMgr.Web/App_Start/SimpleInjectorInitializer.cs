@@ -2,7 +2,7 @@ using SimpleInjector;
 using SimpleInjector.Extensions;
 using SimpleInjector.Integration.Web;
 using SimpleInjector.Integration.Web.Mvc;
-using Company.DIV.ConfigMgr.Data;
+using Company.DIV.ConfigMgr.DataRead;
 
 namespace Company.DIV.ConfigMgr
     {

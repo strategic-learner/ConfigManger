@@ -4,13 +4,28 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{746B9027-53A0-43D1-ADF1-F07DFC8E1D95}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{0B410303-FD22-4E81-8ED8-6B58088E6667}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Company.DIV.ConfigMgr.Domain</RootNamespace>
-    <AssemblyName>Company.DIV.ConfigMgr.Domain</AssemblyName>
+    <RootNamespace>Company.DIV.ConfigMgr.DataRead</RootNamespace>
+    <AssemblyName>Company.DIV.ConfigMgr.Data</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -28,6 +43,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DEV|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -37,6 +53,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'QA|AnyCPU'">
     <OutputPath>bin\QA\</OutputPath>
@@ -46,6 +63,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'STG|AnyCPU'">
     <OutputPath>bin\STG\</OutputPath>
@@ -55,6 +73,8 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'PROD|AnyCPU'">
     <OutputPath>bin\PROD\</OutputPath>
@@ -64,6 +84,10 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -76,7 +100,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -85,30 +112,53 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="dataConstants.cs" />
-    <Compile Include="entApp.cs" />
-    <Compile Include="entConfig.cs" />
-    <Compile Include="entConfigParam.cs" />
-    <Compile Include="entExecutable.cs" />
-    <Compile Include="entJ_Plan_LOB.cs" />
-    <Compile Include="entLineOfBusiness.cs" />
-    <Compile Include="entParamDefinition.cs" />
-    <Compile Include="entParamType.cs" />
-    <Compile Include="entParamVersion.cs" />
-    <Compile Include="entPathServer.cs" />
-    <Compile Include="entPathShare.cs" />
-    <Compile Include="entPlan.cs" />
-    <Compile Include="entPrimaryFunction.cs" />
+    <Compile Include="AppDAO.cs" />
+    <Compile Include="Migrations\201701022117030_PreCQRS.cs" />
+    <Compile Include="Migrations\201701022117030_PreCQRS.Designer.cs">
+      <DependentUpon>201701022117030_PreCQRS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="_Context.cs" />
+    <Compile Include="IDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_Initializer.cs" />
+    <Compile Include="_SeedData.cs" />
+    <Compile Include="__Main.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Company.DIV.ConfigMgr.Users\Company.DIV.ConfigMgr.Users.csproj">
-      <Project>{d893e906-4bcb-4cd3-9d25-a4bbc97dbf96}</Project>
-      <Name>Company.DIV.ConfigMgr.Users</Name>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SnapshotsEFPowerTools\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Company.DIV.ConfigMgr.Domain\Company.DIV.ConfigMgr.DomainRead.csproj">
+      <Project>{746b9027-53a0-43d1-adf1-f07dfc8e1d95}</Project>
+      <Name>Company.DIV.ConfigMgr.DomainRead</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MigrationSqlScripts\_MigrationsHist.txt" />
+    <Content Include="MigrationSqlScripts\Update-Database EmptyDbSetCreateIfNotExists.sql" />
+    <Content Include="MigrationSqlScripts\Update-Database Initial.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201701022117030_PreCQRS.resx">
+      <DependentUpon>201701022117030_PreCQRS.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

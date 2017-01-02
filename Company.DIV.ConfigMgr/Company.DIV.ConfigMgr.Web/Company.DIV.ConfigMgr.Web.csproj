@@ -238,13 +238,13 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Company.DIV.ConfigMgr.Data\Company.DIV.ConfigMgr.Data.csproj">
+    <ProjectReference Include="..\Company.DIV.ConfigMgr.Data\Company.DIV.ConfigMgr.DataRead.csproj">
       <Project>{0b410303-fd22-4e81-8ed8-6b58088e6667}</Project>
-      <Name>Company.DIV.ConfigMgr.Data</Name>
+      <Name>Company.DIV.ConfigMgr.DataRead</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Company.DIV.ConfigMgr.Domain\Company.DIV.ConfigMgr.Domain.csproj">
+    <ProjectReference Include="..\Company.DIV.ConfigMgr.Domain\Company.DIV.ConfigMgr.DomainRead.csproj">
       <Project>{746b9027-53a0-43d1-adf1-f07dfc8e1d95}</Project>
-      <Name>Company.DIV.ConfigMgr.Domain</Name>
+      <Name>Company.DIV.ConfigMgr.DomainRead</Name>
     </ProjectReference>
     <ProjectReference Include="..\Company.DIV.ConfigMgr.Users\Company.DIV.ConfigMgr.Users.csproj">
       <Project>{d893e906-4bcb-4cd3-9d25-a4bbc97dbf96}</Project>

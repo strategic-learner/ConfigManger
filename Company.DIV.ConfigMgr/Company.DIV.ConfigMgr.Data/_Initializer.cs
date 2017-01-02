@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Company.DIV.ConfigMgr.Data
+namespace Company.DIV.ConfigMgr.DataRead
     {
     internal class ConfigMgrDropCreateAlwaysInitializer : DropCreateDatabaseAlways<ConfigMgrContext>
         {

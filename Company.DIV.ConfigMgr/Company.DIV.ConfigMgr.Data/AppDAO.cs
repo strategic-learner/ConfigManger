@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Company.DIV.ConfigMgr.Domain;
 
-namespace Company.DIV.ConfigMgr.Data
+namespace Company.DIV.ConfigMgr.DataRead
     {
     public class AppDAO : IDAO<App>
         {

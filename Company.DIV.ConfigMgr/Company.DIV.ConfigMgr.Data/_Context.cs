@@ -8,7 +8,7 @@ using Company.DIV.ConfigMgr.Domain;
 
 
 
-namespace Company.DIV.ConfigMgr.Data
+namespace Company.DIV.ConfigMgr.DataRead
     {
     internal class ConfigMgrContext : DbContext
         {
@@ -39,7 +39,7 @@ namespace Company.DIV.ConfigMgr.Data
 
             ////Schemas for clear environment 'domain' separation within the db
             modelBuilder.Entity<ConfigParamPROD>()  
-                .ToTable("ConfigParam" , schemaName: "PROD"); //Add views in each db to remap Schema back to [AD]
+                .ToTable("ConfigParam" , schemaName: "_PROD"); //Add views in each db to remap Schema back to [AD]
 
             modelBuilder.Entity<ConfigParamPROD>()
                 .HasRequired(cp => cp.Config)
@@ -51,7 +51,7 @@ namespace Company.DIV.ConfigMgr.Data
 
 
             modelBuilder.Entity<ConfigParamSTG1>()
-                .ToTable("ConfigParam" , schemaName: "STG1");
+                .ToTable("ConfigParam" , schemaName: "_STG1");
 
             modelBuilder.Entity<ConfigParamSTG1>()
                 .HasRequired(cp => cp.Config)
@@ -63,7 +63,7 @@ namespace Company.DIV.ConfigMgr.Data
 
 
             modelBuilder.Entity<ConfigParamSTG2>()
-                .ToTable("ConfigParam" , schemaName: "STG2");
+                .ToTable("ConfigParam" , schemaName: "_STG2");
 
             modelBuilder.Entity<ConfigParamSTG2>()
                 .HasRequired(cp => cp.ParamDefinition)
@@ -75,7 +75,7 @@ namespace Company.DIV.ConfigMgr.Data
 
 
             modelBuilder.Entity<ConfigParamQA1>()
-                .ToTable("ConfigParam" , schemaName: "QA1");
+                .ToTable("ConfigParam" , schemaName: "_QA1");
 
             modelBuilder.Entity<ConfigParamQA1>()
                 .HasRequired(cp => cp.Config)
@@ -87,7 +87,7 @@ namespace Company.DIV.ConfigMgr.Data
 
 
             modelBuilder.Entity<ConfigParamQA2>()
-                .ToTable("ConfigParam" , schemaName: "QA2");
+                .ToTable("ConfigParam" , schemaName: "_QA2");
 
 			modelBuilder.Entity<ConfigParamQA2>()
                 .HasRequired(cp => cp.Config)
@@ -99,7 +99,7 @@ namespace Company.DIV.ConfigMgr.Data
 
 
             modelBuilder.Entity<ConfigParamDEV1>()
-                .ToTable("ConfigParam" , schemaName: "DEV1");
+                .ToTable("ConfigParam" , schemaName: "_DEV1");
 
             modelBuilder.Entity<ConfigParamDEV1>()
                 .HasRequired(cp => cp.Config)
@@ -111,7 +111,7 @@ namespace Company.DIV.ConfigMgr.Data
 
 
             modelBuilder.Entity<ConfigParamDEV2>()
-                .ToTable("ConfigParam" , schemaName: "DEV2");
+                .ToTable("ConfigParam" , schemaName: "_DEV2");
 
             modelBuilder.Entity<ConfigParamDEV2>()
                 .HasRequired(cp => cp.ParamDefinition)
