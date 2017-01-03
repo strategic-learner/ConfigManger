@@ -14,6 +14,8 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         private PathShare() { }
         public PathShare( string user )
             {
+            this.JPathServerPathShares = new HashSet<JPathServerPathShare>();
+
             ID = new Guid();
             createDT = DateTime.Now;
             createUser = MockUsers.defaultUser;
@@ -33,13 +35,13 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         [StringLength(256)]
         public string path { get; private set; }
 
-        
+
         #region Navigation Properties
 
-        public ICollection<PathServer> PathServer { get; private set; }
+        public ICollection<JPathServerPathShare> JPathServerPathShares { get; private set; }
 
         #endregion
-        
+
 
         public DateTime createDT { get; private set; }
         public string createUser { get; private set; }

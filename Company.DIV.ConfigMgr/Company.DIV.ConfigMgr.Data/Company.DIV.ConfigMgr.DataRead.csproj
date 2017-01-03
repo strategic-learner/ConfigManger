@@ -117,6 +117,10 @@
     <Compile Include="Migrations\201701022117030_PreCQRS.Designer.cs">
       <DependentUpon>201701022117030_PreCQRS.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701032201030_RefactorM2M_to_One2M.cs" />
+    <Compile Include="Migrations\201701032201030_RefactorM2M_to_One2M.Designer.cs">
+      <DependentUpon>201701032201030_RefactorM2M_to_One2M.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="_Context.cs" />
     <Compile Include="Contracts\IDAO.cs" />
@@ -152,12 +156,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MigrationSqlScripts\_MigrationsHist.txt" />
-    <Content Include="MigrationSqlScripts\Update-Database EmptyDbSetCreateIfNotExists.sql" />
-    <Content Include="MigrationSqlScripts\Update-Database Initial.sql" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201701022117030_PreCQRS.resx">
       <DependentUpon>201701022117030_PreCQRS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701032201030_RefactorM2M_to_One2M.resx">
+      <DependentUpon>201701032201030_RefactorM2M_to_One2M.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

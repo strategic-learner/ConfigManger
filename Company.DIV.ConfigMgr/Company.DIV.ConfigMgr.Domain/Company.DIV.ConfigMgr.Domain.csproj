@@ -85,6 +85,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IJ_App_Plan.cs" />
+    <Compile Include="Contracts\IJ_Config_Executable.cs" />
+    <Compile Include="Contracts\IJ_Config_JPlanLOB.cs" />
+    <Compile Include="Contracts\IJ_Config_Plan.cs" />
+    <Compile Include="Contracts\IJ_Executable_PathServer.cs" />
+    <Compile Include="Contracts\IJ_Executable_PrimaryFunction.cs" />
+    <Compile Include="Contracts\IJ_PathServer_PathShare.cs" />
     <Compile Include="Contracts\_dataConstants.cs" />
     <Compile Include="Contracts\IApp.cs" />
     <Compile Include="Contracts\IConfig.cs" />
@@ -95,7 +102,13 @@
     <Compile Include="Contracts\IExecutable.cs" />
     <Compile Include="Contracts\IJ_Plan_LOB.cs" />
     <Compile Include="Contracts\ILineOfBusiness.cs" />
-    <Compile Include="Read\entJ_x1_x2.cs" />
+    <Compile Include="Read\entJ_App_Plan.cs" />
+    <Compile Include="Read\entJ_Config_Plan.cs" />
+    <Compile Include="Read\entJ_Config_Executable.cs" />
+    <Compile Include="Read\entJ_Config_JPlanLOB.cs" />
+    <Compile Include="Read\entJ_Executable_PathServer.cs" />
+    <Compile Include="Read\entJ_Executable_PrimaryFunction.cs" />
+    <Compile Include="Read\entJ_PathServer_PathShare.cs" />
     <Compile Include="Read\entParamDefinition.cs" />
     <Compile Include="Contracts\IParamType.cs" />
     <Compile Include="Contracts\IParamVersion.cs" />

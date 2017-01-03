@@ -81,8 +81,7 @@ namespace Company.DIV.ConfigMgr.DataRead
                 .Where(p => p.Name == "updateDT")
                 .Configure(c => c.IsRequired());
 
-            modelBuilder.Properties<EntityStateDisconnected>()
-                .Configure(p => p.HasColumnAnnotation("NotMapped" , true));
+            modelBuilder.Ignore<EntityStateDisconnected>();
 
             #endregion
 
@@ -108,70 +107,70 @@ namespace Company.DIV.ConfigMgr.DataRead
             //ConfigParamPROD (code-first table settings)
             modelBuilder.Entity<ConfigParamPROD>()
                 .HasRequired(cp => cp.Config)
-                .WithMany(c => c.ConfigParamsPROD);
+                .WithMany(c => c.ConfigParamPROD);
 
             modelBuilder.Entity<ConfigParamPROD>()
                 .HasRequired(cp => cp.ParamDefinition)
-                .WithMany(pd => pd.ConfigParamsPROD);
+                .WithMany(pd => pd.ConfigParamPROD);
 
             //ConfigParamSTG1 (code-first table settings)
             modelBuilder.Entity<ConfigParamSTG1>()
                 .HasRequired(cp => cp.Config)
-                .WithMany(c => c.ConfigParamsSTG1);
+                .WithMany(c => c.ConfigParamSTG1);
 
             modelBuilder.Entity<ConfigParamSTG1>()
                 .HasRequired(cp => cp.ParamDefinition)
-                .WithMany(pd => pd.ConfigParamsSTG1);
+                .WithMany(pd => pd.ConfigParamSTG1);
 
 
             //ConfigParamSTG2 (code-first table settings)
             modelBuilder.Entity<ConfigParamSTG2>()
                 .HasRequired(cp => cp.ParamDefinition)
-                .WithMany(pd => pd.ConfigParamsSTG2);
+                .WithMany(pd => pd.ConfigParamSTG2);
 
             modelBuilder.Entity<ConfigParamSTG2>()
                 .HasRequired(cp => cp.Config)
-                .WithMany(c => c.ConfigParamsSTG2);
+                .WithMany(c => c.ConfigParamSTG2);
 
 
             //ConfigParamQA1 (code-first table settings)
             modelBuilder.Entity<ConfigParamQA1>()
                 .HasRequired(cp => cp.Config)
-                .WithMany(c => c.ConfigParamsQA1);
+                .WithMany(c => c.ConfigParamQA1);
 
             modelBuilder.Entity<ConfigParamQA1>()
                 .HasRequired(cp => cp.ParamDefinition)
-                .WithMany(pd => pd.ConfigParamsQA1);
+                .WithMany(pd => pd.ConfigParamQA1);
 
 
             //ConfigParamQA2 (code-first table settings)
             modelBuilder.Entity<ConfigParamQA2>()
                 .HasRequired(cp => cp.Config)
-                .WithMany(c => c.ConfigParamsQA2);
+                .WithMany(c => c.ConfigParamQA2);
 
             modelBuilder.Entity<ConfigParamQA2>()
                 .HasRequired(cp => cp.ParamDefinition)
-                .WithMany(pd => pd.ConfigParamsQA2);
+                .WithMany(pd => pd.ConfigParamQA2);
 
 
             //ConfigParamDEV1 (code-first table settings)
             modelBuilder.Entity<ConfigParamDEV1>()
                 .HasRequired(cp => cp.Config)
-                .WithMany(c => c.ConfigParamsDEV1);
+                .WithMany(c => c.ConfigParamDEV1);
 
             modelBuilder.Entity<ConfigParamDEV1>()
                 .HasRequired(cp => cp.ParamDefinition)
-                .WithMany(pd => pd.ConfigParamsDEV1);
+                .WithMany(pd => pd.ConfigParamDEV1);
 
 
             //ConfigParamDEV2 (code-first table settings)
             modelBuilder.Entity<ConfigParamDEV2>()
                 .HasRequired(cp => cp.ParamDefinition)
-                .WithMany(pd => pd.ConfigParamsDEV2);
+                .WithMany(pd => pd.ConfigParamDEV2);
 
             modelBuilder.Entity<ConfigParamDEV2>()
                 .HasRequired(cp => cp.Config)
-                .WithMany(c => c.ConfigParamsDEV2);
+                .WithMany(c => c.ConfigParamDEV2);
 
 
             //Executable (code-first table settings)
@@ -184,9 +183,101 @@ namespace Company.DIV.ConfigMgr.DataRead
               .WithMany(a => a.Executables);
 
 
+            //JAppPlan (code-first table settings)
+            modelBuilder.Entity<JAppPlan>()
+                .ToTable("J_App_Plan");
+
+            modelBuilder.Entity<JAppPlan>()
+                .HasRequired(jap => jap.App)
+                .WithMany(a => a.JAppPlans);
+
+            modelBuilder.Entity<JAppPlan>()
+                .HasRequired(jap => jap.Plan)
+                .WithMany(p => p.JAppPlans);
+
+
+            //JConfigExecutable (code-first table settings)
+            modelBuilder.Entity<JConfigExecutable>()
+                .ToTable("J_Config_Executable");
+
+            modelBuilder.Entity<JConfigExecutable>()
+                .HasRequired(jce => jce.Executable)
+                .WithMany(e => e.JConfigExecutables);
+
+            modelBuilder.Entity<JConfigExecutable>()
+                .HasRequired(jce => jce.Config)
+                .WithMany(c => c.JConfigExecutables);
+
+
+            //JConfigJPlanLOB (code-first table settings)
+            modelBuilder.Entity<JConfigJPlanLOB>()
+                .ToTable("J_Config_JPlanLOB");
+
+            modelBuilder.Entity<JConfigJPlanLOB>()
+                .HasRequired(jcjpl => jcjpl.Config)
+                .WithMany(c => c.JConfigJPlanLOBs);
+
+            modelBuilder.Entity<JConfigJPlanLOB>()
+                .HasRequired(jcjpl => jcjpl.JPlanLOB)
+                .WithMany(jpl => jpl.JConfigJPlanLOBs);
+
+
+            //JConfigPlan (code-first table settings)
+            modelBuilder.Entity<JConfigPlan>()
+                .ToTable("J_Config_Plan");
+
+            modelBuilder.Entity<JConfigPlan>()
+                .HasRequired(jcp => jcp.Config)
+                .WithMany(c => c.JConfigPlans);
+
+            modelBuilder.Entity<JConfigPlan>()
+                .HasRequired(jcp => jcp.Plan)
+                .WithMany(p => p.JConfigPlans);
+
+
+
+            //JExecutablePathServer (code-first table settings)
+            modelBuilder.Entity<JExecutablePathServer>()
+                .ToTable("J_Executable_PathServer");
+
+            modelBuilder.Entity<JExecutablePathServer>()
+                .HasRequired(jeps => jeps.Executable)
+                .WithMany(y => y.JExecutablePathServers);
+
+            modelBuilder.Entity<JExecutablePathServer>()
+                .HasRequired(jeps => jeps.PathServer)
+                .WithMany(z => z.JExecutablePathServers);
+
+
+            //JExecutablePrimaryFunction (code-first table settings)
+            modelBuilder.Entity<JExecutablePrimaryFunction>()
+                .ToTable("J_Executable_PrimaryFunction");
+
+            modelBuilder.Entity<JExecutablePrimaryFunction>()
+                .HasRequired(jepf => jepf.Executable)
+                .WithMany(y => y.JExecutablePrimaryFunctions);
+
+            modelBuilder.Entity<JExecutablePrimaryFunction>()
+                .HasRequired(jepf => jepf.PrimaryFunction)
+                .WithMany(z => z.JExecutablePrimaryFunctions);
+
+
+            //JPathServerPathShare (code-first table settings)
+            modelBuilder.Entity<JPathServerPathShare>()
+                .ToTable("J_PathServer_PathShare");
+
+            modelBuilder.Entity<JPathServerPathShare>()
+                .HasRequired(jpsps => jpsps.PathServer)
+                .WithMany(ps1 => ps1.JPathServerPathShares);
+
+            modelBuilder.Entity<JPathServerPathShare>()
+                .HasRequired(jpsps => jpsps.PathShare)
+                .WithMany(ps2 => ps2.JPathServerPathShares);
+
+
             //JPlanLOB (code-first table settings)
             modelBuilder.Entity<JPlanLOB>()
-                .HasTableAnnotation("Table" , "J_Plan_LOB");
+                .ToTable("J_Plan_LOB");
 
             modelBuilder.Entity<JPlanLOB>()
                 .HasRequired(jpl => jpl.Plans)
@@ -195,21 +286,6 @@ namespace Company.DIV.ConfigMgr.DataRead
             modelBuilder.Entity<JPlanLOB>()
                 .HasRequired(jpl => jpl.LineOfBusiness)
                 .WithMany(lob =>lob.JPlanLOB);
-
-            ////Jx1x2 (code-first table settings)
-            //modelBuilder.Entity<Jx1x2>()
-            //    .HasTableAnnotation("Table" , "J_x1_x2");
-
-            //modelBuilder.Entity<Jx1x2>()
-            //    .HasRequired(x => x.x1)
-            //    .WithMany(y => y.Jx1x2);
-
-            //modelBuilder.Entity<Jx1x2>()
-            //    .HasRequired(x => x.x1)
-            //    .WithMany(z => z.Jx1x2);
-
-
-
 
 
             //LineOfBusiness (code-first table settings)

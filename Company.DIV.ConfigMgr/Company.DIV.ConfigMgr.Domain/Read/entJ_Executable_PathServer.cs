@@ -7,10 +7,10 @@ using Company.DIV.ConfigMgr.Users;
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
 
-    //public class Jx1x2 : IJx1x2
+    public class JExecutablePathServer : IJExecutablePathServer
         {
-        public Jx1x2() { }
-        public Jx1x2( string user)
+        public JExecutablePathServer() { }
+        public JExecutablePathServer( string user)
             {
             ID = new Guid();
             createDT = DateTime.Now;
@@ -23,17 +23,17 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
         [Required]
         [Index("NDX_UniqueKey" , 1 , IsUnique = true , IsClustered = false)]
-        public Guid x1ID { get; private set; }
+        public Guid ExecutableID { get; private set; }
 
         [Required]
         [Index("NDX_UniqueKey" , 2 , IsUnique = true , IsClustered = false)]
-        public Guid x2ID { get; private set; }
+        public Guid PathServerID { get; private set; }
 
 
         #region NavigationProperties
 
-        public x1 x1s { get; private set; }
-        public x2 x2s { get; private set; }
+        public Executable Executable { get; private set; }
+        public PathServer PathServer { get; private set; }
         
         #endregion
 

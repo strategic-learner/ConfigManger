@@ -14,6 +14,8 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         private ParamType() { }
         public ParamType( string user )
             {
+            this.ParamDefinitions = new HashSet<ParamDefinition>();
+
             ID = new Guid();
             createDT = DateTime.Now;
             createUser = MockUsers.defaultUser;

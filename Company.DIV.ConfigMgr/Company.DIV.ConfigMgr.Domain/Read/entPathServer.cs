@@ -14,6 +14,9 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         private PathServer() { }
         public PathServer( string user )
             {
+            this.JExecutablePathServers = new HashSet<JExecutablePathServer>();
+            this.JPathServerPathShares = new HashSet<JPathServerPathShare>();
+
             ID = new Guid();
             createDT = DateTime.Now;
             createUser = MockUsers.defaultUser;
@@ -36,8 +39,9 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
         #region Navigation Properties
 
-        public ICollection<Executable> Executables { get; private set; }
-        public ICollection<PathShare> PathShare { get; private set; }
+        public ICollection<JExecutablePathServer> JExecutablePathServers { get; private set; }
+        public ICollection<JPathServerPathShare> JPathServerPathShares { get; private set; }
+
         #endregion
 
 

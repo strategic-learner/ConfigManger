@@ -14,6 +14,10 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         private ParamVersion() { }
         public ParamVersion(string user)
             {
+            this.Executables = new HashSet<Executable>();
+            this.Configs = new HashSet<Config>();
+            this.ParamDefinitions = new HashSet<ParamDefinition>();
+
             ID = new Guid();
             createDT = DateTime.Now;
             createUser = MockUsers.defaultUser;
@@ -32,13 +36,13 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         [MaxLength(100)]
         public string description { get; private set; }
 
-        //[Required]
-        //public  { get; private set; }
 
         #region NavigationProperties
+
         public ICollection<Executable> Executables { get; private set; }
         public ICollection<Config> Configs { get; private set; }
         public ICollection<ParamDefinition> ParamDefinitions { get; private set; }
+
         #endregion
 
 

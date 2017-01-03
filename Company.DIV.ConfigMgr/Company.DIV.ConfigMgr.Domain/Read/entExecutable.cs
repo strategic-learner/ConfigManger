@@ -14,6 +14,10 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         private Executable() { }
         public Executable( string user )
             {
+            this.JConfigExecutables = new HashSet<JConfigExecutable>();
+            this.JExecutablePathServers = new HashSet<JExecutablePathServer>();
+            this.JExecutablePrimaryFunctions = new HashSet<JExecutablePrimaryFunction>();
+
             ID = new Guid();
             createDT = DateTime.Now;
             createUser = MockUsers.defaultUser;
@@ -43,9 +47,9 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
         #region NavigationProperties
 
-        public ICollection<PrimaryFunction> PrimaryFunctions { get; private set; }
-        public ICollection<PathServer> PathServers { get; private set; }
-        public ICollection<Config> Configs { get; private set; }
+        public ICollection<JConfigExecutable> JConfigExecutables { get; private set; }
+        public ICollection<JExecutablePathServer> JExecutablePathServers { get; private set; }
+        public ICollection<JExecutablePrimaryFunction> JExecutablePrimaryFunctions { get; private set; }
         public ParamVersion ParamVersion { get; private set; }
         public App App { get; private set; }
 

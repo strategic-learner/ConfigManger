@@ -13,6 +13,10 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         public Plan() { }
         public Plan( string user )
             {
+            this.JAppPlans = new HashSet<JAppPlan>();
+            this.JConfigPlans = new HashSet<JConfigPlan>();
+            this.JPlanLOB = new HashSet<JPlanLOB>();
+
             ID = new Guid();
             createDT = DateTime.Now;
             createUser = MockUsers.defaultUser;
@@ -35,8 +39,8 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
         #region NavigationProperties
 
-        public ICollection<App> Apps { get; private set; }
-        public ICollection<Config> Configs { get; private set; }
+        public ICollection<JAppPlan> JAppPlans { get; private set; }
+        public ICollection<JConfigPlan> JConfigPlans { get; private set; }
         public ICollection<JPlanLOB> JPlanLOB { get; private set; }
 
         #endregion

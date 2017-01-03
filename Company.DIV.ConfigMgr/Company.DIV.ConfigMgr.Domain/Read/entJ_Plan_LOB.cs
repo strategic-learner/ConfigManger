@@ -12,6 +12,8 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         public JPlanLOB() { }
         public JPlanLOB(string user)
             {
+            this.JConfigJPlanLOBs = new HashSet<JConfigJPlanLOB>();
+
             ID = new Guid();
             createDT = DateTime.Now;
             createUser = MockUsers.defaultUser;
@@ -33,8 +35,8 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         #region NavigationProperties
 
         public Plan Plans { get; private set; }
-        public LineOfBusiness LineOfBusiness { get; private set; }
-        public ICollection<Config> Configs { get; private set; }
+        public LineOfBusiness LineOfBusiness { get; private set; }0
+        public ICollection<JConfigJPlanLOB> JConfigJPlanLOBs { get; private set; }
         
         #endregion
 

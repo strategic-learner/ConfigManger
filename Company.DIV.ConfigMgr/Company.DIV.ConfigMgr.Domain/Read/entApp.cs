@@ -13,8 +13,11 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         private App() { }
         public App( string user )
             {
+			this.JAppPlans = new HashSet<JAppPlan>();
+            this.Configs = new HashSet<Config>();
+            this.Executables = new HashSet<Executable>();
+
             ID = new Guid();
-			this.Plans = new HashSet<Plan>();
             createDT = DateTime.Now;
             createUser = MockUsers.defaultUser;
             updateDT = DateTime.Now;
@@ -38,8 +41,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
         #region Navigation Properties
 
-        [Required]
-		public ICollection<Plan> Plans  { get; private set; }
+		public ICollection<JAppPlan> JAppPlans { get; private set; }
         public ICollection<Config> Configs { get; private set; }
         public ICollection<Executable> Executables { get; private set; }
 

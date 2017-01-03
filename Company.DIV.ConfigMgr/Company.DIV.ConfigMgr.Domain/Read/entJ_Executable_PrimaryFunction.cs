@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class LineOfBusiness : ILineOfBusiness
-        {
-        private LineOfBusiness() { }
-        public LineOfBusiness( string user )
-            {
-            this.JPlanLOB = new HashSet<JPlanLOB>();
 
+    public class JExecutablePrimaryFunction : IJExecutablePrimaryFunction
+        {
+        public JExecutablePrimaryFunction() { }
+        public JExecutablePrimaryFunction( string user)
+            {
             ID = new Guid();
             createDT = DateTime.Now;
             createUser = MockUsers.defaultUser;
@@ -22,23 +19,22 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             updateUser = MockUsers.defaultUser;
             }
 
-        
         public Guid ID { get; private set; }
 
         [Required]
-        [MaxLength(10)]
-        public string abbr { get; private set; }
+        [Index("NDX_UniqueKey" , 1 , IsUnique = true , IsClustered = false)]
+        public Guid ExecutableID { get; private set; }
 
         [Required]
-        [MaxLength(50)]
-        public string descr { get; private set; }
+        [Index("NDX_UniqueKey" , 2 , IsUnique = true , IsClustered = false)]
+        public Guid PrimaryFunctionID { get; private set; }
 
 
         #region NavigationProperties
 
-        [Required]
-        public ICollection<JPlanLOB> JPlanLOB { get; private set; }
-
+        public Executable Executable { get; private set; }
+        public PrimaryFunction PrimaryFunction { get; private set; }
+        
         #endregion
 
 
