@@ -20,7 +20,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             updateUser = MockUsers.defaultUser;
             }
 
-        [Key]
+        
 		public Guid ID { get; set; }
 
         /// <summary>

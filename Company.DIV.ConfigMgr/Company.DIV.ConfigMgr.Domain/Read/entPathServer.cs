@@ -9,7 +9,7 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-	public class PathServer
+	public class PathServer : IPathServer
 		{
 		public PathServer( string user )
             {
@@ -20,7 +20,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             updateUser = MockUsers.defaultUser;
             }
 
-        [Key]
+        
 		public Guid ID { get; set; }
 
         [Required]

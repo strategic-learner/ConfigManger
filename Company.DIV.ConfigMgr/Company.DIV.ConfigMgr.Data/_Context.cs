@@ -5,7 +5,7 @@ using System.Web;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using Company.DIV.ConfigMgr.Domain.Read;
-
+using Company.DIV.ConfigMgr.Domain;
 
 
 namespace Company.DIV.ConfigMgr.DataRead
@@ -37,8 +37,35 @@ namespace Company.DIV.ConfigMgr.DataRead
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
 
 
-            ////Schemas for clear environment 'domain' separation within the db
-            modelBuilder.Entity<ConfigParamPROD>()  
+            #region GeneralColumnConventionsNDefaults
+            modelBuilder.Properties<String>()
+                .Configure(s => s.HasMaxLength(20)); //Just a default
+
+            modelBuilder.Properties<Guid>()
+                .Where(p => p.Name == "ID")
+                .Configure(c => c.IsKey());
+
+            modelBuilder.Properties<string>()
+                .Where(p => p.Name.Length > 4 && p.Name.EndsWith("User"))
+                .Configure(c => c.HasMaxLength(20).IsRequired() );
+
+            modelBuilder.Properties<string>()
+                .Where(p => p.Name == "createDT")
+                .Configure(c => c.IsRequired());
+
+            modelBuilder.Properties<string>()
+                .Where(p => p.Name == "updateDT")
+                .Configure(c => c.IsRequired());
+
+            modelBuilder.Properties<EntityStateDisconnected>()
+                .Configure(p=>p.HasColumnAnnotation("NotMapped",true));
+
+            #endregion
+
+
+
+            ///These non-"AD" Schemas are for clear environment 'domain' separation within the db.  Make the setup unmistakeable for DBA replication, or pub/sub
+            modelBuilder.Entity<ConfigParamPROD>()
                 .ToTable("ConfigParam" , schemaName: "_PROD"); //Add views in each db to remap Schema back to [AD]
 
             modelBuilder.Entity<ConfigParamPROD>()
@@ -122,6 +149,15 @@ namespace Company.DIV.ConfigMgr.DataRead
                 .WithMany(c => c.ConfigParamsDEV2);
 
 
+
+            //modelBuilder.Entity<App>()
+            //.Property(p => p.createUser)
+            //.IsRequired();
+
+            modelBuilder.Ignore<ConfigParam>();
+
+            modelBuilder.Entity<JPlanLOB>()
+                .HasTableAnnotation("Table" , "J_Plan_LOB");
 
             modelBuilder.Entity<App>()
                .HasMany(a => a.Plans)
@@ -228,8 +264,8 @@ namespace Company.DIV.ConfigMgr.DataRead
         public DbSet<Executable> executable { get; set; }
         public DbSet<JPlanLOB> jPlanLOB { get; set; }
         public DbSet<LineOfBusiness> lineOfBusiness { get; set; }
-        public DbSet<PrimaryFunction> executableFunctions { get; set; }
-        public DbSet<ParamDefinition> paramDefinitions { get; set; }
+        public DbSet<PrimaryFunction> executableFunction { get; set; }
+        public DbSet<ParamDefinition> paramDefinition { get; set; }
         public DbSet<ParamType> paramType { get; set; }
         public DbSet<ParamVersion> paramVersion { get; set; }
         public DbSet<PathServer> pathServer { get; set; }

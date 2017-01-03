@@ -8,7 +8,7 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class Plan
+    public class Plan : IPlan
         {
 
         public Plan( string user )
@@ -21,7 +21,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
             }
 
-        [Key]
+        
         public Guid ID { get; set; }
 
 

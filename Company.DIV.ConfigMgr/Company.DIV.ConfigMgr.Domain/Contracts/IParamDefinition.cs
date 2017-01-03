@@ -9,7 +9,7 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain
     {
-     public interface ParamDefinition : IEntityRW
+     public interface IParamDefinition : IEntityRW
         {
          Guid ParamVersionID { get; }
          int ParamSequence { get; }

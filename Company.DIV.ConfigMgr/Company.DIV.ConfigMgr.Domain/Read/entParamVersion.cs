@@ -9,7 +9,7 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-	public class ParamVersion
+	public class ParamVersion : IParamVersion
 		{
 		public ParamVersion(string user)
             {
@@ -21,7 +21,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             updateUser = MockUsers.defaultUser;
             }
 
-        [Key]
+        
 		public Guid ID { get; set; }
 
         [Required]

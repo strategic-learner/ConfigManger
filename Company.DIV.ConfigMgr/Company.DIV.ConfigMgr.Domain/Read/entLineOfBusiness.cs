@@ -8,7 +8,7 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class LineOfBusiness
+    public class LineOfBusiness : ILineOfBusiness
         {
         public LineOfBusiness( string user )
             {
@@ -20,7 +20,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             updateUser = MockUsers.defaultUser;
             }
 
-        [Key]
+        
         public Guid ID { get; set; }
 
         [Required]

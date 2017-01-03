@@ -28,7 +28,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     /// At first Class inheritance Concrete/Abstract created silly-big Generated Views
     /// Now I changed something(?) and the Generated Views seem fine
     /// </summary>
-    public abstract class ConfigParam
+    public abstract class ConfigParam : IConfigParam
         {
         public ConfigParam( string user )
             {
@@ -43,7 +43,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             updateUser = MockUsers.defaultUser;
             }
 
-        [Key]
+        
         public Guid ID { get; set; }
 
         [Required]
@@ -100,7 +100,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     //public interface IConfigParam  //Class inheritance w/wo Abstract may have serious performance impact - need to compose not inherit
     //    {
 
-    //    [Key]
+    //    
     //    Guid ID { get; set; }
 
     //    [Required]

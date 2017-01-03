@@ -9,7 +9,7 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-	public class Executable
+	public class Executable : IExecutable
 		{
         public Executable( string user )
             {
@@ -20,7 +20,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             updateUser = MockUsers.defaultUser;
             }
 
-        [Key]
+        
 		public Guid ID { get; set; }
 
         [Required] //wanted this to be Optional for early phase, but EF (or maybe just EF PowerTools?) was fighting me

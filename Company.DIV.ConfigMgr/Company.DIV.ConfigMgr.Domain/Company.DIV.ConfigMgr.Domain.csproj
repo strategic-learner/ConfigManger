@@ -89,6 +89,7 @@
     <Compile Include="Contracts\IApp.cs" />
     <Compile Include="Contracts\IConfig.cs" />
     <Compile Include="Contracts\IConfigParam.cs" />
+    <Compile Include="Contracts\_Enums.cs" />
     <Compile Include="Contracts\_IEntityRW.cs" />
     <Compile Include="Contracts\IExecutable.cs" />
     <Compile Include="Contracts\IJ_Plan_LOB.cs" />

@@ -13,8 +13,9 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     /// Is there an easier way to do this in Fluent API?  
     /// Needed to allow only valid combinations to be referenced from Config
     /// </summary>
-    [Table("J_Plan_LOB")]
-    public class JPlanLOB
+
+        //[Table("J_Plan_LOB")]
+    public class JPlanLOB : IJPlanLOB
         {
         public JPlanLOB()
             {
@@ -26,15 +27,15 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
             }
 
-        [Key]  //Refactor???
+          //Refactor???
         public Guid ID { get; set; }
 
-        //[Key]  //Refactor???
+        //  //Refactor???
         [Required]
         [Index("NDX_PK" , 1 , IsUnique = true , IsClustered = false)]
         public Guid planID { get; set; }
 
-        //[Key]  //Refactor???
+        //  //Refactor???
         [Required]
         [Index("NDX_PK" , 2 , IsUnique = true , IsClustered = false)]
         public Guid LineOfBusinessID { get; set; }
