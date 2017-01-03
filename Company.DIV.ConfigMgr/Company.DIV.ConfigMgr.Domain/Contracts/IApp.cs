@@ -12,7 +12,7 @@ namespace Company.DIV.ConfigMgr.Domain
         { 
 
         /// <summary>
-        /// value predefined by business
+        ///an external value; defined by the business
         /// </summary>
 		int ITIL { get; }
         string abbr { get; }

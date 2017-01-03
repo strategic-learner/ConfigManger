@@ -11,10 +11,10 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     {
     public class ParamDefinition : IParamDefinition
         {
+        private ParamDefinition() { }
         public ParamDefinition( string user )
             {
             ID = new Guid();
-            //this.PROPERTY = new HashSet<ENTITYCLASS>();
             createDT = DateTime.Now;
             createUser = MockUsers.defaultUser;
             updateDT = DateTime.Now;
@@ -22,61 +22,49 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             }
 
         
-        public Guid ID { get; set; }
+        public Guid ID { get; private set; }
 
         [Required]
         [Index("NDX_PKey" , 1 , IsUnique = true, IsClustered =false)] 
-        public Guid ParamVersionID { get; set; }
+        public Guid ParamVersionID { get; private set; }
 
         [Required]
         [Index("NDX_PKey" , 2 , IsUnique = true , IsClustered = false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ParamSequence { get; set; }
+        public int ParamSequence { get; private set; }
         
         [Required]
-        public Guid ParamTypeID { get; set; }  //data type for validations
+        public Guid ParamTypeID { get; private set; }  //data type for validations
 
         [Required]
         [MaxLength(50)]
-        public string variableName { get; set; }
+        public string variableName { get; private set; }
 
         [Required]
         [MaxLength(500)]
-        public string intendedUse { get; set; } //Specify intended usage of the ConfigParam's value
+        public string intendedUse { get; private set; } //Specify intended usage of the ConfigParam's value
 
-        //[Required]
-        //public  { get; set; }
 
-            #region NavigationProperties
-        public ParamVersion ParamVersion { get; set; }
-        public ParamType ParamType { get; set; }
-        public ICollection<ConfigParamPROD> ConfigParamsPROD { get; set; }
-        public ICollection<ConfigParamSTG1> ConfigParamsSTG1 { get; set; }
-        public ICollection<ConfigParamSTG2> ConfigParamsSTG2 { get; set; }
-        public ICollection<ConfigParamQA1> ConfigParamsQA1 { get; set; }
-        public ICollection<ConfigParamQA2> ConfigParamsQA2 { get; set; }
-        public ICollection<ConfigParamDEV1> ConfigParamsDEV1 { get; set; }
-        public ICollection<ConfigParamDEV2> ConfigParamsDEV2 { get; set; }
+        #region NavigationProperties
+
+        public ParamVersion ParamVersion { get; private set; }
+        public ParamType ParamType { get; private set; }
+        public ICollection<ConfigParamPROD> ConfigParamsPROD { get; private set; }
+        public ICollection<ConfigParamSTG1> ConfigParamsSTG1 { get; private set; }
+        public ICollection<ConfigParamSTG2> ConfigParamsSTG2 { get; private set; }
+        public ICollection<ConfigParamQA1> ConfigParamsQA1 { get; private set; }
+        public ICollection<ConfigParamQA2> ConfigParamsQA2 { get; private set; }
+        public ICollection<ConfigParamDEV1> ConfigParamsDEV1 { get; private set; }
+        public ICollection<ConfigParamDEV2> ConfigParamsDEV2 { get; private set; }
+        
         #endregion
 
 
-        [Required]
-		public DateTime createDT { get; set; }
+        public DateTime createDT { get; private set; }
+        public string createUser { get; private set; }
+        public DateTime updateDT { get; private set; }
+        public string updateUser { get; private set; }
 
-		[Required]
-        [MaxLength(20)]
-        public string createUser { get; set; }
-
-		[Required]
-		public DateTime updateDT { get; set; }
-
-		[Required]
-        [MaxLength(20)]
-        public string updateUser { get; set; }
-
-
-
-        private ParamDefinition() { }
-
+        public EntityStateDisconnected entityStateDisconnected { get; private set;}
         }
     }

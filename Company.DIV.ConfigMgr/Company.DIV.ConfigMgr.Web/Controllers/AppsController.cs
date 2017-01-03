@@ -59,8 +59,9 @@ namespace Company.DIV.ConfigMgr.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                app.ID = Guid.NewGuid();
-                dao.Insert(app);
+                //TODO: refactor2CQRS
+                //app.ID = Guid.NewGuid();
+                //dao.Insert(app);
                 return RedirectToAction("Index");
             }
 
@@ -70,15 +71,17 @@ namespace Company.DIV.ConfigMgr.Web.Controllers
         // GET: Apps/Edit/5
         public ActionResult Edit(Guid? id)
         {
-            if (id == null)
-            {
+            //TODO: refactor2CQRS
+
+            if ( id == null )
+                {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+                }
             App app = dao.findByID(id);
-            if (app == null)
-            {
+            if ( app == null )
+                {
                 return HttpNotFound();
-            }
+                }
             return View(app);
         }
 
@@ -89,18 +92,21 @@ namespace Company.DIV.ConfigMgr.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,ITIL,abbr,description,createDT,createUser,updateDT,updateUser")] App app)
         {
-            if (ModelState.IsValid)
-            {
+            //TODO: refactor2CQRS
+
+            if ( ModelState.IsValid )
+                {
                 dao.Update(app);
                 return RedirectToAction("Index");
-            }
+                }
             return View(app);
-        }
+            }
 
         // GET: Apps/Delete/5
         public ActionResult Delete(Guid? id)
         {
-            if (id == null)
+            //TODO: refactor2CQRS
+            if ( id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -117,6 +123,7 @@ namespace Company.DIV.ConfigMgr.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
+            //TODO: refactor2CQRS
             dao.Delete(id);
             return RedirectToAction("Index");
         }

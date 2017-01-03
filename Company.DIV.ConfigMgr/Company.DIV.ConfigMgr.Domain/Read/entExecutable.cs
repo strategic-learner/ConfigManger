@@ -11,9 +11,10 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     {
 	public class Executable : IExecutable
 		{
+        private Executable() { }
         public Executable( string user )
             {
-            //this.PROPERTY = new HashSet<ENTITYCLASS>();
+            ID = new Guid();
             createDT = DateTime.Now;
             createUser = MockUsers.defaultUser;
             updateDT = DateTime.Now;
@@ -21,52 +22,41 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             }
 
         
-		public Guid ID { get; set; }
+		public Guid ID { get; private set; }
 
         [Required] //wanted this to be Optional for early phase, but EF (or maybe just EF PowerTools?) was fighting me
-        public Guid ParamVersionID { get; set; }
+        public Guid ParamVersionID { get; private set; }
 
         [Required]
         [Index("NDX_AppID_NameWExtension" , 1 , IsUnique = true , IsClustered = false)] 
-        public Guid AppID { get; set; }
+        public Guid AppID { get; private set; }
 
         [Required]
         [Index("NDX_AppID_NameWExtension" , 2 , IsUnique = true , IsClustered = false)]
         [MaxLength(256)]
-        public string nameWExtension { get; set; }
+        public string nameWExtension { get; private set; }
 
         [Required]
         [MaxLength(100)]
-        public string description { get; set; }
+        public string description { get; private set; }
 
-        //[Required]
-        //public  { get; set; }
 
         #region NavigationProperties
-        public ICollection<PrimaryFunction> PrimaryFunctions { get; set; }
-        public ICollection<PathServer> PathServers { get; set; }
-        public ICollection<Config> Configs { get; set; }
-        public ParamVersion ParamVersion { get; set; }
-        public App App { get; set; }
+
+        public ICollection<PrimaryFunction> PrimaryFunctions { get; private set; }
+        public ICollection<PathServer> PathServers { get; private set; }
+        public ICollection<Config> Configs { get; private set; }
+        public ParamVersion ParamVersion { get; private set; }
+        public App App { get; private set; }
+
         #endregion
 
 
-        [Required]
-		public DateTime createDT { get; set; }
+        public DateTime createDT { get; private set; }
+        public string createUser { get; private set; }
+        public DateTime updateDT { get; private set; }
+        public string updateUser { get; private set; }
 
-		[Required]
-        [MaxLength(20)]
-        public string createUser { get; set; }
-
-		[Required]
-		public DateTime updateDT { get; set; }
-
-		[Required]
-        [MaxLength(20)]
-        public string updateUser { get; set; }
-
-
-
-        private Executable() { }
+        public EntityStateDisconnected entityStateDisconnected { get; private set;}
         }
 	}

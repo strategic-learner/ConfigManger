@@ -11,16 +11,10 @@ namespace Company.DIV.ConfigMgr.Domain
     /// <summary>
     /// Interface for all entities Read and Write
     /// </summary>
-    public interface IEntityRW
+    public interface IViewModel
         {
-        Guid ID { get; }
-
-        DateTime createDT { get; }
-        string createUser { get; }
-
-        DateTime updateDT { get; }
-        string updateUser { get; }
-
-        EntityStateDisconnected entityStateDisconnected { get; }
+        //EntityStateDisconnected entityStateDisconnected { get; }
+        
+        //SomeTypeof<DomainEvent> DomainEvent { get; }
         }
     }

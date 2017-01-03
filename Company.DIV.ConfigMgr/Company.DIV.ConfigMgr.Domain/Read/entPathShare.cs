@@ -11,9 +11,10 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     {
 	public class PathShare : IPathShare
 		{
-		public PathShare( string user )
+        private PathShare() { }
+        public PathShare( string user )
             {
-            //this.PROPERTY = new HashSet<ENTITYCLASS>();
+            ID = new Guid();
             createDT = DateTime.Now;
             createUser = MockUsers.defaultUser;
             updateDT = DateTime.Now;
@@ -21,45 +22,30 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             }
 
         
-		public Guid ID { get; set; }
+		public Guid ID { get; private set; }
         
         [Required]
         [Index("NDX_PKey" , 1 , IsUnique = true , IsClustered = false)]
         [StringLength(256)]
-        public string share { get; set; }
+        public string share { get; private set; }
 
         [Index("NDX_PKey" , 2 , IsUnique = true , IsClustered = false)]
         [StringLength(256)]
-        public string path { get; set; }
+        public string path { get; private set; }
 
-        //[Required]
-        //public  { get; set; }
-
+        
         #region Navigation Properties
 
-        public ICollection<PathServer> PathServer { get; set; }
+        public ICollection<PathServer> PathServer { get; private set; }
 
         #endregion
+        
 
+        public DateTime createDT { get; private set; }
+        public string createUser { get; private set; }
+        public DateTime updateDT { get; private set; }
+        public string updateUser { get; private set; }
 
-
-        [Required]
-		public DateTime createDT { get; set; }
-
-		[Required]
-        [MaxLength(20)]
-        public string createUser { get; set; }
-
-		[Required]
-		public DateTime updateDT { get; set; }
-
-		[Required]
-        [MaxLength(20)]
-        public string updateUser { get; set; }
-
-
-
-        private PathShare() { }
-
+        public EntityStateDisconnected entityStateDisconnected { get; private set;}
         }
     }

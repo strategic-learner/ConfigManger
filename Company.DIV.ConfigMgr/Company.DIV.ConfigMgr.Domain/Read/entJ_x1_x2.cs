@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class Plan : IPlan
+
+    //public class Jx1x2 : IJx1x2
         {
-        public Plan() { }
-        public Plan( string user )
+        public Jx1x2() { }
+        public Jx1x2( string user)
             {
             ID = new Guid();
             createDT = DateTime.Now;
@@ -20,25 +19,22 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             updateUser = MockUsers.defaultUser;
             }
 
-        
         public Guid ID { get; private set; }
 
+        [Required]
+        [Index("NDX_UniqueKey" , 1 , IsUnique = true , IsClustered = false)]
+        public Guid x1ID { get; private set; }
 
         [Required]
-        [MaxLength(4)]
-        public string abbr { get; private set; }
-
-        [Required]
-        [MaxLength(50)]
-        public string descr { get; private set; }
+        [Index("NDX_UniqueKey" , 2 , IsUnique = true , IsClustered = false)]
+        public Guid x2ID { get; private set; }
 
 
         #region NavigationProperties
 
-        public ICollection<App> Apps { get; private set; }
-        public ICollection<Config> Configs { get; private set; }
-        public ICollection<JPlanLOB> JPlanLOB { get; private set; }
-
+        public x1 x1s { get; private set; }
+        public x2 x2s { get; private set; }
+        
         #endregion
 
 
@@ -49,5 +45,4 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
         public EntityStateDisconnected entityStateDisconnected { get; private set;}
         }
-
     }

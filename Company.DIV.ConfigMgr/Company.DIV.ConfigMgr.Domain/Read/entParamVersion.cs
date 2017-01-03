@@ -11,10 +11,10 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     {
 	public class ParamVersion : IParamVersion
 		{
-		public ParamVersion(string user)
+        private ParamVersion() { }
+        public ParamVersion(string user)
             {
             ID = new Guid();
-            //this.PROPERTY = new HashSet<ENTITYCLASS>();
             createDT = DateTime.Now;
             createUser = MockUsers.defaultUser;
             updateDT = DateTime.Now;
@@ -22,43 +22,31 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             }
 
         
-		public Guid ID { get; set; }
+		public Guid ID { get; private set; }
 
         [Required]
         [Index("NDX_PKey" , 1 , IsUnique = true , IsClustered = false)] 
-        public float version { get; set; }
+        public float version { get; private set; }
 
         [Required]
         [MaxLength(100)]
-        public string description { get; set; }
+        public string description { get; private set; }
 
         //[Required]
-        //public  { get; set; }
+        //public  { get; private set; }
 
         #region NavigationProperties
-        public ICollection<Executable> Executables { get; set; }
-        public ICollection<Config> Configs { get; set; }
-        public ICollection<ParamDefinition> ParamDefinitions { get; set; }
+        public ICollection<Executable> Executables { get; private set; }
+        public ICollection<Config> Configs { get; private set; }
+        public ICollection<ParamDefinition> ParamDefinitions { get; private set; }
         #endregion
 
 
-        [Required]
-		public DateTime createDT { get; set; }
+        public DateTime createDT { get; private set; }
+        public string createUser { get; private set; }
+        public DateTime updateDT { get; private set; }
+        public string updateUser { get; private set; }
 
-		[Required]
-        [MaxLength(20)]
-        public string createUser { get; set; }
-
-		[Required]
-		public DateTime updateDT { get; set; }
-
-		[Required]
-        [MaxLength(20)]
-        public string updateUser { get; set; }
-
-
-
-        private ParamVersion() { }
-
+        public EntityStateDisconnected entityStateDisconnected { get; private set;}
         }
     }

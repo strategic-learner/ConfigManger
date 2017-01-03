@@ -24,19 +24,19 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
 
 
-    /// <summary>
-    /// At first Class inheritance Concrete/Abstract created silly-big Generated Views
+    /// <DevNotes>
+    /// At first Class inheritance Concrete/Abstract created silly-big Generated Views; 
     /// Now I changed something(?) and the Generated Views seem fine
-    /// </summary>
+    /// </DevNotes>
     public abstract class ConfigParam : IConfigParam
         {
+        protected ConfigParam() { }
         public ConfigParam( string user )
             {
-            //this.PROPERTY = new HashSet<ENTITYCLASS>();
-
             effDT = DateTime.Now;
             trmDT = DataConstants.defaultEndDate;
 
+            ID = new Guid();
             createDT = DateTime.Now;
             createUser = MockUsers.defaultUser;
             updateDT = DateTime.Now;
@@ -44,112 +44,45 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             }
 
         
-        public Guid ID { get; set; }
+        public Guid ID { get; private set; }
 
         [Required]
-        public Guid ConfigID { get; set; }
+        public Guid ConfigID { get; private set; }
 
         [Required]
-        public DateTime effDT { get; set; }
+        public DateTime effDT { get; private set; }
 
         [Required]
-        public DateTime trmDT { get; set; }
+        public DateTime trmDT { get; private set; }
 
         [Required]
-        public Guid ParamDefinitionsID { get; set; }
+        public Guid ParamDefinitionsID { get; private set; }
 
         [Required]
-        public bool isRefOnly { get; set; }
+        public bool isRefOnly { get; private set; }
 
         [Required]
         [Column(TypeName = "NVarchar(MAX)")]
-        public string value { get; set; }
+        public string value { get; private set; }
 
         [MaxLength(100)]
-        public string valueUseageComments { get; set; }
+        public string valueUseageComments { get; private set; }
 
 
         #region NavigationProperties
 
-        public Config Config { get; set; }
-        public ParamDefinition ParamDefinition { get; set; }
+        public Config Config { get; private set; }
+        public ParamDefinition ParamDefinition { get; private set; }
 
         #endregion
 
 
-        [Required]
-        public DateTime createDT { get; set; }
+        public DateTime createDT { get; private set; }
+        public string createUser { get; private set; }
+        public DateTime updateDT { get; private set; }
+        public string updateUser { get; private set; }
 
-        [Required]
-        [MaxLength(20)]
-        public string createUser { get; set; }
-
-        [Required]
-        public DateTime updateDT { get; set; }
-
-        [Required]
-        [MaxLength(20)]
-        public string updateUser { get; set; }
-
-
-        protected ConfigParam() { }
-
+        public EntityStateDisconnected entityStateDisconnected { get; private set;}
         }
-
-
-    //public interface IConfigParam  //Class inheritance w/wo Abstract may have serious performance impact - need to compose not inherit
-    //    {
-
-    //    
-    //    Guid ID { get; set; }
-
-    //    [Required]
-    //    Guid ConfigID { get; set; }
-
-    //    [Required]
-    //    DateTime effDT { get; set; }
-
-    //    [Required]
-    //    DateTime trmDT { get; set; }
-
-    //    [Required]
-    //    Guid ParamDefinitionsID { get; set; }
-
-    //    [Required]
-    //    bool isRefOnly { get; set; }
-
-    //    [Required]
-    //    [Column(TypeName = "NVarchar(MAX)")]
-    //    string value { get; set; }
-
-    //    [MaxLength(100)]
-    //    string valueUseageComments { get; set; }
-
-
-    //    #region NavigationProperties
-
-    //    Config Config { get; set; }
-    //    ParamDefinition ParamDefinition { get; set; }
-
-    //    #endregion
-
-
-    //    [Required]
-    //    DateTime createDT { get; set; }
-
-    //    [Required]
-    //    [MaxLength(20)]
-    //    string createUser { get; set; }
-
-    //    [Required]
-    //    DateTime updateDT { get; set; }
-
-    //    [Required]
-    //    [MaxLength(20)]
-    //    string updateUser { get; set; }
-
-    //    }
-
-
 
     }

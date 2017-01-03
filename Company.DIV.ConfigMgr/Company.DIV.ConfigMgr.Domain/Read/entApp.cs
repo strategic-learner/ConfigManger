@@ -10,7 +10,8 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     {
     public class App : IApp
         {
-		public App( string user )
+        private App() { }
+        public App( string user )
             {
             ID = new Guid();
 			this.Plans = new HashSet<Plan>();
@@ -21,47 +22,35 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             }
 
         
-		public Guid ID { get; set; }
+		public Guid ID { get; private set; }
 
-        /// <summary>
-        /// value predefined by business
-        /// </summary>
 		[Required]
-		public int ITIL { get; set; }
+		public int ITIL { get; private set; }
 
 		[Required]
         [MaxLength(3)]
-        public string abbr { get; set; }
+        public string abbr { get; private set; }
 
 		[Required]
         [MaxLength(100)]
-        public string description { get; set; }
+        public string description { get; private set; }
 
 
         #region Navigation Properties
 
         [Required]
-		public ICollection<Plan> Plans  { get; set; }
-        public ICollection<Config> Configs { get; set; }
-        public ICollection<Executable> Executables { get; set; }
+		public ICollection<Plan> Plans  { get; private set; }
+        public ICollection<Config> Configs { get; private set; }
+        public ICollection<Executable> Executables { get; private set; }
 
         #endregion
 
 
-        [Required]
-		public DateTime createDT { get; set; }
+        public DateTime createDT { get; private set; }
+        public string createUser { get; private set; }
+        public DateTime updateDT { get; private set; }
+        public string updateUser { get; private set; }
 
-		[Required]
-        [MaxLength(20)]
-        public string createUser { get; set; }
-
-		[Required]
-		public DateTime updateDT { get; set; }
-
-		[Required]
-        [MaxLength(20)]
-        public string updateUser { get; set; }
-
-        private App() { }
-    }
+        public EntityStateDisconnected entityStateDisconnected { get; private set;}
+        }
 }

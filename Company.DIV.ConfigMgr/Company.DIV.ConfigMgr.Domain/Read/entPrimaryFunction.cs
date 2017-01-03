@@ -11,9 +11,10 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     {
 	public class PrimaryFunction : IPrimaryFunction
 		{
-		public PrimaryFunction( string user )
+        private PrimaryFunction() { }
+        public PrimaryFunction( string user )
             {
-            //this.PROPERTY = new HashSet<ENTITYCLASS>();
+            ID = new Guid();
             createDT = DateTime.Now;
             createUser = MockUsers.defaultUser;
             updateDT = DateTime.Now;
@@ -21,42 +22,29 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             }
 
         
-		public Guid ID { get; set; }
+		public Guid ID { get; private set; }
         
         [Required]
         [MaxLength(3)]
-        public string abbr { get; set; }
+        public string abbr { get; private set; }
 
         [Required]
         [MaxLength(50)]
-        public string description { get; set; }
+        public string description { get; private set; }
 
-        //[Required]
-        //public  { get; set; }
 
         #region NavigationProperties
 
-        public ICollection<Executable> Executables { get; set; }
+        public ICollection<Executable> Executables { get; private set; }
 
         #endregion
 
 
-        [Required]
-		public DateTime createDT { get; set; }
+		public DateTime createDT { get; private set; }
+        public string createUser { get; private set; }
+		public DateTime updateDT { get; private set; }
+        public string updateUser { get; private set; }
 
-		[Required]
-        [MaxLength(20)]
-        public string createUser { get; set; }
-
-		[Required]
-		public DateTime updateDT { get; set; }
-
-		[Required]
-        [MaxLength(20)]
-        public string updateUser { get; set; }
-
-
-
-        private PrimaryFunction() { }
+        public EntityStateDisconnected entityStateDisconnected { get; private set;}
         }
 	}

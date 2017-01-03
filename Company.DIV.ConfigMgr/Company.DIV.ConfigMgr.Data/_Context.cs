@@ -21,23 +21,47 @@ namespace Company.DIV.ConfigMgr.DataRead
 
             {
             this.Configuration.LazyLoadingEnabled = false;
-            
-            #if DEBUG
+
+#if DEBUG
             Database.Log = Console.WriteLine;
-            #endif
+#endif
             }
 
         protected override void OnModelCreating( DbModelBuilder modelBuilder )
             {
-            modelBuilder.HasDefaultSchema("AD");
-
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             //very little if anything should ever be deleted - mostly deactivated (ConfigParam data is an exception, but no dependency concern)
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
 
+            modelBuilder.HasDefaultSchema("AD");
+            
+            //These non-"AD" Schemas are for clear environment 'domain' separation within the db.  Make the cross-server setup unmistakeable for DBA replication , or pub/sub
+            modelBuilder.Entity<ConfigParamPROD>()
+                .ToTable("ConfigParam" , schemaName: "_PROD"); //TODO Add views in respective db to remap Schema back to [AD].[ConfigParam]
+
+            modelBuilder.Entity<ConfigParamSTG1>()
+                .ToTable("ConfigParam" , schemaName: "_STG1"); //TODO Add views in respective db to remap Schema back to [AD].[ConfigParam]
+
+            modelBuilder.Entity<ConfigParamSTG2>()
+                .ToTable("ConfigParam" , schemaName: "_STG2"); //TODO Add views in respective db to remap Schema back to [AD].[ConfigParam]
+
+            modelBuilder.Entity<ConfigParamQA1>()
+                .ToTable("ConfigParam" , schemaName: "_QA1"); //TODO Add views in respective db to remap Schema back to [AD].[ConfigParam]
+
+            modelBuilder.Entity<ConfigParamQA2>()
+                .ToTable("ConfigParam" , schemaName: "_QA2"); //TODO Add views in respective db to remap Schema back to [AD].[ConfigParam]
+
+            modelBuilder.Entity<ConfigParamDEV1>()
+                .ToTable("ConfigParam" , schemaName: "_DEV1"); //TODO Add views in respective db to remap Schema back to [AD].[ConfigParam]
+
+            modelBuilder.Entity<ConfigParamDEV2>()
+                .ToTable("ConfigParam" , schemaName: "_DEV2"); //TODO Add views in respective db to remap Schema back to [AD].[ConfigParam]
+
+
 
             #region GeneralColumnConventionsNDefaults
+
             modelBuilder.Properties<String>()
                 .Configure(s => s.HasMaxLength(20)); //Just a default
 
@@ -47,7 +71,7 @@ namespace Company.DIV.ConfigMgr.DataRead
 
             modelBuilder.Properties<string>()
                 .Where(p => p.Name.Length > 4 && p.Name.EndsWith("User"))
-                .Configure(c => c.HasMaxLength(20).IsRequired() );
+                .Configure(c => c.HasMaxLength(20).IsRequired());
 
             modelBuilder.Properties<string>()
                 .Where(p => p.Name == "createDT")
@@ -58,16 +82,30 @@ namespace Company.DIV.ConfigMgr.DataRead
                 .Configure(c => c.IsRequired());
 
             modelBuilder.Properties<EntityStateDisconnected>()
-                .Configure(p=>p.HasColumnAnnotation("NotMapped",true));
+                .Configure(p => p.HasColumnAnnotation("NotMapped" , true));
 
             #endregion
 
 
+            //Ignored classes  (code-first table settings)
+            modelBuilder.Ignore<ConfigParam>();
+            
 
-            ///These non-"AD" Schemas are for clear environment 'domain' separation within the db.  Make the setup unmistakeable for DBA replication, or pub/sub
-            modelBuilder.Entity<ConfigParamPROD>()
-                .ToTable("ConfigParam" , schemaName: "_PROD"); //Add views in each db to remap Schema back to [AD]
+            //App (code-first table settings)
+            //modelBuilder.Entity<App>()
+            //    .Property(p => p.createUser).IsRequired();
 
+
+            //Config (code-first table settings)
+            modelBuilder.Entity<Config>()
+                .HasRequired(c => c.App)
+                .WithMany(a => a.Configs);
+
+            modelBuilder.Entity<Config>()
+              .HasRequired(c => c.ParamVersion)
+              .WithMany(pv => pv.Configs);
+
+            //ConfigParamPROD (code-first table settings)
             modelBuilder.Entity<ConfigParamPROD>()
                 .HasRequired(cp => cp.Config)
                 .WithMany(c => c.ConfigParamsPROD);
@@ -76,10 +114,7 @@ namespace Company.DIV.ConfigMgr.DataRead
                 .HasRequired(cp => cp.ParamDefinition)
                 .WithMany(pd => pd.ConfigParamsPROD);
 
-
-            modelBuilder.Entity<ConfigParamSTG1>()
-                .ToTable("ConfigParam" , schemaName: "_STG1");
-
+            //ConfigParamSTG1 (code-first table settings)
             modelBuilder.Entity<ConfigParamSTG1>()
                 .HasRequired(cp => cp.Config)
                 .WithMany(c => c.ConfigParamsSTG1);
@@ -89,9 +124,7 @@ namespace Company.DIV.ConfigMgr.DataRead
                 .WithMany(pd => pd.ConfigParamsSTG1);
 
 
-            modelBuilder.Entity<ConfigParamSTG2>()
-                .ToTable("ConfigParam" , schemaName: "_STG2");
-
+            //ConfigParamSTG2 (code-first table settings)
             modelBuilder.Entity<ConfigParamSTG2>()
                 .HasRequired(cp => cp.ParamDefinition)
                 .WithMany(pd => pd.ConfigParamsSTG2);
@@ -101,9 +134,7 @@ namespace Company.DIV.ConfigMgr.DataRead
                 .WithMany(c => c.ConfigParamsSTG2);
 
 
-            modelBuilder.Entity<ConfigParamQA1>()
-                .ToTable("ConfigParam" , schemaName: "_QA1");
-
+            //ConfigParamQA1 (code-first table settings)
             modelBuilder.Entity<ConfigParamQA1>()
                 .HasRequired(cp => cp.Config)
                 .WithMany(c => c.ConfigParamsQA1);
@@ -113,21 +144,17 @@ namespace Company.DIV.ConfigMgr.DataRead
                 .WithMany(pd => pd.ConfigParamsQA1);
 
 
+            //ConfigParamQA2 (code-first table settings)
             modelBuilder.Entity<ConfigParamQA2>()
-                .ToTable("ConfigParam" , schemaName: "_QA2");
-
-			modelBuilder.Entity<ConfigParamQA2>()
                 .HasRequired(cp => cp.Config)
                 .WithMany(c => c.ConfigParamsQA2);
 
-			modelBuilder.Entity<ConfigParamQA2>()
+            modelBuilder.Entity<ConfigParamQA2>()
                 .HasRequired(cp => cp.ParamDefinition)
-			    .WithMany(pd => pd.ConfigParamsQA2);
+                .WithMany(pd => pd.ConfigParamsQA2);
 
 
-            modelBuilder.Entity<ConfigParamDEV1>()
-                .ToTable("ConfigParam" , schemaName: "_DEV1");
-
+            //ConfigParamDEV1 (code-first table settings)
             modelBuilder.Entity<ConfigParamDEV1>()
                 .HasRequired(cp => cp.Config)
                 .WithMany(c => c.ConfigParamsDEV1);
@@ -137,9 +164,7 @@ namespace Company.DIV.ConfigMgr.DataRead
                 .WithMany(pd => pd.ConfigParamsDEV1);
 
 
-            modelBuilder.Entity<ConfigParamDEV2>()
-                .ToTable("ConfigParam" , schemaName: "_DEV2");
-
+            //ConfigParamDEV2 (code-first table settings)
             modelBuilder.Entity<ConfigParamDEV2>()
                 .HasRequired(cp => cp.ParamDefinition)
                 .WithMany(pd => pd.ConfigParamsDEV2);
@@ -149,102 +174,136 @@ namespace Company.DIV.ConfigMgr.DataRead
                 .WithMany(c => c.ConfigParamsDEV2);
 
 
-
-            //modelBuilder.Entity<App>()
-            //.Property(p => p.createUser)
-            //.IsRequired();
-
-            modelBuilder.Ignore<ConfigParam>();
-
-            modelBuilder.Entity<JPlanLOB>()
-                .HasTableAnnotation("Table" , "J_Plan_LOB");
-
-            modelBuilder.Entity<App>()
-               .HasMany(a => a.Plans)
-               .WithMany(p => p.Apps)
-               .Map(ap => {
-                   ap.MapLeftKey("app");
-                   ap.MapRightKey("plan");
-                   ap.ToTable("J_App_Plan");
-               });
-
-            modelBuilder.Entity<Config>()
-               .HasMany(c => c.Plans)
-               .WithMany(p => p.Configs)
-               .Map(ap => {
-                   ap.MapLeftKey("plan");
-                   ap.MapRightKey("config");
-                   ap.ToTable("J_Config_Plan");
-               });
-
-            modelBuilder.Entity<Config>()
-               .HasMany(c => c.Executables)
-               .WithMany(e => e.Configs)
-               .Map(ap => {
-                   ap.MapLeftKey("executable");
-                   ap.MapRightKey("config");
-                   ap.ToTable("J_Config_Executable");
-               });
-
-            modelBuilder.Entity<Config>()
-               .HasMany(c => c.JPlanLOBs)
-               .WithMany(jpl => jpl.Configs)
-               .Map(ap => {
-                   ap.MapLeftKey("jPlanLOB");
-                   ap.MapRightKey("config");
-                   ap.ToTable("J_Config_JPlanLOB");
-               });
-
+            //Executable (code-first table settings)
             modelBuilder.Entity<Executable>()
-               .HasMany(e => e.PathServers)
-               .WithMany(p => p.Executables)
-               .Map(ap => {
-                   ap.MapLeftKey("pathServer");
-                   ap.MapRightKey("executable");
-                   ap.ToTable("J_Executable_PathServer");
-               });
-
-            modelBuilder.Entity<Executable>()
-              .HasMany(e => e.PrimaryFunctions)
-              .WithMany(pf => pf.Executables)
-              .Map(ap => {
-                  ap.MapLeftKey("primaryFunction");
-                  ap.MapRightKey("executable");
-                  ap.ToTable("J_Executable_PrimaryFunction");
-              });
-
-            modelBuilder.Entity<PathServer>()
-              .HasMany(srv => srv.PathShare)
-              .WithMany(shr => shr.PathServer)
-              .Map(ap => {
-                  ap.MapLeftKey("pathServer");
-                  ap.MapRightKey("pathShare");
-                  ap.ToTable("J_PathServer_PathShare");
-              });
-
-            modelBuilder.Entity<Config>()
-               .HasRequired(c => c.App)
-               .WithMany(a => a.Configs);
-
-            modelBuilder.Entity<Config>()
-              .HasRequired(c => c.ParamVersion)
-              .WithMany(pv => pv.Configs);
-
-            modelBuilder.Entity<Executable>()
-              .HasRequired(e => e.ParamVersion)  //wanted to change this to HasOptional while adding to fluent, but EF (or maybe just EF PowerTools?) was fighting the change even after removing the [Required] decoration in entity model
-              .WithMany(pv => pv.Executables);
+                .HasRequired(e => e.ParamVersion)  //wanted to change this to HasOptional while adding to fluent, but EF (or maybe just EF PowerTools?) was fighting the change even after removing the [Required] decoration in entity model
+                .WithMany(pv => pv.Executables);
 
             modelBuilder.Entity<Executable>()
               .HasRequired(e => e.App)
               .WithMany(a => a.Executables);
 
+
+            //JPlanLOB (code-first table settings)
+            modelBuilder.Entity<JPlanLOB>()
+                .HasTableAnnotation("Table" , "J_Plan_LOB");
+
+            modelBuilder.Entity<JPlanLOB>()
+                .HasRequired(jpl => jpl.Plans)
+                .WithMany(p => p.JPlanLOB);
+
+            modelBuilder.Entity<JPlanLOB>()
+                .HasRequired(jpl => jpl.LineOfBusiness)
+                .WithMany(lob =>lob.JPlanLOB);
+
+            ////Jx1x2 (code-first table settings)
+            //modelBuilder.Entity<Jx1x2>()
+            //    .HasTableAnnotation("Table" , "J_x1_x2");
+
+            //modelBuilder.Entity<Jx1x2>()
+            //    .HasRequired(x => x.x1)
+            //    .WithMany(y => y.Jx1x2);
+
+            //modelBuilder.Entity<Jx1x2>()
+            //    .HasRequired(x => x.x1)
+            //    .WithMany(z => z.Jx1x2);
+
+
+
+
+
+            //LineOfBusiness (code-first table settings)
+
+            //PrimaryFunction (code-first table settings)
+
+            //ParamDefinition (code-first table settings)
             modelBuilder.Entity<ParamDefinition>()
-              .HasRequired(pd => pd.ParamVersion)
-              .WithMany(pv => pv.ParamDefinitions);
+                .HasRequired(pd => pd.ParamVersion)
+                .WithMany(pv => pv.ParamDefinitions);
 
             modelBuilder.Entity<ParamDefinition>()
               .HasRequired(pd => pd.ParamType)
               .WithMany(pt => pt.ParamDefinitions);
+
+            //ParamType (code-first table settings)
+
+            //ParamVersion (code-first table settings)
+
+            //PathServer (code-first table settings)
+
+            //PathShare (code-first table settings)
+
+            //Plan (code-first table settings)
+
+
+
+
+
+
+
+
+            //modelBuilder.Entity<App>()
+            //   .HasMany(a => a.Plans)
+            //   .WithMany(p => p.Apps)
+            //   .Map(ap => {
+            //       ap.MapLeftKey("app");
+            //       ap.MapRightKey("plan");
+            //       ap.ToTable("J_App_Plan");
+            //   });
+
+            //modelBuilder.Entity<Config>()
+            //   .HasMany(c => c.Plans)
+            //   .WithMany(p => p.Configs)
+            //   .Map(ap => {
+            //       ap.MapLeftKey("plan");
+            //       ap.MapRightKey("config");
+            //       ap.ToTable("J_Config_Plan");
+            //   });
+
+            //modelBuilder.Entity<Config>()
+            //   .HasMany(c => c.Executables)
+            //   .WithMany(e => e.Configs)
+            //   .Map(ap => {
+            //       ap.MapLeftKey("executable");
+            //       ap.MapRightKey("config");
+            //       ap.ToTable("J_Config_Executable");
+            //   });
+
+            //modelBuilder.Entity<Config>()
+            //   .HasMany(c => c.JPlanLOBs)
+            //   .WithMany(jpl => jpl.Configs)
+            //   .Map(ap => {
+            //       ap.MapLeftKey("jPlanLOB");
+            //       ap.MapRightKey("config");
+            //       ap.ToTable("J_Config_JPlanLOB");
+            //   });
+
+            //modelBuilder.Entity<Executable>()
+            //   .HasMany(e => e.PathServers)
+            //   .WithMany(p => p.Executables)
+            //   .Map(ap => {
+            //       ap.MapLeftKey("pathServer");
+            //       ap.MapRightKey("executable");
+            //       ap.ToTable("J_Executable_PathServer");
+            //   });
+
+            //modelBuilder.Entity<Executable>()
+            //  .HasMany(e => e.PrimaryFunctions)
+            //  .WithMany(pf => pf.Executables)
+            //  .Map(ap => {
+            //      ap.MapLeftKey("primaryFunction");
+            //      ap.MapRightKey("executable");
+            //      ap.ToTable("J_Executable_PrimaryFunction");
+            //  });
+
+            //modelBuilder.Entity<PathServer>()
+            //  .HasMany(srv => srv.PathShare)
+            //  .WithMany(shr => shr.PathServer)
+            //  .Map(ap => {
+            //      ap.MapLeftKey("pathServer");
+            //      ap.MapRightKey("pathShare");
+            //      ap.ToTable("J_PathServer_PathShare");
+            //  });
 
             }
 

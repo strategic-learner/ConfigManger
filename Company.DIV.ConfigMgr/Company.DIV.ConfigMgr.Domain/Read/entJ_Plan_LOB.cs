@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Company.DIV.ConfigMgr.Users;
@@ -9,60 +7,43 @@ using Company.DIV.ConfigMgr.Users;
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
 
-    /// <summary>
-    /// Is there an easier way to do this in Fluent API?  
-    /// Needed to allow only valid combinations to be referenced from Config
-    /// </summary>
-
-        //[Table("J_Plan_LOB")]
     public class JPlanLOB : IJPlanLOB
         {
-        public JPlanLOB()
+        public JPlanLOB() { }
+        public JPlanLOB(string user)
             {
-            //this.??? = new HashSet<???>();
+            ID = new Guid();
             createDT = DateTime.Now;
             createUser = MockUsers.defaultUser;
             updateDT = DateTime.Now;
             updateUser = MockUsers.defaultUser;
-
             }
 
-          //Refactor???
-        public Guid ID { get; set; }
+        public Guid ID { get; private set; }
 
-        //  //Refactor???
         [Required]
-        [Index("NDX_PK" , 1 , IsUnique = true , IsClustered = false)]
-        public Guid planID { get; set; }
+        [Index("NDX_UniqueKey" , 1 , IsUnique = true , IsClustered = false)]
+        public Guid planID { get; private set; }
 
-        //  //Refactor???
         [Required]
-        [Index("NDX_PK" , 2 , IsUnique = true , IsClustered = false)]
-        public Guid LineOfBusinessID { get; set; }
+        [Index("NDX_UniqueKey" , 2 , IsUnique = true , IsClustered = false)]
+        public Guid LineOfBusinessID { get; private set; }
 
 
         #region NavigationProperties
-        public Plan Plans { get; set; }
-        public LineOfBusiness LineOfBusiness { get; set; }
-        public ICollection<Config> Configs { get; set; }
+
+        public Plan Plans { get; private set; }
+        public LineOfBusiness LineOfBusiness { get; private set; }
+        public ICollection<Config> Configs { get; private set; }
+        
         #endregion
 
 
-        [Required]
-        public DateTime createDT { get; set; }
+        public DateTime createDT { get; private set; }
+        public string createUser { get; private set; }
+        public DateTime updateDT { get; private set; }
+        public string updateUser { get; private set; }
 
-        [Required]
-        [MaxLength(20)]
-        public string createUser { get; set; }
-
-        [Required]
-        public DateTime updateDT { get; set; }
-
-        [Required]
-        [MaxLength(20)]
-        public string updateUser { get; set; }
-
-
-
+        public EntityStateDisconnected entityStateDisconnected { get; private set;}
         }
     }
