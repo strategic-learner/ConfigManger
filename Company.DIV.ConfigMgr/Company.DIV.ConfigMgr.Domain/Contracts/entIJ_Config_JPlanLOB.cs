@@ -3,7 +3,7 @@
 namespace Company.DIV.ConfigMgr.Domain
     {
 
-    public interface IJConfigJPlanLOB : IEntityBase
+    public interface IJConfigJPlanLOB
         {
         Guid ConfigID { get; }
         Guid JPlanLOBID { get; }

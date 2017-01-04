@@ -2,7 +2,7 @@
 
 namespace Company.DIV.ConfigMgr.Domain
     {
-    public interface ILineOfBusiness : IEntityBase
+    public interface ILineOfBusiness
         {
         string abbr { get; }
         string descr { get; }

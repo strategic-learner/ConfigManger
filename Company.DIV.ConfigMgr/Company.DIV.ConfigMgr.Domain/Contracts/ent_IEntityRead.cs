@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 
 namespace Company.DIV.ConfigMgr.Domain
     {
@@ -7,6 +7,14 @@ namespace Company.DIV.ConfigMgr.Domain
     /// </summary>
     public interface IEntityRead
         {
+        Guid ID { get; }
+
+        DateTime createDT { get; }
+        string createUser { get; }
+
+        DateTime updateDT { get; }
+        string updateUser { get; }
+
         EntityStateDisconnected entityStateDisconnected { get; }
         }
     }

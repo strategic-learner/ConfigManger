@@ -2,7 +2,7 @@
 
 namespace Company.DIV.ConfigMgr.Domain
     {
-    public interface IApp : IEntityBase
+    public interface IApp
         { 
 
         /// <summary>

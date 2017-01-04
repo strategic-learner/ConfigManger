@@ -3,7 +3,7 @@
 namespace Company.DIV.ConfigMgr.Domain
     {
 
-    public interface IJAppPlan : IEntityBase
+    public interface IJAppPlan
         {
         Guid AppID { get; }
         Guid PlanID { get; }

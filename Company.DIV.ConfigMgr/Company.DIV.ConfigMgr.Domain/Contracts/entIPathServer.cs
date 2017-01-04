@@ -2,7 +2,7 @@
 
 namespace Company.DIV.ConfigMgr.Domain
     {
-	public interface IPathServer : IEntityBase
+	public interface IPathServer
         {
         string server { get; }
         string path { get; }

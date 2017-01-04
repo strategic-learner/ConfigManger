@@ -3,7 +3,7 @@
 namespace Company.DIV.ConfigMgr.Domain
     {
 
-    public interface IJExecutablePrimaryFunction : IEntityBase
+    public interface IJExecutablePrimaryFunction
         {
         Guid ExecutableID { get; }
         Guid PrimaryFunctionID { get; }

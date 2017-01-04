@@ -3,7 +3,7 @@
 namespace Company.DIV.ConfigMgr.Domain
     {
 
-    public interface IJPathServerPathShare : IEntityBase
+    public interface IJPathServerPathShare
         {
         Guid PathServerID { get; }
         Guid PathShareID { get; }

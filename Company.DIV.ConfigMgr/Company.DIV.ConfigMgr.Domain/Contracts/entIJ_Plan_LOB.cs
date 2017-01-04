@@ -3,7 +3,7 @@
 namespace Company.DIV.ConfigMgr.Domain
     {
 
-    public interface IJPlanLOB : IEntityBase
+    public interface IJPlanLOB
         {
         Guid planID { get; }
         Guid LineOfBusinessID { get; }

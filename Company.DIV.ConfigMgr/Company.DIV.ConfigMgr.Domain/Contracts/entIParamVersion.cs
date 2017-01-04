@@ -2,7 +2,7 @@
 
 namespace Company.DIV.ConfigMgr.Domain
     {
-	public interface IParamVersion : IEntityBase
+	public interface IParamVersion
         {
         float version { get; }
         string description { get; }

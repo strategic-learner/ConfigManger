@@ -3,7 +3,7 @@
 namespace Company.DIV.ConfigMgr.Domain
     {
 
-    public interface IJExecutablePathServer : IEntityBase
+    public interface IJExecutablePathServer
         {
         Guid ExecutableID { get; }
         Guid PathServerID { get; }

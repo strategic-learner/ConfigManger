@@ -2,7 +2,7 @@
 
 namespace Company.DIV.ConfigMgr.Domain
     {
-	public interface IConfig : IEntityBase
+	public interface IConfig
 		{
          int jobID { get;  }
          Guid AppID { get; }

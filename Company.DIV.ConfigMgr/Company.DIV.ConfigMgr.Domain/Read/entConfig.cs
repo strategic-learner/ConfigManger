@@ -36,7 +36,6 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             }
 
 
-        [Key]
 		public Guid ID { get; private set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

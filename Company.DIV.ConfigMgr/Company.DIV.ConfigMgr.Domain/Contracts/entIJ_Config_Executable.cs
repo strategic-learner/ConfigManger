@@ -3,7 +3,7 @@
 namespace Company.DIV.ConfigMgr.Domain
     {
 
-    public interface IJConfigExecutable : IEntityBase
+    public interface IJConfigExecutable
         {
         Guid ConfigID { get; }
         Guid ExecutableID { get; }

@@ -2,7 +2,7 @@
 
 namespace Company.DIV.ConfigMgr.Domain
     {
-    public interface IConfigParam : IEntityBase
+    public interface IConfigParam
         {
          Guid ConfigID { get; }
          DateTime effDT { get; }

@@ -73,13 +73,31 @@ namespace Company.DIV.ConfigMgr.Data.Read
                 .Where(p => p.Name.Length > 4 && p.Name.EndsWith("User"))
                 .Configure(c => c.HasMaxLength(20).IsRequired());
 
-            modelBuilder.Properties<string>()
+            modelBuilder.Properties<DateTime>()
                 .Where(p => p.Name == "createDT")
                 .Configure(c => c.IsRequired());
 
-            modelBuilder.Properties<string>()
+            modelBuilder.Properties<DateTime>()
                 .Where(p => p.Name == "updateDT")
                 .Configure(c => c.IsRequired());
+
+
+            modelBuilder.Properties<int>()
+                .Where(p => p.Name == "AuditID")
+                .Configure(c => c.IsKey());
+
+            modelBuilder.Properties<DateTime>()
+                .Where(p => p.Name.StartsWith("Audit"))
+                .Configure(c => c.IsRequired());
+
+            modelBuilder.Properties<byte>()
+                .Where(p => p.Name.StartsWith("Audit"))
+                .Configure(c => c.IsRequired());
+
+            modelBuilder.Properties<string>()
+                .Where(p => p.Name.StartsWith("Audit"))
+                .Configure(c => c.HasMaxLength(20).IsRequired());
+
 
             modelBuilder.Ignore<Domain.EntityStateDisconnected>();
 
@@ -310,102 +328,51 @@ namespace Company.DIV.ConfigMgr.Data.Read
             //PathShare (code-first table settings)
 
             //Plan (code-first table settings)
-
-
-
-
-
-
-
-
-            //modelBuilder.Entity<App>()
-            //   .HasMany(a => a.Plans)
-            //   .WithMany(p => p.Apps)
-            //   .Map(ap => {
-            //       ap.MapLeftKey("app");
-            //       ap.MapRightKey("plan");
-            //       ap.ToTable("J_App_Plan");
-            //   });
-
-            //modelBuilder.Entity<Config>()
-            //   .HasMany(c => c.Plans)
-            //   .WithMany(p => p.Configs)
-            //   .Map(ap => {
-            //       ap.MapLeftKey("plan");
-            //       ap.MapRightKey("config");
-            //       ap.ToTable("J_Config_Plan");
-            //   });
-
-            //modelBuilder.Entity<Config>()
-            //   .HasMany(c => c.Executables)
-            //   .WithMany(e => e.Configs)
-            //   .Map(ap => {
-            //       ap.MapLeftKey("executable");
-            //       ap.MapRightKey("config");
-            //       ap.ToTable("J_Config_Executable");
-            //   });
-
-            //modelBuilder.Entity<Config>()
-            //   .HasMany(c => c.JPlanLOBs)
-            //   .WithMany(jpl => jpl.Configs)
-            //   .Map(ap => {
-            //       ap.MapLeftKey("jPlanLOB");
-            //       ap.MapRightKey("config");
-            //       ap.ToTable("J_Config_JPlanLOB");
-            //   });
-
-            //modelBuilder.Entity<Executable>()
-            //   .HasMany(e => e.PathServers)
-            //   .WithMany(p => p.Executables)
-            //   .Map(ap => {
-            //       ap.MapLeftKey("pathServer");
-            //       ap.MapRightKey("executable");
-            //       ap.ToTable("J_Executable_PathServer");
-            //   });
-
-            //modelBuilder.Entity<Executable>()
-            //  .HasMany(e => e.PrimaryFunctions)
-            //  .WithMany(pf => pf.Executables)
-            //  .Map(ap => {
-            //      ap.MapLeftKey("primaryFunction");
-            //      ap.MapRightKey("executable");
-            //      ap.ToTable("J_Executable_PrimaryFunction");
-            //  });
-
-            //modelBuilder.Entity<PathServer>()
-            //  .HasMany(srv => srv.PathShare)
-            //  .WithMany(shr => shr.PathServer)
-            //  .Map(ap => {
-            //      ap.MapLeftKey("pathServer");
-            //      ap.MapRightKey("pathShare");
-            //      ap.ToTable("J_PathServer_PathShare");
-            //  });
-
+            
             }
 
 
         public DbSet<App> app { get; set; }
+        public DbSet<AppAudit> appAudit { get; }
         public DbSet<Config> config { get; set; }
+        public DbSet<ConfigAudit> configAudit { get;  }
 
         public DbSet<ConfigParamPROD> configParamPROD { get; set; }
+        public DbSet<ConfigParamPRODAudit> configParamPRODAudit { get; }
         public DbSet<ConfigParamSTG1> configParamSTG1 { get; set; }
+        public DbSet<ConfigParamSTG1Audit> configParamSTG1Audit { get;  }
         public DbSet<ConfigParamSTG2> configParamSTG2 { get; set; }
+        public DbSet<ConfigParamSTG2Audit> configParamSTG2Audit { get;  }
         public DbSet<ConfigParamQA1> configParamQA1 { get; set; }
+        public DbSet<ConfigParamQA1Audit> configParamQA1Audit { get; }
         public DbSet<ConfigParamQA2> configParamQA2 { get; set; }
+        public DbSet<ConfigParamQA2Audit> configParamQA2Audit { get; }
         public DbSet<ConfigParamDEV1> configParamDev1 { get; set; }
+        public DbSet<ConfigParamDEV1Audit> configParamDev1Audit { get; }
         public DbSet<ConfigParamDEV2> configParamDev2 { get; set; }
+        public DbSet<ConfigParamDEV2Audit> configParamDev2Audit { get; }
 
 
         public DbSet<Executable> executable { get; set; }
+        public DbSet<ExecutableAudit> executableAudit { get; }
         public DbSet<JPlanLOB> jPlanLOB { get; set; }
+        public DbSet<JPlanLOBAudit> jPlanLOBAudit { get; }
         public DbSet<LineOfBusiness> lineOfBusiness { get; set; }
+        public DbSet<LineOfBusinessAudit> lineOfBusinessAudit { get; }
         public DbSet<PrimaryFunction> executableFunction { get; set; }
+        public DbSet<PrimaryFunctionAudit> executableFunctionAudit { get; }
         public DbSet<ParamDefinition> paramDefinition { get; set; }
+        public DbSet<ParamDefinitionAudit> paramDefinitionAudit { get; }
         public DbSet<ParamType> paramType { get; set; }
+        public DbSet<ParamTypeAudit> paramTypeAudit { get; }
         public DbSet<ParamVersion> paramVersion { get; set; }
+        public DbSet<ParamVersionAudit> paramVersionAudit { get; }
         public DbSet<PathServer> pathServer { get; set; }
+        public DbSet<PathServerAudit> pathServerAudit { get; }
         public DbSet<PathShare> pathShare { get; set; }
+        public DbSet<PathShareAudit> pathShareAudit { get; }
         public DbSet<Plan> plan { get; set; }
+        public DbSet<PlanAudit> planAudit { get; }
 
         }
 
