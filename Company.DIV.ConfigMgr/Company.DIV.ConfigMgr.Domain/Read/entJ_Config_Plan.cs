@@ -7,7 +7,7 @@ using Company.DIV.ConfigMgr.Users;
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
 
-    public class JConfigPlan : IJConfigPlan
+    public class JConfigPlan : IJConfigPlan, IEntityRead
         {
         public JConfigPlan() { }
         public JConfigPlan( string user)

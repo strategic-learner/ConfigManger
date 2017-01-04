@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Company.DIV.ConfigMgr.DataRead;
+using Company.DIV.ConfigMgr.Data.Read.DAO;
 using Company.DIV.ConfigMgr.Domain.Read;
 
 
@@ -14,9 +14,9 @@ namespace Company.DIV.ConfigMgr.Web.Controllers
 {
     public class AppsController : Controller
     {
-        private AppDAO dao;
+        private AppRead dao;
         
-        public AppsController( AppDAO appDAO )
+        public AppsController( AppRead appDAO )
             {
             dao = appDAO;
             }
@@ -96,7 +96,7 @@ namespace Company.DIV.ConfigMgr.Web.Controllers
 
             if ( ModelState.IsValid )
                 {
-                dao.Update(app);
+                //dao.Update(app);
                 return RedirectToAction("Index");
                 }
             return View(app);
@@ -124,7 +124,7 @@ namespace Company.DIV.ConfigMgr.Web.Controllers
         public ActionResult DeleteConfirmed(Guid id)
         {
             //TODO: refactor2CQRS
-            dao.Delete(id);
+            //dao.Delete(id);
             return RedirectToAction("Index");
         }
 
@@ -132,7 +132,7 @@ namespace Company.DIV.ConfigMgr.Web.Controllers
         {
             if (disposing)
             {
-                dao.Dispose();
+                //dao.Dispose();  //handled by DI LifeStyle
             }
             base.Dispose(disposing);
         }

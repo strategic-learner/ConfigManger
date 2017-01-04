@@ -7,7 +7,7 @@ using Company.DIV.ConfigMgr.Users;
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
 
-    public class JConfigJPlanLOB : IJConfigJPlanLOB
+    public class JConfigJPlanLOB : IJConfigJPlanLOB, IEntityRead
         {
         public JConfigJPlanLOB() { }
         public JConfigJPlanLOB( string user)

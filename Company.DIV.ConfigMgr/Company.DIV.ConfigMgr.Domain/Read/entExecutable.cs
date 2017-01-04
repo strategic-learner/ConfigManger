@@ -9,8 +9,8 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-	public class Executable : IExecutable
-		{
+	public class Executable : IExecutable, IEntityRead
+        {
         private Executable() { }
         public Executable( string user )
             {

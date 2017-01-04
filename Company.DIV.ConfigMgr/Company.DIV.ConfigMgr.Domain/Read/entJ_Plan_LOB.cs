@@ -7,7 +7,7 @@ using Company.DIV.ConfigMgr.Users;
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
 
-    public class JPlanLOB : IJPlanLOB
+    public class JPlanLOB : IJPlanLOB, IEntityRead
         {
         public JPlanLOB() { }
         public JPlanLOB(string user)
@@ -35,7 +35,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         #region NavigationProperties
 
         public Plan Plans { get; private set; }
-        public LineOfBusiness LineOfBusiness { get; private set; }0
+        public LineOfBusiness LineOfBusiness { get; private set; }
         public ICollection<JConfigJPlanLOB> JConfigJPlanLOBs { get; private set; }
         
         #endregion

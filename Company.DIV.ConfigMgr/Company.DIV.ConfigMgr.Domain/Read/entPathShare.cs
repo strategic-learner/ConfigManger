@@ -9,8 +9,8 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-	public class PathShare : IPathShare
-		{
+	public class PathShare : IPathShare, IEntityRead
+        {
         private PathShare() { }
         public PathShare( string user )
             {

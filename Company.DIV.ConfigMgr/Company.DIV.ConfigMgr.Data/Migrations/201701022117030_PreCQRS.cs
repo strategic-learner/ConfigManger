@@ -1,4 +1,4 @@
-namespace Company.DIV.ConfigMgr.DataRead.Migrations
+namespace Company.DIV.ConfigMgr.Data.Read.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;

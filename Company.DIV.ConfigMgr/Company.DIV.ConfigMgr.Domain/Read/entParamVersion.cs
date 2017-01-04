@@ -9,8 +9,8 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-	public class ParamVersion : IParamVersion
-		{
+	public class ParamVersion : IParamVersion, IEntityRead
+        {
         private ParamVersion() { }
         public ParamVersion(string user)
             {

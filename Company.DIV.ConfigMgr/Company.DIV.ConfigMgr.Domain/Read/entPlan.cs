@@ -8,7 +8,7 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class Plan : IPlan
+    public class Plan : IPlan, IEntityRead
         {
         public Plan() { }
         public Plan( string user )

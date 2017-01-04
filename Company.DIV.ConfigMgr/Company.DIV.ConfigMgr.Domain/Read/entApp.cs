@@ -8,7 +8,7 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class App : IApp
+    public class App : IApp, IEntityRead
         {
         private App() { }
         public App( string user )

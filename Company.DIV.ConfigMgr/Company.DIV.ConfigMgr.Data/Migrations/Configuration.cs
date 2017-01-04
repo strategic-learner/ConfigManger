@@ -1,11 +1,11 @@
-namespace Company.DIV.ConfigMgr.DataRead.Migrations
+namespace Company.DIV.ConfigMgr.Data.Read.Migrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Company.DIV.ConfigMgr.DataRead.ConfigMgrContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Company.DIV.ConfigMgr.Data.Read.ConfigMgrReadContext>
     {
         public Configuration()
             {
@@ -13,7 +13,7 @@ namespace Company.DIV.ConfigMgr.DataRead.Migrations
             ContextKey = "MainModel";
             }
 
-        protected override void Seed(Company.DIV.ConfigMgr.DataRead.ConfigMgrContext context)
+        protected override void Seed(Company.DIV.ConfigMgr.Data.Read.ConfigMgrReadContext context)
         {
             //  This method will be called after migrating to the latest version.
 

@@ -7,7 +7,7 @@ using Company.DIV.ConfigMgr.Users;
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
 
-    public class JPathServerPathShare : IJPathServerPathShare
+    public class JPathServerPathShare : IJPathServerPathShare, IEntityRead
         {
         public JPathServerPathShare() { }
         public JPathServerPathShare( string user)

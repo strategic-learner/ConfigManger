@@ -9,8 +9,8 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-	public class ParamType : IParamType
-		{
+	public class ParamType : IParamType, IEntityRead
+        {
         private ParamType() { }
         public ParamType( string user )
             {

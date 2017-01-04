@@ -9,8 +9,8 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-	public class PrimaryFunction : IPrimaryFunction
-		{
+	public class PrimaryFunction : IPrimaryFunction, IEntityRead
+        {
         private PrimaryFunction() { }
         public PrimaryFunction( string user )
             {

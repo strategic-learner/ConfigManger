@@ -8,7 +8,7 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class LineOfBusiness : ILineOfBusiness
+    public class LineOfBusiness : ILineOfBusiness, IEntityRead
         {
         private LineOfBusiness() { }
         public LineOfBusiness( string user )

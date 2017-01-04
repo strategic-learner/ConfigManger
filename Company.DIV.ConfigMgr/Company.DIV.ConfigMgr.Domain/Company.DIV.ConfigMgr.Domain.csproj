@@ -85,23 +85,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\IJ_App_Plan.cs" />
-    <Compile Include="Contracts\IJ_Config_Executable.cs" />
-    <Compile Include="Contracts\IJ_Config_JPlanLOB.cs" />
-    <Compile Include="Contracts\IJ_Config_Plan.cs" />
-    <Compile Include="Contracts\IJ_Executable_PathServer.cs" />
-    <Compile Include="Contracts\IJ_Executable_PrimaryFunction.cs" />
-    <Compile Include="Contracts\IJ_PathServer_PathShare.cs" />
-    <Compile Include="Contracts\_dataConstants.cs" />
-    <Compile Include="Contracts\IApp.cs" />
-    <Compile Include="Contracts\IConfig.cs" />
-    <Compile Include="Contracts\IConfigParam.cs" />
-    <Compile Include="Contracts\_Enums.cs" />
-    <Compile Include="Contracts\_IViewModel.cs" />
-    <Compile Include="Contracts\_IEntityRW.cs" />
-    <Compile Include="Contracts\IExecutable.cs" />
-    <Compile Include="Contracts\IJ_Plan_LOB.cs" />
-    <Compile Include="Contracts\ILineOfBusiness.cs" />
+    <Compile Include="Contracts\entIJ_App_Plan.cs" />
+    <Compile Include="Contracts\entIJ_Config_Executable.cs" />
+    <Compile Include="Contracts\entIJ_Config_JPlanLOB.cs" />
+    <Compile Include="Contracts\entIJ_Config_Plan.cs" />
+    <Compile Include="Contracts\entIJ_Executable_PathServer.cs" />
+    <Compile Include="Contracts\entIJ_Executable_PrimaryFunction.cs" />
+    <Compile Include="Contracts\entIJ_PathServer_PathShare.cs" />
+    <Compile Include="Contracts\dataIDataRead.cs" />
+    <Compile Include="Contracts\dataIDataWrite.cs" />
+    <Compile Include="Contracts\dataConstants.cs" />
+    <Compile Include="Contracts\entIApp.cs" />
+    <Compile Include="Contracts\entIConfig.cs" />
+    <Compile Include="Contracts\entIConfigParam.cs" />
+    <Compile Include="Contracts\ent_Enums.cs" />
+    <Compile Include="Contracts\ent_IEntityWrite.cs" />
+    <Compile Include="Contracts\ent_IEntityRead.cs" />
+    <Compile Include="Contracts\vm_IViewModel.cs" />
+    <Compile Include="Contracts\ent_IEntityBase.cs" />
+    <Compile Include="Contracts\entIExecutable.cs" />
+    <Compile Include="Contracts\entIJ_Plan_LOB.cs" />
+    <Compile Include="Contracts\entILineOfBusiness.cs" />
     <Compile Include="Read\entJ_App_Plan.cs" />
     <Compile Include="Read\entJ_Config_Plan.cs" />
     <Compile Include="Read\entJ_Config_Executable.cs" />
@@ -110,19 +114,19 @@
     <Compile Include="Read\entJ_Executable_PrimaryFunction.cs" />
     <Compile Include="Read\entJ_PathServer_PathShare.cs" />
     <Compile Include="Read\entParamDefinition.cs" />
-    <Compile Include="Contracts\IParamType.cs" />
-    <Compile Include="Contracts\IParamVersion.cs" />
-    <Compile Include="Contracts\IPathServer.cs" />
-    <Compile Include="Contracts\IPathShare.cs" />
-    <Compile Include="Contracts\IPlan.cs" />
-    <Compile Include="Contracts\IPrimaryFunction.cs" />
+    <Compile Include="Contracts\entIParamType.cs" />
+    <Compile Include="Contracts\entIParamVersion.cs" />
+    <Compile Include="Contracts\entIPathServer.cs" />
+    <Compile Include="Contracts\entIPathShare.cs" />
+    <Compile Include="Contracts\entIPlan.cs" />
+    <Compile Include="Contracts\entIPrimaryFunction.cs" />
     <Compile Include="Read\entApp.cs" />
     <Compile Include="Read\entConfig.cs" />
     <Compile Include="Read\entConfigParam.cs" />
     <Compile Include="Read\entExecutable.cs" />
     <Compile Include="Read\entJ_Plan_LOB.cs" />
     <Compile Include="Read\entLineOfBusiness.cs" />
-    <Compile Include="Contracts\IParamDefinition.cs" />
+    <Compile Include="Contracts\entIParamDefinition.cs" />
     <Compile Include="Read\entParamType.cs" />
     <Compile Include="Read\entParamVersion.cs" />
     <Compile Include="Read\entPathServer.cs" />
@@ -130,6 +134,26 @@
     <Compile Include="Read\entPlan.cs" />
     <Compile Include="Read\entPrimaryFunction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Write\entApp.cs" />
+    <Compile Include="Write\entConfig.cs" />
+    <Compile Include="Write\entConfigParam.cs" />
+    <Compile Include="Write\entExecutable.cs" />
+    <Compile Include="Write\entJ_App_Plan.cs" />
+    <Compile Include="Write\entJ_Config_Executable.cs" />
+    <Compile Include="Write\entJ_Config_JPlanLOB.cs" />
+    <Compile Include="Write\entJ_Config_Plan.cs" />
+    <Compile Include="Write\entJ_Executable_PathServer.cs" />
+    <Compile Include="Write\entJ_Executable_PrimaryFunction.cs" />
+    <Compile Include="Write\entJ_PathServer_PathShare.cs" />
+    <Compile Include="Write\entJ_Plan_LOB.cs" />
+    <Compile Include="Write\entLineOfBusiness.cs" />
+    <Compile Include="Write\entParamDefinition.cs" />
+    <Compile Include="Write\entParamType.cs" />
+    <Compile Include="Write\entParamVersion.cs" />
+    <Compile Include="Write\entPathServer.cs" />
+    <Compile Include="Write\entPathShare.cs" />
+    <Compile Include="Write\entPlan.cs" />
+    <Compile Include="Write\entPrimaryFunction.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Company.DIV.ConfigMgr.Users\Company.DIV.ConfigMgr.Users.csproj">
@@ -141,7 +165,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Write\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

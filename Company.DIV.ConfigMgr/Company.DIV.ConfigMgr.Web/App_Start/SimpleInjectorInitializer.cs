@@ -2,7 +2,7 @@ using SimpleInjector;
 using SimpleInjector.Extensions;
 using SimpleInjector.Integration.Web;
 using SimpleInjector.Integration.Web.Mvc;
-using Company.DIV.ConfigMgr.DataRead;
+using Company.DIV.ConfigMgr.Data.Read.DAO;
 
 namespace Company.DIV.ConfigMgr
     {
@@ -27,7 +27,7 @@ namespace Company.DIV.ConfigMgr
      
         private static void InitializeContainer(Container container)
             {
-            container.Register<AppDAO , AppDAO>(Lifestyle.Scoped); //bc using IDisposable - Otherwise use Lifestyle.Transient
+            container.Register<AppRead , AppRead>(Lifestyle.Transient);
             }
 
         }

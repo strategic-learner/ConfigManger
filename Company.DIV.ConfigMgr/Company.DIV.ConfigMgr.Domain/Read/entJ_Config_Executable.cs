@@ -7,7 +7,7 @@ using Company.DIV.ConfigMgr.Users;
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
 
-    public class JConfigExecutable : IJConfigExecutable
+    public class JConfigExecutable : IJConfigExecutable, IEntityRead
         {
         public JConfigExecutable() { }
         public JConfigExecutable( string user)

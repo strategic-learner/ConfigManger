@@ -7,7 +7,7 @@ using Company.DIV.ConfigMgr.Users;
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
 
-    public class JExecutablePrimaryFunction : IJExecutablePrimaryFunction
+    public class JExecutablePrimaryFunction : IJExecutablePrimaryFunction, IEntityRead
         {
         public JExecutablePrimaryFunction() { }
         public JExecutablePrimaryFunction( string user)

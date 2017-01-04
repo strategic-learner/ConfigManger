@@ -9,7 +9,7 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class ParamDefinition : IParamDefinition
+    public class ParamDefinition : IParamDefinition, IEntityRead
         {
         private ParamDefinition() { }
         public ParamDefinition( string user )

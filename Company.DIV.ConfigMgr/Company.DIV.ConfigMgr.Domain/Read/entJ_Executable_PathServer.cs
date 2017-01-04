@@ -7,7 +7,7 @@ using Company.DIV.ConfigMgr.Users;
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
 
-    public class JExecutablePathServer : IJExecutablePathServer
+    public class JExecutablePathServer : IJExecutablePathServer, IEntityRead
         {
         public JExecutablePathServer() { }
         public JExecutablePathServer( string user)

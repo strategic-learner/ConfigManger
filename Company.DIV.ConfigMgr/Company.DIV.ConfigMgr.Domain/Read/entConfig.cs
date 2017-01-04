@@ -10,8 +10,8 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-	public class Config : IConfig
-		{
+	public class Config : IConfig, IEntityRead
+        {
         private Config() { }
         public Config(string user)
 			{
@@ -73,6 +73,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         public ICollection<JConfigPlan> JConfigPlans { get; private set; }
         public ICollection<JConfigJPlanLOB> JConfigJPlanLOBs { get; private set; }
         public ICollection<JConfigExecutable> JConfigExecutables { get; private set; }
+
         public App App { get; private set; }
         public ParamVersion ParamVersion { get; private set; }
 
