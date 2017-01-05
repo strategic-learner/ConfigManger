@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-	public class ParamVersion : IParamVersion, IEntityRead
+    public class ParamVersion : IParamVersion, IEntityRead
         {
         private ParamVersion() { }
         public ParamVersion(string user)
@@ -46,8 +43,6 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         #endregion
 
 
-        public DateTime createDT { get; private set; }
-        public string createUser { get; private set; }
         public DateTime updateDT { get; private set; }
         public string updateUser { get; private set; }
 

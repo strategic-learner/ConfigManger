@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-	public class ConfigAudit : IConfig, IEntityAudit
+    public class ConfigAudit : IConfig, IEntityAudit
         {
         private ConfigAudit() { }
 
@@ -27,8 +27,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         public DateTime effDT { get; private set;}
         public DateTime trmDT { get; private set;}
 
-        public DateTime createDT_ { get; private set;}
-        public string createUser_ { get; private set;}
+
         public DateTime updateDT_ { get; private set;}
         public string updateUser_ { get; private set;}
         }

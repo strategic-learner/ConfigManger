@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Company.DIV.ConfigMgr.Users;
@@ -64,12 +61,10 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         public ICollection<ConfigParamQA2> ConfigParamQA2 { get; private set; }
         public ICollection<ConfigParamDEV1> ConfigParamDEV1 { get; private set; }
         public ICollection<ConfigParamDEV2> ConfigParamDEV2 { get; private set; }
-        
+
         #endregion
 
 
-        public DateTime createDT { get; private set; }
-        public string createUser { get; private set; }
         public DateTime updateDT { get; private set; }
         public string updateUser { get; private set; }
 
