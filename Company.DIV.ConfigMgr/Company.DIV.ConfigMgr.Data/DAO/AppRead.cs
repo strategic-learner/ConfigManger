@@ -2,7 +2,6 @@
 using System.Linq;
 using Company.DIV.ConfigMgr.Domain;
 using Company.DIV.ConfigMgr.Domain.Read;
-using Company.DIV.ConfigMgr.Data.Read;
 
 namespace Company.DIV.ConfigMgr.Data.Read.DAO
     {

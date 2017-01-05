@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-	public class PathServerAudit : IPathServer, IEntityAudit
+    public class PathServerAudit : IPathServer, IEntityAudit
         {
         private PathServerAudit() { }
 
@@ -22,8 +22,6 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         public string path { get; private set;}
 
 
-        public DateTime createDT_ { get; private set;}
-        public string createUser_ { get; private set;}
         public DateTime updateDT_ { get; private set;}
         public string updateUser_ { get; private set;}
         }

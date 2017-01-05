@@ -3,7 +3,7 @@
 
 namespace Company.DIV.ConfigMgr.Domain
     {
-     public interface IParamDefinition
+    public interface IParamDefinition
         {
          Guid ParamVersionID { get; }
          int ParamSequence { get; }

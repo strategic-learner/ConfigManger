@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-	public class ParamTypeAudit : IParamType, IEntityAudit
+    public class ParamTypeAudit : IParamType, IEntityAudit
         {
         private ParamTypeAudit() { }
 
@@ -16,9 +16,8 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
         [MaxLength(15)]
         public string type { get; private set;}
-        
-        public DateTime createDT_ { get; private set;}
-        public string createUser_ { get; private set;}
+
+
         public DateTime updateDT_ { get; private set;}
         public string updateUser_ { get; private set;}
         }

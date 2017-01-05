@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using Company.DIV.ConfigMgr.Domain;
 using Company.DIV.ConfigMgr.Domain.Read;
 //using Company.DIV.ConfigMgr.Domain;
 
@@ -60,7 +58,7 @@ namespace Company.DIV.ConfigMgr.Data.Read
 
 
 
-            #region GeneralColumnConventionsNDefaults
+            #region GeneralConventionNDefaultOverrides
 
             modelBuilder.Properties<String>()
                 .Configure(s => s.HasMaxLength(20)); //Just a default
@@ -98,15 +96,13 @@ namespace Company.DIV.ConfigMgr.Data.Read
                 .Where(p => p.Name.StartsWith("Audit"))
                 .Configure(c => c.HasMaxLength(20).IsRequired());
 
-
-            modelBuilder.Ignore<Domain.EntityStateDisconnected>();
-
             #endregion
 
 
             //Ignored classes  (code-first table settings)
             modelBuilder.Ignore<ConfigParam>();
-            
+            modelBuilder.Ignore<EntityStateDisconnected>();
+
 
             //App (code-first table settings)
             //modelBuilder.Entity<App>()
@@ -332,6 +328,9 @@ namespace Company.DIV.ConfigMgr.Data.Read
             }
 
 
+
+        //Audit Entities should have no setters - they have purely db-generated data
+
         public DbSet<App> app { get; set; }
         public DbSet<AppAudit> appAudit { get; }
         public DbSet<Config> config { get; set; }
@@ -351,12 +350,27 @@ namespace Company.DIV.ConfigMgr.Data.Read
         public DbSet<ConfigParamDEV1Audit> configParamDev1Audit { get; }
         public DbSet<ConfigParamDEV2> configParamDev2 { get; set; }
         public DbSet<ConfigParamDEV2Audit> configParamDev2Audit { get; }
-
-
+        
         public DbSet<Executable> executable { get; set; }
         public DbSet<ExecutableAudit> executableAudit { get; }
+
+        public DbSet<JAppPlan> jAppPlan { get; set; }
+        public DbSet<JAppPlanAudit> jAppPlanAudit { get; }
+        public DbSet<JConfigExecutable> jConfigExecutable { get; set; }
+        public DbSet<JConfigExecutableAudit> jConfigExecutableAudit { get;  }
+        public DbSet<JConfigJPlanLOB> jConfigJPlanLOB { get; set; }
+        public DbSet<JConfigJPlanLOBAudit> jConfigJPlanLOBAudit { get;  }
+        public DbSet<JConfigPlan> jConfigPlan { get; set; }
+        public DbSet<JConfigPlanAudit> jConfigPlanAudit { get;  }
+        public DbSet<JExecutablePathServer> jExecutablePathServer { get; set; }
+        public DbSet<JExecutablePathServerAudit> jExecutablePathServerAudit { get;  }
+        public DbSet<JExecutablePrimaryFunction> jExecutablePrimaryFunction { get; set; }
+        public DbSet<JExecutablePrimaryFunctionAudit> jExecutablePrimaryFunctionAudit { get;  }
+        public DbSet<JPathServerPathShare> jPathServerPathShare { get; set; }
+        public DbSet<JPathServerPathShareAudit> jPathServerPathShareAudit { get;  }
         public DbSet<JPlanLOB> jPlanLOB { get; set; }
-        public DbSet<JPlanLOBAudit> jPlanLOBAudit { get; }
+        public DbSet<JPlanLOBAudit> jPlanLOBAudit { get;  }
+
         public DbSet<LineOfBusiness> lineOfBusiness { get; set; }
         public DbSet<LineOfBusinessAudit> lineOfBusinessAudit { get; }
         public DbSet<PrimaryFunction> executableFunction { get; set; }

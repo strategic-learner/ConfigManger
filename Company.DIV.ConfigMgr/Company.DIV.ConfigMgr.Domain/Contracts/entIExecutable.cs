@@ -2,7 +2,7 @@
 
 namespace Company.DIV.ConfigMgr.Domain
     {
-	public interface IExecutable
+    public interface IExecutable
         {
          Guid ParamVersionID { get; }
          Guid AppID { get; }

@@ -9,9 +9,6 @@ namespace Company.DIV.ConfigMgr.Domain
         {
         Guid ID { get; }
 
-        DateTime createDT { get; }
-        string createUser { get; }
-
         DateTime updateDT { get; }
         string updateUser { get; }
 

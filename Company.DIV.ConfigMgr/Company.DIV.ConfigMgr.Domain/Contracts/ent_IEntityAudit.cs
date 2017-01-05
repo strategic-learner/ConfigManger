@@ -15,12 +15,7 @@ namespace Company.DIV.ConfigMgr.Domain
 
         Guid ID_ { get; }
 
-        DateTime createDT_ { get; }
-        string createUser_ { get; }
-
         DateTime updateDT_ { get; }
         string updateUser_ { get; }
-
-
         }
     }

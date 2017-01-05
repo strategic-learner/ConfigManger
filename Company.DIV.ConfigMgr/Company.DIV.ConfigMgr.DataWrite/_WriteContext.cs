@@ -32,7 +32,16 @@ namespace Company.DIV.ConfigMgr.Data.Write
 
 
         public DbSet<Executable> executable { get; set; }
+
+        public DbSet<JAppPlan> jAppPlan { get; set; }
+        public DbSet<JConfigExecutable> jConfigExecutable { get; set; }
+        public DbSet<JConfigJPlanLOB> jConfigJPlanLOB { get; set; }
+        public DbSet<JConfigPlan> jConfigPlan { get; set; }
+        public DbSet<JExecutablePathServer> jExecutablePathServer { get; set; }
+        public DbSet<JExecutablePrimaryFunction> jExecutablePrimaryFunction { get; set; }
+        public DbSet<JPathServerPathShare> jPathServerPathShare { get; set; }
         public DbSet<JPlanLOB> jPlanLOB { get; set; }
+        
         public DbSet<LineOfBusiness> lineOfBusiness { get; set; }
         public DbSet<PrimaryFunction> executableFunction { get; set; }
         public DbSet<ParamDefinition> paramDefinition { get; set; }

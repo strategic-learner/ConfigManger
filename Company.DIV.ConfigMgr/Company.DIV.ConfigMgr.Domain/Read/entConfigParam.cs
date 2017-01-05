@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Company.DIV.ConfigMgr.Users;
@@ -37,9 +33,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             trmDT = DataConstants.defaultEndDate;
 
             ID = new Guid();
-            createDT = DateTime.Now;
-            createUser = MockUsers.defaultUser;
-            updateDT = DateTime.Now;
+           updateDT = DateTime.Now;
             updateUser = MockUsers.defaultUser;
             }
 
@@ -77,8 +71,6 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         #endregion
 
 
-        public DateTime createDT { get; private set; }
-        public string createUser { get; private set; }
         public DateTime updateDT { get; private set; }
         public string updateUser { get; private set; }
 

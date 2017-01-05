@@ -15,8 +15,6 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             this.JConfigJPlanLOBs = new HashSet<JConfigJPlanLOB>();
 
             ID = new Guid();
-            createDT = DateTime.Now;
-            createUser = MockUsers.defaultUser;
             updateDT = DateTime.Now;
             updateUser = MockUsers.defaultUser;
             }
@@ -37,12 +35,10 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         public Plan Plans { get; private set; }
         public LineOfBusiness LineOfBusiness { get; private set; }
         public ICollection<JConfigJPlanLOB> JConfigJPlanLOBs { get; private set; }
-        
+
         #endregion
 
 
-        public DateTime createDT { get; private set; }
-        public string createUser { get; private set; }
         public DateTime updateDT { get; private set; }
         public string updateUser { get; private set; }
 

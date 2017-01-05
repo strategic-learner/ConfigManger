@@ -22,10 +22,9 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         public string variableName { get; private set;}
 
         [MaxLength(500)]
-        public string intendedUse { get; private set;} 
-    
-        public DateTime createDT_ { get; private set;}
-        public string createUser_ { get; private set;}
+        public string intendedUse { get; private set;}
+
+
         public DateTime updateDT_ { get; private set;}
         public string updateUser_ { get; private set;}
         }

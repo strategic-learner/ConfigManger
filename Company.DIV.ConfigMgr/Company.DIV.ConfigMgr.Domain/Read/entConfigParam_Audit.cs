@@ -45,8 +45,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         [MaxLength(100)]
         public string valueUseageComments { get; private set;}
 
-        public DateTime createDT_ { get; private set;}
-        public string createUser_ { get; private set;}
+
         public DateTime updateDT_ { get; private set;}
         public string updateUser_ { get; private set;}
         }

@@ -16,8 +16,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         public Guid ExecutableID { get; private set;}
         public Guid PrimaryFunctionID { get; private set;}
 
-        public DateTime createDT_ { get; private set;}
-        public string createUser_ { get; private set;}
+
         public DateTime updateDT_ { get; private set;}
         public string updateUser_ { get; private set;}
         }
