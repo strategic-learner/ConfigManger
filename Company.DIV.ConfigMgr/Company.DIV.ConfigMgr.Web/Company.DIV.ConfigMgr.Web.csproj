@@ -161,7 +161,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SimpleInjectorInitializer.cs" />
-    <Compile Include="Controllers\AppsController.cs" />
+    <Compile Include="Controllers\__DELETEME AppsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -205,11 +205,11 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Apps\Create.cshtml" />
-    <Content Include="Views\Apps\Delete.cshtml" />
-    <Content Include="Views\Apps\Details.cshtml" />
-    <Content Include="Views\Apps\Edit.cshtml" />
-    <Content Include="Views\Apps\Index.cshtml" />
+    <Content Include="Views\__DELETEME Apps\Create.cshtml" />
+    <Content Include="Views\__DELETEME Apps\Delete.cshtml" />
+    <Content Include="Views\__DELETEME Apps\Details.cshtml" />
+    <Content Include="Views\__DELETEME Apps\Edit.cshtml" />
+    <Content Include="Views\__DELETEME Apps\Index.cshtml" />
     <None Include="Web.DEV.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -238,13 +238,13 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Company.DIV.ConfigMgr.DataWrite\Company.DIV.ConfigMgr.Data.Write.csproj">
-      <Project>{e6a3198e-5c9e-47a8-a1e1-5e645c5e8d44}</Project>
-      <Name>Company.DIV.ConfigMgr.Data.Write</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Company.DIV.ConfigMgr.Data\Company.DIV.ConfigMgr.Data.Read.csproj">
+    <ProjectReference Include="..\Company.DIV.ConfigMgr.Data.Read\Company.DIV.ConfigMgr.Data.Read.csproj">
       <Project>{0b410303-fd22-4e81-8ed8-6b58088e6667}</Project>
       <Name>Company.DIV.ConfigMgr.Data.Read</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Company.DIV.ConfigMgr.Data.Write\Company.DIV.ConfigMgr.Data.Write.csproj">
+      <Project>{e6a3198e-5c9e-47a8-a1e1-5e645c5e8d44}</Project>
+      <Name>Company.DIV.ConfigMgr.Data.Write</Name>
     </ProjectReference>
     <ProjectReference Include="..\Company.DIV.ConfigMgr.Domain\Company.DIV.ConfigMgr.Domain.csproj">
       <Project>{746b9027-53a0-43d1-adf1-f07dfc8e1d95}</Project>

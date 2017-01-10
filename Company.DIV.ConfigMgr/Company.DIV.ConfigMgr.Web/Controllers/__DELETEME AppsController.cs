@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 using System.Collections.Generic;
 using System.Data;
 //using System.Data.Entity;  //Removed with EF reference
@@ -7,7 +8,20 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Company.DIV.ConfigMgr.Data.Read.DAO;
-using Company.DIV.ConfigMgr.Domain.Read;
+//using Company.DIV.ConfigMgr.Domain.Read;
+
+
+
+
+/// <summary>
+/// 
+/// 
+/// TOSS THIS VIEW SCAFFOLDED FROM "App" AND RECREATE FROM "AppRead"
+/// 
+/// 
+/// </summary>
+
+
 
 
 namespace Company.DIV.ConfigMgr.Web.Controllers
@@ -138,3 +152,4 @@ namespace Company.DIV.ConfigMgr.Web.Controllers
         }
     }
 }
+*/
