@@ -105,11 +105,16 @@ namespace Company.DIV.ConfigMgr.Data.Read
 
 
             //App (code-first table settings)
+            modelBuilder.Entity<App>().MapToStoredProcedures();
+            modelBuilder.Entity<AppAudit>().MapToStoredProcedures();
             //modelBuilder.Entity<App>()
             //    .Property(p => p.createUser).IsRequired();
 
 
             //Config (code-first table settings)
+            modelBuilder.Entity<Config>().MapToStoredProcedures();
+            modelBuilder.Entity<ConfigAudit>().MapToStoredProcedures();
+
             modelBuilder.Entity<Config>()
                 .HasRequired(c => c.App)
                 .WithMany(a => a.Configs);
@@ -119,6 +124,9 @@ namespace Company.DIV.ConfigMgr.Data.Read
               .WithMany(pv => pv.Configs);
 
             //ConfigParamPROD (code-first table settings)
+            modelBuilder.Entity<ConfigParamPROD>().MapToStoredProcedures();
+            modelBuilder.Entity<ConfigParamPRODAudit>().MapToStoredProcedures();
+
             modelBuilder.Entity<ConfigParamPROD>()
                 .HasRequired(cp => cp.Config)
                 .WithMany(c => c.ConfigParamPROD);
@@ -128,6 +136,9 @@ namespace Company.DIV.ConfigMgr.Data.Read
                 .WithMany(pd => pd.ConfigParamPROD);
 
             //ConfigParamSTG1 (code-first table settings)
+            modelBuilder.Entity<ConfigParamSTG1>().MapToStoredProcedures();
+            modelBuilder.Entity<ConfigParamSTG1Audit>().MapToStoredProcedures();
+
             modelBuilder.Entity<ConfigParamSTG1>()
                 .HasRequired(cp => cp.Config)
                 .WithMany(c => c.ConfigParamSTG1);
@@ -138,6 +149,9 @@ namespace Company.DIV.ConfigMgr.Data.Read
 
 
             //ConfigParamSTG2 (code-first table settings)
+            modelBuilder.Entity<ConfigParamSTG2>().MapToStoredProcedures();
+            modelBuilder.Entity<ConfigParamSTG2Audit>().MapToStoredProcedures();
+
             modelBuilder.Entity<ConfigParamSTG2>()
                 .HasRequired(cp => cp.ParamDefinition)
                 .WithMany(pd => pd.ConfigParamSTG2);
@@ -148,6 +162,9 @@ namespace Company.DIV.ConfigMgr.Data.Read
 
 
             //ConfigParamQA1 (code-first table settings)
+            modelBuilder.Entity<ConfigParamQA1>().MapToStoredProcedures();
+            modelBuilder.Entity<ConfigParamQA1Audit>().MapToStoredProcedures();
+
             modelBuilder.Entity<ConfigParamQA1>()
                 .HasRequired(cp => cp.Config)
                 .WithMany(c => c.ConfigParamQA1);
@@ -158,6 +175,9 @@ namespace Company.DIV.ConfigMgr.Data.Read
 
 
             //ConfigParamQA2 (code-first table settings)
+            modelBuilder.Entity<ConfigParamQA2>().MapToStoredProcedures();
+            modelBuilder.Entity<ConfigParamQA2Audit>().MapToStoredProcedures();
+
             modelBuilder.Entity<ConfigParamQA2>()
                 .HasRequired(cp => cp.Config)
                 .WithMany(c => c.ConfigParamQA2);
@@ -168,6 +188,9 @@ namespace Company.DIV.ConfigMgr.Data.Read
 
 
             //ConfigParamDEV1 (code-first table settings)
+            modelBuilder.Entity<ConfigParamDEV1>().MapToStoredProcedures();
+            modelBuilder.Entity<ConfigParamDEV1Audit>().MapToStoredProcedures();
+
             modelBuilder.Entity<ConfigParamDEV1>()
                 .HasRequired(cp => cp.Config)
                 .WithMany(c => c.ConfigParamDEV1);
@@ -178,6 +201,9 @@ namespace Company.DIV.ConfigMgr.Data.Read
 
 
             //ConfigParamDEV2 (code-first table settings)
+            modelBuilder.Entity<ConfigParamDEV2>().MapToStoredProcedures();
+            modelBuilder.Entity<ConfigParamDEV2Audit>().MapToStoredProcedures();
+
             modelBuilder.Entity<ConfigParamDEV2>()
                 .HasRequired(cp => cp.ParamDefinition)
                 .WithMany(pd => pd.ConfigParamDEV2);
@@ -188,6 +214,9 @@ namespace Company.DIV.ConfigMgr.Data.Read
 
 
             //Executable (code-first table settings)
+            modelBuilder.Entity<Executable>().MapToStoredProcedures();
+            modelBuilder.Entity<ExecutableAudit>().MapToStoredProcedures();
+
             modelBuilder.Entity<Executable>()
                 .HasRequired(e => e.ParamVersion)  //wanted to change this to HasOptional while adding to fluent, but EF (or maybe just EF PowerTools?) was fighting the change even after removing the [Required] decoration in entity model
                 .WithMany(pv => pv.Executables);
@@ -198,6 +227,9 @@ namespace Company.DIV.ConfigMgr.Data.Read
 
 
             //JAppPlan (code-first table settings)
+            modelBuilder.Entity<JAppPlan>().MapToStoredProcedures();
+            modelBuilder.Entity<JAppPlanAudit>().MapToStoredProcedures();
+
             modelBuilder.Entity<JAppPlan>()
                 .ToTable("J_App_Plan");
 
@@ -211,6 +243,9 @@ namespace Company.DIV.ConfigMgr.Data.Read
 
 
             //JConfigExecutable (code-first table settings)
+            modelBuilder.Entity<JConfigExecutable>().MapToStoredProcedures();
+            modelBuilder.Entity<JConfigExecutableAudit>().MapToStoredProcedures();
+
             modelBuilder.Entity<JConfigExecutable>()
                 .ToTable("J_Config_Executable");
 
@@ -224,6 +259,9 @@ namespace Company.DIV.ConfigMgr.Data.Read
 
 
             //JConfigJPlanLOB (code-first table settings)
+            modelBuilder.Entity<JConfigJPlanLOB>().MapToStoredProcedures();
+            modelBuilder.Entity<JConfigJPlanLOBAudit>().MapToStoredProcedures();
+
             modelBuilder.Entity<JConfigJPlanLOB>()
                 .ToTable("J_Config_JPlanLOB");
 
@@ -237,6 +275,9 @@ namespace Company.DIV.ConfigMgr.Data.Read
 
 
             //JConfigPlan (code-first table settings)
+            modelBuilder.Entity<JConfigPlan>().MapToStoredProcedures();
+            modelBuilder.Entity<JConfigPlanAudit>().MapToStoredProcedures();
+
             modelBuilder.Entity<JConfigPlan>()
                 .ToTable("J_Config_Plan");
 
@@ -251,6 +292,9 @@ namespace Company.DIV.ConfigMgr.Data.Read
 
 
             //JExecutablePathServer (code-first table settings)
+            modelBuilder.Entity<JExecutablePathServer>().MapToStoredProcedures();
+            modelBuilder.Entity<JExecutablePathServerAudit>().MapToStoredProcedures();
+
             modelBuilder.Entity<JExecutablePathServer>()
                 .ToTable("J_Executable_PathServer");
 
@@ -264,6 +308,9 @@ namespace Company.DIV.ConfigMgr.Data.Read
 
 
             //JExecutablePrimaryFunction (code-first table settings)
+            modelBuilder.Entity<JExecutablePrimaryFunction>().MapToStoredProcedures();
+            modelBuilder.Entity<JExecutablePrimaryFunctionAudit>().MapToStoredProcedures();
+
             modelBuilder.Entity<JExecutablePrimaryFunction>()
                 .ToTable("J_Executable_PrimaryFunction");
 
@@ -277,6 +324,9 @@ namespace Company.DIV.ConfigMgr.Data.Read
 
 
             //JPathServerPathShare (code-first table settings)
+            modelBuilder.Entity<JPathServerPathShare>().MapToStoredProcedures();
+            modelBuilder.Entity<JPathServerPathShareAudit>().MapToStoredProcedures();
+
             modelBuilder.Entity<JPathServerPathShare>()
                 .ToTable("J_PathServer_PathShare");
 
@@ -290,6 +340,9 @@ namespace Company.DIV.ConfigMgr.Data.Read
 
 
             //JPlanLOB (code-first table settings)
+            modelBuilder.Entity<JPlanLOB>().MapToStoredProcedures();
+            modelBuilder.Entity<JPlanLOBAudit>().MapToStoredProcedures();
+
             modelBuilder.Entity<JPlanLOB>()
                 .ToTable("J_Plan_LOB");
 
@@ -303,10 +356,19 @@ namespace Company.DIV.ConfigMgr.Data.Read
 
 
             //LineOfBusiness (code-first table settings)
+            modelBuilder.Entity<LineOfBusiness>().MapToStoredProcedures();
+            modelBuilder.Entity<LineOfBusinessAudit>().MapToStoredProcedures();
+
 
             //PrimaryFunction (code-first table settings)
+            modelBuilder.Entity<PrimaryFunction>().MapToStoredProcedures();
+            modelBuilder.Entity<PrimaryFunctionAudit>().MapToStoredProcedures();
+
 
             //ParamDefinition (code-first table settings)
+            modelBuilder.Entity<ParamDefinition>().MapToStoredProcedures();
+            modelBuilder.Entity<ParamDefinitionAudit>().MapToStoredProcedures();
+
             modelBuilder.Entity<ParamDefinition>()
                 .HasRequired(pd => pd.ParamVersion)
                 .WithMany(pv => pv.ParamDefinitions);
@@ -316,15 +378,28 @@ namespace Company.DIV.ConfigMgr.Data.Read
               .WithMany(pt => pt.ParamDefinitions);
 
             //ParamType (code-first table settings)
+            modelBuilder.Entity<ParamType>().MapToStoredProcedures();
+            modelBuilder.Entity<ParamTypeAudit>().MapToStoredProcedures();
+
 
             //ParamVersion (code-first table settings)
+            modelBuilder.Entity<ParamVersion>().MapToStoredProcedures();
+            modelBuilder.Entity<ParamVersionAudit>().MapToStoredProcedures();
+
 
             //PathServer (code-first table settings)
+            modelBuilder.Entity<PathServer>().MapToStoredProcedures();
+            modelBuilder.Entity<PathServerAudit>().MapToStoredProcedures();
 
             //PathShare (code-first table settings)
+            modelBuilder.Entity<PathShare>().MapToStoredProcedures();
+            modelBuilder.Entity<PathShareAudit>().MapToStoredProcedures();
 
             //Plan (code-first table settings)
-            
+            modelBuilder.Entity<Plan>().MapToStoredProcedures();
+            modelBuilder.Entity<PlanAudit>().MapToStoredProcedures();
+
+
             }
 
 
