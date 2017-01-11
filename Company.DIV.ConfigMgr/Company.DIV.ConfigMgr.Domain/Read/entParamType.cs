@@ -5,7 +5,7 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class ParamType : IParamType, IEntityRead
+    public class ParamType : EntityRead, IParamType
         {
         private ParamType() { }
         public ParamType( MockUsers user )
@@ -18,7 +18,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             }
 
         
-		public Guid ID { get; private set; }
+		
 
         [Required]
         [MaxLength(15)]
@@ -33,9 +33,9 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
 
 
-        public DateTime updateDT { get; private set; }
-        public string updateUser { get; private set; }
+        
+        
 
-        public EntityStateDisconnected entityStateDisconnected { get; private set;}
+        
         }
     }

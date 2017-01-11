@@ -5,13 +5,13 @@ namespace Company.DIV.ConfigMgr.Domain
     /// <summary>
     /// Interface for all entities that Read
     /// </summary>
-    public interface IEntityRead
+    public class EntityRead
         {
-        Guid ID { get; }
+        public Guid ID { get; protected set; }
 
-        DateTime updateDT { get; }
-        string updateUser { get; }
+        public DateTime updateDT { get; protected set; }
+        public string updateUser { get; protected set; }
 
-        EntityStateDisconnected entityStateDisconnected { get; }
+        public EntityStateDisconnected entityStateDisconnected { get; set; }
         }
     }

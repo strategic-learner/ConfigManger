@@ -4,11 +4,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Company.DIV.ConfigMgr.Domain.Write
     {
-    public class Config : IConfig, IEntityWrite
+    public class Config : EntityWrite, IConfig
         {
         private Config() { }
 
-		public Guid ID { get; private set; }
+		
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int jobID { get; private set; }
@@ -21,7 +21,7 @@ namespace Company.DIV.ConfigMgr.Domain.Write
         public DateTime trmDT { get; private set; }
 
 
-        public DateTime updateDT { get; private set; }
-        public string updateUser { get; private set; }
+        
+        
         }
     }

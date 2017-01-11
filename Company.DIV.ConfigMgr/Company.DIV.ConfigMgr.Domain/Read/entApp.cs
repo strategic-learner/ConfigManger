@@ -5,7 +5,7 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class App : IApp, IEntityRead
+    public class App : EntityRead, IApp
         {
         private App() { }
         public App( MockUsers user )
@@ -20,7 +20,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             }
 
         
-		public Guid ID { get; private set; }
+		
 
 		[Required]
 		public int ITIL { get; private set; }
@@ -43,9 +43,9 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         #endregion
 
 
-        public DateTime updateDT { get; private set; }
-        public string updateUser { get; private set; }
+        
+        
 
-        public EntityStateDisconnected entityStateDisconnected { get; private set;}
+        
         }
 }

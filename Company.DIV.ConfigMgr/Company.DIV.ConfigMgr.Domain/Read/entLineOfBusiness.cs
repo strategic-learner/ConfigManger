@@ -5,7 +5,7 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class LineOfBusiness : ILineOfBusiness, IEntityRead
+    public class LineOfBusiness : EntityRead, ILineOfBusiness
         {
         private LineOfBusiness() { }
         public LineOfBusiness( MockUsers user )
@@ -18,7 +18,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             }
 
         
-        public Guid ID { get; private set; }
+        
 
         [Required]
         [MaxLength(10)]
@@ -37,9 +37,9 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         #endregion
 
 
-        public DateTime updateDT { get; private set; }
-        public string updateUser { get; private set; }
+        
+        
 
-        public EntityStateDisconnected entityStateDisconnected { get; private set;}
+        
         }
     }

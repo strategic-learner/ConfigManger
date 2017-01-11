@@ -3,15 +3,15 @@
 namespace Company.DIV.ConfigMgr.Domain.Write
     {
 
-    public class JAppPlan : IJAppPlan, IEntityWrite
+    public class JAppPlan : EntityWrite, IJAppPlan
         {
-        public JAppPlan() { }
-        public Guid ID { get; private set; }
+        private JAppPlan() { }
+        
         public Guid AppID { get; private set; }
         public Guid PlanID { get; private set; }
 
 
-        public DateTime updateDT { get; private set; }
-        public string updateUser { get; private set; }
+        
+        
         }
     }

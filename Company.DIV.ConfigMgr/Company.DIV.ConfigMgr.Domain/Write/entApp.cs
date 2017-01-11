@@ -2,11 +2,11 @@
 
 namespace Company.DIV.ConfigMgr.Domain.Write
     {
-    public class App : IApp, IEntityWrite
+    public class App : EntityWrite, IApp
         {
         private App() { }
 
-		public Guid ID { get; private set; }
+		
 
 		public int ITIL { get; private set; }
 
@@ -15,7 +15,7 @@ namespace Company.DIV.ConfigMgr.Domain.Write
         public string description { get; private set; }
 
 
-        public DateTime updateDT { get; private set; }
-        public string updateUser { get; private set; }
+        
+        
         }
 }

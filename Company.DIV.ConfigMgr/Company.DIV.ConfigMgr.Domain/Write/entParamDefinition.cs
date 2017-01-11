@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Company.DIV.ConfigMgr.Domain.Write
     {
-    public class ParamDefinition : IParamDefinition, IEntityWrite
+    public class ParamDefinition : EntityWrite, IParamDefinition
         {
         private ParamDefinition() { }
 
-        public Guid ID { get; private set; }
+        
         public Guid ParamVersionID { get; private set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -17,7 +17,7 @@ namespace Company.DIV.ConfigMgr.Domain.Write
         public string intendedUse { get; private set; } //Specify intended usage of the ConfigParam's value
 
 
-        public DateTime updateDT { get; private set; }
-        public string updateUser { get; private set; }
+        
+        
         }
     }

@@ -63,45 +63,68 @@ namespace Company.DIV.ConfigMgr.Data.Read
             modelBuilder.Properties<String>()
                 .Configure(s => s.HasMaxLength(20)); //Just a default
 
-            modelBuilder.Properties<Guid>()
-                .Where(p => p.Name == "ID")
-                .Configure(c => c.IsKey());
-
-            modelBuilder.Properties<string>()
-                .Where(p => p.Name.Length > 4 && p.Name.EndsWith("User"))
-                .Configure(c => c.HasMaxLength(20).IsRequired());
-
-            modelBuilder.Properties<DateTime>()
-                .Where(p => p.Name == "createDT")
-                .Configure(c => c.IsRequired());
-
-            modelBuilder.Properties<DateTime>()
-                .Where(p => p.Name == "updateDT")
-                .Configure(c => c.IsRequired());
 
 
-            modelBuilder.Properties<int>()
-                .Where(p => p.Name == "AuditID")
-                .Configure(c => c.IsKey());
 
-            modelBuilder.Properties<DateTime>()
-                .Where(p => p.Name.StartsWith("Audit"))
-                .Configure(c => c.IsRequired());
+            modelBuilder.Types<EntityRead>()
+            .Configure(t => {
+                t.Property(p => p.ID).IsKey();
+                t.Property(p => p.updateDT).IsRequired();
+                t.Property(p => p.updateUser).IsRequired().HasMaxLength(20);
+            });
 
-            modelBuilder.Properties<byte>()
-                .Where(p => p.Name.StartsWith("Audit"))
-                .Configure(c => c.IsRequired());
+            //modelBuilder.Properties<Guid>()
+            //    .Where(p => p.Name == "ID")
+            //    .Configure(c => c.IsKey());
 
-            modelBuilder.Properties<string>()
-                .Where(p => p.Name.StartsWith("Audit"))
-                .Configure(c => c.HasMaxLength(20).IsRequired());
+            //modelBuilder.Properties<string>()
+            //    .Where(p => p.Name.Length > 4 && p.Name.EndsWith("User"))
+            //    .Configure(c => c.HasMaxLength(20).IsRequired());
+
+            //modelBuilder.Properties<DateTime>()
+            //    .Where(p => p.Name == "updateDT")
+            //    .Configure(c => c.IsRequired());
+
+
+
+            modelBuilder.Types<EntityAudit>()
+            .Configure(t => {
+                t.Property(p => p.AuditID).IsKey();
+                t.Property(p => p.AuditType).IsRequired();
+                t.Property(p => p.AuditDT).IsRequired();
+                t.Property(p => p.AuditSUserSName).IsRequired().HasMaxLength(20);
+
+                t.Property(p => p.ID).IsOptional();
+                t.Property(p => p.updateDT).IsOptional();
+                t.Property(p => p.updateUser).IsOptional().HasMaxLength(20);
+            });
+
+            //modelBuilder.Properties<int>()
+            //    .Where(p => p.Name == "AuditID")
+            //    .Configure(c => c.IsKey());
+
+            //modelBuilder.Properties<DateTime>()
+            //    .Where(p => p.Name.StartsWith("Audit"))
+            //    .Configure(c => c.IsRequired());
+
+            //modelBuilder.Properties<byte>()
+            //    .Where(p => p.Name.StartsWith("Audit"))
+            //    .Configure(c => c.IsRequired());
+
+            //modelBuilder.Properties<string>()
+            //    .Where(p => p.Name.StartsWith("Audit"))
+            //    .Configure(c => c.HasMaxLength(20).IsRequired());
 
             #endregion
 
 
             //Ignored classes  (code-first table settings)
+            modelBuilder.Ignore<EntityAudit>();
+            modelBuilder.Ignore<EntityRead>();
+            modelBuilder.Ignore<EntityWrite>(); //just in case
             modelBuilder.Ignore<ConfigParam>();
             modelBuilder.Ignore<EntityStateDisconnected>();
+
 
 
             //App (code-first table settings)

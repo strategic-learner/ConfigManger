@@ -5,9 +5,9 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class Plan : IPlan, IEntityRead
+    public class Plan : EntityRead, IPlan
         {
-        public Plan() { }
+        private Plan() { }
         public Plan( MockUsers user ) 
             {
             this.JAppPlans = new HashSet<JAppPlan>();
@@ -20,7 +20,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             }
 
         
-        public Guid ID { get; private set; }
+        
 
 
         [Required]
@@ -41,10 +41,10 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         #endregion
 
 
-        public DateTime updateDT { get; private set; }
-        public string updateUser { get; private set; }
+        
+        
 
-        public EntityStateDisconnected entityStateDisconnected { get; private set;}
+        
         }
 
     }

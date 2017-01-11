@@ -6,7 +6,7 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class PathServer : IPathServer, IEntityRead
+    public class PathServer : EntityRead, IPathServer
         {
         private PathServer() { }
         public PathServer( MockUsers user )
@@ -20,7 +20,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             }
 
         
-		public Guid ID { get; private set; }
+		
 
         [Required]
         [Index("NDX_PKey" , 1 , IsUnique = true , IsClustered = false)]
@@ -40,9 +40,9 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         #endregion
 
 
-        public DateTime updateDT { get; private set; }
-        public string updateUser { get; private set; }
+        
+        
 
-        public EntityStateDisconnected entityStateDisconnected { get; private set;}
+        
         }
     }

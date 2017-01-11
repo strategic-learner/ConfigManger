@@ -5,11 +5,11 @@ namespace Company.DIV.ConfigMgr.Domain
     /// <summary>
     /// Interface for all entities that Write
     /// </summary>
-    public interface IEntityWrite
+    public class EntityWrite
         {
-        Guid ID { get; }
+        public Guid ID { get; private set; }
 
-        DateTime updateDT { get; }
-        string updateUser { get; }
+        public DateTime updateDT { get; private set; }
+        public string updateUser { get; private set; }
         }
     }

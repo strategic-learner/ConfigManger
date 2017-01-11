@@ -7,9 +7,9 @@ using Company.DIV.ConfigMgr.Users;
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
 
-    public class JPlanLOB : IJPlanLOB, IEntityRead
+    public class JPlanLOB : EntityRead, IJPlanLOB
         {
-        public JPlanLOB() { }
+        private JPlanLOB() { }
         public JPlanLOB( MockUsers user )
             {
             this.JConfigJPlanLOBs = new HashSet<JConfigJPlanLOB>();
@@ -19,7 +19,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             updateUser = user.defaultUser;
             }
 
-        public Guid ID { get; private set; }
+        
 
         [Required]
         [Index("NDX_UniqueKey" , 1 , IsUnique = true , IsClustered = false)]
@@ -39,9 +39,9 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         #endregion
 
 
-        public DateTime updateDT { get; private set; }
-        public string updateUser { get; private set; }
+        
+        
 
-        public EntityStateDisconnected entityStateDisconnected { get; private set;}
+        
         }
     }

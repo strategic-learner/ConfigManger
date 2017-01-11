@@ -23,16 +23,16 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     /// At first Class inheritance Concrete/Abstract created silly-big Generated Views; 
     /// Now I changed something(?)somewhere(?) and the Generated Views are equal to 100% composed entityClasses
     /// </DevNotes>
-    public abstract class ConfigParamAudit : IConfigParam, IEntityAudit
+    public abstract class ConfigParamAudit : EntityAudit, IConfigParam
         {
         protected ConfigParamAudit() { }
 
-        public int AuditID { get; private set;}
-        public DateTime AuditDT { get; private set;}
-        public byte AuditType { get; private set;}
-        public string AuditSUserSName { get; private set;}
+        
+        
+        
+        
 
-        public Guid ID_ { get; private set;}
+        
         public Guid ConfigID { get; private set;}
         public DateTime effDT { get; private set;}
         public DateTime trmDT { get; private set;}
@@ -46,8 +46,8 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         public string valueUseageComments { get; private set;}
 
 
-        public DateTime updateDT_ { get; private set;}
-        public string updateUser_ { get; private set;}
+        
+        
         }
 
     }

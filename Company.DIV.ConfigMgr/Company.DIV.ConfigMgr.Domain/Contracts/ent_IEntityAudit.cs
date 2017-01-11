@@ -5,17 +5,17 @@ namespace Company.DIV.ConfigMgr.Domain
     /// <summary>
     /// Interface for all entities that read Audit tables
     /// </summary>
-    public interface IEntityAudit
+    public class EntityAudit
         {
-        int AuditID { get; }
-        DateTime AuditDT { get; }
-        byte AuditType { get; }
-        string AuditSUserSName { get; }
+        public int AuditID { get; private set; }
+        public DateTime AuditDT { get; private set; }
+        public byte AuditType { get; private set; }
+        public string AuditSUserSName { get; private set; }
 
 
-        Guid ID_ { get; }
+        public Guid? ID { get; private set; }
 
-        DateTime updateDT_ { get; }
-        string updateUser_ { get; }
+        public DateTime? updateDT { get; private set; }
+        public string updateUser { get; private set; }
         }
     }

@@ -6,7 +6,7 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class Executable : IExecutable, IEntityRead
+    public class Executable : EntityRead, IExecutable
         {
         private Executable() { }
         public Executable( MockUsers user )
@@ -21,7 +21,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             }
 
         
-		public Guid ID { get; private set; }
+		
 
         [Required] //wanted this to be Optional for early phase, but EF (or maybe just EF PowerTools?) was fighting me
         public Guid ParamVersionID { get; private set; }
@@ -51,9 +51,9 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         #endregion
 
 
-        public DateTime updateDT { get; private set; }
-        public string updateUser { get; private set; }
+        
+        
 
-        public EntityStateDisconnected entityStateDisconnected { get; private set;}
+        
         }
 	}

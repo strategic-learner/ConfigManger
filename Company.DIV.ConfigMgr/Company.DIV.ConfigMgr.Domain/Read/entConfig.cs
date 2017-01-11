@@ -7,7 +7,7 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class Config : IConfig, IEntityRead
+    public class Config : EntityRead, IConfig
         {
         private Config() { }
         public Config( MockUsers user ) 
@@ -31,7 +31,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             }
 
 
-		public Guid ID { get; private set; }
+		
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int jobID { get; private set; }
@@ -82,9 +82,9 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         #endregion
 
 
-        public DateTime updateDT { get; private set; }
-        public string updateUser { get; private set; }
+        
+        
 
-        public EntityStateDisconnected entityStateDisconnected { get; private set;}
+        
         }
     }
