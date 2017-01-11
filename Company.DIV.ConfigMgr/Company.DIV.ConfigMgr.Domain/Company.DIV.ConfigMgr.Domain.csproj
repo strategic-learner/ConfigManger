@@ -99,9 +99,9 @@
     <Compile Include="Contracts\entIConfig.cs" />
     <Compile Include="Contracts\entIConfigParam.cs" />
     <Compile Include="Contracts\ent_Enums.cs" />
-    <Compile Include="Contracts\ent_IEntityWrite.cs" />
-    <Compile Include="Contracts\ent_IEntityAudit.cs" />
-    <Compile Include="Contracts\ent_IEntityRead.cs" />
+    <Compile Include="Contracts\entBase_EntityWrite.cs" />
+    <Compile Include="Contracts\entBase_EntityAudit.cs" />
+    <Compile Include="Contracts\entBase_EntityRead.cs" />
     <Compile Include="Contracts\vm_IViewModel.cs" />
     <Compile Include="Contracts\entIExecutable.cs" />
     <Compile Include="Contracts\entIJ_Plan_LOB.cs" />
