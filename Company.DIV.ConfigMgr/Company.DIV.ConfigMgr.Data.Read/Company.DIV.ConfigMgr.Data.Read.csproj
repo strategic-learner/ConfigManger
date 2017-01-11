@@ -125,6 +125,10 @@
     <Compile Include="Migrations\201701051910327_AddAuditTables_AddMissingDbSet.Designer.cs">
       <DependentUpon>201701051910327_AddAuditTables_AddMissingDbSet.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701110252225_ClassInsteadOfInterface4EntityBaseTypes.cs" />
+    <Compile Include="Migrations\201701110252225_ClassInsteadOfInterface4EntityBaseTypes.Designer.cs">
+      <DependentUpon>201701110252225_ClassInsteadOfInterface4EntityBaseTypes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="_ReadContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -172,6 +176,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701051910327_AddAuditTables_AddMissingDbSet.resx">
       <DependentUpon>201701051910327_AddAuditTables_AddMissingDbSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701110252225_ClassInsteadOfInterface4EntityBaseTypes.resx">
+      <DependentUpon>201701110252225_ClassInsteadOfInterface4EntityBaseTypes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
