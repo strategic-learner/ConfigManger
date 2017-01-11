@@ -9,7 +9,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     public class ParamDefinition : IParamDefinition, IEntityRead
         {
         private ParamDefinition() { }
-        public ParamDefinition( string user )
+        public ParamDefinition( MockUsers user )
             {
             this.ConfigParamPROD = new HashSet<ConfigParamPROD>();
             this.ConfigParamSTG1 = new HashSet<ConfigParamSTG1>();
@@ -21,7 +21,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
             ID = new Guid();
             updateDT = DateTime.Now;
-            updateUser = MockUsers.defaultUser;
+            updateUser = user.defaultUser;
             }
 
         

@@ -9,14 +9,14 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     public class PathServer : IPathServer, IEntityRead
         {
         private PathServer() { }
-        public PathServer( string user )
+        public PathServer( MockUsers user )
             {
             this.JExecutablePathServers = new HashSet<JExecutablePathServer>();
             this.JPathServerPathShares = new HashSet<JPathServerPathShare>();
 
             ID = new Guid();
             updateDT = DateTime.Now;
-            updateUser = MockUsers.defaultUser;
+            updateUser = user.defaultUser;
             }
 
         

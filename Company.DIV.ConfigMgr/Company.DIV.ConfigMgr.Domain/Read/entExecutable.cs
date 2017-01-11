@@ -9,7 +9,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     public class Executable : IExecutable, IEntityRead
         {
         private Executable() { }
-        public Executable( string user )
+        public Executable( MockUsers user )
             {
             this.JConfigExecutables = new HashSet<JConfigExecutable>();
             this.JExecutablePathServers = new HashSet<JExecutablePathServer>();
@@ -17,7 +17,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
             ID = new Guid();
             updateDT = DateTime.Now;
-            updateUser = MockUsers.defaultUser;
+            updateUser = user.defaultUser;
             }
 
         

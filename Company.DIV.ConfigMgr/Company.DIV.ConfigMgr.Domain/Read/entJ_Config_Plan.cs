@@ -10,11 +10,11 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     public class JConfigPlan : IJConfigPlan, IEntityRead
         {
         public JConfigPlan() { }
-        public JConfigPlan( string user)
+        public JConfigPlan( MockUsers user )
             {
             ID = new Guid();
             updateDT = DateTime.Now;
-            updateUser = MockUsers.defaultUser;
+            updateUser = user.defaultUser;
             }
 
         public Guid ID { get; private set; }

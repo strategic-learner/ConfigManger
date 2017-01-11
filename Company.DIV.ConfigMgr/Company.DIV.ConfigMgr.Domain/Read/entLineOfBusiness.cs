@@ -8,13 +8,13 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     public class LineOfBusiness : ILineOfBusiness, IEntityRead
         {
         private LineOfBusiness() { }
-        public LineOfBusiness( string user )
+        public LineOfBusiness( MockUsers user )
             {
             this.JPlanLOB = new HashSet<JPlanLOB>();
 
             ID = new Guid();
             updateDT = DateTime.Now;
-            updateUser = MockUsers.defaultUser;
+            updateUser = user.defaultUser;
             }
 
         

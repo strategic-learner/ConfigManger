@@ -8,7 +8,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     public class App : IApp, IEntityRead
         {
         private App() { }
-        public App( string user )
+        public App( MockUsers user )
             {
 			this.JAppPlans = new HashSet<JAppPlan>();
             this.Configs = new HashSet<Config>();
@@ -16,7 +16,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
             ID = new Guid();
             updateDT = DateTime.Now;
-            updateUser = MockUsers.defaultUser;
+            updateUser = user.defaultUser;
             }
 
         

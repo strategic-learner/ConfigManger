@@ -10,7 +10,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     public class Config : IConfig, IEntityRead
         {
         private Config() { }
-        public Config(string user)
+        public Config( MockUsers user ) 
 			{
             this.JConfigPlans = new HashSet<JConfigPlan>();
             this.JConfigJPlanLOBs = new HashSet<JConfigJPlanLOB>();
@@ -27,7 +27,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
             ID = new Guid();
             updateDT = DateTime.Now;
-            updateUser = MockUsers.defaultUser;
+            updateUser = user.defaultUser;
             }
 
 

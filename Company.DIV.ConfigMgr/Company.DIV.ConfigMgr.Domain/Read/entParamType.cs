@@ -8,13 +8,13 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     public class ParamType : IParamType, IEntityRead
         {
         private ParamType() { }
-        public ParamType( string user )
+        public ParamType( MockUsers user )
             {
             this.ParamDefinitions = new HashSet<ParamDefinition>();
 
             ID = new Guid();
             updateDT = DateTime.Now;
-            updateUser = MockUsers.defaultUser;
+            updateUser = user.defaultUser;
             }
 
         

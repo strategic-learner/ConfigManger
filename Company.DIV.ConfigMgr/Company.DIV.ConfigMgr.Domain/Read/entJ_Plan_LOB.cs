@@ -10,13 +10,13 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     public class JPlanLOB : IJPlanLOB, IEntityRead
         {
         public JPlanLOB() { }
-        public JPlanLOB(string user)
+        public JPlanLOB( MockUsers user )
             {
             this.JConfigJPlanLOBs = new HashSet<JConfigJPlanLOB>();
 
             ID = new Guid();
             updateDT = DateTime.Now;
-            updateUser = MockUsers.defaultUser;
+            updateUser = user.defaultUser;
             }
 
         public Guid ID { get; private set; }

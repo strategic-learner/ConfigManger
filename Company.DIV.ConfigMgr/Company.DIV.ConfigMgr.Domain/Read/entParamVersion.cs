@@ -9,7 +9,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     public class ParamVersion : IParamVersion, IEntityRead
         {
         private ParamVersion() { }
-        public ParamVersion(string user)
+        public ParamVersion( MockUsers user )
             {
             this.Executables = new HashSet<Executable>();
             this.Configs = new HashSet<Config>();
@@ -17,7 +17,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
             ID = new Guid();
             updateDT = DateTime.Now;
-            updateUser = MockUsers.defaultUser;
+            updateUser = user.defaultUser;
             }
 
         

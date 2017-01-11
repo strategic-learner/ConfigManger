@@ -27,14 +27,14 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     public abstract class ConfigParam : IConfigParam, IEntityRead
         {
         protected ConfigParam() { }
-        public ConfigParam( string user )
+        public ConfigParam( MockUsers user )
             {
             effDT = DateTime.Now;
             trmDT = DataConstants.defaultEndDate;
 
             ID = new Guid();
            updateDT = DateTime.Now;
-            updateUser = MockUsers.defaultUser;
+            updateUser = user.defaultUser;
             }
 
         

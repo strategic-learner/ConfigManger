@@ -9,11 +9,11 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     public class JConfigJPlanLOB : IJConfigJPlanLOB, IEntityRead
         {
         public JConfigJPlanLOB() { }
-        public JConfigJPlanLOB( string user)
+        public JConfigJPlanLOB( MockUsers user )
             {
             ID = new Guid();
             updateDT = DateTime.Now;
-            updateUser = MockUsers.defaultUser;
+            updateUser = user.defaultUser;
             }
 
         public Guid ID { get; private set; }

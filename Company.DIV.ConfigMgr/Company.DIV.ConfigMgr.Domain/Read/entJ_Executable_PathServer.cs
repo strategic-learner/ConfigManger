@@ -9,11 +9,11 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     public class JExecutablePathServer : IJExecutablePathServer, IEntityRead
         {
         public JExecutablePathServer() { }
-        public JExecutablePathServer( string user)
+        public JExecutablePathServer( MockUsers user )
             {
             ID = new Guid();
             updateDT = DateTime.Now;
-            updateUser = MockUsers.defaultUser;
+            updateUser = user.defaultUser;
             }
 
         public Guid ID { get; private set; }

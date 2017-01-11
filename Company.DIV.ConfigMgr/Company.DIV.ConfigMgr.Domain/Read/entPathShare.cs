@@ -9,13 +9,13 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     public class PathShare : IPathShare, IEntityRead
         {
         private PathShare() { }
-        public PathShare( string user )
+        public PathShare( MockUsers user )
             {
             this.JPathServerPathShares = new HashSet<JPathServerPathShare>();
 
             ID = new Guid();
             updateDT = DateTime.Now;
-            updateUser = MockUsers.defaultUser;
+            updateUser = user.defaultUser;
             }
 
         

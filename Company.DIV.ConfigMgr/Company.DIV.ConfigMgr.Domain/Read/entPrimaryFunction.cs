@@ -8,13 +8,13 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     public class PrimaryFunction : IPrimaryFunction, IEntityRead
         {
         private PrimaryFunction() { }
-        public PrimaryFunction( string user )
+        public PrimaryFunction( MockUsers user )
             {
             this.JExecutablePrimaryFunctions = new HashSet<JExecutablePrimaryFunction>();
 
             ID = new Guid();
             updateDT = DateTime.Now;
-            updateUser = MockUsers.defaultUser;
+            updateUser = user.defaultUser;
             }
 
         

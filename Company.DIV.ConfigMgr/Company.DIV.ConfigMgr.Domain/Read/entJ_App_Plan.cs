@@ -9,11 +9,11 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     public class JAppPlan : IJAppPlan, IEntityRead
         {
         public JAppPlan() { }
-        public JAppPlan( string user)
+        public JAppPlan( MockUsers user )
             {
             ID = new Guid();
             updateDT = DateTime.Now;
-            updateUser = MockUsers.defaultUser;
+            updateUser = user.defaultUser;
             }
 
         public Guid ID { get; private set; }

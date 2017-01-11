@@ -12,9 +12,9 @@ namespace Company.DIV.ConfigMgr.Users
     public class MockUsers
         {
 
-        public static String defaultUser { get; } = "defaultUser";
+        public String defaultUser { get; } = "defaultUser";
 
-        public static string Mock1()
+        public string Mock1()
             {
             return "Mock User1";
             }

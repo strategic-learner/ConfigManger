@@ -9,11 +9,11 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     public class JPathServerPathShare : IJPathServerPathShare, IEntityRead
         {
         public JPathServerPathShare() { }
-        public JPathServerPathShare( string user)
+        public JPathServerPathShare( MockUsers user )
             {
             ID = new Guid();
             updateDT = DateTime.Now;
-            updateUser = MockUsers.defaultUser;
+            updateUser = user.defaultUser;
             }
 
         public Guid ID { get; private set; }

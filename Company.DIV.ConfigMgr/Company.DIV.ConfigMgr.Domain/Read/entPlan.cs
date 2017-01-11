@@ -8,7 +8,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     public class Plan : IPlan, IEntityRead
         {
         public Plan() { }
-        public Plan( string user )
+        public Plan( MockUsers user ) 
             {
             this.JAppPlans = new HashSet<JAppPlan>();
             this.JConfigPlans = new HashSet<JConfigPlan>();
@@ -16,7 +16,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
             ID = new Guid();
             updateDT = DateTime.Now;
-            updateUser = MockUsers.defaultUser;
+            updateUser = user.defaultUser;
             }
 
         
