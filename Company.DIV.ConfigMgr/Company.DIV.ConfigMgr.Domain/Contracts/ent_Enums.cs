@@ -5,7 +5,7 @@ namespace Company.DIV.ConfigMgr.Domain
     /// <DevNotes>
     /// Couldn't figure out modelbuilder syntax for ingnoring the enum version of this
     /// Easier with class: modelBuilder.Ignore<EntityStateDisconnected>();
-    /// Harder with enum: modelBuilder.TableByTable.column.Ignore();
+    /// Harder with enum: foreach Table (modelBuilder.Table.column.Ignore();)
     /// </DevNotes>
     /// <summary>
     /// class that works as an enum
