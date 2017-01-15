@@ -6,7 +6,9 @@ using Company.DIV.ConfigMgr.Domain.Write;
 
 namespace Company.DIV.ConfigMgr.Data.Write
     {
-    internal class ConfigMgrWriteContext : DbContext
+    public interface IConfigMgrWriteContext {/* for DI */}
+
+    public sealed class ConfigMgrWriteContext : DbContext, IConfigMgrWriteContext
         {
         public ConfigMgrWriteContext() :
         base("name=ConfigMgr") 

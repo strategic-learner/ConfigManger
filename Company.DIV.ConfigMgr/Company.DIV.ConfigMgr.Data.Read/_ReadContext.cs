@@ -8,7 +8,9 @@ using Company.DIV.ConfigMgr.Domain.Read;
 
 namespace Company.DIV.ConfigMgr.Data.Read
     {
-    internal class ConfigMgrReadContext : DbContext
+    public interface IConfigMgrReadContext {/* for DI */}
+
+    public sealed class ConfigMgrReadContext : DbContext, IConfigMgrReadContext
         {
         public ConfigMgrReadContext() :
         base("name=ConfigMgr") //--HOLY WTW: PowerTools can only find the connString with this!!!???

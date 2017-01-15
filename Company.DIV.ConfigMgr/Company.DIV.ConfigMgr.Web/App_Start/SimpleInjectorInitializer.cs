@@ -2,7 +2,10 @@ using SimpleInjector;
 using SimpleInjector.Extensions;
 using SimpleInjector.Integration.Web;
 using SimpleInjector.Integration.Web.Mvc;
-using Company.DIV.ConfigMgr.Data.Read.DAO;
+
+using Company.DIV.ConfigMgr.Data.Read;
+using Company.DIV.ConfigMgr.Data.Write;
+using Company.DIV.ConfigMgr.Domain;
 
 namespace Company.DIV.ConfigMgr
     {
@@ -27,7 +30,10 @@ namespace Company.DIV.ConfigMgr
      
         private static void InitializeContainer(Container container)
             {
-            container.Register<AppRead , AppRead>(Lifestyle.Transient);
+            //container.Register<AppRead , AppRead>(Lifestyle.Transient);
+            container.Register<IConfigMgrReadContext , ConfigMgrReadContext>(Lifestyle.Transient);
+            container.Register<IConfigMgrWriteContext , ConfigMgrWriteContext>(Lifestyle.Transient);
+
             }
 
         }

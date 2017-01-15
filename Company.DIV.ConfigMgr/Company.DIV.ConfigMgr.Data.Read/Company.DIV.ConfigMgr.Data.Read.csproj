@@ -164,7 +164,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DAO\__UseCase_ReadMe.txt" />
     <Content Include="Migration_SqlScripts\_MigrationsHist.txt" />
   </ItemGroup>
   <ItemGroup>
