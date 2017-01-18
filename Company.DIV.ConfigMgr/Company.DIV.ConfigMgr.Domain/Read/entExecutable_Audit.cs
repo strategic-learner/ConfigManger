@@ -8,12 +8,6 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         private ExecutableAudit() { }
 
         
-        
-        
-        
-
-        
-        public Guid ParamVersionID { get; private set;}
         public Guid AppID { get; private set;}
 
         [MaxLength(256)]
@@ -21,9 +15,6 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
         [MaxLength(100)]
         public string description { get; private set;}
-
-
-        
-        
+        public Guid? ParamVersionID { get; private set; }
         }
-	}
+    }

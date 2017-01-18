@@ -114,6 +114,11 @@
   <ItemGroup>
     <Compile Include="DAO\AppRead.cs" />
     <Compile Include="DAO\DROConfigurationFull.cs" />
+    <Compile Include="Migrations\201701180225518_Initial.cs" />
+    <Compile Include="Migrations\201701180225518_Initial.Designer.cs">
+      <DependentUpon>201701180225518_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="_ReadContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="_DbInitializer.cs" />
@@ -149,7 +154,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Migration_SqlScripts\AddSomeDataForDesignTimeHelp.sql" />
-    <Content Include="Migration_SqlScripts\_MigrationsHist.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201701180225518_Initial.resx">
+      <DependentUpon>201701180225518_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

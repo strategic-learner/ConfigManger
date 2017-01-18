@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace Company.DIV.ConfigMgr.Domain.Business.UseCase
     {
-    public class QryGetAggConfigurationByJobIDList
+    public class JobIDList
         {
-        public QryGetAggConfigurationByJobIDList( List<int> _JobIDList )
-            {JobIDList = _JobIDList;}
+        public JobIDList( List<int> JobIDList )
+            {IDs = JobIDList;}
 
-        public List<int> JobIDList { get; private set; }
+        public List<int> IDs { get; private set; }
         }
     }

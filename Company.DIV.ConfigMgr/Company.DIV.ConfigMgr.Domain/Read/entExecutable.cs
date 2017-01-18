@@ -22,9 +22,6 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         
 		
 
-        [Required] //wanted this to be Optional for early phase, but EF (or maybe just EF PowerTools?) was fighting me
-        public Guid ParamVersionID { get; private set; }
-
         [Required]
         [Index("NDX_AppID_NameWExtension" , 1 , IsUnique = true , IsClustered = false)] 
         public Guid AppID { get; private set; }
@@ -37,6 +34,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         [Required]
         [MaxLength(100)]
         public string description { get; private set; }
+        public Guid? ParamVersionID { get; private set; }
 
 
         #region NavigationProperties

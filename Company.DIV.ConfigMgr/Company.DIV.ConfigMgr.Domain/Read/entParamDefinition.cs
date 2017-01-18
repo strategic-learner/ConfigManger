@@ -23,13 +23,13 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         //    updateUser = user.defaultUser;
         //    }
 
-        
+
         [Required]
-        [Index("NDX_PKey" , 1 , IsUnique = true, IsClustered =false)] 
+        [Index("NDX_UNIQUE_ParamVersionID_ParamSequence" , 1 , IsUnique = true, IsClustered =false)] 
         public Guid ParamVersionID { get; private set; }
 
         [Required]
-        [Index("NDX_PKey" , 2 , IsUnique = true , IsClustered = false)]
+        [Index("NDX_UNIQUE_ParamVersionID_ParamSequence" , 2 , IsUnique = true , IsClustered = false)]
         //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]  this was wrong big-time! can't cleanly Undo Identiy on a column, and didn't want it anyways
         public int ParamSequence { get; private set; }
 

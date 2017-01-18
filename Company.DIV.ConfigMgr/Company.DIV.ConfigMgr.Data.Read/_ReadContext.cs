@@ -23,7 +23,7 @@ namespace Company.DIV.ConfigMgr.Data.Read
             this.Configuration.LazyLoadingEnabled = false;
 
 #if DEBUG
-            Database.Log = Console.WriteLine;
+            //Database.Log = Console.WriteLine;
 #endif
             }
 
@@ -205,19 +205,19 @@ namespace Company.DIV.ConfigMgr.Data.Read
             modelBuilder.Entity<Executable>().MapToStoredProcedures();
 
             modelBuilder.Entity<Executable>()
-                .HasRequired(e => e.ParamVersion)  //wanted to change this to HasOptional while adding to fluent, but EF (or maybe just EF PowerTools?) was fighting the change even after removing the [Required] decoration in entity model
-                .WithMany(pv => pv.Executables);
-
-            modelBuilder.Entity<Executable>()
               .HasRequired(e => e.App)
               .WithMany(a => a.Executables);
+
+            modelBuilder.Entity<Executable>()
+                .HasOptional(e => e.ParamVersion)
+                .WithMany(pv => pv.Executables);
+
 
 
             //JAppPlan (code-first table settings)
             modelBuilder.Entity<JAppPlan>().MapToStoredProcedures();
 
-            modelBuilder.Entity<JAppPlan>()
-                .ToTable("J_App_Plan");
+            modelBuilder.Entity<JAppPlan>().ToTable("J_App_Plan");
 
             modelBuilder.Entity<JAppPlan>()
                 .HasRequired(jap => jap.App)
@@ -227,12 +227,13 @@ namespace Company.DIV.ConfigMgr.Data.Read
                 .HasRequired(jap => jap.Plan)
                 .WithMany(p => p.JAppPlans);
 
+            modelBuilder.Entity<JAppPlanAudit>().ToTable("J_App_Plan_Audit");
+
 
             //JConfigExecutable (code-first table settings)
             modelBuilder.Entity<JConfigExecutable>().MapToStoredProcedures();
 
-            modelBuilder.Entity<JConfigExecutable>()
-                .ToTable("J_Config_Executable");
+            modelBuilder.Entity<JConfigExecutable>().ToTable("J_Config_Executable");
 
             modelBuilder.Entity<JConfigExecutable>()
                 .HasRequired(jce => jce.Executable)
@@ -242,12 +243,13 @@ namespace Company.DIV.ConfigMgr.Data.Read
                 .HasRequired(jce => jce.Config)
                 .WithMany(c => c.JConfigExecutables);
 
+            modelBuilder.Entity<JConfigExecutableAudit>().ToTable("J_Config_Executable_Audit");
+
 
             //JConfigJPlanLOB (code-first table settings)
             modelBuilder.Entity<JConfigJPlanLOB>().MapToStoredProcedures();
 
-            modelBuilder.Entity<JConfigJPlanLOB>()
-                .ToTable("J_Config_JPlanLOB");
+            modelBuilder.Entity<JConfigJPlanLOB>().ToTable("J_Config_JPlanLOB");
 
             modelBuilder.Entity<JConfigJPlanLOB>()
                 .HasRequired(jcjpl => jcjpl.Config)
@@ -258,11 +260,13 @@ namespace Company.DIV.ConfigMgr.Data.Read
                 .WithMany(jpl => jpl.JConfigJPlanLOBs);
 
 
+            modelBuilder.Entity<JConfigJPlanLOBAudit>().ToTable("J_Config_JPlanLOB_Audit");
+
+
             //JConfigPlan (code-first table settings)
             modelBuilder.Entity<JConfigPlan>().MapToStoredProcedures();
 
-            modelBuilder.Entity<JConfigPlan>()
-                .ToTable("J_Config_Plan");
+            modelBuilder.Entity<JConfigPlan>().ToTable("J_Config_Plan");
 
             modelBuilder.Entity<JConfigPlan>()
                 .HasRequired(jcp => jcp.Config)
@@ -272,13 +276,13 @@ namespace Company.DIV.ConfigMgr.Data.Read
                 .HasRequired(jcp => jcp.Plan)
                 .WithMany(p => p.JConfigPlans);
 
+            modelBuilder.Entity<JConfigPlanAudit>().ToTable("J_Config_Plan_Audit");
 
 
             //JExecutablePathServer (code-first table settings)
             modelBuilder.Entity<JExecutablePathServer>().MapToStoredProcedures();
 
-            modelBuilder.Entity<JExecutablePathServer>()
-                .ToTable("J_Executable_PathServer");
+            modelBuilder.Entity<JExecutablePathServer>().ToTable("J_Executable_PathServer");
 
             modelBuilder.Entity<JExecutablePathServer>()
                 .HasRequired(jeps => jeps.Executable)
@@ -287,6 +291,8 @@ namespace Company.DIV.ConfigMgr.Data.Read
             modelBuilder.Entity<JExecutablePathServer>()
                 .HasRequired(jeps => jeps.PathServer)
                 .WithMany(z => z.JExecutablePathServers);
+
+            modelBuilder.Entity<JExecutablePathServerAudit>().ToTable("J_Executable_PathServer_Audit");
 
 
             //JExecutablePrimaryFunction (code-first table settings)
@@ -303,12 +309,14 @@ namespace Company.DIV.ConfigMgr.Data.Read
                 .HasRequired(jepf => jepf.PrimaryFunction)
                 .WithMany(z => z.JExecutablePrimaryFunctions);
 
+            modelBuilder.Entity<JExecutablePrimaryFunctionAudit>()
+                .ToTable("J_Executable_PrimaryFunction_Audit");
+
 
             //JPathServerPathShare (code-first table settings)
             modelBuilder.Entity<JPathServerPathShare>().MapToStoredProcedures();
 
-            modelBuilder.Entity<JPathServerPathShare>()
-                .ToTable("J_PathServer_PathShare");
+            modelBuilder.Entity<JPathServerPathShare>().ToTable("J_PathServer_PathShare");
 
             modelBuilder.Entity<JPathServerPathShare>()
                 .HasRequired(jpsps => jpsps.PathServer)
@@ -318,12 +326,13 @@ namespace Company.DIV.ConfigMgr.Data.Read
                 .HasRequired(jpsps => jpsps.PathShare)
                 .WithMany(ps2 => ps2.JPathServerPathShares);
 
+            modelBuilder.Entity<JPathServerPathShareAudit>().ToTable("J_PathServer_PathShare_Audit");
+
 
             //JPlanLOB (code-first table settings)
             modelBuilder.Entity<JPlanLOB>().MapToStoredProcedures();
 
-            modelBuilder.Entity<JPlanLOB>()
-                .ToTable("J_Plan_LOB");
+            modelBuilder.Entity<JPlanLOB>().ToTable("J_Plan_LOB");
 
             modelBuilder.Entity<JPlanLOB>()
                 .HasRequired(jpl => jpl.Plans)
@@ -332,6 +341,9 @@ namespace Company.DIV.ConfigMgr.Data.Read
             modelBuilder.Entity<JPlanLOB>()
                 .HasRequired(jpl => jpl.LineOfBusiness)
                 .WithMany(lob =>lob.JPlanLOB);
+
+            modelBuilder.Entity<JPlanLOBAudit>().ToTable("J_Plan_LOB_Audit");
+
 
 
             //LineOfBusiness (code-first table settings)

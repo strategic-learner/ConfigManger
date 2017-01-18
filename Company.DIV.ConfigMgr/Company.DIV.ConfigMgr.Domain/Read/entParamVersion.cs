@@ -24,7 +24,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 		
 
         [Required]
-        [Index("NDX_PKey" , 1 , IsUnique = true , IsClustered = false)] 
+        [Index("NDX_UNIQUE_version" , 1 , IsUnique = true , IsClustered = false)] 
         public float version { get; private set; }
 
         [Required]

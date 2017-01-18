@@ -20,13 +20,13 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
         
 		
-
+        
         [Required]
-        [Index("NDX_PKey" , 1 , IsUnique = true , IsClustered = false)]
+        [Index("NDX_UNIQUE_server_path" , 1 , IsUnique = true , IsClustered = false)]
         [StringLength(256)]
         public string server { get; private set; }
 
-        [Index("NDX_PKey" , 2 , IsUnique = true , IsClustered = false)]
+        [Index("NDX_UNIQUE_server_path" , 2 , IsUnique = true , IsClustered = false)]
         [StringLength(256)]
         public string path { get; private set; }
 
