@@ -1,7 +1,6 @@
 ﻿
 use ConfigMgr
 
-
 GO
 
 --INSERT INTO [AD].[App] 
@@ -94,12 +93,7 @@ GO
 --BEGIN
 --print 'parameters okay'
 
-IF EXISTS (SELECT name FROM sys.indexes WHERE name = N'NDX_PKey' AND object_id = object_id(N'[AD].[ParamDefinition]', N'U'))
-    DROP INDEX [NDX_PKey] ON [AD].[ParamDefinition]
-
-ALTER TABLE [AD].[ParamDefinition] ALTER COLUMN [ParamSequence] [char] NOT NULL
-
---SET IDENTITY_INSERT [AD].[ParamDefinition] OFF
+--SET IDENTITY_INSERT [AD].[ParamDefinition] ON
 --INSERT INTO [AD].[ParamDefinition] ([ID], [ParamVersionID], [ParamSequence], [ParamTypeID], [variableName], [intendedUse], [updateDT], [updateUser]) 
 --Select * from
 -- (select [ID]= null, [ParamVersionID]= null, [ParamSequence]= null, [ParamTypeID]= null, [variableName]= null, [intendedUse]= null, [updateDT]= null, [updateUser]= null
@@ -250,9 +244,9 @@ print @ParamVersionID
 print @ConfigID1 
 
 	INSERT INTO  [_PROD].[ConfigParam]
-	([ID],[ConfigID],[effDT],[trmDT],[ParamDefinitionID],[isRefOnly],[value],[valueUseageComments],[updateDT],[updateUser]) 
+	([ID],[ConfigID],[effDT],[trmDT],[ParamDefinitionsID],[isRefOnly],[value],[valueUseageComments],[updateDT],[updateUser]) 
 	Select * from
-	(select [ID]= null , [ConfigID]=null ,	[effDT]=null ,[trmDT]=null ,[ParamDefinitionID]=null ,[isRefOnly]=null ,[value]=null ,[valueUseageComments]=null ,[updateDT]=null ,[updateUser]=null
+	(select [ID]= null , [ConfigID]=null ,	[effDT]=null ,[trmDT]=null ,[ParamDefinitionsID]=null ,[isRefOnly]=null ,[value]=null ,[valueUseageComments]=null ,[updateDT]=null ,[updateUser]=null
 	Union Select NewID() ,@ConfigID1 ,GetDate()-100 ,GetDate()+100 ,(Select ID From AD.ParamVersion x where x.ParamVersionID = @ParamVersionID and x.variableName = 'execOpt1') ,0 ,'1' ,'' ,GetDate() ,'Data4DesignTimeHelp'
 	Union Select NewID() ,@ConfigID1 ,GetDate()-100 ,GetDate()+100 ,(Select ID From AD.ParamVersion x where x.ParamVersionID = @ParamVersionID and x.variableName = 'connRW1_1Srvr') ,0 ,'serverPROD' ,'' ,GetDate() ,'Data4DesignTimeHelp'
 	Union Select NewID() ,@ConfigID1 ,GetDate()-100 ,GetDate()+100 ,(Select ID From AD.ParamVersion x where x.ParamVersionID = @ParamVersionID and x.variableName = 'connRW1_2Db') ,0 ,'WhuteverDB' ,'' ,GetDate() ,'Data4DesignTimeHelp'
