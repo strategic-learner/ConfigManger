@@ -2,22 +2,21 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
     public class PathServer : EntityRead, IPathServer
         {
         private PathServer() { }
-        public PathServer( MockUsers user )
-            {
-            this.JExecutablePathServers = new HashSet<JExecutablePathServer>();
-            this.JPathServerPathShares = new HashSet<JPathServerPathShare>();
+        //public PathServer( MockUsers user )
+        //    {
+        //    this.JExecutablePathServers = new HashSet<JExecutablePathServer>();
+        //    this.JPathServerPathShares = new HashSet<JPathServerPathShare>();
 
-            ID = new Guid();
-            updateDT = DateTime.Now;
-            updateUser = user.defaultUser;
-            }
+        //    ID = new Guid();
+        //    updateDT = DateTime.Now;
+        //    updateUser = user.defaultUser;
+        //    }
 
         
 		

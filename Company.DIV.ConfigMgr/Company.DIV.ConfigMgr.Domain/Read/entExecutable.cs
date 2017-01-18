@@ -2,23 +2,22 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
     public class Executable : EntityRead, IExecutable
         {
         private Executable() { }
-        public Executable( MockUsers user )
-            {
-            this.JConfigExecutables = new HashSet<JConfigExecutable>();
-            this.JExecutablePathServers = new HashSet<JExecutablePathServer>();
-            this.JExecutablePrimaryFunctions = new HashSet<JExecutablePrimaryFunction>();
+        //public Executable( MockUsers user )
+        //    {
+        //    this.JConfigExecutables = new HashSet<JConfigExecutable>();
+        //    this.JExecutablePathServers = new HashSet<JExecutablePathServer>();
+        //    this.JExecutablePrimaryFunctions = new HashSet<JExecutablePrimaryFunction>();
 
-            ID = new Guid();
-            updateDT = DateTime.Now;
-            updateUser = user.defaultUser;
-            }
+        //    ID = new Guid();
+        //    updateDT = DateTime.Now;
+        //    updateUser = user.defaultUser;
+        //    }
 
         
 		

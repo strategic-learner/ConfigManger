@@ -7,6 +7,7 @@ namespace Company.DIV.ConfigMgr.Data.Read.Migrations
     {
         public override void Up()
         {
+            DropIndex("AD.ParamDefinition", "NDX_PKey");
             AddColumn("AD.AppAudit", "ID", c => c.Guid());
             AddColumn("AD.AppAudit", "updateDT", c => c.DateTime());
             AddColumn("AD.AppAudit", "updateUser", c => c.String(maxLength: 20));
@@ -85,6 +86,8 @@ namespace Company.DIV.ConfigMgr.Data.Read.Migrations
             AddColumn("AD.PlanAudit", "ID", c => c.Guid());
             AddColumn("AD.PlanAudit", "updateDT", c => c.DateTime());
             AddColumn("AD.PlanAudit", "updateUser", c => c.String(maxLength: 20));
+            AlterColumn("AD.ParamDefinition", "ParamSequence", c => c.Int(nullable: false));
+            CreateIndex("AD.ParamDefinition", new[] { "ParamVersionID", "ParamSequence" }, unique: true, name: "NDX_PKey");
             DropColumn("AD.AppAudit", "ID_");
             DropColumn("AD.AppAudit", "updateDT_");
             DropColumn("AD.AppAudit", "updateUser_");
@@ -325,6 +328,7 @@ namespace Company.DIV.ConfigMgr.Data.Read.Migrations
                     {
                         ID = p.Guid(),
                         ParamVersionID = p.Guid(),
+                        ParamSequence = p.Int(),
                         ParamTypeID = p.Guid(),
                         variableName = p.String(maxLength: 50),
                         intendedUse = p.String(maxLength: 500),
@@ -332,12 +336,8 @@ namespace Company.DIV.ConfigMgr.Data.Read.Migrations
                         updateUser = p.String(maxLength: 20),
                     },
                 body:
-                    @"INSERT [AD].[ParamDefinition]([ID], [ParamVersionID], [ParamTypeID], [variableName], [intendedUse], [updateDT], [updateUser])
-                      VALUES (@ID, @ParamVersionID, @ParamTypeID, @variableName, @intendedUse, @updateDT, @updateUser)
-                      
-                      SELECT t0.[ParamSequence]
-                      FROM [AD].[ParamDefinition] AS t0
-                      WHERE @@ROWCOUNT > 0 AND t0.[ID] = @ID"
+                    @"INSERT [AD].[ParamDefinition]([ID], [ParamVersionID], [ParamSequence], [ParamTypeID], [variableName], [intendedUse], [updateDT], [updateUser])
+                      VALUES (@ID, @ParamVersionID, @ParamSequence, @ParamTypeID, @variableName, @intendedUse, @updateDT, @updateUser)"
             );
             
             CreateStoredProcedure(
@@ -355,7 +355,7 @@ namespace Company.DIV.ConfigMgr.Data.Read.Migrations
                     },
                 body:
                     @"UPDATE [AD].[ParamDefinition]
-                      SET [ParamVersionID] = @ParamVersionID, [ParamTypeID] = @ParamTypeID, [variableName] = @variableName, [intendedUse] = @intendedUse, [updateDT] = @updateDT, [updateUser] = @updateUser
+                      SET [ParamVersionID] = @ParamVersionID, [ParamSequence] = @ParamSequence, [ParamTypeID] = @ParamTypeID, [variableName] = @variableName, [intendedUse] = @intendedUse, [updateDT] = @updateDT, [updateUser] = @updateUser
                       WHERE ([ID] = @ID)"
             );
             
@@ -1534,6 +1534,8 @@ namespace Company.DIV.ConfigMgr.Data.Read.Migrations
             AddColumn("AD.AppAudit", "updateUser_", c => c.String(maxLength: 20));
             AddColumn("AD.AppAudit", "updateDT_", c => c.DateTime(nullable: false));
             AddColumn("AD.AppAudit", "ID_", c => c.Guid(nullable: false));
+            DropIndex("AD.ParamDefinition", "NDX_PKey");
+            AlterColumn("AD.ParamDefinition", "ParamSequence", c => c.Int(nullable: false, identity: true));
             DropColumn("AD.PlanAudit", "updateUser");
             DropColumn("AD.PlanAudit", "updateDT");
             DropColumn("AD.PlanAudit", "ID");
@@ -1612,6 +1614,7 @@ namespace Company.DIV.ConfigMgr.Data.Read.Migrations
             DropColumn("AD.AppAudit", "updateUser");
             DropColumn("AD.AppAudit", "updateDT");
             DropColumn("AD.AppAudit", "ID");
+            CreateIndex("AD.ParamDefinition", new[] { "ParamVersionID", "ParamSequence" }, unique: true, name: "NDX_PKey");
         }
     }
 }

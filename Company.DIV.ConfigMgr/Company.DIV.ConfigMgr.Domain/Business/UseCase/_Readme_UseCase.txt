@@ -1,6 +1,6 @@
 ﻿
 
-These DAO objects are used as ViewModels in .Web MVC project
+These DAO objects labeled "UseCase" are the aggregates used as ViewModels in MVC
 
 
 Going with these definitions:

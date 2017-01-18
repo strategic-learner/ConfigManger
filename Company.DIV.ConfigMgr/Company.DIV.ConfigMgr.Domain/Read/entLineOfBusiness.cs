@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Company.DIV.ConfigMgr.Users;
+
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
     public class LineOfBusiness : EntityRead, ILineOfBusiness
         {
         private LineOfBusiness() { }
-        public LineOfBusiness( MockUsers user )
-            {
-            this.JPlanLOB = new HashSet<JPlanLOB>();
+        //public LineOfBusiness( MockUsers user )
+        //    {
+        //    this.JPlanLOB = new HashSet<JPlanLOB>();
 
-            ID = new Guid();
-            updateDT = DateTime.Now;
-            updateUser = user.defaultUser;
-            }
+        //    ID = new Guid();
+        //    updateDT = DateTime.Now;
+        //    updateUser = user.defaultUser;
+        //    }
 
         
         

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Company.DIV.ConfigMgr.Users;
 
 
 namespace Company.DIV.ConfigMgr.Domain.Read
@@ -10,25 +9,25 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     public class Config : EntityRead, IConfig
         {
         private Config() { }
-        public Config( MockUsers user ) 
-			{
-            this.JConfigPlans = new HashSet<JConfigPlan>();
-            this.JConfigJPlanLOBs = new HashSet<JConfigJPlanLOB>();
-            this.JConfigExecutables = new HashSet<JConfigExecutable>();
-            this.ConfigParamPROD = new HashSet<ConfigParamPROD>();
-            this.ConfigParamSTG1 = new HashSet<ConfigParamSTG1>();
-            this.ConfigParamSTG2 = new HashSet<ConfigParamSTG2>();
-            this.ConfigParamQA1 = new HashSet<ConfigParamQA1>();
-            this.ConfigParamQA2 = new HashSet<ConfigParamQA2>();
-            this.ConfigParamDEV1 = new HashSet<ConfigParamDEV1>();
-            this.ConfigParamDEV2 = new HashSet<ConfigParamDEV2>();
-            effDT = DateTime.Now;
-            trmDT = DataConstants.defaultEndDate;
+   //     public Config( MockUsers user ) 
+			//{
+   //         this.JConfigPlans = new HashSet<JConfigPlan>();
+   //         this.JConfigJPlanLOBs = new HashSet<JConfigJPlanLOB>();
+   //         this.JConfigExecutables = new HashSet<JConfigExecutable>();
+   //         this.ConfigParamPROD = new HashSet<ConfigParamPROD>();
+   //         this.ConfigParamSTG1 = new HashSet<ConfigParamSTG1>();
+   //         this.ConfigParamSTG2 = new HashSet<ConfigParamSTG2>();
+   //         this.ConfigParamQA1 = new HashSet<ConfigParamQA1>();
+   //         this.ConfigParamQA2 = new HashSet<ConfigParamQA2>();
+   //         this.ConfigParamDEV1 = new HashSet<ConfigParamDEV1>();
+   //         this.ConfigParamDEV2 = new HashSet<ConfigParamDEV2>();
+   //         effDT = DateTime.Now;
+   //         trmDT = DataConstants.defaultEndDate;
 
-            ID = new Guid();
-            updateDT = DateTime.Now;
-            updateUser = user.defaultUser;
-            }
+   //         ID = new Guid();
+   //         updateDT = DateTime.Now;
+   //         updateUser = user.defaultUser;
+   //         }
 
 
 		

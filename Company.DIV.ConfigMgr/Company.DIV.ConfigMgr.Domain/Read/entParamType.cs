@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Company.DIV.ConfigMgr.Users;
+
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
     public class ParamType : EntityRead, IParamType
         {
         private ParamType() { }
-        public ParamType( MockUsers user )
-            {
-            this.ParamDefinitions = new HashSet<ParamDefinition>();
+        //public ParamType( MockUsers user )
+        //    {
+        //    this.ParamDefinitions = new HashSet<ParamDefinition>();
 
-            ID = new Guid();
-            updateDT = DateTime.Now;
-            updateUser = user.defaultUser;
-            }
+        //    ID = new Guid();
+        //    updateDT = DateTime.Now;
+        //    updateUser = user.defaultUser;
+        //    }
 
         
 		

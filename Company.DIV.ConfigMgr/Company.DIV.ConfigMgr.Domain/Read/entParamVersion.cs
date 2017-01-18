@@ -2,23 +2,23 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Company.DIV.ConfigMgr.Users;
+
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
     public class ParamVersion : EntityRead, IParamVersion
         {
         private ParamVersion() { }
-        public ParamVersion( MockUsers user )
-            {
-            this.Executables = new HashSet<Executable>();
-            this.Configs = new HashSet<Config>();
-            this.ParamDefinitions = new HashSet<ParamDefinition>();
+        //public ParamVersion( MockUsers user )
+        //    {
+        //    this.Executables = new HashSet<Executable>();
+        //    this.Configs = new HashSet<Config>();
+        //    this.ParamDefinitions = new HashSet<ParamDefinition>();
 
-            ID = new Guid();
-            updateDT = DateTime.Now;
-            updateUser = user.defaultUser;
-            }
+        //    ID = new Guid();
+        //    updateDT = DateTime.Now;
+        //    updateUser = user.defaultUser;
+        //    }
 
         
 		
