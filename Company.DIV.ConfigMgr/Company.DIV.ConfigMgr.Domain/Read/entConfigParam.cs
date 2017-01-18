@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Company.DIV.ConfigMgr.Users;
 
 
 namespace Company.DIV.ConfigMgr.Domain.Read
@@ -27,15 +26,15 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     public abstract class ConfigParam : EntityRead, IConfigParam
         {
         protected ConfigParam() { }
-        public ConfigParam( MockUsers user )
-            {
-            effDT = DateTime.Now;
-            trmDT = DataConstants.defaultEndDate;
+        //public ConfigParam( MockUsers user )
+        //    {
+        //    effDT = DateTime.Now;
+        //    trmDT = DataConstants.defaultEndDate;
 
-            ID = new Guid();
-           updateDT = DateTime.Now;
-            updateUser = user.defaultUser;
-            }
+        //    ID = new Guid();
+        //   updateDT = DateTime.Now;
+        //    updateUser = user.defaultUser;
+        //    }
 
         
         
@@ -50,7 +49,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         public DateTime trmDT { get; private set; }
 
         [Required]
-        public Guid ParamDefinitionsID { get; private set; }
+        public Guid ParamDefinitionID { get; private set; }
 
         [Required]
         public bool isRefOnly { get; private set; }

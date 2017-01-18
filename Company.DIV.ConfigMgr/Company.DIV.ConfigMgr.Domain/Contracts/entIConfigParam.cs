@@ -7,7 +7,7 @@ namespace Company.DIV.ConfigMgr.Domain
          Guid ConfigID { get; }
          DateTime effDT { get; }
          DateTime trmDT { get; }
-         Guid ParamDefinitionsID { get; }
+         Guid ParamDefinitionID { get; }
          bool isRefOnly { get; }
          string value { get; }
          string valueUseageComments { get; }

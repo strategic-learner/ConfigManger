@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
     public class Plan : EntityRead, IPlan
         {
         private Plan() { }
-        public Plan( MockUsers user ) 
-            {
-            this.JAppPlans = new HashSet<JAppPlan>();
-            this.JConfigPlans = new HashSet<JConfigPlan>();
-            this.JPlanLOB = new HashSet<JPlanLOB>();
+        //public Plan( MockUsers user ) 
+        //    {
+        //    this.JAppPlans = new HashSet<JAppPlan>();
+        //    this.JConfigPlans = new HashSet<JConfigPlan>();
+        //    this.JPlanLOB = new HashSet<JPlanLOB>();
 
-            ID = new Guid();
-            updateDT = DateTime.Now;
-            updateUser = user.defaultUser;
-            }
+        //    ID = new Guid();
+        //    updateDT = DateTime.Now;
+        //    updateUser = user.defaultUser;
+        //    }
 
         
         

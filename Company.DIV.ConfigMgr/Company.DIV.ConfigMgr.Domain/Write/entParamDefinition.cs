@@ -10,7 +10,7 @@ namespace Company.DIV.ConfigMgr.Domain.Write
         
         public Guid ParamVersionID { get; private set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]  //this was wrong - big-time
         public int ParamSequence { get; private set; }
         public Guid ParamTypeID { get; private set; }  //data type for validations
         public string variableName { get; private set; }

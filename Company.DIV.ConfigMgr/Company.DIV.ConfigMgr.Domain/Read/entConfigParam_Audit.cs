@@ -36,7 +36,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         public Guid ConfigID { get; private set;}
         public DateTime effDT { get; private set;}
         public DateTime trmDT { get; private set;}
-        public Guid ParamDefinitionsID { get; private set;}
+        public Guid ParamDefinitionID { get; private set;}
         public bool isRefOnly { get; private set;}
 
         [Column(TypeName = "NVarchar(MAX)")]

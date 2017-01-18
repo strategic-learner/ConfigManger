@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
@@ -9,12 +8,12 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     public class JExecutablePrimaryFunction : EntityRead, IJExecutablePrimaryFunction
         {
         private JExecutablePrimaryFunction() { }
-        public JExecutablePrimaryFunction( MockUsers user )
-            {
-            ID = new Guid();
-            updateDT = DateTime.Now;
-            updateUser = user.defaultUser;
-            }
+        //public JExecutablePrimaryFunction( MockUsers user )
+        //    {
+        //    ID = new Guid();
+        //    updateDT = DateTime.Now;
+        //    updateUser = user.defaultUser;
+        //    }
 
         
 

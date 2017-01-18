@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Company.DIV.ConfigMgr.Users;
+
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
@@ -9,12 +9,12 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     public class JConfigJPlanLOB : EntityRead, IJConfigJPlanLOB
         {
         private JConfigJPlanLOB() { }
-        public JConfigJPlanLOB( MockUsers user )
-            {
-            ID = new Guid();
-            updateDT = DateTime.Now;
-            updateUser = user.defaultUser;
-            }
+        //public JConfigJPlanLOB( MockUsers user )
+        //    {
+        //    ID = new Guid();
+        //    updateDT = DateTime.Now;
+        //    updateUser = user.defaultUser;
+        //    }
 
         
 

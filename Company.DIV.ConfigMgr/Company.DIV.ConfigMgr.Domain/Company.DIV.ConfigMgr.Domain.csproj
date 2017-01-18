@@ -85,9 +85,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Business\UseCase\AggConfiguration.cs" />
-    <Compile Include="Business\UseCase\Agg_DaoConfiguration.cs" />
-    <Compile Include="Business\UseCase\DaoApp.cs" />
+    <Compile Include="Business\UseCase\QryGetAggConfigurationByJobIDList.cs" />
     <Compile Include="Contracts\entIJ_App_Plan.cs" />
     <Compile Include="Contracts\entIJ_Config_Executable.cs" />
     <Compile Include="Contracts\entIJ_Config_JPlanLOB.cs" />
@@ -105,7 +103,7 @@
     <Compile Include="Contracts\entBase_EntityWrite.cs" />
     <Compile Include="Contracts\entBase_EntityAudit.cs" />
     <Compile Include="Contracts\entBase_EntityRead.cs" />
-    <Compile Include="Contracts\UseCase_IAggConfiguration.cs" />
+    <Compile Include="Contracts\DAOConfigurationFull.cs" />
     <Compile Include="Contracts\entIExecutable.cs" />
     <Compile Include="Contracts\entIJ_Plan_LOB.cs" />
     <Compile Include="Contracts\entILineOfBusiness.cs" />

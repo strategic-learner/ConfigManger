@@ -5,7 +5,7 @@ namespace Company.DIV.ConfigMgr.Domain
     /// <summary>
     /// Interface for all entities that read Audit tables
     /// </summary>
-    public class EntityAudit
+    public abstract class EntityAudit
         {
         public int AuditID { get; private set; }
         public DateTime AuditDT { get; private set; }

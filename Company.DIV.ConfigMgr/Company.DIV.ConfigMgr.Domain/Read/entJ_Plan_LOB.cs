@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Company.DIV.ConfigMgr.Users;
+
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
@@ -10,14 +10,14 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     public class JPlanLOB : EntityRead, IJPlanLOB
         {
         private JPlanLOB() { }
-        public JPlanLOB( MockUsers user )
-            {
-            this.JConfigJPlanLOBs = new HashSet<JConfigJPlanLOB>();
+        //public JPlanLOB( MockUsers user )
+        //    {
+        //    this.JConfigJPlanLOBs = new HashSet<JConfigJPlanLOB>();
 
-            ID = new Guid();
-            updateDT = DateTime.Now;
-            updateUser = user.defaultUser;
-            }
+        //    ID = new Guid();
+        //    updateDT = DateTime.Now;
+        //    updateUser = user.defaultUser;
+        //    }
 
         
 
