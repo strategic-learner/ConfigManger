@@ -114,23 +114,6 @@
   <ItemGroup>
     <Compile Include="DAO\AppRead.cs" />
     <Compile Include="DAO\DROConfigurationFull.cs" />
-    <Compile Include="Migrations\201701022117030_PreCQRS.cs" />
-    <Compile Include="Migrations\201701022117030_PreCQRS.Designer.cs">
-      <DependentUpon>201701022117030_PreCQRS.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701032201030_RefactorM2M_to_One2M.cs" />
-    <Compile Include="Migrations\201701032201030_RefactorM2M_to_One2M.Designer.cs">
-      <DependentUpon>201701032201030_RefactorM2M_to_One2M.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701051910327_AddAuditTables_AddMissingDbSet.cs" />
-    <Compile Include="Migrations\201701051910327_AddAuditTables_AddMissingDbSet.Designer.cs">
-      <DependentUpon>201701051910327_AddAuditTables_AddMissingDbSet.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701110252225_ClassInsteadOfInterface4EntityBaseTypes.cs" />
-    <Compile Include="Migrations\201701110252225_ClassInsteadOfInterface4EntityBaseTypes.Designer.cs">
-      <DependentUpon>201701110252225_ClassInsteadOfInterface4EntityBaseTypes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="_ReadContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="_DbInitializer.cs" />
@@ -167,20 +150,6 @@
   <ItemGroup>
     <Content Include="Migration_SqlScripts\AddSomeDataForDesignTimeHelp.sql" />
     <Content Include="Migration_SqlScripts\_MigrationsHist.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201701022117030_PreCQRS.resx">
-      <DependentUpon>201701022117030_PreCQRS.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701032201030_RefactorM2M_to_One2M.resx">
-      <DependentUpon>201701032201030_RefactorM2M_to_One2M.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701051910327_AddAuditTables_AddMissingDbSet.resx">
-      <DependentUpon>201701051910327_AddAuditTables_AddMissingDbSet.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701110252225_ClassInsteadOfInterface4EntityBaseTypes.resx">
-      <DependentUpon>201701110252225_ClassInsteadOfInterface4EntityBaseTypes.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
