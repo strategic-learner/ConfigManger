@@ -103,7 +103,7 @@
     <Compile Include="Contracts\entBase_EntityWrite.cs" />
     <Compile Include="Contracts\entBase_EntityAudit.cs" />
     <Compile Include="Contracts\entBase_EntityRead.cs" />
-    <Compile Include="Contracts\DAOConfigurationFull.cs" />
+    <Compile Include="Contracts\DAOConfigFull.cs" />
     <Compile Include="Contracts\entIExecutable.cs" />
     <Compile Include="Contracts\entIJ_Plan_LOB.cs" />
     <Compile Include="Contracts\entILineOfBusiness.cs" />

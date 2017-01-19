@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAO\AppWrite.cs" />
-    <Compile Include="DAO\DWOConfigurationFull.cs" />
+    <Compile Include="DAO\DWOConfigFull.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="_WriteContext.cs" />
   </ItemGroup>
