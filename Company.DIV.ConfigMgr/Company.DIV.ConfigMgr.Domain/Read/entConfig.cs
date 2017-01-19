@@ -47,11 +47,11 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         [Required]
         [MinLength(8)]
         [MaxLength(25)]
-        public string DescriptonShort { get; private set; }
+        public string DescriptionShort { get; private set; }
 
         [Required]
         [MaxLength(100)]
-        public string DescriptonFull { get; private set; }
+        public string DescriptionFull { get; private set; }
 
         [Required]
         public DateTime effDT { get; private set; }
@@ -79,11 +79,5 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         public ICollection<ConfigParamDEV2> ConfigParamDEV2 { get; private set; }
 
         #endregion
-
-
-        
-        
-
-        
         }
     }

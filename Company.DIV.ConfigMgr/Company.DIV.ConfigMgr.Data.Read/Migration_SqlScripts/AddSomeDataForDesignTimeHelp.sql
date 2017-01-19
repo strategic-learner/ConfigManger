@@ -15,6 +15,8 @@ Union Select NewID(), 456, 'pro', 'pro some description here', getdate(), 'Data4
  ) x
  where x.ID is not null
 
+ Select * from AD.App
+ Select * from AD.Config
 GO
 
 INSERT INTO [AD].[Plan] ([ID], [abbr], [descr], [updateDT], [updateUser])
@@ -237,9 +239,16 @@ BEGIN
 	Union Select NewID() ,@AppID123 ,@ParamVersionID ,1 ,'Desc Short JobID4' ,'Desc Full JobID4' , GetDate()-10, GetDate()+100, GetDate(), 'Data4DesignTimeHelp'
 	 ) x
 	where x.ID is not null
+	order by x.DescriptionShort
 	--SET IDENTITY_INSERT [AD].[Config] OFF
  END
 
+
+--Update AD.Config Set 
+-- DescriptonShort = SUBSTRING(DescriptonShort,0,len(DescriptonShort) )+convert(varchar(10),Jobid)
+--,DescriptonFull = SUBSTRING(DescriptonFull,0,len(DescriptonFull) )+convert(varchar(10),Jobid)
+--select * 
+--from AD.Config
 
 
  GO
@@ -408,6 +417,22 @@ select x.* ,x2.[ParamSequence] ,x2.[ParamTypeID] ,x2.[variableName]
 	from [_DEV1].[ConfigParam] x 
 		join [AD].[ParamDefinition] x2 on x.ParamDefinitionID = x2.ID 
 	order by x.[ConfigID], x2.[ParamSequence]
+
+
+/*
+Truncate table [_PROD].[ConfigParam]
+Truncate table [_QA1].[ConfigParam]
+Truncate table [_DEV1].[ConfigParam]
+Truncate table [AD].[J_Config_Executable]
+Truncate table [AD].[J_Config_Plan]
+delete from [AD].[ParamDefinition]
+delete from[AD].[Config]
+delete from [AD].[Executable]
+delete from [AD].[Plan]
+delete from [AD].[App]
+delete from [AD].[ParamVersion]
+delete from [AD].[ParamType]
+*/
 
 
 

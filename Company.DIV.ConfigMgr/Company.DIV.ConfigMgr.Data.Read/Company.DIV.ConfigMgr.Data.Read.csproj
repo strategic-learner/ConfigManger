@@ -113,10 +113,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAO\AppRead.cs" />
-    <Compile Include="DAO\DROConfigurationFull.cs" />
+    <Compile Include="DAO\DROConfigFull.cs" />
     <Compile Include="Migrations\201701180225518_Initial.cs" />
     <Compile Include="Migrations\201701180225518_Initial.Designer.cs">
       <DependentUpon>201701180225518_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701182035189_FixPropName_Descripton.cs" />
+    <Compile Include="Migrations\201701182035189_FixPropName_Descripton.Designer.cs">
+      <DependentUpon>201701182035189_FixPropName_Descripton.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="_ReadContext.cs" />
@@ -158,6 +162,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201701180225518_Initial.resx">
       <DependentUpon>201701180225518_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701182035189_FixPropName_Descripton.resx">
+      <DependentUpon>201701182035189_FixPropName_Descripton.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -8,7 +8,7 @@ namespace Company.DIV.ConfigMgr.Data.Read.Migrations
     internal sealed class Configuration : DbMigrationsConfiguration<Company.DIV.ConfigMgr.Data.Read.ConfigMgrReadContext>
     {
         public Configuration()
-        {
+            {
             AutomaticMigrationsEnabled = false;
             ContextKey = "MainModel";
             }

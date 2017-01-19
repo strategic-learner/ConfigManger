@@ -8,8 +8,8 @@ namespace Company.DIV.ConfigMgr.Domain
          Guid AppID { get; }
          Guid ParamVersionID { get; }
          bool Active { get; }
-         string DescriptonShort { get; }
-         string DescriptonFull { get; }
+         string DescriptionShort { get; }
+         string DescriptionFull { get; }
          DateTime effDT { get; }
          DateTime trmDT { get; }
 
