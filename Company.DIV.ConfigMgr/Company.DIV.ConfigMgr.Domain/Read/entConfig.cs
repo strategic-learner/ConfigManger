@@ -63,20 +63,20 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         #region NavigationProperties
 
         [Required]
-        public ICollection<JConfigPlan> JConfigPlans { get; private set; }  //Depricate this in favor of a [Required] JConfigJPlanLOB
-        public ICollection<JConfigJPlanLOB> JConfigJPlanLOBs { get; private set; }
-        public ICollection<JConfigExecutable> JConfigExecutables { get; private set; }
+        public ICollection<JConfigPlan> JConfigPlans { get; set; }  //Depricate this in favor of a [Required] JConfigJPlanLOB
+        public ICollection<JConfigJPlanLOB> JConfigJPlanLOBs { get; set; }
+        public ICollection<JConfigExecutable> JConfigExecutables { get; set; }
 
         //public App App { get; private set; }  //Trying OneWay Nav
         //public ParamVersion ParamVersion { get; private set; }  //Trying OneWay Nav
 
-        public ICollection<ConfigParamPROD> ConfigParamPROD { get; private set; }
-        public ICollection<ConfigParamSTG1> ConfigParamSTG1 { get; private set; }
-        public ICollection<ConfigParamSTG2> ConfigParamSTG2 { get; private set; }
-        public ICollection<ConfigParamQA1> ConfigParamQA1 { get; private set; }
-        public ICollection<ConfigParamQA2> ConfigParamQA2 { get; private set; }
-        public ICollection<ConfigParamDEV1> ConfigParamDEV1 { get; private set; }
-        public ICollection<ConfigParamDEV2> ConfigParamDEV2 { get; private set; }
+        public ICollection<ConfigParamPROD> ConfigParamPROD { get; set; }
+        public ICollection<ConfigParamSTG1> ConfigParamSTG1 { get; set; }
+        public ICollection<ConfigParamSTG2> ConfigParamSTG2 { get; set; }
+        public ICollection<ConfigParamQA1> ConfigParamQA1 { get; set; }
+        public ICollection<ConfigParamQA2> ConfigParamQA2 { get; set; }
+        public ICollection<ConfigParamDEV1> ConfigParamDEV1 { get; set; }
+        public ICollection<ConfigParamDEV2> ConfigParamDEV2 { get; set; }
 
         #endregion
         }

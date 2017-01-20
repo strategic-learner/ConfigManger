@@ -5,7 +5,7 @@ using Company.DIV.ConfigMgr.Domain.Write;
 
 namespace Company.DIV.ConfigMgr.Data.Write.DAO
     {
-    public class DWOConfigFull : DAOConfigFull<Config /*, ParamVersion , ParamDefinition , App , JConfigPlan , JConfigExecutable , ConfigParam*/>
+    public class DWOConfigFull : DAOConfigFull<Config , ParamVersion , ParamDefinition , App , /*JConfigJPlanLOB ,*/ Plan , LineOfBusiness , /*JConfigExecutable ,*/ Executable , ConfigParam>
         {
 
         private IConfigMgrWriteContext db;
