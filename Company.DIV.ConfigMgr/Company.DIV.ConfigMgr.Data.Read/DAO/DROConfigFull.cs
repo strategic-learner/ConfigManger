@@ -13,83 +13,179 @@ using System.Data.Entity;
 using Company.DIV.ConfigMgr.Domain;
 using Company.DIV.ConfigMgr.Domain.Read;
 using Company.DIV.ConfigMgr.Domain.Business.UseCase;
-
+using System.Threading.Tasks;
 
 namespace Company.DIV.ConfigMgr.Data.Read.DAO
     {
-    public class DROConfigFull : DAOConfigFull<Config /*, ParamVersion , ParamDefinition , App , JConfigPlan , JConfigExecutable , ConfigParam*/>
+    public class DROConfigFull : DAOConfigFull<Config , ParamVersion , ParamDefinition , App , JConfigPlan , JConfigExecutable , ConfigParam>
         {
-        private ConfigMgrReadContext db;
-        //List<EntityState> entryState = new List<EntityState>();
-        //private Config ConfigSingle;
+        private ConfigMgrReadContext _db;
 
-        public DROConfigFull( ConfigMgrReadContext _db , JobIDList JobIDList )
+        public DROConfigFull( ConfigMgrReadContext db , JobIDList JobIDList )
             {
-            db = _db as ConfigMgrReadContext;
-            db.Configuration.AutoDetectChangesEnabled=false;
-            //db.Configuration.LazyLoadingEnabled = false;
-            var jobIDs = JobIDList.IDs.ToArray();
+            this._db = db as ConfigMgrReadContext;
+            List<int> jobIDs = JobIDList.IDs;
 
             this.config = db.config
                 .AsNoTracking()
                 .Where(cfg => jobIDs.Contains(cfg.jobID))
-                .ToList().AsQueryable();
-
-            foreach ( Config cfg in this.config )
-                {
-                db.config.Attach(cfg);
-                //EntityState es = db.Entry(config).State;
-                //entryState.Add(es);
-                }
+                .ToList();
             
             }
 
+        public DROConfigFull( ConfigMgrReadContext _db , JobIDList JobIDList , DROConfigFull ConfigFull)
+            {
+            this._db = _db as ConfigMgrReadContext;
+            this.config = ConfigFull.config;
+
+            List<int> existingJobIDs = this.config.Select(x => x.jobID).ToList();
+            List<int> JobIDsToAdd = new List<int>();
+            foreach ( int jobID in JobIDList.IDs )
+                {
+                if ( !existingJobIDs.Contains(jobID) )
+                    { JobIDsToAdd.Add(jobID); }
+                }
+
+            this.config = this.config.AsEnumerable().Union(_db.config
+                .AsNoTracking()
+                .Where(cfg => JobIDsToAdd.Contains(cfg.jobID))
+                .ToList()
+                ).ToList();
+            }
+
+
+
+
         public void LoadToFirstLevel()
             {
-            List<Guid> appIDs = this.config.Select(c => c.AppID).Distinct().ToList();
-            foreach ( Guid id in appIDs )
-                {
-                db.app
-                    .AsNoTracking()
-                    .Where(a => a.ID == id)
-                    .Load();
-                }
+            Task<bool> appsLoadAll = Task.Factory.StartNew(AppsLoadAll);
+            Task<bool> paramVersionsLoadAll = Task.Factory.StartNew(ParamVersionsLoadAll);
+            
 
-            List<Guid> paramVersionIDs = this.config.Select(c => c.ParamVersionID).Distinct().ToList();
-            foreach ( Guid pvID in paramVersionIDs )
-                {
-                db.paramVersion
-                    .AsNoTracking()
-                    .Where(pv => pv.ID == pvID)
-                    .Load();
-
-                db.paramDefinition
-                    .AsNoTracking()
-                    .Where(pd => pd.ParamVersionID == pvID)
-                    .Load();
-                }
-
-
+            Task.WaitAll();
+            
             foreach ( Config cfg in this.config )
                 {
                 //db.Entry(cfg).Reference(x => x.App).Load();  //loads endless loop of App<=>config references
                 //db.Entry(cfg).Reference(x => x.ParamVersion).Load();  //Loading for the first cfg, seems to load for all the other cfg`s in the loop?
 
-                db.Entry(cfg).Collection(x => x.JConfigExecutables).Load();
-                db.Entry(cfg).Collection(x => x.JConfigJPlanLOBs).Load();
-                db.Entry(cfg).Collection(x => x.JConfigPlans).Load();
+                _db.Entry(cfg).Collection(x => x.JConfigExecutables).Load();
+                _db.Entry(cfg).Collection(x => x.JConfigJPlanLOBs).Load();
+                _db.Entry(cfg).Collection(x => x.JConfigPlans).Load();
 
-                db.Entry(cfg).Collection(x => x.ConfigParamPROD).Load();
-                db.Entry(cfg).Collection(x => x.ConfigParamSTG1).Load();
-                db.Entry(cfg).Collection(x => x.ConfigParamSTG2).Load();
-                db.Entry(cfg).Collection(x => x.ConfigParamQA1).Load();
-                db.Entry(cfg).Collection(x => x.ConfigParamQA2).Load();
-                db.Entry(cfg).Collection(x => x.ConfigParamDEV1).Load();
-                db.Entry(cfg).Collection(x => x.ConfigParamDEV2).Load();
+                _db.Entry(cfg).Collection(x => x.ConfigParamPROD).Load();
+                _db.Entry(cfg).Collection(x => x.ConfigParamSTG1).Load();
+                _db.Entry(cfg).Collection(x => x.ConfigParamSTG2).Load();
+                _db.Entry(cfg).Collection(x => x.ConfigParamQA1).Load();
+                _db.Entry(cfg).Collection(x => x.ConfigParamQA2).Load();
+                _db.Entry(cfg).Collection(x => x.ConfigParamDEV1).Load();
+                _db.Entry(cfg).Collection(x => x.ConfigParamDEV2).Load();
                 }
 
             }
 
+
+        private bool AppsLoadAll()
+            {
+            List<Guid> appIDsAll = this.config.Select(c => c.AppID).Distinct().ToList();
+            List<Guid> existingAppIDs = this.app.Select(x => x.ID).ToList();
+            List<Guid> AppIDsToAdd = new List<Guid>();
+            foreach ( Guid id in appIDsAll )
+                {
+                if ( !existingAppIDs.Contains(id) )
+                    { AppIDsToAdd.Add(id); }
+                }
+
+            this.app = this.app.AsEnumerable().Union(
+                _db.app
+                .AsNoTracking()
+                .Where(x => AppIDsToAdd.Contains(x.ID))
+                .ToList()
+                ).ToList();
+
+            return true;
+            }
+
+
+        private bool ParamVersionsLoadAll()
+            {
+            List<Guid> paramVersionIDsAll = this.config.Select(c => c.ParamVersionID).Distinct().ToList();
+            List<Guid> existingParamVersionIDs = this.paramVersion.Select(x => x.ID).ToList();
+            List<Guid> paramVersionIDsToAdd = new List<Guid>();
+            foreach ( Guid id in paramVersionIDsAll )
+                {
+                if ( !existingParamVersionIDs.Contains(id) )
+                    { paramVersionIDsToAdd.Add(id); }
+                }
+
+            this.paramVersion = this.paramVersion.AsEnumerable().Union(
+                _db.paramVersion
+                .AsNoTracking()
+                .Where(x => paramVersionIDsToAdd.Contains(x.ID))
+                .ToList()
+                ).ToList();
+
+            return true;
+            }
+
+
+
+        
+
+        private bool ExecutablesLoadAll()
+            {
+            
+            List<Guid> JConfigExecutablesAll = this.config.Select(c => _db.executable.Where( == c.ParamVersionID)).Distinct().ToList();
+            List<Guid> existingParamVersionIDs = this.paramVersion.Select(x => x.ID).ToList();
+            List<Guid> paramVersionIDsToAdd = new List<Guid>();
+            foreach ( Guid id in paramVersionIDsAll )
+                {
+                if ( !existingParamVersionIDs.Contains(id) )
+                    { paramVersionIDsToAdd.Add(id); }
+                }
+
+            this.paramVersion = this.paramVersion.AsEnumerable().Union(
+                _db.paramVersion
+                .AsNoTracking()
+                .Where(x => paramVersionIDsToAdd.Contains(x.ID))
+                .ToList()
+                ).ToList();
+
+            return true;
+            }
+
+
+
+
+
+
+
+        //private bool ConfigParamLoadAll<T>() where T : IConfigParam
+        //    {
+        //    List<Guid> paramVersionIDsAll = this.config.Select(c => c.ParamVersionID).Distinct().ToList();
+        //    List<Guid> existingParamVersionIDs = this.paramVersion.Select(x => x.ID).ToList();
+        //    List<Guid> paramVersionIDsToAdd = new List<Guid>();
+        //    foreach ( Guid id in paramVersionIDsAll )
+        //        {
+        //        if ( !existingParamVersionIDs.Contains(id) )
+        //            { paramVersionIDsToAdd.Add(id); }
+        //        }
+
+        //    this.paramVersion = this.paramVersion.AsEnumerable().Union(
+        //        _db.paramVersion
+        //        .AsNoTracking()
+        //        .Where(x => paramVersionIDsToAdd.Contains(x.ID))
+        //        .ToList()
+        //        ).ToList();
+
+        //    return true;
+        //    }
+
+
+
+
+        public void DisposeDBContext()
+            {this._db.Dispose();}
 
         }
     }

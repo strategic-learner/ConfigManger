@@ -25,10 +25,6 @@ namespace Company.DIV.ConfigMgr.Data.Read
             using ( ConfigMgrReadContext dbcontext = new ConfigMgrReadContext() )
                 {
 
-                ///BREAKPOINT:  Why is ConfigMgrReadContext full of data upon instantiation!!!???  (The every datapoint in the database is in Locals/ResultsView)
-
-                ///Just trying stuff:
-                //dbcontext.Configuration.LazyLoadingEnabled = false;  // should be redundant
                 var test = new Company.DIV.ConfigMgr.Data.Read.DAO.DROConfigFull(dbcontext , jobIDList);
                 test.LoadToFirstLevel();
                 int test3 = 3;
