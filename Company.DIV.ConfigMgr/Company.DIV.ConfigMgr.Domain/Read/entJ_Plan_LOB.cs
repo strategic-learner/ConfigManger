@@ -23,7 +23,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
         [Required]
         [Index("NDX_UniqueKey" , 1 , IsUnique = true , IsClustered = false)]
-        public Guid planID { get; private set; }
+        public Guid PlanID { get; private set; }
 
         [Required]
         [Index("NDX_UniqueKey" , 2 , IsUnique = true , IsClustered = false)]
@@ -32,8 +32,8 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
         #region NavigationProperties
 
-        public Plan Plans { get; private set; }
-        public LineOfBusiness LineOfBusiness { get; private set; }
+        //public Plan Plans { get; private set; }  //Trying OneWay Nav
+        //public LineOfBusiness LineOfBusiness { get; private set; }  //Trying OneWay Nav
         public ICollection<JConfigJPlanLOB> JConfigJPlanLOBs { get; private set; }
 
         #endregion

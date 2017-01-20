@@ -28,15 +28,15 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
         #region NavigationProperties
 
-        public PathServer PathServer { get; private set; }
-        public PathShare PathShare { get; private set; }
-        
+        //public PathServer PathServer { get; private set; }  //Trying OneWay Nav
+        //public PathShare PathShare { get; private set; }  //Trying OneWay Nav
+
         #endregion
 
 
-        
-        
 
-        
+
+
+
         }
     }

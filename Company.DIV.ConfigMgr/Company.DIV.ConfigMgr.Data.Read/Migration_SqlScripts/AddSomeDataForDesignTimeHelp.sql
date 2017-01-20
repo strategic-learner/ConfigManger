@@ -15,8 +15,8 @@ Union Select NewID(), 456, 'pro', 'pro some description here', getdate(), 'Data4
  ) x
  where x.ID is not null
 
- Select * from AD.App
- Select * from AD.Config
+ --Select * from AD.App
+ --Select * from AD.Config
 GO
 
 INSERT INTO [AD].[Plan] ([ID], [abbr], [descr], [updateDT], [updateUser])
@@ -230,25 +230,25 @@ BEGIN
 
 	--SET IDENTITY_INSERT [AD].[Config] ON
 	INSERT INTO [AD].[Config]
-	([ID] /*,[jobID]*/ ,[AppID] ,[ParamVersionID] ,[Active] ,[DescriptonShort] ,[DescriptonFull] ,[effDT] ,[trmDT] ,[updateDT] ,[updateUser]) 
+	([ID] /*,[jobID]*/ ,[AppID] ,[ParamVersionID] ,[Active] ,[DescriptionShort] ,[DescriptionFull] ,[effDT] ,[trmDT] ,[updateDT] ,[updateUser]) 
 	Select * from
-	 (select [ID]= null /*,[jobID] = null*/ ,[AppID] = null ,[ParamVersionID] = null ,[Active] = null ,[DescriptonShort] = null ,[DescriptonFull] = null ,[effDT] = null ,[trmDT] = null ,[updateDT] = null ,[updateUser]= null
-	Union Select NewID() ,@AppIDxyz ,@ParamVersionID ,1 ,'Desc Short JobID1' ,'Desc Full JobID1' , GetDate()-10, GetDate()+100, GetDate(), 'Data4DesignTimeHelp'
-	Union Select NewID() ,@AppIDxyz ,@ParamVersionID ,1 ,'Desc Short JobID2' ,'Desc Full JobID2' , GetDate()-10, GetDate()+100, GetDate(), 'Data4DesignTimeHelp'
-	Union Select NewID() ,@AppID123 ,@ParamVersionID ,1 ,'Desc Short JobID3' ,'Desc Full JobID3' , GetDate()-10, GetDate()+100, GetDate(), 'Data4DesignTimeHelp'
-	Union Select NewID() ,@AppID123 ,@ParamVersionID ,1 ,'Desc Short JobID4' ,'Desc Full JobID4' , GetDate()-10, GetDate()+100, GetDate(), 'Data4DesignTimeHelp'
+	 (select [ID]= null /*,[jobID] = null*/ ,[AppID] = null ,[ParamVersionID] = null ,[Active] = null ,[DescriptionShort] = null ,[DescriptionFull] = null ,[effDT] = null ,[trmDT] = null ,[updateDT] = null ,[updateUser]= null
+	Union Select NewID() ,@AppIDxyz ,@ParamVersionID ,1 ,'Desc Short JobIDX' ,'Desc Full JobIDX' , GetDate()-10, GetDate()+100, GetDate(), 'Data4DesignTimeHelp'
+	Union Select NewID() ,@AppIDxyz ,@ParamVersionID ,1 ,'Desc Short JobIDX' ,'Desc Full JobIDX' , GetDate()-10, GetDate()+100, GetDate(), 'Data4DesignTimeHelp'
+	Union Select NewID() ,@AppID123 ,@ParamVersionID ,1 ,'Desc Short JobIDX' ,'Desc Full JobIDX' , GetDate()-10, GetDate()+100, GetDate(), 'Data4DesignTimeHelp'
+	Union Select NewID() ,@AppID123 ,@ParamVersionID ,1 ,'Desc Short JobIDX' ,'Desc Full JobIDX' , GetDate()-10, GetDate()+100, GetDate(), 'Data4DesignTimeHelp'
 	 ) x
 	where x.ID is not null
 	order by x.DescriptionShort
 	--SET IDENTITY_INSERT [AD].[Config] OFF
- END
+	 END
 
 
 --Update AD.Config Set 
--- DescriptonShort = SUBSTRING(DescriptonShort,0,len(DescriptonShort) )+convert(varchar(10),Jobid)
---,DescriptonFull = SUBSTRING(DescriptonFull,0,len(DescriptonFull) )+convert(varchar(10),Jobid)
---select * 
---from AD.Config
+-- DescriptionShort = SUBSTRING(DescriptionShort,0,len(DescriptionShort) )+convert(varchar(10),Jobid)
+--,DescriptionFull = SUBSTRING(DescriptionFull,0,len(DescriptionFull) )+convert(varchar(10),Jobid)
+
+--select * from AD.Config
 
 
  GO
@@ -257,7 +257,7 @@ BEGIN
 
  Declare
 @ParamVersionID UniqueIdentifier = (select ID from AD.ParamVersion x where version = '2.001')
-,@ConfigID1 UniqueIdentifier = (select ID from AD.Config x where x.JobID = 1)
+,@ConfigID1 UniqueIdentifier = (select ID from AD.Config x where x.JobID = 5)
 print @ParamVersionID 
 print @ConfigID1 
 
@@ -349,8 +349,8 @@ GO
 
 
 Declare
- @ConfigIDxyz UniqueIdentifier = (select ID from AD.Config x where x.jobID = '1')
-,@ConfigID123 UniqueIdentifier = (select ID from AD.Config x where x.jobID = '3')
+ @ConfigIDxyz UniqueIdentifier = (select ID from AD.Config x where x.jobID = '5')
+,@ConfigID123 UniqueIdentifier = (select ID from AD.Config x where x.jobID = '7')
 ,@PlanIDxyz UniqueIdentifier = (select ID from AD.[Plan] x where x.abbr = 'p001')
 ,@PlanID123 UniqueIdentifier = (select ID from AD.[Plan] x where x.abbr = 'p003')
 
@@ -371,8 +371,8 @@ GO
 
 
 Declare
- @ConfigIDxyz UniqueIdentifier = (select ID from AD.Config x where x.jobID = '1')
-,@ConfigID123 UniqueIdentifier = (select ID from AD.Config x where x.jobID = '3')
+ @ConfigIDxyz UniqueIdentifier = (select ID from AD.Config x where x.jobID = '5')
+,@ConfigID123 UniqueIdentifier = (select ID from AD.Config x where x.jobID = '7')
 
 INSERT INTO  [AD].[J_Config_Executable]
 	([ID] ,[ConfigID] ,[ExecutableID] ,[updateDT] ,[updateUser])

@@ -29,15 +29,15 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
         #region NavigationProperties
 
-        public Config Config { get; private set; }
-        public JPlanLOB JPlanLOB { get; private set; }
+        //public Config Config { get; private set; }  //Trying OneWay Nav
+        //public JPlanLOB JPlanLOB { get; private set; }  //Trying OneWay Nav
 
         #endregion
 
 
-        
-        
 
-        
+
+
+
         }
     }

@@ -28,15 +28,15 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
         #region NavigationProperties
 
-        public Executable Executable { get; private set; }
-        public PrimaryFunction PrimaryFunction { get; private set; }
+        //public Executable Executable { get; private set; }  //Trying OneWay Nav
+        //public PrimaryFunction PrimaryFunction { get; private set; }  //Trying OneWay Nav
 
         #endregion
 
 
-        
-        
 
-        
+
+
+
         }
     }

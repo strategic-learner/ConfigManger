@@ -8,7 +8,7 @@ namespace Company.DIV.ConfigMgr.Domain.Write
         private JPlanLOB() { }
 
         
-        public Guid planID { get; private set; }
+        public Guid PlanID { get; private set; }
         public Guid LineOfBusinessID { get; private set; }
 
 

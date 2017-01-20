@@ -106,126 +106,104 @@ namespace Company.DIV.ConfigMgr.Data.Read
             //modelBuilder.Entity<App>()
             //    .Property(p => p.createUser).IsRequired();
 
+            modelBuilder.Entity<App>()
+                .HasMany(a => a.Configs)
+                .WithRequired().HasForeignKey(c=>c.AppID);
+
+            modelBuilder.Entity<App>()
+                .HasMany(a => a.Executables)
+                .WithRequired().HasForeignKey(e => e.AppID);
+
+            modelBuilder.Entity<App>()
+                .HasMany(a => a.JAppPlans)
+                .WithRequired().HasForeignKey(jap => jap.AppID);
+
+
 
             //Config (code-first table settings)
             modelBuilder.Entity<Config>().MapToStoredProcedures();
 
             modelBuilder.Entity<Config>()
-                .HasRequired(c => c.App)
-                .WithMany(a => a.Configs);
+                .HasMany(c => c.JConfigJPlanLOBs)
+                .WithRequired().HasForeignKey(jcjpl => jcjpl.ConfigID);
+
+            modelBuilder.Entity<Config>()    //Depricate this                
+                .HasMany(c => c.JConfigPlans)    //Depricate this                
+                .WithRequired().HasForeignKey(jcp => jcp.ConfigID);
 
             modelBuilder.Entity<Config>()
-              .HasRequired(c => c.ParamVersion)
-              .WithMany(pv => pv.Configs);
+                .HasMany(c => c.JConfigExecutables)
+                .WithRequired().HasForeignKey(jce => jce.ConfigID);
+
+
+            modelBuilder.Entity<Config>()
+                    .HasMany(c => c.ConfigParamPROD)
+                    .WithRequired().HasForeignKey(cp => cp.ConfigID);
+
+            modelBuilder.Entity<Config>()
+                    .HasMany(c => c.ConfigParamSTG1)
+                    .WithRequired().HasForeignKey(cp => cp.ConfigID);
+
+            modelBuilder.Entity<Config>()
+                    .HasMany(c => c.ConfigParamSTG2)
+                    .WithRequired().HasForeignKey(cp => cp.ConfigID);
+
+            modelBuilder.Entity<Config>()
+                    .HasMany(c => c.ConfigParamQA1)
+                    .WithRequired().HasForeignKey(cp => cp.ConfigID);
+
+            modelBuilder.Entity<Config>()
+                    .HasMany(c => c.ConfigParamQA2)
+                    .WithRequired().HasForeignKey(cp => cp.ConfigID);
+
+            modelBuilder.Entity<Config>()
+                    .HasMany(c => c.ConfigParamDEV1)
+                    .WithRequired().HasForeignKey(cp => cp.ConfigID);
+
+            modelBuilder.Entity<Config>()
+                    .HasMany(c => c.ConfigParamDEV2)
+                    .WithRequired().HasForeignKey(cp => cp.ConfigID);
+
 
             //ConfigParamPROD (code-first table settings)
             modelBuilder.Entity<ConfigParamPROD>().MapToStoredProcedures();
 
-            modelBuilder.Entity<ConfigParamPROD>()
-                .HasRequired(cp => cp.Config)
-                .WithMany(c => c.ConfigParamPROD);
-
-            modelBuilder.Entity<ConfigParamPROD>()
-                .HasRequired(cp => cp.ParamDefinition)
-                .WithMany(pd => pd.ConfigParamPROD);
-
             //ConfigParamSTG1 (code-first table settings)
             modelBuilder.Entity<ConfigParamSTG1>().MapToStoredProcedures();
-
-            modelBuilder.Entity<ConfigParamSTG1>()
-                .HasRequired(cp => cp.Config)
-                .WithMany(c => c.ConfigParamSTG1);
-
-            modelBuilder.Entity<ConfigParamSTG1>()
-                .HasRequired(cp => cp.ParamDefinition)
-                .WithMany(pd => pd.ConfigParamSTG1);
-
 
             //ConfigParamSTG2 (code-first table settings)
             modelBuilder.Entity<ConfigParamSTG2>().MapToStoredProcedures();
 
-            modelBuilder.Entity<ConfigParamSTG2>()
-                .HasRequired(cp => cp.ParamDefinition)
-                .WithMany(pd => pd.ConfigParamSTG2);
-
-            modelBuilder.Entity<ConfigParamSTG2>()
-                .HasRequired(cp => cp.Config)
-                .WithMany(c => c.ConfigParamSTG2);
-
-
             //ConfigParamQA1 (code-first table settings)
             modelBuilder.Entity<ConfigParamQA1>().MapToStoredProcedures();
-
-            modelBuilder.Entity<ConfigParamQA1>()
-                .HasRequired(cp => cp.Config)
-                .WithMany(c => c.ConfigParamQA1);
-
-            modelBuilder.Entity<ConfigParamQA1>()
-                .HasRequired(cp => cp.ParamDefinition)
-                .WithMany(pd => pd.ConfigParamQA1);
-
 
             //ConfigParamQA2 (code-first table settings)
             modelBuilder.Entity<ConfigParamQA2>().MapToStoredProcedures();
 
-            modelBuilder.Entity<ConfigParamQA2>()
-                .HasRequired(cp => cp.Config)
-                .WithMany(c => c.ConfigParamQA2);
-
-            modelBuilder.Entity<ConfigParamQA2>()
-                .HasRequired(cp => cp.ParamDefinition)
-                .WithMany(pd => pd.ConfigParamQA2);
-
-
             //ConfigParamDEV1 (code-first table settings)
             modelBuilder.Entity<ConfigParamDEV1>().MapToStoredProcedures();
 
-            modelBuilder.Entity<ConfigParamDEV1>()
-                .HasRequired(cp => cp.Config)
-                .WithMany(c => c.ConfigParamDEV1);
-
-            modelBuilder.Entity<ConfigParamDEV1>()
-                .HasRequired(cp => cp.ParamDefinition)
-                .WithMany(pd => pd.ConfigParamDEV1);
-
-
             //ConfigParamDEV2 (code-first table settings)
             modelBuilder.Entity<ConfigParamDEV2>().MapToStoredProcedures();
-
-            modelBuilder.Entity<ConfigParamDEV2>()
-                .HasRequired(cp => cp.ParamDefinition)
-                .WithMany(pd => pd.ConfigParamDEV2);
-
-            modelBuilder.Entity<ConfigParamDEV2>()
-                .HasRequired(cp => cp.Config)
-                .WithMany(c => c.ConfigParamDEV2);
-
 
             //Executable (code-first table settings)
             modelBuilder.Entity<Executable>().MapToStoredProcedures();
 
             modelBuilder.Entity<Executable>()
-              .HasRequired(e => e.App)
-              .WithMany(a => a.Executables);
-
+                .HasMany(e => e.JConfigExecutables)
+                .WithRequired().HasForeignKey(jce => jce.ExecutableID);
             modelBuilder.Entity<Executable>()
-                .HasOptional(e => e.ParamVersion)
-                .WithMany(pv => pv.Executables);
-
+                .HasMany(y => y.JExecutablePathServers)
+                .WithRequired().HasForeignKey(jeps => jeps.ExecutableID);
+            modelBuilder.Entity<Executable>()
+                .HasMany(y => y.JExecutablePrimaryFunctions)
+                .WithRequired().HasForeignKey(jepf => jepf.ExecutableID);
 
 
             //JAppPlan (code-first table settings)
             modelBuilder.Entity<JAppPlan>().MapToStoredProcedures();
 
             modelBuilder.Entity<JAppPlan>().ToTable("J_App_Plan");
-
-            modelBuilder.Entity<JAppPlan>()
-                .HasRequired(jap => jap.App)
-                .WithMany(a => a.JAppPlans);
-
-            modelBuilder.Entity<JAppPlan>()
-                .HasRequired(jap => jap.Plan)
-                .WithMany(p => p.JAppPlans);
 
             modelBuilder.Entity<JAppPlanAudit>().ToTable("J_App_Plan_Audit");
 
@@ -235,14 +213,6 @@ namespace Company.DIV.ConfigMgr.Data.Read
 
             modelBuilder.Entity<JConfigExecutable>().ToTable("J_Config_Executable");
 
-            modelBuilder.Entity<JConfigExecutable>()
-                .HasRequired(jce => jce.Executable)
-                .WithMany(e => e.JConfigExecutables);
-
-            modelBuilder.Entity<JConfigExecutable>()
-                .HasRequired(jce => jce.Config)
-                .WithMany(c => c.JConfigExecutables);
-
             modelBuilder.Entity<JConfigExecutableAudit>().ToTable("J_Config_Executable_Audit");
 
 
@@ -250,15 +220,6 @@ namespace Company.DIV.ConfigMgr.Data.Read
             modelBuilder.Entity<JConfigJPlanLOB>().MapToStoredProcedures();
 
             modelBuilder.Entity<JConfigJPlanLOB>().ToTable("J_Config_JPlanLOB");
-
-            modelBuilder.Entity<JConfigJPlanLOB>()
-                .HasRequired(jcjpl => jcjpl.Config)
-                .WithMany(c => c.JConfigJPlanLOBs);
-
-            modelBuilder.Entity<JConfigJPlanLOB>()
-                .HasRequired(jcjpl => jcjpl.JPlanLOB)
-                .WithMany(jpl => jpl.JConfigJPlanLOBs);
-
 
             modelBuilder.Entity<JConfigJPlanLOBAudit>().ToTable("J_Config_JPlanLOB_Audit");
 
@@ -268,14 +229,6 @@ namespace Company.DIV.ConfigMgr.Data.Read
 
             modelBuilder.Entity<JConfigPlan>().ToTable("J_Config_Plan");
 
-            modelBuilder.Entity<JConfigPlan>()
-                .HasRequired(jcp => jcp.Config)
-                .WithMany(c => c.JConfigPlans);
-
-            modelBuilder.Entity<JConfigPlan>()
-                .HasRequired(jcp => jcp.Plan)
-                .WithMany(p => p.JConfigPlans);
-
             modelBuilder.Entity<JConfigPlanAudit>().ToTable("J_Config_Plan_Audit");
 
 
@@ -283,14 +236,6 @@ namespace Company.DIV.ConfigMgr.Data.Read
             modelBuilder.Entity<JExecutablePathServer>().MapToStoredProcedures();
 
             modelBuilder.Entity<JExecutablePathServer>().ToTable("J_Executable_PathServer");
-
-            modelBuilder.Entity<JExecutablePathServer>()
-                .HasRequired(jeps => jeps.Executable)
-                .WithMany(y => y.JExecutablePathServers);
-
-            modelBuilder.Entity<JExecutablePathServer>()
-                .HasRequired(jeps => jeps.PathServer)
-                .WithMany(z => z.JExecutablePathServers);
 
             modelBuilder.Entity<JExecutablePathServerAudit>().ToTable("J_Executable_PathServer_Audit");
 
@@ -301,14 +246,6 @@ namespace Company.DIV.ConfigMgr.Data.Read
             modelBuilder.Entity<JExecutablePrimaryFunction>()
                 .ToTable("J_Executable_PrimaryFunction");
 
-            modelBuilder.Entity<JExecutablePrimaryFunction>()
-                .HasRequired(jepf => jepf.Executable)
-                .WithMany(y => y.JExecutablePrimaryFunctions);
-
-            modelBuilder.Entity<JExecutablePrimaryFunction>()
-                .HasRequired(jepf => jepf.PrimaryFunction)
-                .WithMany(z => z.JExecutablePrimaryFunctions);
-
             modelBuilder.Entity<JExecutablePrimaryFunctionAudit>()
                 .ToTable("J_Executable_PrimaryFunction_Audit");
 
@@ -318,14 +255,6 @@ namespace Company.DIV.ConfigMgr.Data.Read
 
             modelBuilder.Entity<JPathServerPathShare>().ToTable("J_PathServer_PathShare");
 
-            modelBuilder.Entity<JPathServerPathShare>()
-                .HasRequired(jpsps => jpsps.PathServer)
-                .WithMany(ps1 => ps1.JPathServerPathShares);
-
-            modelBuilder.Entity<JPathServerPathShare>()
-                .HasRequired(jpsps => jpsps.PathShare)
-                .WithMany(ps2 => ps2.JPathServerPathShares);
-
             modelBuilder.Entity<JPathServerPathShareAudit>().ToTable("J_PathServer_PathShare_Audit");
 
 
@@ -334,53 +263,129 @@ namespace Company.DIV.ConfigMgr.Data.Read
 
             modelBuilder.Entity<JPlanLOB>().ToTable("J_Plan_LOB");
 
-            modelBuilder.Entity<JPlanLOB>()
-                .HasRequired(jpl => jpl.Plans)
-                .WithMany(p => p.JPlanLOB);
-
-            modelBuilder.Entity<JPlanLOB>()
-                .HasRequired(jpl => jpl.LineOfBusiness)
-                .WithMany(lob =>lob.JPlanLOB);
-
             modelBuilder.Entity<JPlanLOBAudit>().ToTable("J_Plan_LOB_Audit");
 
+            modelBuilder.Entity<JPlanLOB>()
+                .HasMany(jpl => jpl.JConfigJPlanLOBs)
+                .WithRequired().HasForeignKey(jcjpl => jcjpl.JPlanLOBID);
 
 
             //LineOfBusiness (code-first table settings)
             modelBuilder.Entity<LineOfBusiness>().MapToStoredProcedures();
 
+            modelBuilder.Entity<LineOfBusiness>()
+                .HasMany(lob => lob.JPlanLOB)
+                .WithRequired().HasForeignKey(jpl => jpl.LineOfBusinessID);
+
 
             //PrimaryFunction (code-first table settings)
             modelBuilder.Entity<PrimaryFunction>().MapToStoredProcedures();
+
+            modelBuilder.Entity<PrimaryFunction>()
+                .HasMany(z => z.JExecutablePrimaryFunctions)
+                .WithRequired().HasForeignKey(jepf => jepf.PrimaryFunctionID);
 
 
             //ParamDefinition (code-first table settings)
             modelBuilder.Entity<ParamDefinition>().MapToStoredProcedures();
 
             modelBuilder.Entity<ParamDefinition>()
-                .HasRequired(pd => pd.ParamVersion)
-                .WithMany(pv => pv.ParamDefinitions);
+                .HasMany(pd => pd.ConfigParamPROD)
+                .WithRequired()
+                .HasForeignKey(cp => cp.ParamDefinitionID);
 
             modelBuilder.Entity<ParamDefinition>()
-              .HasRequired(pd => pd.ParamType)
-              .WithMany(pt => pt.ParamDefinitions);
+                .HasMany(pd => pd.ConfigParamSTG1)
+                .WithRequired()
+                .HasForeignKey(cp => cp.ParamDefinitionID);
+
+            modelBuilder.Entity<ParamDefinition>()
+                .HasMany(pd => pd.ConfigParamSTG2)
+                .WithRequired()
+                .HasForeignKey(cp => cp.ParamDefinitionID);
+
+            modelBuilder.Entity<ParamDefinition>()
+                .HasMany(pd => pd.ConfigParamQA1)
+                .WithRequired()
+                .HasForeignKey(cp => cp.ParamDefinitionID);
+
+            modelBuilder.Entity<ParamDefinition>()
+                .HasMany(pd => pd.ConfigParamQA2)
+                .WithRequired()
+                .HasForeignKey(cp => cp.ParamDefinitionID);
+
+            modelBuilder.Entity<ParamDefinition>()
+                .HasMany(pd => pd.ConfigParamDEV1)
+                .WithRequired()
+                .HasForeignKey(cp => cp.ParamDefinitionID);
+
+            modelBuilder.Entity<ParamDefinition>()
+                .HasMany(pd => pd.ConfigParamDEV2)
+                .WithRequired()
+                .HasForeignKey(cp => cp.ParamDefinitionID);
+
 
             //ParamType (code-first table settings)
             modelBuilder.Entity<ParamType>().MapToStoredProcedures();
+
+            modelBuilder.Entity<ParamType>()
+                .HasMany(pt => pt.ParamDefinitions)
+                .WithRequired()
+                .HasForeignKey(pd => pd.ParamTypeID);
+
 
 
             //ParamVersion (code-first table settings)
             modelBuilder.Entity<ParamVersion>().MapToStoredProcedures();
 
+            modelBuilder.Entity<ParamVersion>()
+                .HasMany(pv => pv.Configs)
+            .WithRequired()
+                .HasForeignKey(c => c.ParamVersionID);
+
+            modelBuilder.Entity<ParamVersion>()
+                .HasMany(pv => pv.Executables)
+                .WithOptional().HasForeignKey(e => e.ParamVersionID);
+
+            modelBuilder.Entity<ParamVersion>()
+                .HasMany(pv => pv.ParamDefinitions)
+                .WithRequired()
+                .HasForeignKey(pd => pd.ParamVersionID);
+
 
             //PathServer (code-first table settings)
             modelBuilder.Entity<PathServer>().MapToStoredProcedures();
+
+            modelBuilder.Entity<PathServer>()
+                .HasMany(ps1 => ps1.JPathServerPathShares)
+                .WithRequired().HasForeignKey(jpsps => jpsps.PathServerID);
+
+            modelBuilder.Entity<PathServer>()
+                .HasMany(z => z.JExecutablePathServers)
+                .WithRequired().HasForeignKey(jeps => jeps.PathServerID);
+
+            modelBuilder.Entity<PathShare>()
+                .HasMany(ps2 => ps2.JPathServerPathShares)
+                .WithRequired().HasForeignKey(jpsps => jpsps.PathShareID);
+
 
             //PathShare (code-first table settings)
             modelBuilder.Entity<PathShare>().MapToStoredProcedures();
 
             //Plan (code-first table settings)
             modelBuilder.Entity<Plan>().MapToStoredProcedures();
+
+            modelBuilder.Entity<Plan>()
+                .HasMany(p => p.JAppPlans)
+                .WithRequired().HasForeignKey(jap => jap.PlanID);
+
+            modelBuilder.Entity<Plan>()
+                .HasMany(p => p.JPlanLOB)
+                .WithRequired().HasForeignKey(jpl => jpl.PlanID);
+
+            modelBuilder.Entity<Plan>()    //Depricate this                
+                .HasMany(p => p.JConfigPlans)    //Depricate this               
+                .WithRequired().HasForeignKey(jcp => jcp.PlanID);
 
 
             }

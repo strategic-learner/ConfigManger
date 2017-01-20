@@ -42,15 +42,15 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         public ICollection<JConfigExecutable> JConfigExecutables { get; private set; }
         public ICollection<JExecutablePathServer> JExecutablePathServers { get; private set; }
         public ICollection<JExecutablePrimaryFunction> JExecutablePrimaryFunctions { get; private set; }
-        public ParamVersion ParamVersion { get; private set; }
-        public App App { get; private set; }
+        //public ParamVersion ParamVersion { get; private set; }  //Trying OneWay Nav
+        //public App App { get; private set; }  //Trying OneWay Nav
 
         #endregion
 
 
-        
-        
 
-        
+
+
+
         }
 	}

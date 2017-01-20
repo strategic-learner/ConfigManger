@@ -5,7 +5,7 @@ namespace Company.DIV.ConfigMgr.Domain
 
     public interface IJPlanLOB
         {
-        Guid planID { get; }
+        Guid PlanID { get; }
         Guid LineOfBusinessID { get; }
         }
     }

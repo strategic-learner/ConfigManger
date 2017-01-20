@@ -14,8 +14,8 @@ namespace Company.DIV.ConfigMgr.Domain
         //where TJConfigExecutable : IJConfigExecutable
         //where TConfigParam : IConfigParam
         {
-        public virtual List<TConfig> configList { get; protected set; }
-        public virtual IQueryable<TConfig> configQrybl { get; protected set; }
+        //public virtual List<TConfig> configList { get; protected set; }
+        public virtual IQueryable<TConfig> config { get; protected set; }
         //public virtual IQueryable<TParamVersion> paramVersion { get; protected set; }
         //public virtual IQueryable<TParamDefinition> paramDefinition { get; protected set; }  //+EagerLoad( ParamType.ID, ParamType.Type)
         //public virtual IQueryable<TApp> app { get; protected set; }

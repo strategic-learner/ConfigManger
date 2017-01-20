@@ -39,11 +39,5 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         public ICollection<ParamDefinition> ParamDefinitions { get; private set; }
 
         #endregion
-
-
-        
-        
-
-        
         }
     }

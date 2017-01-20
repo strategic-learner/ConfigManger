@@ -26,6 +26,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
         [Required]
         [Index("NDX_UNIQUE_ParamVersionID_ParamSequence" , 1 , IsUnique = true, IsClustered =false)] 
+        //[ForeignKey("ParamVersion")]
         public Guid ParamVersionID { get; private set; }
 
         [Required]
@@ -47,8 +48,8 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
         #region NavigationProperties
 
-        public ParamVersion ParamVersion { get; private set; }
-        public ParamType ParamType { get; private set; }
+        //public ParamVersion ParamVersion { get; private set; }  //Trying OneWay Nav
+        //public ParamType ParamType { get; private set; }  //Trying OneWay Nav
         public ICollection<ConfigParamPROD> ConfigParamPROD { get; private set; }
         public ICollection<ConfigParamSTG1> ConfigParamSTG1 { get; private set; }
         public ICollection<ConfigParamSTG2> ConfigParamSTG2 { get; private set; }
@@ -58,11 +59,5 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         public ICollection<ConfigParamDEV2> ConfigParamDEV2 { get; private set; }
 
         #endregion
-
-
-        
-        
-
-        
         }
     }

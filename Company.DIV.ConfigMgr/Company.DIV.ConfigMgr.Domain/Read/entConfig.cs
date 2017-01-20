@@ -63,12 +63,12 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         #region NavigationProperties
 
         [Required]
-        public ICollection<JConfigPlan> JConfigPlans { get; private set; }
+        public ICollection<JConfigPlan> JConfigPlans { get; private set; }  //Depricate this in favor of a [Required] JConfigJPlanLOB
         public ICollection<JConfigJPlanLOB> JConfigJPlanLOBs { get; private set; }
         public ICollection<JConfigExecutable> JConfigExecutables { get; private set; }
 
-        public App App { get; private set; }
-        public ParamVersion ParamVersion { get; private set; }
+        //public App App { get; private set; }  //Trying OneWay Nav
+        //public ParamVersion ParamVersion { get; private set; }  //Trying OneWay Nav
 
         public ICollection<ConfigParamPROD> ConfigParamPROD { get; private set; }
         public ICollection<ConfigParamSTG1> ConfigParamSTG1 { get; private set; }

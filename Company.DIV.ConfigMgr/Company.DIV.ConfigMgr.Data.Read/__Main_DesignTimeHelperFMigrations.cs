@@ -13,14 +13,14 @@ namespace Company.DIV.ConfigMgr.Data.Read
             Database.SetInitializer<ConfigMgrReadContext>(new ConfigMgrCreateDatabaseIfNotExistsInitializer());
             //Database.SetInitializer<ConfigMgrContext>(new ConfigMgrDropCreateAlwaysInitializer());
             //Database.SetInitializer<ConfigMgrContext>(new ConfigMgrDropCreateIfModelChangesInitializer());
-            #endif
+#endif
 
-            //List<int> List = new List<int>
-            ////{1,2,3,4 }
-            //{1,2,3 }
-            //;
+            List<int> List = new List<int>
+            //{5,6,7,8 };
+            {5,6,7 };
+            
 
-            //Domain.Business.UseCase.JobIDList jobIDList = new Domain.Business.UseCase.JobIDList(List);
+            Domain.Business.UseCase.JobIDList jobIDList = new Domain.Business.UseCase.JobIDList(List);
 
             using ( ConfigMgrReadContext dbcontext = new ConfigMgrReadContext() )
                 {
@@ -29,8 +29,8 @@ namespace Company.DIV.ConfigMgr.Data.Read
 
                 ///Just trying stuff:
                 //dbcontext.Configuration.LazyLoadingEnabled = false;  // should be redundant
-                //var test = new Company.DIV.ConfigMgr.Data.Read.DAO.DROConfigFull(dbcontext , jobIDList);
-                //test.LoadToFirstLevel();
+                var test = new Company.DIV.ConfigMgr.Data.Read.DAO.DROConfigFull(dbcontext , jobIDList);
+                test.LoadToFirstLevel();
                 int test3 = 3;
                 }
 
