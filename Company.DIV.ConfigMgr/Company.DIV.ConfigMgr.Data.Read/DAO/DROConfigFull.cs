@@ -24,6 +24,10 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
         
         public DROConfigFull( ConfigMgrReadContext db , JobIDList JobIDList )
             {
+            if ( db == null ) { throw new NullReferenceException("db cannot be null"); }
+            if ( JobIDList == null ) { throw new NullReferenceException("JobIDList cannot be null"); }
+            if ( JobIDList.IDs.Count<=0 ){ throw new Exception("JobIDList.IDs.Count must be GT 0"); }
+
             this._db = db as ConfigMgrReadContext;
             List<int> jobIDs = JobIDList.IDs;
 
@@ -40,9 +44,13 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
             LoadToFirstLevel();
             }
 
-        public DROConfigFull( ConfigMgrReadContext _db , JobIDList JobIDList , DROConfigFull ConfigFull)
+        public DROConfigFull( ConfigMgrReadContext db , JobIDList JobIDList , DROConfigFull ConfigFull)
             {
-            this._db = _db as ConfigMgrReadContext;
+            if ( db == null ){ throw new NullReferenceException("db cannot be null"); }
+            if ( JobIDList == null ){ throw new NullReferenceException("JobIDList cannot be null"); }
+            if ( JobIDList.IDs.Count <= 0 ){ throw new Exception("JobIDList.IDs.Count must be GT 0"); }
+
+            this._db = db as ConfigMgrReadContext;
             this.config = ConfigFull.config;
 
             List<int> existingJobIDs = this.config.Select(x => x.jobID).ToList();
@@ -53,7 +61,7 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
                     { JobIDsToAdd.Add(jobID); }
                 }
 
-            this.config = this.config.AsEnumerable().Union(_db.config
+            this.config = this.config.AsEnumerable().Union(db.config
                 .AsNoTracking()
                 .Where(cfg => JobIDsToAdd.Contains(cfg.jobID))
                 .ToList()
@@ -99,50 +107,32 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
 
 
 
-        public Guid GuidEmpty()
-            { return new Guid("00000000-0000-0000-0000-000000000000"); }
-        public List<Guid> GuidEmptyList()
-            {List<Guid> g = new List<Guid> { GuidEmpty() };
-            return g;}
-
-
-
         private bool AppsLoadAll()
             {
             List<Guid> appIDsAll = this.config.Select(c => c.AppID).Distinct().ToList();
-            List<Guid> existingAppIDs = GuidEmptyList();
-            if(this.app != null)
-                {
-                existingAppIDs = existingAppIDs
-                    .Union(this.app.Select(x => x.ID))
-                    .ToList();
-                }
-
-            List<Guid> AppIDsToAdd = new List<Guid>();
-            foreach ( Guid id in appIDsAll )
-                {
-                if ( !existingAppIDs.Contains(id) )
-                    { AppIDsToAdd.Add(id); }
-                }
-
-
-            if ( this.app != null )
-                {
-                this.app = this.app.AsEnumerable().Union(
-                _db.app
-                .AsNoTracking()
-                .Where(x => AppIDsToAdd.Contains(x.ID))
-                .ToList()
-                ).ToList();
-                }
-            else
-                {
-                this.app = _db.app
-               .AsNoTracking()
-               .Where(x => AppIDsToAdd.Contains(x.ID))
-               .ToList();               
-                }
-
+            List<Guid> appIDsExisting = 
+                this.app?.AsEnumerable().Select(x => x.ID)
+                .Union(
+                    GuidEmptyList()
+                    ).ToList()
+                    ??
+                    GuidEmptyList()
+                    ;
+            
+            this.app = 
+                this.app?.AsEnumerable()
+                .Union(
+                    _db.app
+                    .AsNoTracking()
+                    .Where(x => appIDsAll.Contains(x.ID) && !appIDsExisting.Contains(x.ID))
+                    .ToList()
+                    ).ToList()
+                    ??
+                    _db.app
+                    .AsNoTracking()
+                    .Where(x => appIDsAll.Contains(x.ID))
+                    .ToList()
+                    ;
 
             return true;
             }
@@ -150,41 +140,123 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
         private bool ParamVersionsLoadAll()
             {
             List<Guid> paramVersionIDsAll = this.config.Select(c => c.ParamVersionID).Distinct().ToList();
-            List<Guid> existingParamVersionIDs = this.paramVersion.Select(x => x.ID).Distinct().ToList();
-            List<Guid> paramVersionIDsToAdd = new List<Guid>();
-            foreach ( Guid id in paramVersionIDsAll )
-                {
-                if ( !existingParamVersionIDs.Contains(id) )
-                    { paramVersionIDsToAdd.Add(id); }
-                }
+            List<Guid> paramVersionIDsExisting =
+                this.paramVersion?.AsEnumerable().Select(x => x.ID).Distinct()
+                .Union(
+                    GuidEmptyList()
+                    ).ToList()
+                    ??
+                    GuidEmptyList()
+                    ;
 
-            this.paramVersion = this.paramVersion.AsEnumerable().Union(
-                _db.paramVersion
-                .AsNoTracking()
-                .Where(x => paramVersionIDsToAdd.Contains(x.ID))
-                .ToList()
-                ).ToList();
+            this.paramVersion = 
+                this.paramVersion?.AsEnumerable()
+                .Union(
+                    _db.paramVersion
+                    .AsNoTracking()
+                    .Where(x => paramVersionIDsAll.Contains(x.ID) && !paramVersionIDsExisting.Contains(x.ID))
+                    .ToList()
+                    ).ToList()
+                    ??
+                    _db.paramVersion
+                    .AsNoTracking()
+                    .Where(x => paramVersionIDsAll.Contains(x.ID))
+                    .ToList()
+                    ;
 
             return true;
             }
 
         private bool ExecutablesLoadAll()
             {
-            foreach(Config cfg in this.config)
-                {
-                List<Guid> JConfigExecutableIDsExisting = cfg.JConfigExecutables.Select(x => x.ID).Distinct().ToList();
+            List<Guid> executableIDsExistingJoins = 
+                this.config
+                .SelectMany(c => c.JConfigExecutables?.Select(jce => jce.ExecutableID))
+                .Distinct()
+                .ToList()
+                ??
+                GuidEmptyList();
+                        
+            var jConfigExecutableAll = _db.jConfigExecutable
+                .Where(x => ConfigIDsAll.Contains(x.ConfigID) && !executableIDsExistingJoins.Contains(x.ID))
+                .Distinct()
+                .ToList();
 
-                cfg.JConfigExecutables = cfg.JConfigExecutables.AsEnumerable().Union(_db.jConfigExecutable
-                    .Where(j => j.ConfigID == cfg.ID && !JConfigExecutableIDsExisting.Contains(j.ID))
-                    .ToList()).ToList();
+            foreach (Config cfg in this.config)
+                {
+                List<Guid> jConfigExecutableIDsExisting = 
+                    cfg.JConfigExecutables?.AsEnumerable().Select(x => x.ID).Distinct()
+                    .Union(
+                        GuidEmptyList()
+                        ).ToList()
+                    ??
+                    GuidEmptyList();
+
+                cfg.JConfigExecutables = 
+                    cfg.JConfigExecutables?.AsEnumerable()
+                    .Union(
+                        jConfigExecutableAll
+                        .Where(j => j.ConfigID == cfg.ID && !jConfigExecutableIDsExisting.Contains(j.ID))
+                        .ToList()
+                        ).ToList()
+                    ??
+                    jConfigExecutableAll
+                    .Where(j => j.ConfigID == cfg.ID)
+                    .ToList();
                 }
 
-            List<Guid> ExecutableIDsExisting = this.config.SelectMany(c => c.JConfigExecutables.Select(jce=>jce.ExecutableID)).Distinct().ToList();
+            List<Guid> executableIDsAll =
+                jConfigExecutableAll
+                .Select(jcea =>jcea.ExecutableID)
+                .ToList();
 
-            this.executable = this.executable.AsEnumerable().Union(_db.executable
-                .Where(e => ExecutableIDsExisting.Contains(e.ID))
-                .ToList()).ToList();
+            if ( !executableIDsAll.Any())
+                { executableIDsAll = GuidEmptyList(); }
 
+
+            List<Guid> executableIDsExisting =
+                this.executable.Select(e=>e.ID)
+                .Distinct()
+                .ToList()
+                ??
+                GuidEmptyList();
+
+            this.executable = 
+                this.executable?.AsEnumerable()
+                .Union(
+                    _db.executable
+                    .Where(e => executableIDsAll.Contains(e.ID) && !executableIDsExisting.Contains(e.ID))
+                    .ToList()
+                    ).ToList()
+                ??
+                _db.executable
+                .Where(e => executableIDsAll.Contains(e.ID))
+                .ToList();
+
+            return true;
+            }
+
+
+        private bool ParamDefinitionLoadAll()
+            {
+
+            return true;
+            }
+
+        private bool PlanLoadAll()
+            {
+
+            return true;
+            }
+
+        private bool LineOfBusinessLoadAll()
+            {
+
+            return true;
+            }
+
+        private bool ConfigParamLoadAll()
+            {
 
             return true;
             }
@@ -192,10 +264,12 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
 
 
 
+        private bool ConfigParamLoadAll<TConfigParam>() where TConfigParam : IConfigParam
+            {
+            //TConfigParam
 
-
-
-        //private bool ConfigParamLoadAll<T>() where T : IConfigParam
+            return true;
+            }
         //    {
         //    List<Guid> paramVersionIDsAll = this.config.Select(c => c.ParamVersionID).Distinct().ToList();
         //    List<Guid> existingParamVersionIDs = this.paramVersion.Select(x => x.ID).ToList();
@@ -217,6 +291,14 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
         //    }
 
 
+
+
+
+        private List<Guid> GuidEmptyList()
+            {
+            List<Guid> g = new List<Guid> { Guid.Empty };
+            return g;
+            }
 
 
         public void DisposeDBContext()

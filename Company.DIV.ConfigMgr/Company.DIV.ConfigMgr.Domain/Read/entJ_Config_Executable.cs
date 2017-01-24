@@ -16,7 +16,7 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         //    updateUser = user.defaultUser;
         //    }
 
-        
+
 
         [Required]
         [Index("NDX_UniqueKey" , 1 , IsUnique = true , IsClustered = false)]
