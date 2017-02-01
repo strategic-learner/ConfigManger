@@ -15,43 +15,28 @@ namespace Company.DIV.ConfigMgr.Domain
         /// <summary>
         /// Mutable value
         /// </summary>
-        public int value { get; private set; }
-        public bool wasAdded { get; private set; }
-        public bool wasChanged { get; private set; }
-        public bool wasDeleted { get; private set; }
+        public int value { get; private set; } = 0;
+        public bool wasAdded { get; private set; } = false;
+        public bool wasChanged { get; private set; } = false;
+        public bool wasDeleted { get; private set; } = false;
+        public bool cancelChanges { get; private set; } = false;
 
         public EntityStateDisconnected()
             {
-            value = 0;
-            wasAdded = false;
-            wasChanged = false;
-            wasDeleted = false;
             }
 
-        public void unchanged() { value = 0; }
+        public void cancel()
+            {value = 0;
+            cancelChanges = true; }
         public void added()
             { value = 1;
-            if(!wasAdded)
-                { wasAdded = true; }
-            }
+            wasAdded = true; }
         public void changed()
             { value = 2;
-            if ( !wasChanged)
-                { wasChanged = true; }
-            }
+            wasChanged = true; }
         public void deleted()
             { value = 3;
-            if ( !wasDeleted)
-                { wasDeleted = true; }
-            }
+            wasDeleted = true; }
         }
-
-    //public enum EntityStateDisconnected
-    //    {
-    //    unchanged 
-    //    , added 
-    //    ,changed 
-    //    ,deleted 
-    //    }
-
+    
     }

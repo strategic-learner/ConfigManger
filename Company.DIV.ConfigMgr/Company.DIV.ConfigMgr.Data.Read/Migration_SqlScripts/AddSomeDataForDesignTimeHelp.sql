@@ -1,6 +1,26 @@
 ﻿
 use ConfigMgr
 
+
+--GO  
+--EXEC sp_configure 'show advanced options', 1;  
+--GO  
+--RECONFIGURE ;  
+--GO 
+--EXEC sp_configure
+--GO
+--EXEC sp_configure 'user connections'
+--GO
+/*settings were:
+name	minimum	maximum	config_value	run_value
+user connections	0	32767	0	0
+*/  
+--EXEC sp_configure 'user connections', 500 ;  
+--GO  
+--RECONFIGURE;  
+--GO
+
+
 GO
 
 INSERT INTO [AD].[App] 
