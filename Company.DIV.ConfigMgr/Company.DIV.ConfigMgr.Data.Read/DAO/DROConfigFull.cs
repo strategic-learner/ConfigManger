@@ -11,7 +11,7 @@ using System.Diagnostics;
 
 namespace Company.DIV.ConfigMgr.Data.Read.DAO
     {
-    public class DROConfigFull : DAOConfigFull<Config , ParamVersion , ParamDefinition , App , /*JConfigJPlanLOB ,*/ Plan , LineOfBusiness , /*JConfigExecutable ,*/ Executable , ConfigParam>
+    public class DROConfigFull : DAOConfigFull<Config , ParamVersion , ParamDefinition , App , JConfigJPlanLOB , Executable , ConfigParam>
         {
         private ConfigMgrReadContext _db;
         List<Guid> _ConfigIDsAll;
@@ -85,7 +85,7 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
             await AppsLoadAllAsync();
             await ParamVersionAndDefinitionsLoadAllAsync();
             await ExecutablesLoadAllAsync();
-
+            await PlanLOBsLoadAll();
             //Debug.Print("__________bf Task[] LoadAll");
 
             //Cant do this using shared DbContext, not thread safe - would have to create new instance of DbContext per parallel Task.
@@ -139,20 +139,14 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
                 }
             catch ( Exception ex )
                 {
-                //Debug.Print("________________Source");
-                //Debug.Print(ex.Source.ToString());
-                //Debug.Print("________________Message");
-                //Debug.Print(ex.Message.ToString());
+                //Debug.Print("________________entireException");
+                //Debug.Print(ex.ToString());
                 //Debug.Print("________________StackTrace");
                 //Debug.Print(ex.StackTrace.ToString());
                 //Debug.Print("________________InnerException");
                 //Debug.Print(ex.InnerException.ToString());
-                //Debug.Print("________________HResult");
-                //Debug.Print(ex.HResult.ToString());
                 //Debug.Print("________________Data");
                 //Debug.Print(ex.Data.ToString());
-                //Debug.Print("________________entireException");
-                //Debug.Print(ex.ToString());
                 }
             finally
                 {
@@ -166,20 +160,14 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
                 }
             catch ( Exception ex )
                 {
-                //Debug.Print("________________Source");
-                //Debug.Print(ex.Source.ToString());
-                //Debug.Print("________________Message");
-                //Debug.Print(ex.Message.ToString());
+                //Debug.Print("________________entireException");
+                //Debug.Print(ex.ToString());
                 //Debug.Print("________________StackTrace");
                 //Debug.Print(ex.StackTrace.ToString());
                 //Debug.Print("________________InnerException");
                 //Debug.Print(ex.InnerException.ToString());
-                //Debug.Print("________________HResult");
-                //Debug.Print(ex.HResult.ToString());
                 //Debug.Print("________________Data");
-                //Debug.Print(ex.Data.ToString());
-                //Debug.Print("________________entireException");
-                //Debug.Print(ex.ToString());
+                //Debug.Print(ex.Data.ToString());                
                 }
             finally
                 {
@@ -192,20 +180,14 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
                 }
             catch(Exception ex)
                 {
-                //Debug.Print("________________Source");
-                //Debug.Print(ex.Source.ToString());
-                //Debug.Print("________________Message");
-                //Debug.Print(ex.Message.ToString());
+                //Debug.Print("________________entireException");
+                //Debug.Print(ex.ToString());
                 //Debug.Print("________________StackTrace");
                 //Debug.Print(ex.StackTrace.ToString());
                 //Debug.Print("________________InnerException");
                 //Debug.Print(ex.InnerException.ToString());
-                //Debug.Print("________________HResult");
-                //Debug.Print(ex.HResult.ToString());
                 //Debug.Print("________________Data");
                 //Debug.Print(ex.Data.ToString());
-                //Debug.Print("________________entireException");
-                //Debug.Print(ex.ToString());
                 }
             finally
                 {
@@ -308,22 +290,16 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
 
         private async Task<bool> ExecutablesLoadAllAsync()
             {
-            //List<Guid> executableIDJoinsExisting =
-            //    this.config
-            //    .Where(c => c.JConfigExecutables != null)
-            //    .SelectMany(c => c.JConfigExecutables.Select(jce => jce.ExecutableID))
-            //    .Distinct()
-            //    .ToList();
-            Debug.Print("__________ExecutablesLoadAllAsync() start");
+            //Debug.Print("__________ExecutablesLoadAllAsync() start");
             List<Guid> executableIDsAll = new List<Guid>();
             List<Guid> executableIDsExisting = new List<Guid>();
             List<Guid> executableIDsToAdd = new List<Guid>();
-            Debug.Print("__________ExecutablesLoadAllAsync() End fields");
+            //Debug.Print("__________ExecutablesLoadAllAsync() End fields");
 
             ///Attach the M2M NavProps
             try
                 {
-                Debug.Print("__________ExecutablesLoadAllAsync() var jConfigExecutableAll");
+                //Debug.Print("__________ExecutablesLoadAllAsync() var jConfigExecutableAll");
                 var jConfigExecutableAll =
                     await _db.jConfigExecutable
                     .AsNoTracking()
@@ -334,7 +310,7 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
 
                 foreach ( Config cfg in this.config )
                     {
-                    Debug.Print("__________ExecutablesLoadAllAsync() forEach Start");
+                    //Debug.Print("__________ExecutablesLoadAllAsync() forEach Start");
                     List<Guid> jConfigExecutableIDsExisting =
                         cfg.JConfigExecutables?.Select(x => x.ID)
                         .Distinct()
@@ -342,7 +318,7 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
                         ??
                         EmptyListTGuid();
 
-                    Debug.Print("__________ExecutablesLoadAllAsync() forEach Mid");
+                    //Debug.Print("__________ExecutablesLoadAllAsync() forEach Mid");
                     cfg.JConfigExecutables =
                         cfg.JConfigExecutables?.AsEnumerable()
                         .Union(
@@ -354,10 +330,10 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
                         jConfigExecutableAll
                         .Where(j => j.ConfigID == cfg.ID)
                         .ToList();
-                    Debug.Print("__________ExecutablesLoadAllAsync() forEach End");
+                    //Debug.Print("__________ExecutablesLoadAllAsync() forEach End");
                     }
 
-                Debug.Print("__________ExecutablesLoadAllAsync() executableIDsAll");
+                //Debug.Print("__________ExecutablesLoadAllAsync() executableIDsAll");
                 executableIDsAll =
                     jConfigExecutableAll
                     .Select(jcea => jcea.ExecutableID)
@@ -369,16 +345,16 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
                 }
             catch ( Exception ex )
                 {
-                Debug.Print("__________ExecutablesLoadAllAsync() Catch 1");
+                //Debug.Print("__________ExecutablesLoadAllAsync() Catch 1");
                 //Exception thrown: 'System.NotSupportedException' in EntityFramework.dll
                 }
             finally
                 {
-                Debug.Print("__________ExecutablesLoadAllAsync() Finally 1");
+                //Debug.Print("__________ExecutablesLoadAllAsync() Finally 1");
                 }
 
 
-            Debug.Print("__________ExecutablesLoadAllAsync() executableIDsExisting");
+            //Debug.Print("__________ExecutablesLoadAllAsync() executableIDsExisting");
             //Get the Executables
             executableIDsExisting =
                 this.executable?.Select(e => e.ID)
@@ -387,20 +363,20 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
                 ??
                 EmptyListTGuid();
 
-            Debug.Print("__________ExecutablesLoadAllAsync() executableIDsToAdd");
+            //Debug.Print("__________ExecutablesLoadAllAsync() executableIDsToAdd");
             executableIDsToAdd = 
                 executableIDsAll.Except(executableIDsExisting).ToList();
 
             try
                 {
-                Debug.Print("__________ExecutablesLoadAllAsync() executablesToAdd");
+                //Debug.Print("__________ExecutablesLoadAllAsync() executablesToAdd");
                 var executablesToAdd =
                     await _db.executable
                     .AsNoTracking()
                     .Where(e => executableIDsToAdd.Contains(e.ID))
                     .ToListAsync();
 
-                Debug.Print("__________ExecutablesLoadAllAsync() this.executable");
+                //Debug.Print("__________ExecutablesLoadAllAsync() this.executable");
                 this.executable =
                     this.executable?.AsEnumerable()
                     .Union(
@@ -411,28 +387,51 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
                 }
             catch(Exception ex)
                 {
-                Debug.Print("__________ExecutablesLoadAllAsync() catch 2");
+                //Debug.Print("__________ExecutablesLoadAllAsync() catch 2");
                 }
             finally
                 {
-                Debug.Print("__________ExecutablesLoadAllAsync() finally 2");
+                //Debug.Print("__________ExecutablesLoadAllAsync() finally 2");
                 }
 
             return true;
             }
 
 
-        //private Task PlansLoadAll()
+
+        private async Task<bool> PlanLOBsLoadAll()
+            {
+            this.planLOB = 
+            await _db.jPlanLOB
+                .Join(_db.plan, 
+                    jpl=>jpl.PlanID , p=>p.ID
+                    ,( jpl , p )=> new {
+                        IDjPlanLOB = jpl.ID
+                        ,PlanAbbr = p.abbr
+                        ,jpl.LineOfBusinessID}
+                    )
+                .Join(_db.lineOfBusiness ,
+                    x => x.LineOfBusinessID , lob => lob.ID 
+                    ,( x , lob ) => new {
+                         x.IDjPlanLOB
+                        ,x.PlanAbbr
+                        ,LobAbbr = lob.abbr }
+                    )
+                .Select(x2 => new DTOPlanLOB {
+                     IDjPlanLOB = x2.IDjPlanLOB
+                    ,PlanAbbr = x2.PlanAbbr
+                    ,LobAbbr = x2.LobAbbr } )
+                .ToListAsync();
+
+            return true;
+            }
+
+        //private async Task LineOfBusinessLoadAll()
         //    {
 
         //    }
 
-        //private Task LineOfBusinessLoadAll()
-        //    {
-
-        //    }
-
-        //private Task ConfigParamsLoadAll()
+        //private async Task ConfigParamsLoadAll()
         //    {
 
         //    }
@@ -465,10 +464,12 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
             this.configParamDEV1 = _DROConfigFull.configParamDEV1;
             this.configParamDEV2 = _DROConfigFull.configParamDEV2;
             this.executable = _DROConfigFull.executable;
-            this.lob = _DROConfigFull.lob;
             this.paramDefinition = _DROConfigFull.paramDefinition;
             this.paramVersion = _DROConfigFull.paramVersion;
-            this.plan = _DROConfigFull.plan;
+            this.jConfigJPlanLOB = _DROConfigFull.jConfigJPlanLOB;
+            this.planLOB = _DROConfigFull.planLOB;
+            //this.lob = _DROConfigFull.lob;
+            //this.plan = _DROConfigFull.plan;
             }
 
 

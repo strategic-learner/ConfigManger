@@ -5,15 +5,12 @@ using Company.DIV.ConfigMgr.Domain;
 namespace Company.DIV.ConfigMgr.Domain 
     {
     //https://lostechies.com/jimmybogard/2008/05/21/entities-value-objects-aggregates-and-roots/
-    public abstract class DAOConfigFull<TConfig, TParamVersion, TParamDefinition, TApp, /*TJConfigJPlanLOB,*/ TPlan,TLineOfBusiness, /*TJConfigExecutable,*/ TExecutable, TConfigParam>
+    public abstract class DAOConfigFull<TConfig, TParamVersion, TParamDefinition, TApp, TJConfigJPlanLOB, TExecutable, TConfigParam >
         where TConfig : IConfig
         where TParamVersion : IParamVersion
         where TParamDefinition : IParamDefinition
         where TApp : IApp
-        //where TJConfigJPlanLOB : IJConfigJPlanLOB
-        where TPlan : IPlan
-        where TLineOfBusiness : ILineOfBusiness
-        //where TJConfigExecutable : IJConfigExecutable
+        where TJConfigJPlanLOB : IJConfigJPlanLOB
         where TExecutable : IExecutable
         where TConfigParam : IConfigParam
         {
@@ -24,9 +21,10 @@ namespace Company.DIV.ConfigMgr.Domain
         public virtual List<TParamDefinition> paramDefinition { get; protected set; }  //+EagerLoad( ParamType.ID, ParamType.Type)
         public virtual List<TApp> app { get; protected set; }
 
-        //public virtual List<IJConfigJPlanLOB> jConfigJPlanLOB { get; } //+EagerLoad( Plan.Abbr, LineOfBusiness.Abbr)
-        public virtual List<TPlan> plan { get; protected set; }
-        public virtual List<TLineOfBusiness> lob { get; protected set; }
+        public virtual List<DTOPlanLOB> planLOB { get; protected set; }
+        public virtual List<TJConfigJPlanLOB> jConfigJPlanLOB { get; protected set; } //+EagerLoad( Plan.Abbr, LineOfBusiness.Abbr)
+        //public virtual List<TPlan> plan { get; protected set; }
+        //public virtual List<TLineOfBusiness> lob { get; protected set; }
 
         //public virtual List<TJConfigExecutable> jConfigExecutable { get; protected set; }  //+EagerLoad( Executable.nameWExtension, Executable.description)
         public virtual List<TExecutable> executable { get; protected set; }

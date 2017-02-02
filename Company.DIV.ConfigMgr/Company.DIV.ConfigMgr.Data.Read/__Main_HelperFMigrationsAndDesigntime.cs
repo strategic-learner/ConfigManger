@@ -81,6 +81,8 @@ namespace Company.DIV.ConfigMgr.Data.Read
                     //await DROConfigFull1.LoadAllAsync();  // even with non-parallel Async (), this just skips to Main +Finally without running anything inside DROConfigFull1.LoadAllAsync()
                     //var x1 = DROConfigFull1.LoadAllAsync();
                     //await x1;  // this just skips to Main +Finally without running anything inside DROConfigFull1.LoadAllAsync()
+                    //await Task.WhenAll(DROConfigFull1.LoadAllAsync());  // even with non-parallel Async (), this just skips to Main +Finally without running anything inside DROConfigFull1.LoadAllAsync()
+
                     }
                 catch ( Exception ex )
                     {

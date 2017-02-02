@@ -39,7 +39,8 @@ Union Select NewID(), 456, 'pro', 'pro some description here', getdate(), 'Data4
  --Select * from AD.Config
 GO
 
-INSERT INTO [AD].[Plan] ([ID], [abbr], [descr], [updateDT], [updateUser])
+INSERT INTO [AD].[Plan] 
+([ID], [abbr], [descr], [updateDT], [updateUser])
 Select * from
  (select [ID]= null, [abbr]= null, [descr]= null, [updateDT]= null, [updateUser]= null
 Union Select NewID(), 'p001', 'plan/location 001', getdate(), 'Data4DesignTimeHelp'
@@ -368,21 +369,100 @@ GO
 
 
 
-Declare
- @ConfigIDxyz UniqueIdentifier = (select ID from AD.Config x where x.jobID = '5')
-,@ConfigID123 UniqueIdentifier = (select ID from AD.Config x where x.jobID = '7')
-,@PlanIDxyz UniqueIdentifier = (select ID from AD.[Plan] x where x.abbr = 'p001')
-,@PlanID123 UniqueIdentifier = (select ID from AD.[Plan] x where x.abbr = 'p003')
-
-
-INSERT INTO  [AD].[J_Config_Plan]
-	([ID] ,[ConfigID] ,[PlanID] ,[updateDT] ,[updateUser])
+	INSERT INTO  [AD].[LineOfBusiness]
+	([ID],	[abbr],	[descr],	[updateDT],	[updateUser])
 	Select * from
-	(select [ID]=null ,[ConfigID]=null ,[PlanID]=null ,[updateDT]=null ,[updateUser]=null
-		union select NewID() ,@ConfigIDxyz ,@PlanIDxyz ,Getdate() ,'Data4DesignTimeHelp'
-		union select NewID() ,@ConfigID123 ,@PlanID123 ,Getdate() ,'Data4DesignTimeHelp'
+	(select [ID]=null	,[abbr]=null	,[descr]=null	,[updateDT]=null	,[updateUser]=null
+		union select NewID() ,'LOBabc' ,'LOB abc Description' ,GetDate() ,'Data4DesignTimeHelp'
+		union select NewID() ,'LOB123' ,'LOB 123 Description' ,GetDate() ,'Data4DesignTimeHelp'
+		union select NewID() ,'LOBxyz' ,'LOB xyz Description' ,GetDate() ,'Data4DesignTimeHelp'
 	) x
 	where x.ID is not null
+
+
+
+GO
+
+
+
+Declare
+ @PlanID1 UniqueIdentifier = (select ID from AD.[Plan] x where x.abbr = 'p001')
+,@PlanID3 UniqueIdentifier = (select ID from AD.[Plan] x where x.abbr = 'p003')
+,@PlanID5 UniqueIdentifier = (select ID from AD.[Plan] x where x.abbr = 'p005')
+,@LOBIDabc UniqueIdentifier = (select ID from AD.LineOfBusiness x where x.abbr = 'LOBabc')
+,@LOBID123 UniqueIdentifier = (select ID from AD.LineOfBusiness x where x.abbr = 'LOB123')
+,@LOBIDxyz UniqueIdentifier = (select ID from AD.LineOfBusiness x where x.abbr = 'LOBxyz')
+
+INSERT INTO  [AD].[J_Plan_LOB]
+	([ID] ,[PlanID] ,[LineOfBusinessID] ,[updateDT] ,[updateUser])
+	Select * from
+	(select [ID]=null ,[PlanId]=null ,[LineOfBusinessID]=null ,[updateDT]=null ,[updateUser]=null
+		union select NewID() ,@PlanID1 ,@LOBIDabc ,Getdate() ,'Data4DesignTimeHelp'
+		union select NewID() ,@PlanID1 ,@LOBIDxyz ,Getdate() ,'Data4DesignTimeHelp'
+
+		union select NewID() ,@PlanID3 ,@LOBIDabc ,Getdate() ,'Data4DesignTimeHelp'
+		union select NewID() ,@PlanID3 ,@LOBID123 ,Getdate() ,'Data4DesignTimeHelp'
+		union select NewID() ,@PlanID3 ,@LOBIDxyz ,Getdate() ,'Data4DesignTimeHelp'
+
+		union select NewID() ,@PlanID5 ,@LOBID123 ,Getdate() ,'Data4DesignTimeHelp'
+	) x
+	where x.ID is not null
+
+
+GO
+
+
+Declare
+
+ @ConfigID5 UniqueIdentifier = (select ID from AD.Config x where x.jobID = '5')
+,@ConfigID7 UniqueIdentifier = (select ID from AD.Config x where x.jobID = '7')
+,@ConfigID8 UniqueIdentifier = (select ID from AD.Config x where x.jobID = '8')
+,@Plan1_LOBabc UniqueIdentifier = (
+	Select x.ID From [AD].[J_Plan_LOB] x	join [AD].[Plan] p on x.planID = p.id	join [AD].[LineOfBusiness] lob on x.LineOfBusinessID = lob.ID
+	Where p.abbr = 'p001' and lob.abbr = 'LOBabc')
+,@Plan3_LOB123 UniqueIdentifier = (
+	Select x.ID From [AD].[J_Plan_LOB] x	join [AD].[Plan] p on x.planID = p.id	join [AD].[LineOfBusiness] lob on x.LineOfBusinessID = lob.ID
+	Where p.abbr = 'p003' and lob.abbr = 'LOB123')
+,@Plan3_LOBxyz UniqueIdentifier = (
+	Select x.ID From [AD].[J_Plan_LOB] x	join [AD].[Plan] p on x.planID = p.id	join [AD].[LineOfBusiness] lob on x.LineOfBusinessID = lob.ID
+	Where p.abbr = 'p003' and lob.abbr = 'LOBxyz')
+,@Plan5_LOB123 UniqueIdentifier = (
+	Select x.ID From [AD].[J_Plan_LOB] x	join [AD].[Plan] p on x.planID = p.id	join [AD].[LineOfBusiness] lob on x.LineOfBusinessID = lob.ID
+	Where p.abbr = 'p005' and lob.abbr = 'LOB123')
+
+INSERT INTO  [AD].[J_Config_JPlanLOB]
+	([ID] ,[ConfigID] ,[JPlanLOBID] ,[updateDT] ,[updateUser])
+	Select * from
+	(select [ID]=null ,[ConfigID]=null ,[JPlanLOBID]=null ,[updateDT]=null ,[updateUser]=null
+		union select NewID() ,@ConfigID5 ,@Plan3_LOB123 ,Getdate() ,'Data4DesignTimeHelp'
+		union select NewID() ,@ConfigID5 ,@Plan3_LOBxyz ,Getdate() ,'Data4DesignTimeHelp'
+		union select NewID() ,@ConfigID7 ,@Plan1_LOBabc ,Getdate() ,'Data4DesignTimeHelp'
+		union select NewID() ,@ConfigID8 ,@Plan5_LOB123 ,Getdate() ,'Data4DesignTimeHelp'
+	) x
+	where x.ID is not null
+
+
+
+GO
+
+
+--DEPRICATE THIS TABLE
+
+--Declare
+-- @ConfigIDxyz UniqueIdentifier = (select ID from AD.Config x where x.jobID = '5')
+--,@ConfigID123 UniqueIdentifier = (select ID from AD.Config x where x.jobID = '7')
+--,@PlanIDxyz UniqueIdentifier = (select ID from AD.[Plan] x where x.abbr = 'p001')
+--,@PlanID123 UniqueIdentifier = (select ID from AD.[Plan] x where x.abbr = 'p003')
+
+
+--INSERT INTO  [AD].[J_Config_Plan]
+--	([ID] ,[ConfigID] ,[PlanID] ,[updateDT] ,[updateUser])
+--	Select * from
+--	(select [ID]=null ,[ConfigID]=null ,[PlanID]=null ,[updateDT]=null ,[updateUser]=null
+--		union select NewID() ,@ConfigIDxyz ,@PlanIDxyz ,Getdate() ,'Data4DesignTimeHelp'
+--		union select NewID() ,@ConfigID123 ,@PlanID123 ,Getdate() ,'Data4DesignTimeHelp'
+--	) x
+--	where x.ID is not null
 
 
 
@@ -416,12 +496,18 @@ select * from [AD].[Config] x order by x.JobID
 select * from [AD].[App] x order by x.abbr
 select * from [AD].[J_Config_Executable] x order by x.ConfigID
 					select * from [AD].[Executable] x order by x.AppID, x.nameWExtension
+select * from  [AD].[J_Config_JPlanLOB] x order by x.ID
+	select * from [AD].[J_Plan_LOB] x order by x.ID
+		select * from [AD].[Plan] x order by x.abbr
+		select * from [AD].[LineOfBusiness] x order by x.abbr
 
-select * from [AD].[J_Config_Plan] x order by x.ConfigID
-					select * from [AD].[Plan] x order by x.abbr
+
+--select * from [AD].[J_Config_Plan] x order by x.ConfigID
+					
 select * from [AD].[ParamVersion] x order by x.version
 	select * from [AD].[ParamType] x order by x.type
 	select * from [AD].[ParamDefinition] x order by x.ParamVersionID, x.ParamSequence
+
 
 
 /* Config Params */

@@ -100,6 +100,8 @@
     <Compile Include="Contracts\entIApp.cs" />
     <Compile Include="Contracts\entIConfig.cs" />
     <Compile Include="Contracts\entIConfigParam.cs" />
+    <Compile Include="Contracts\DTOPlanLOB.cs" />
+    <Compile Include="Contracts\IDTOPlanLOB.cs" />
     <Compile Include="Contracts\ent_Enums.cs" />
     <Compile Include="Contracts\entBase_EntityWrite.cs" />
     <Compile Include="Contracts\entBase_EntityAudit.cs" />

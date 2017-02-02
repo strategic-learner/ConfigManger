@@ -98,6 +98,8 @@ namespace Company.DIV.ConfigMgr.Data.Read
             modelBuilder.Ignore<EntityWrite>(); //just in case
             modelBuilder.Ignore<ConfigParam>();
             modelBuilder.Ignore<EntityStateDisconnected>();
+            modelBuilder.Ignore<DTOPlanLOB>();
+            
 
 
 
