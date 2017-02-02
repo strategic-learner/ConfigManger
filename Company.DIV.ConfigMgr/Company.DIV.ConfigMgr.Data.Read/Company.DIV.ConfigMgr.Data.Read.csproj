@@ -127,6 +127,10 @@
     <Compile Include="Migrations\201701200654373_RefactorModelToOneWayNavigations.Designer.cs">
       <DependentUpon>201701200654373_RefactorModelToOneWayNavigations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702020559010_RemoveNavProp_Config_JConfigPlans.cs" />
+    <Compile Include="Migrations\201702020559010_RemoveNavProp_Config_JConfigPlans.Designer.cs">
+      <DependentUpon>201702020559010_RemoveNavProp_Config_JConfigPlans.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="_ReadContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -173,6 +177,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701200654373_RefactorModelToOneWayNavigations.resx">
       <DependentUpon>201701200654373_RefactorModelToOneWayNavigations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702020559010_RemoveNavProp_Config_JConfigPlans.resx">
+      <DependentUpon>201702020559010_RemoveNavProp_Config_JConfigPlans.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

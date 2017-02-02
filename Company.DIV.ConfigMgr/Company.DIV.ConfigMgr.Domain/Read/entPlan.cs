@@ -34,7 +34,6 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         #region NavigationProperties
 
         public ICollection<JAppPlan> JAppPlans { get; private set; }
-        public ICollection<JConfigPlan> JConfigPlans { get; private set; }
         public ICollection<JPlanLOB> JPlanLOB { get; private set; }
 
         #endregion

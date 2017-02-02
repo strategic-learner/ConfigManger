@@ -62,8 +62,8 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
         #region NavigationProperties
 
-        [Required]
-        public ICollection<JConfigPlan> JConfigPlans { get; set; }  //Depricate this in favor of a [Required] JConfigJPlanLOB
+        //[Required]
+        //public ICollection<JConfigPlan> JConfigPlans { get; set; }  //Depricate this in favor of a [Required] JConfigJPlanLOB
         public ICollection<JConfigJPlanLOB> JConfigJPlanLOBs { get; set; }
         public ICollection<JConfigExecutable> JConfigExecutables { get; set; }
 

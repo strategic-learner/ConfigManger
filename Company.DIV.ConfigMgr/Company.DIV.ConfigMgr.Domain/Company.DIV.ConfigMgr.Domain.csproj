@@ -90,7 +90,6 @@
     <Compile Include="Contracts\entIJ_App_Plan.cs" />
     <Compile Include="Contracts\entIJ_Config_Executable.cs" />
     <Compile Include="Contracts\entIJ_Config_JPlanLOB.cs" />
-    <Compile Include="Contracts\entIJ_Config_Plan.cs" />
     <Compile Include="Contracts\entIJ_Executable_PathServer.cs" />
     <Compile Include="Contracts\entIJ_Executable_PrimaryFunction.cs" />
     <Compile Include="Contracts\entIJ_PathServer_PathShare.cs" />
@@ -118,8 +117,6 @@
     <Compile Include="Read\entJ_App_Plan.cs" />
     <Compile Include="Read\entJ_Config_Executable_Audit.cs" />
     <Compile Include="Read\entJ_Config_JPlanLOB_Audit.cs" />
-    <Compile Include="Read\entJ_Config_Plan_Audit.cs" />
-    <Compile Include="Read\entJ_Config_Plan.cs" />
     <Compile Include="Read\entJ_Config_Executable.cs" />
     <Compile Include="Read\entJ_Config_JPlanLOB.cs" />
     <Compile Include="Read\entJ_Executable_PathServer_Audit.cs" />
@@ -165,7 +162,6 @@
     <Compile Include="Write\entJ_App_Plan.cs" />
     <Compile Include="Write\entJ_Config_Executable.cs" />
     <Compile Include="Write\entJ_Config_JPlanLOB.cs" />
-    <Compile Include="Write\entJ_Config_Plan.cs" />
     <Compile Include="Write\entJ_Executable_PathServer.cs" />
     <Compile Include="Write\entJ_Executable_PrimaryFunction.cs" />
     <Compile Include="Write\entJ_PathServer_PathShare.cs" />

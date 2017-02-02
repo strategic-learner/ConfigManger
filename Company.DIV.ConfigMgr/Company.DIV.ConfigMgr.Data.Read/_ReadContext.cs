@@ -129,9 +129,6 @@ namespace Company.DIV.ConfigMgr.Data.Read
                 .HasMany(c => c.JConfigJPlanLOBs)
                 .WithRequired().HasForeignKey(jcjpl => jcjpl.ConfigID);
 
-            modelBuilder.Entity<Config>()    //Depricate this                
-                .HasMany(c => c.JConfigPlans)    //Depricate this                
-                .WithRequired().HasForeignKey(jcp => jcp.ConfigID);
 
             modelBuilder.Entity<Config>()
                 .HasMany(c => c.JConfigExecutables)
@@ -224,14 +221,6 @@ namespace Company.DIV.ConfigMgr.Data.Read
             modelBuilder.Entity<JConfigJPlanLOB>().ToTable("J_Config_JPlanLOB");
 
             modelBuilder.Entity<JConfigJPlanLOBAudit>().ToTable("J_Config_JPlanLOB_Audit");
-
-
-            //JConfigPlan (code-first table settings)
-            modelBuilder.Entity<JConfigPlan>().MapToStoredProcedures();
-
-            modelBuilder.Entity<JConfigPlan>().ToTable("J_Config_Plan");
-
-            modelBuilder.Entity<JConfigPlanAudit>().ToTable("J_Config_Plan_Audit");
 
 
             //JExecutablePathServer (code-first table settings)
@@ -385,11 +374,6 @@ namespace Company.DIV.ConfigMgr.Data.Read
                 .HasMany(p => p.JPlanLOB)
                 .WithRequired().HasForeignKey(jpl => jpl.PlanID);
 
-            modelBuilder.Entity<Plan>()    //Depricate this                
-                .HasMany(p => p.JConfigPlans)    //Depricate this               
-                .WithRequired().HasForeignKey(jcp => jcp.PlanID);
-
-
             }
 
 
@@ -425,8 +409,6 @@ namespace Company.DIV.ConfigMgr.Data.Read
         public DbSet<JConfigExecutableAudit> jConfigExecutableAudit { get;  }
         public DbSet<JConfigJPlanLOB> jConfigJPlanLOB { get; set; }
         public DbSet<JConfigJPlanLOBAudit> jConfigJPlanLOBAudit { get;  }
-        public DbSet<JConfigPlan> jConfigPlan { get; set; }
-        public DbSet<JConfigPlanAudit> jConfigPlanAudit { get;  }
         public DbSet<JExecutablePathServer> jExecutablePathServer { get; set; }
         public DbSet<JExecutablePathServerAudit> jExecutablePathServerAudit { get;  }
         public DbSet<JExecutablePrimaryFunction> jExecutablePrimaryFunction { get; set; }

@@ -398,6 +398,61 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
             }
 
 
+        private async Task<bool> JConfigJPlanLOBsLoadAll()
+            {
+            //Debug.Print("__________JConfigJPlanLOBsLoadAll()  start");
+
+            ///Attach the M2M NavProps
+            try
+                {
+                //Debug.Print("__________JConfigJPlanLOBsLoadAll() var jConfigJPlanLOBAll");
+                var jConfigJPlanLOBAll =
+                    await _db.jConfigJPlanLOB
+                    .AsNoTracking()
+                    .Where(x => _ConfigIDsAll.Contains(x.ConfigID))
+                    .Distinct()
+                    .ToListAsync();
+
+
+                foreach ( Config cfg in this.config )
+                    {
+                    //Debug.Print("__________JConfigJPlanLOBsLoadAll() forEach Start");
+                    List<Guid> jConfigJPlanLOBIDsExisting =
+                        cfg.JConfigJPlanLOBs?.Select(x => x.ID)
+                        .Distinct()
+                        .ToList()
+                        ??
+                        EmptyListTGuid();
+
+                    //Debug.Print("__________JConfigJPlanLOBsLoadAll() forEach Mid");
+                    cfg.JConfigJPlanLOBs =
+                        cfg.JConfigJPlanLOBs?.AsEnumerable()
+                        .Union(
+                            jConfigJPlanLOBAll
+                            .Where(j => j.ConfigID == cfg.ID && !jConfigJPlanLOBIDsExisting.Contains(j.ID))
+                            .ToList()
+                            ).ToList()
+                        ??
+                        jConfigJPlanLOBAll
+                        .Where(j => j.ConfigID == cfg.ID)
+                        .ToList();
+                    //Debug.Print("__________JConfigJPlanLOBsLoadAll() forEach End");
+                    }
+
+                //Debug.Print("__________JConfigJPlanLOBsLoadAll() ");
+                }
+            catch ( Exception ex )
+                {
+                //Debug.Print("__________JConfigJPlanLOBsLoadAll() Catch");
+                //Exception thrown: 'System.NotSupportedException' in EntityFramework.dll
+                }
+            finally
+                {
+                //Debug.Print("__________JConfigJPlanLOBsLoadAll() Finally");
+                }
+
+            return true;
+            }
 
         private async Task<bool> PlanLOBsLoadAll()
             {
