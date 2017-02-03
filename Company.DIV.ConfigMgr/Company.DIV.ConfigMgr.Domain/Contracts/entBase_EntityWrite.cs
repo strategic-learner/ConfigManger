@@ -3,9 +3,9 @@
 namespace Company.DIV.ConfigMgr.Domain
     {
     /// <summary>
-    /// Interface for all entities that Write
+    /// Abstract class for all entities that Write
     /// </summary>
-    public abstract class EntityWrite
+    public abstract class EntityWrite : IEntityWrite
         {
         public Guid ID { get; protected set; }
 

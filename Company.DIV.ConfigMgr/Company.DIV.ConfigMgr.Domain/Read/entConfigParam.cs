@@ -6,17 +6,70 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
 
-    public class ConfigParamPROD : ConfigParam { }
+    public class ConfigParamPROD : ConfigParam
+        {
+        //TODO: cleanup Interface for this (Add Environ)
 
-    public class ConfigParamSTG1 : ConfigParam { }
-    public class ConfigParamSTG2 : ConfigParam { }
+        [NotMapped]
+        public override string Environ { get; } = "Prod";
+        }
 
-    public class ConfigParamQA1 : ConfigParam { }
-    public class ConfigParamQA2 : ConfigParam { }
+    public class ConfigParamSTG1 : ConfigParam
+        {
+        [NotMapped]
+        public override string Environ { get; } = "STG1";
+        }
 
-    public class ConfigParamDEV1 : ConfigParam { }
-    public class ConfigParamDEV2 : ConfigParam {}
+    public class ConfigParamSTG2 : ConfigParam
+        {
+        [NotMapped]
+        public override string Environ { get; } = "STG2";
+        }
 
+
+    public class ConfigParamQA1 : ConfigParam
+        {
+        [NotMapped]
+        public override string Environ { get; } = "QA1";
+        }
+
+    public class ConfigParamQA2 : ConfigParam
+        {
+        [NotMapped]
+        public override string Environ { get; } = "QA2";
+        }
+
+
+    public class ConfigParamDEV1 : ConfigParam
+        {
+        [NotMapped]
+        public override string Environ { get; } = "DEV1";
+        }
+
+    public class ConfigParamDEV2 : ConfigParam
+        {
+        [NotMapped]
+        public override string Environ { get; } = "DEV2";
+        }
+
+
+
+    public interface ITestConfigParam : IEntityRead , IConfigParam
+        {
+        Guid ID { get; }
+        DateTime updateDT { get; }
+        string updateUser { get; }
+        EntityStateDisconnected entityStateDisconnected { get; }
+
+        string Environ { get; }
+        Guid ConfigID { get; }
+        DateTime effDT { get; }
+        DateTime trmDT { get; }
+        Guid ParamDefinitionID { get; }
+        bool isRefOnly { get; }
+        string value { get; }
+        string valueUseageComments { get; }
+        }
 
 
     /// <DevNotes>
@@ -36,8 +89,8 @@ namespace Company.DIV.ConfigMgr.Domain.Read
         //    updateUser = user.defaultUser;
         //    }
 
-        
-        
+        [NotMapped]
+        public abstract string Environ { get; } 
 
         [Required]
         public Guid ConfigID { get; private set; }

@@ -395,10 +395,10 @@ namespace Company.DIV.ConfigMgr.Data.Read
         public DbSet<ConfigParamQA1Audit> configParamQA1Audit { get; }
         public DbSet<ConfigParamQA2> configParamQA2 { get; set; }
         public DbSet<ConfigParamQA2Audit> configParamQA2Audit { get; }
-        public DbSet<ConfigParamDEV1> configParamDev1 { get; set; }
-        public DbSet<ConfigParamDEV1Audit> configParamDev1Audit { get; }
-        public DbSet<ConfigParamDEV2> configParamDev2 { get; set; }
-        public DbSet<ConfigParamDEV2Audit> configParamDev2Audit { get; }
+        public DbSet<ConfigParamDEV1> configParamDEV1 { get; set; }
+        public DbSet<ConfigParamDEV1Audit> configParamDEV1Audit { get; }
+        public DbSet<ConfigParamDEV2> configParamDEV2 { get; set; }
+        public DbSet<ConfigParamDEV2Audit> configParamDEV2Audit { get; }
         
         public DbSet<Executable> executable { get; set; }
         public DbSet<ExecutableAudit> executableAudit { get; }

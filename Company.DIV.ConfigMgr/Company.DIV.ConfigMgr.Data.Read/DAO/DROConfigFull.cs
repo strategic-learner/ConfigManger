@@ -11,7 +11,7 @@ using System.Diagnostics;
 
 namespace Company.DIV.ConfigMgr.Data.Read.DAO
     {
-    public class DROConfigFull : DAOConfigFull<Config , ParamVersion , ParamDefinition , App , JConfigJPlanLOB , Executable , ConfigParam>
+    public class DROConfigFull : DAOConfigFull<Config , ParamVersion , ParamDefinition , App , Executable , ConfigParam>
         {
         private ConfigMgrReadContext _db;
         List<Guid> _ConfigIDsAll;
@@ -99,7 +99,7 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
             //await Task.WhenAll(LoadAll);  
             //Task.WaitAll(LoadAll);  // can't await this   //this may deadlock!? which might explain some things... (PluralSight: Getting Started with Asynchronous Programming in .NET  by Filip Ekberg)
 
-
+            
             //Debug.Print("__________LoadAllAsync() END");
             return true;
             }
@@ -481,21 +481,102 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
             return true;
             }
 
-        //private async Task LineOfBusinessLoadAll()
-        //    {
 
-        //    }
+        private async Task<bool> ConfigParamLoadAll()
+            {
+            var x = await ConfigParamPRODLoadAll();
+            //var x = await ConfigParamSTG1LoadAll();
+            //var x = await ConfigParamSTG2LoadAll();
+            //var x = await ConfigParamQA1LoadAll();
+            //var x = await ConfigParamQA2LoadAll();
+            //var x = await ConfigParamDEV1LoadAll();
+            //var x = await ConfigParamDEV2LoadAll();
 
-        //private async Task ConfigParamsLoadAll()
-        //    {
+            return true;
+            }
 
-        //    }
+        private async Task<List<ITestConfigParam>> ConfigParamGetAll()
+            {
+                        
+            List<ITestConfigParam> ConfigParamsAll =  
+                await _db.configParamPROD
+                    .Where(cpX=> _ConfigIDsAll.Contains(cpX.ConfigID))
+                    //.Select(cpx => )
+                    .Cast<ITestConfigParam>()
+                    //.Select(cpX=> new DTOConfigParam( "PROD" , cpX.ID , cpX.ConfigID , cpX.effDT , cpX.trmDT , cpX.ParamDefinitionID , cpX.isRefOnly , cpX.value , cpX.valueUseageComments ))
+                //.Union(
+                //    _db.configParamSTG1
+                //    .Where(cpX => _ConfigIDsAll.Contains(cpX.ConfigID))
+                //    .Select(cpX => new DTOConfigParam("STG1" , cpX.ID , cpX.ConfigID , cpX.effDT , cpX.trmDT , cpX.ParamDefinitionID , cpX.isRefOnly , cpX.value , cpX.valueUseageComments))
+                //    )
+                //.Union(
+                //    _db.configParamSTG2
+                //    .Where(cpX => _ConfigIDsAll.Contains(cpX.ConfigID))
+                //    .Select(cpX => new DTOConfigParam("STG2" , cpX.ID , cpX.ConfigID , cpX.effDT , cpX.trmDT , cpX.ParamDefinitionID , cpX.isRefOnly , cpX.value , cpX.valueUseageComments))
+                //    )
+                //.Union(
+                //    _db.configParamQA1
+                //    .Where(cpX => _ConfigIDsAll.Contains(cpX.ConfigID))
+                //    .Select(cpX => new DTOConfigParam("QA1" , cpX.ID , cpX.ConfigID , cpX.effDT , cpX.trmDT , cpX.ParamDefinitionID , cpX.isRefOnly , cpX.value , cpX.valueUseageComments))
+                //    )
+                //.Union(
+                //    _db.configParamQA2
+                //    .Where(cpX => _ConfigIDsAll.Contains(cpX.ConfigID))
+                //    .Select(cpX => new DTOConfigParam("QA2" , cpX.ID , cpX.ConfigID , cpX.effDT , cpX.trmDT , cpX.ParamDefinitionID , cpX.isRefOnly , cpX.value , cpX.valueUseageComments))
+                //    )
+                //.Union(
+                //    _db.configParamDEV1
+                //    .Where(cpX => _ConfigIDsAll.Contains(cpX.ConfigID))
+                //    .Select(cpX => new DTOConfigParam("DEV1" , cpX.ID , cpX.ConfigID , cpX.effDT , cpX.trmDT , cpX.ParamDefinitionID , cpX.isRefOnly , cpX.value , cpX.valueUseageComments))
+                //    )
+                //.Union(
+                //    _db.configParamDEV2
+                //    .Where(cpX => _ConfigIDsAll.Contains(cpX.ConfigID))
+                //    .Select(cpX => new DTOConfigParam("DEV2" , cpX.ID , cpX.ConfigID , cpX.effDT , cpX.trmDT , cpX.ParamDefinitionID , cpX.isRefOnly , cpX.value , cpX.valueUseageComments))
+                //    )
+                .ToListAsync();
 
-        //private Task ConfigParamsLoadAll<TConfigParam>() where TConfigParam : IConfigParam
-        //    {
-        //    //TConfigParam
+            return ConfigParamsAll;   
+            //return true;
+            }
 
-        //    }
+        private async Task<bool> ConfigParamPRODLoadAll()
+            {
+            //var cp = 
+            //    await _db.configParamPROD
+            //    .Where(x => _ConfigIDsAll.Contains(x.ConfigID))
+            //    .ToListAsync();
+
+
+
+            //foreach ( Config cfg in this.config )
+            //    {
+            //    //Debug.Print("__________JConfigJPlanLOBsLoadAll() forEach Start");
+            //    List<Guid> jConfigJPlanLOBIDsExisting =
+            //        cfg.JConfigJPlanLOBs?.Select(x => x.ID)
+            //        .Distinct()
+            //        .ToList()
+            //        ??
+            //        EmptyListTGuid();
+
+            //    //Debug.Print("__________JConfigJPlanLOBsLoadAll() forEach Mid");
+            //    cfg.JConfigJPlanLOBs =
+            //        cfg.JConfigJPlanLOBs?.AsEnumerable()
+            //        .Union(
+            //            jConfigJPlanLOBAll
+            //            .Where(j => j.ConfigID == cfg.ID && !jConfigJPlanLOBIDsExisting.Contains(j.ID))
+            //            .ToList()
+            //            ).ToList()
+            //        ??
+            //        jConfigJPlanLOBAll
+            //        .Where(j => j.ConfigID == cfg.ID)
+            //        .ToList();
+            //    //Debug.Print("__________JConfigJPlanLOBsLoadAll() forEach End");
+            //    }
+
+
+            return true;
+            }
 
 
         private static List<Guid> GuidDotEmptyListOf()
@@ -521,12 +602,13 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
             this.executable = _DROConfigFull.executable;
             this.paramDefinition = _DROConfigFull.paramDefinition;
             this.paramVersion = _DROConfigFull.paramVersion;
-            this.jConfigJPlanLOB = _DROConfigFull.jConfigJPlanLOB;
             this.planLOB = _DROConfigFull.planLOB;
-            //this.lob = _DROConfigFull.lob;
-            //this.plan = _DROConfigFull.plan;
             }
 
+        public void dbDispose()
+            {
+            _db.Dispose();
+            }
 
         }
     }

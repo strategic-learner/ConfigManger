@@ -3,9 +3,9 @@
 namespace Company.DIV.ConfigMgr.Domain
     {
     /// <summary>
-    /// Interface for all entities that Read
+    /// Abstract class for all entities that Read
     /// </summary>
-    public abstract class EntityRead
+    public abstract class EntityRead : IEntityRead
         {
         public Guid ID { get; private set; }
 

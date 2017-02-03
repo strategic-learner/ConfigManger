@@ -87,6 +87,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\UseCase\QryGetAggConfigurationByJobIDList.cs" />
+    <Compile Include="Contracts\entBase_IEntityAudit.cs" />
+    <Compile Include="Contracts\entBase_IEntityRead.cs" />
+    <Compile Include="Contracts\entBase_IEntityWrite.cs" />
     <Compile Include="Contracts\entIJ_App_Plan.cs" />
     <Compile Include="Contracts\entIJ_Config_Executable.cs" />
     <Compile Include="Contracts\entIJ_Config_JPlanLOB.cs" />
@@ -100,6 +103,8 @@
     <Compile Include="Contracts\entIConfig.cs" />
     <Compile Include="Contracts\entIConfigParam.cs" />
     <Compile Include="Contracts\DTOPlanLOB.cs" />
+    <Compile Include="Contracts\DTOConfigParam.cs" />
+    <Compile Include="Contracts\IDTOConfigParam.cs" />
     <Compile Include="Contracts\IDTOPlanLOB.cs" />
     <Compile Include="Contracts\ent_Enums.cs" />
     <Compile Include="Contracts\entBase_EntityWrite.cs" />

@@ -82,7 +82,7 @@ namespace Company.DIV.ConfigMgr.Data.Read
                     //var x1 = DROConfigFull1.LoadAllAsync();
                     //await x1;  // this just skips to Main +Finally without running anything inside DROConfigFull1.LoadAllAsync()
                     //await Task.WhenAll(DROConfigFull1.LoadAllAsync());  // even with non-parallel Async (), this just skips to Main +Finally without running anything inside DROConfigFull1.LoadAllAsync()
-
+                    DROConfigFull1.dbDispose();
                     }
                 catch ( Exception ex )
                     {
@@ -119,6 +119,7 @@ namespace Company.DIV.ConfigMgr.Data.Read
                     //await DROConfigFull2.LoadAllAsync();    //even with non-parallel Async (), this just skips to Main +Finally without running anything inside DROConfigFull1.LoadAllAsync()
                     //var x2 = DROConfigFull2.LoadAllAsync();
                     //await x2;  // this just skips to Main +Finally without running anything inside DROConfigFull1.LoadAllAsync()
+                    DROConfigFull2.dbDispose();
                     }
                 catch ( Exception ex )
                     {
@@ -154,6 +155,7 @@ namespace Company.DIV.ConfigMgr.Data.Read
                     //await DROConfigFull3.LoadAllAsync();  //even with non-parallel Async (), this just skips to Main +Finally without running anything inside DROConfigFull1.LoadAllAsync()
                     //var x3 = DROConfigFull3.LoadAllAsync();
                     //await x3;  // this just skips to Main +Finally without running anything inside DROConfigFull1.LoadAllAsync()
+                    DROConfigFull3.dbDispose();
                     }
                 catch (Exception ex)
                     {
