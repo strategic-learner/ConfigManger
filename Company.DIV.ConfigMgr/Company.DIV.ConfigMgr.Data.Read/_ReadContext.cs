@@ -99,7 +99,8 @@ namespace Company.DIV.ConfigMgr.Data.Read
             modelBuilder.Ignore<ConfigParam>();
             modelBuilder.Ignore<EntityStateDisconnected>();
             modelBuilder.Ignore<DTOPlanLOB>();
-            
+            modelBuilder.Ignore<ConfigParamConsolidated>();
+
 
 
 

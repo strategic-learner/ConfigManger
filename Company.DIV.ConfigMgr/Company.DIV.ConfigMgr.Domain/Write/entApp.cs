@@ -4,7 +4,7 @@ using Company.DIV.ConfigMgr.Users;
 
 namespace Company.DIV.ConfigMgr.Domain.Write
     {
-    public class App : EntityWrite, IApp
+    public class App : EntityWrite, IAppBase
         {
         private App() { }
         //public App( /*Read.App don't think this will come direct from Read.App, but rather from a ViewModel */ read, MockUsers user )

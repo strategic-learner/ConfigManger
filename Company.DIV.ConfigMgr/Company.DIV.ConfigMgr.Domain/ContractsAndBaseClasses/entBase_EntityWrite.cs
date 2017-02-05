@@ -11,5 +11,7 @@ namespace Company.DIV.ConfigMgr.Domain
 
         public DateTime updateDT { get; protected set; }
         public string updateUser { get; protected set; }
+
+        public EntityStateDisconnected entityStateDisconnected { get; set; }
         }
     }

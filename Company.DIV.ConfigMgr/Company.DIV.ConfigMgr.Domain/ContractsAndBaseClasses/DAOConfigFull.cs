@@ -9,9 +9,9 @@ namespace Company.DIV.ConfigMgr.Domain
         where TConfig : IConfig
         where TParamVersion : IParamVersion
         where TParamDefinition : IParamDefinition
-        where TApp : IApp
+        where TApp : IAppBase
         where TExecutable : IExecutable
-        where TConfigParam : IConfigParam
+        where TConfigParam : IConfigParamBase
         {
         public virtual List<TConfig> config { get; protected set; }
         //public virtual List<TConfig> config { get; protected set; }

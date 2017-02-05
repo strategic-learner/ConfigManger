@@ -1,14 +1,17 @@
 ﻿using System;
+using System.Collections;
+
 
 namespace Company.DIV.ConfigMgr.Domain
     {
     /// <summary>
     /// this object is the base JPlanLOB entity plus PlanAbbr & LOBAbbr
     /// </summary>
-    public class DTOConfigParam : IDTOConfigParam
+
+    public class ConfigParamConsolidated : IConfigParamConsolidated
         {
-        private DTOConfigParam() { }
-        public DTOConfigParam( 
+        public ConfigParamConsolidated() { }
+        public ConfigParamConsolidated(
             string Environ
             , Guid _ID
             , Guid _ConfigID
@@ -29,24 +32,22 @@ namespace Company.DIV.ConfigMgr.Domain
             this.isRefOnly = _isRefOnly;
             this.value = _value;
             this.valueUseageComments = _valueUseageComments;
-                }
+            }
 
 
-        public string Environ { get; private set; }
-        public Guid ID { get; private set; }
-        public Guid ConfigID { get; private set; }
+        public Guid ID { get;  set; }
+        public DateTime updateDT { get; set; }
+        public string updateUser { get; set; }
+        public EntityStateDisconnected entityStateDisconnected { get; set; }
 
-        public DateTime effDT { get; private set; }
-
-        public DateTime trmDT { get; private set; }
-
-        public Guid ParamDefinitionID { get; private set; }
-
-        public bool isRefOnly { get; private set; }
-
-        public string value { get; private set; }
-
-        public string valueUseageComments { get; private set; }
+        public string Environ { get; set; }
+        public Guid ConfigID { get; set; }
+        public DateTime effDT { get; set; }
+        public DateTime trmDT { get; set; }
+        public Guid ParamDefinitionID { get; set; }
+        public bool isRefOnly { get; set; }
+        public string value { get; set; }
+        public string valueUseageComments { get; set; }
 
         }
     }

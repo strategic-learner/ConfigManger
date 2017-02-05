@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class App : EntityRead, IApp
+    public class App : EntityRead, IAppRead
         {
         private App() { }
 

@@ -86,6 +86,7 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
             await ParamVersionAndDefinitionsLoadAllAsync();
             await ExecutablesLoadAllAsync();
             await PlanLOBsLoadAll();
+            await ConfigParamLoadAll();
             //Debug.Print("__________bf Task[] LoadAll");
 
             //Cant do this using shared DbContext, not thread safe - would have to create new instance of DbContext per parallel Task.
@@ -99,7 +100,7 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
             //await Task.WhenAll(LoadAll);  
             //Task.WaitAll(LoadAll);  // can't await this   //this may deadlock!? which might explain some things... (PluralSight: Getting Started with Asynchronous Programming in .NET  by Filip Ekberg)
 
-            
+
             //Debug.Print("__________LoadAllAsync() END");
             return true;
             }
@@ -482,9 +483,64 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
             }
 
 
+
         private async Task<bool> ConfigParamLoadAll()
             {
-            var x = await ConfigParamPRODLoadAll();
+            var AllParams = await ConfigParamGetAll();
+
+            //var ParamsProd = AllParams
+            //        .Where(x => x.Environ == "PROD")
+            //        .Cast<ConfigParamPROD>()
+            //        .ToList();
+
+            foreach ( Config cfg in this.config )
+                {
+                if ( cfg.ConfigParamPROD == null )
+                    {
+                    cfg.ConfigParamPROD = Enumerable.Empty<ConfigParamPROD>().ToList();
+                    }
+                    //Debug.Print("__________JConfigJPlanLOBsLoadAll() forEach Start");
+                    //List<Guid> jConfigJPlanLOBIDsExisting =
+                    //    cfg.JConfigJPlanLOBs?.Select(x => x.ID)
+                    //    .Distinct()
+                    //    .ToList()
+                    //    ??
+                    //    EmptyListTGuid();
+
+                    //Debug.Print("__________JConfigJPlanLOBsLoadAll() forEach Mid");
+
+
+
+                    //"You can do"
+                    //context.Parties.OfType<Person>().Where(t => t.LastName = name).OfType<Party>()
+                    //.Concat(context.Parties.OfType<Organization>()
+                    //.Where(t => t.Name.StartWith(organizationName)))
+                    //"You don't have to cast the second collection to Party because it is concatenated with an IQueryable<Party> which is covariant with IQueryable<Organization>."
+
+                    var paramsPROD =
+                    AllParams
+                    .Where(x => x.ID == cfg.ID && x.Environ == "PROD" )
+                    .ToList();
+
+                foreach ( ConfigParamConsolidated x in paramsPROD )
+                    {
+                    var cp = new ConfigParamPROD(x);
+                        cfg.ConfigParamPROD.Add(cp);
+                    }
+
+                //cfg.JConfigJPlanLOBs?.AsEnumerable()
+                //.Union(
+                //    jConfigJPlanLOBAll
+                //    .Where(j => j.ConfigID == cfg.ID && !jConfigJPlanLOBIDsExisting.Contains(j.ID))
+                //    .ToList()
+                //    ).ToList()
+                //??
+                //jConfigJPlanLOBAll
+                //.Where(j => j.ConfigID == cfg.ID)
+                //.ToList();
+                //Debug.Print("__________JConfigJPlanLOBsLoadAll() forEach End");
+                }
+
             //var x = await ConfigParamSTG1LoadAll();
             //var x = await ConfigParamSTG2LoadAll();
             //var x = await ConfigParamQA1LoadAll();
@@ -495,89 +551,59 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
             return true;
             }
 
-        private async Task<List<ITestConfigParam>> ConfigParamGetAll()
+        private async Task<List<ConfigParamConsolidated>> ConfigParamGetAll()
             {
-                        
-            List<ITestConfigParam> ConfigParamsAll =  
-                await _db.configParamPROD
-                    .Where(cpX=> _ConfigIDsAll.Contains(cpX.ConfigID))
-                    //.Select(cpx => )
-                    .Cast<ITestConfigParam>()
-                    //.Select(cpX=> new DTOConfigParam( "PROD" , cpX.ID , cpX.ConfigID , cpX.effDT , cpX.trmDT , cpX.ParamDefinitionID , cpX.isRefOnly , cpX.value , cpX.valueUseageComments ))
+            //List<DTOConfigParam> ConfigParamsAll =
+            //     _db.configParamPROD
+            //        .Where(cpX => _ConfigIDsAll.Contains(cpX.ConfigID))
+            //        .Cast<DTOConfigParam>().ToList();
+
+            List<ConfigParamConsolidated>
+                ConfigParamsAll =
+                _db.configParamPROD
+                .Where(cpX => _ConfigIDsAll.Contains(cpX.ConfigID))
+                .Select(cp=> new ConfigParamConsolidated { Environ = "PROD" , ID = cp.ID , ConfigID = cp.ConfigID , effDT = cp.effDT , trmDT = cp.trmDT , ParamDefinitionID  = cp.ParamDefinitionID , isRefOnly = cp.isRefOnly , value = cp.value , valueUseageComments = cp.valueUseageComments })
                 //.Union(
                 //    _db.configParamSTG1
                 //    .Where(cpX => _ConfigIDsAll.Contains(cpX.ConfigID))
-                //    .Select(cpX => new DTOConfigParam("STG1" , cpX.ID , cpX.ConfigID , cpX.effDT , cpX.trmDT , cpX.ParamDefinitionID , cpX.isRefOnly , cpX.value , cpX.valueUseageComments))
+                //    .Select(cp => new { cp.Environ , cp.ID , cp.ConfigID , cp.effDT , cp.trmDT , cp.ParamDefinitionID , cp.isRefOnly , cp.value , cp.valueUseageComments })
                 //    )
-                //.Union(
-                //    _db.configParamSTG2
-                //    .Where(cpX => _ConfigIDsAll.Contains(cpX.ConfigID))
-                //    .Select(cpX => new DTOConfigParam("STG2" , cpX.ID , cpX.ConfigID , cpX.effDT , cpX.trmDT , cpX.ParamDefinitionID , cpX.isRefOnly , cpX.value , cpX.valueUseageComments))
-                //    )
-                //.Union(
-                //    _db.configParamQA1
-                //    .Where(cpX => _ConfigIDsAll.Contains(cpX.ConfigID))
-                //    .Select(cpX => new DTOConfigParam("QA1" , cpX.ID , cpX.ConfigID , cpX.effDT , cpX.trmDT , cpX.ParamDefinitionID , cpX.isRefOnly , cpX.value , cpX.valueUseageComments))
-                //    )
-                //.Union(
-                //    _db.configParamQA2
-                //    .Where(cpX => _ConfigIDsAll.Contains(cpX.ConfigID))
-                //    .Select(cpX => new DTOConfigParam("QA2" , cpX.ID , cpX.ConfigID , cpX.effDT , cpX.trmDT , cpX.ParamDefinitionID , cpX.isRefOnly , cpX.value , cpX.valueUseageComments))
-                //    )
-                //.Union(
-                //    _db.configParamDEV1
-                //    .Where(cpX => _ConfigIDsAll.Contains(cpX.ConfigID))
-                //    .Select(cpX => new DTOConfigParam("DEV1" , cpX.ID , cpX.ConfigID , cpX.effDT , cpX.trmDT , cpX.ParamDefinitionID , cpX.isRefOnly , cpX.value , cpX.valueUseageComments))
-                //    )
-                //.Union(
-                //    _db.configParamDEV2
-                //    .Where(cpX => _ConfigIDsAll.Contains(cpX.ConfigID))
-                //    .Select(cpX => new DTOConfigParam("DEV2" , cpX.ID , cpX.ConfigID , cpX.effDT , cpX.trmDT , cpX.ParamDefinitionID , cpX.isRefOnly , cpX.value , cpX.valueUseageComments))
-                //    )
-                .ToListAsync();
+                    .AsEnumerable()
+                    //.Cast<DTOConfigParam>()
+                    .ToList()
+                    ;
+
+            //.Union(
+            //    _db.configParamSTG2
+            //    .Where(cpX => _ConfigIDsAll.Contains(cpX.ConfigID))
+            //    .Select(cp => new DTOConfigParam(cp.Environ , cp.ID , cp.ConfigID , cp.effDT , cp.trmDT , cp.ParamDefinitionID , cp.isRefOnly , cp.value , cp.valueUseageComments))
+            //    )
+            //.Union(
+            //    _db.configParamQA1
+            //    .Where(cpX => _ConfigIDsAll.Contains(cpX.ConfigID))
+            //    .Select(cp => new DTOConfigParam(cp.Environ , cp.ID , cp.ConfigID , cp.effDT , cp.trmDT , cp.ParamDefinitionID , cp.isRefOnly , cp.value , cp.valueUseageComments))
+            //    )
+            //.Union(
+            //    _db.configParamQA2
+            //    .Where(cpX => _ConfigIDsAll.Contains(cpX.ConfigID))
+            //    .Select(cp => new DTOConfigParam(cp.Environ , cp.ID , cp.ConfigID , cp.effDT , cp.trmDT , cp.ParamDefinitionID , cp.isRefOnly , cp.value , cp.valueUseageComments))
+            //    )
+            //.Union(
+            //    _db.configParamDEV1
+            //    .Where(cpX => _ConfigIDsAll.Contains(cpX.ConfigID))
+            //    .Select(cp => new DTOConfigParam(cp.Environ , cp.ID , cp.ConfigID , cp.effDT , cp.trmDT , cp.ParamDefinitionID , cp.isRefOnly , cp.value , cp.valueUseageComments))
+            //    )
+            //.Union(
+            //    _db.configParamDEV2
+            //    .Where(cpX => _ConfigIDsAll.Contains(cpX.ConfigID))
+            //    .Select(cp => new DTOConfigParam(cp.Environ , cp.ID , cp.ConfigID , cp.effDT , cp.trmDT , cp.ParamDefinitionID , cp.isRefOnly , cp.value , cp.valueUseageComments))
+            //    )
 
             return ConfigParamsAll;   
             //return true;
             }
 
-        private async Task<bool> ConfigParamPRODLoadAll()
-            {
-            //var cp = 
-            //    await _db.configParamPROD
-            //    .Where(x => _ConfigIDsAll.Contains(x.ConfigID))
-            //    .ToListAsync();
-
-
-
-            //foreach ( Config cfg in this.config )
-            //    {
-            //    //Debug.Print("__________JConfigJPlanLOBsLoadAll() forEach Start");
-            //    List<Guid> jConfigJPlanLOBIDsExisting =
-            //        cfg.JConfigJPlanLOBs?.Select(x => x.ID)
-            //        .Distinct()
-            //        .ToList()
-            //        ??
-            //        EmptyListTGuid();
-
-            //    //Debug.Print("__________JConfigJPlanLOBsLoadAll() forEach Mid");
-            //    cfg.JConfigJPlanLOBs =
-            //        cfg.JConfigJPlanLOBs?.AsEnumerable()
-            //        .Union(
-            //            jConfigJPlanLOBAll
-            //            .Where(j => j.ConfigID == cfg.ID && !jConfigJPlanLOBIDsExisting.Contains(j.ID))
-            //            .ToList()
-            //            ).ToList()
-            //        ??
-            //        jConfigJPlanLOBAll
-            //        .Where(j => j.ConfigID == cfg.ID)
-            //        .ToList();
-            //    //Debug.Print("__________JConfigJPlanLOBsLoadAll() forEach End");
-            //    }
-
-
-            return true;
-            }
-
+        
 
         private static List<Guid> GuidDotEmptyListOf()
             {return new List<Guid> { Guid.Empty };}
