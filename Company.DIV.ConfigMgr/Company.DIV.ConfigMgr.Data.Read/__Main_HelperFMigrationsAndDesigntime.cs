@@ -69,7 +69,6 @@ namespace Company.DIV.ConfigMgr.Data.Read
             using ( ConfigMgrReadContext dbcontext = new ConfigMgrReadContext() )
                 {
                 Debug.Print("__________DROConfigFull1_Start");
-                int debug0 = 1;
                 DROConfigFull1 = new Company.DIV.ConfigMgr.Data.Read.DAO.DROConfigFull(dbcontext , jobIDList);
                 //var load1 = DROConfigFull1.LoadAllAsync();
                 //await load1;
@@ -100,14 +99,12 @@ namespace Company.DIV.ConfigMgr.Data.Read
                     // # 1
                     }
 
-                int debug1 = 1;
                 Debug.Print("__________DROConfigFull1_End");
                 }
 
             using ( ConfigMgrReadContext dbcontext = new ConfigMgrReadContext() )
                 {
                 Debug.Print("__________DROConfigFull2_Start");
-                int debug1 = 1;
                 DROConfigFull2 = new Company.DIV.ConfigMgr.Data.Read.DAO.DROConfigFull(dbcontext , jobIDList , DROConfigFull1);
                 //var load2 = DROConfigFull2.LoadAllAsync();
                 //await load2;
@@ -136,14 +133,12 @@ namespace Company.DIV.ConfigMgr.Data.Read
                     {
                     // # 2
                     }
-                int debug2 = 1;
                 Debug.Print("__________DROConfigFull2_End");
                 }
 
             using ( ConfigMgrReadContext dbcontext = new ConfigMgrReadContext() )
                 {
                 Debug.Print("__________DROConfigFull3_Start");
-                int debug2 = 1;
                 DROConfigFull3 = new Company.DIV.ConfigMgr.Data.Read.DAO.DROConfigFull(dbcontext , jobIDList2 , DROConfigFull1);
                 //var load3 = DROConfigFull3.LoadAllAsync();
                 //await load3;
@@ -173,7 +168,6 @@ namespace Company.DIV.ConfigMgr.Data.Read
                     // # 3 
                     }
 
-                int debug3 = 1;
                 Debug.Print("__________DROConfigFull3_End");
                 }
 
