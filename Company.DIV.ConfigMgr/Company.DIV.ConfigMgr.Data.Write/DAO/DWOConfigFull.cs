@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Company.DIV.ConfigMgr.Domain;
 using Company.DIV.ConfigMgr.Domain.Write;
+using Company.DIV.ConfigMgr.Domain.DTO;
 
 namespace Company.DIV.ConfigMgr.Data.Write.DAO
     {

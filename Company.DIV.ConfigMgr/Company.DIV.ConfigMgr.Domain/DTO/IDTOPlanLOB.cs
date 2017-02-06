@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Company.DIV.ConfigMgr.Domain
+namespace Company.DIV.ConfigMgr.Domain.DTO
     {
     /// <summary>
     /// this object is the base JPlanLOB entity plus PlanAbbr & LOBAbbr

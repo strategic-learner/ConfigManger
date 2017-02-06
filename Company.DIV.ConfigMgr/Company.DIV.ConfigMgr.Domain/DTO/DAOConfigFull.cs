@@ -2,9 +2,8 @@
 using System.Linq;
 using Company.DIV.ConfigMgr.Domain;
 
-namespace Company.DIV.ConfigMgr.Domain 
+namespace Company.DIV.ConfigMgr.Domain.DTO
     {
-    //https://lostechies.com/jimmybogard/2008/05/21/entities-value-objects-aggregates-and-roots/
     public abstract class DAOConfigFull<TConfig, TParamVersion, TParamDefinition, TApp, TExecutable, TConfigParam >
         where TConfig : IConfig
         where TParamVersion : IParamVersion

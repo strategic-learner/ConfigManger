@@ -6,6 +6,7 @@ using System.Data.Entity;
 using Company.DIV.ConfigMgr.Domain;
 using Company.DIV.ConfigMgr.Domain.Read;
 using Company.DIV.ConfigMgr.Domain.Business.UseCase;
+using Company.DIV.ConfigMgr.Domain.DTO;
 using System.Threading.Tasks;
 using System.Diagnostics;
 
