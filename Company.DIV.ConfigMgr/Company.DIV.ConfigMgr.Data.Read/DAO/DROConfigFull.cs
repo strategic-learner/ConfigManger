@@ -511,7 +511,6 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
                     { cfg.ConfigParamDEV2 = Enumerable.Empty<ConfigParamDEV2>().ToList(); }
 
 
-
                 //1 find existing in Config
                 IEnumerable<Guid> paramIDsExistingPROD =
                     cfg.ConfigParamPROD.Select(x => x.ID);
@@ -559,7 +558,7 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
 
                 //4 add to Config
                 foreach ( ConfigParamConsolidated x in paramsToAddPROD )
-                    {cfg.ConfigParamPROD.Add(new ConfigParamPROD(x));}
+                    { cfg.ConfigParamPROD.Add(new ConfigParamPROD(x));}
 
                 foreach ( ConfigParamConsolidated x in paramsToAddSTG1 )
                     { cfg.ConfigParamSTG1.Add(new ConfigParamSTG1(x)); }
@@ -575,8 +574,6 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
                     { cfg.ConfigParamDEV1.Add(new ConfigParamDEV1(x)); }
                 foreach ( ConfigParamConsolidated x in paramsToAddDEV2 )
                     { cfg.ConfigParamDEV2.Add(new ConfigParamDEV2(x)); }
-
-
                 }
 
             return true;
@@ -588,7 +585,7 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
                 await
                 _db.configParamPROD
                 .Where(cpX => _ConfigIDsAll.Contains(cpX.ConfigID))
-                .Select(cp=> new ConfigParamConsolidated { Environ = "PROD" , ID = cp.ID , ConfigID = cp.ConfigID , effDT = cp.effDT , trmDT = cp.trmDT , ParamDefinitionID  = cp.ParamDefinitionID , isRefOnly = cp.isRefOnly , value = cp.value , valueUseageComments = cp.valueUseageComments })
+                .Select(cp => new ConfigParamConsolidated { Environ = "PROD" , ID = cp.ID , ConfigID = cp.ConfigID , effDT = cp.effDT , trmDT = cp.trmDT , ParamDefinitionID = cp.ParamDefinitionID , isRefOnly = cp.isRefOnly , value = cp.value , valueUseageComments = cp.valueUseageComments })
                 .Union(_db.configParamSTG1
                     .Where(cpX => _ConfigIDsAll.Contains(cpX.ConfigID))
                     .Select(cp => new ConfigParamConsolidated { Environ = "STG1" , ID = cp.ID , ConfigID = cp.ConfigID , effDT = cp.effDT , trmDT = cp.trmDT , ParamDefinitionID = cp.ParamDefinitionID , isRefOnly = cp.isRefOnly , value = cp.value , valueUseageComments = cp.valueUseageComments })
@@ -617,6 +614,7 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
 
             return ConfigParamsAll;
             }
+
 
 
 

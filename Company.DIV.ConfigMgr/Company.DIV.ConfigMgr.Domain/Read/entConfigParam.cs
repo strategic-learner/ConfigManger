@@ -9,9 +9,9 @@ namespace Company.DIV.ConfigMgr.Domain.Read
     public class ConfigParamPROD : ConfigParam
         {
         private ConfigParamPROD() { }
-        public ConfigParamPROD( ConfigParamConsolidated dto)
+        public ConfigParamPROD( ConfigParamConsolidated dto )
             {
-            if(!dto.Environ.Equals("PROD"))
+            if ( !dto.Environ.Equals("PROD") )
                 { throw new Exception(string.Format("Invalid ctor value {0}.{1}='{2}'" , nameof(ConfigParamPROD) , nameof(Environ) , dto.Environ)); }
             if ( dto.ID.Equals(Guid.Empty) )
                 { throw new Exception(string.Format("Invalid ctor value {0}.{1}='{2}'" , nameof(ConfigParamPROD) , nameof(ID) , dto.ID.ToString())); }
@@ -39,10 +39,10 @@ namespace Company.DIV.ConfigMgr.Domain.Read
             isRefOnly = dto.isRefOnly;
             value = dto.value;
             valueUseageComments = dto.valueUseageComments;
-        }
+            }
 
         [NotMapped]
-        public override string Environ { get ; } = "PROD";
+        public override string Environ { get; } = "PROD";
         }
 
 
