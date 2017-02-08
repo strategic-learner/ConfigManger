@@ -2,7 +2,13 @@
 
 namespace Company.DIV.ConfigMgr.Domain
     {
-    public interface IConfig
+    public interface IConfigRead : IEntityRead, IConfigBase
+        { }
+    public interface IConfigWrite : IEntityWrite, IConfigBase
+        { }
+    public interface IConfigAudit : IEntityAudit, IConfigBase
+        { }
+    public interface IConfigBase
 		{
          int jobID { get;  }
          Guid AppID { get; }

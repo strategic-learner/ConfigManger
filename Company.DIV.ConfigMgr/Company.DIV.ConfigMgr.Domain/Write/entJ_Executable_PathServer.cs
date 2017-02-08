@@ -3,7 +3,7 @@
 namespace Company.DIV.ConfigMgr.Domain.Write
     {
 
-    public class JExecutablePathServer : EntityWrite, IJExecutablePathServer
+    public class JExecutablePathServer : EntityWrite, IJExecutablePathServerWrite
         {
         private JExecutablePathServer() { }
 

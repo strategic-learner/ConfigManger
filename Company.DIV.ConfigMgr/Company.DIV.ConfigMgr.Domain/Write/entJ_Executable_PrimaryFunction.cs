@@ -3,7 +3,7 @@
 namespace Company.DIV.ConfigMgr.Domain.Write
     {
 
-    public class JExecutablePrimaryFunction : EntityWrite, IJExecutablePrimaryFunction
+    public class JExecutablePrimaryFunction : EntityWrite, IJExecutablePrimaryFunctionWrite
         {
         private JExecutablePrimaryFunction() { }
 

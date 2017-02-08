@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class ParamVersion : EntityRead, IParamVersion
+    public class ParamVersion : EntityRead, IParamVersionRead
         {
         private ParamVersion() { }
         //public ParamVersion( MockUsers user )

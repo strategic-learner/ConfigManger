@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
 
-    public class JExecutablePrimaryFunction : EntityRead, IJExecutablePrimaryFunction
+    public class JExecutablePrimaryFunction : EntityRead, IJExecutablePrimaryFunctionRead
         {
         private JExecutablePrimaryFunction() { }
         //public JExecutablePrimaryFunction( MockUsers user )

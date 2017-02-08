@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class ParamTypeAudit : EntityAudit, IParamType
+    public class ParamTypeAudit : EntityAudit, IParamTypeAudit
         {
         private ParamTypeAudit() { }
 

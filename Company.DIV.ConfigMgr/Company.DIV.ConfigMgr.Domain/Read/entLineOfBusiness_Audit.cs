@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class LineOfBusinessAudit : EntityAudit, ILineOfBusiness
+    public class LineOfBusinessAudit : EntityAudit, ILineOfBusinessAudit
         {
         private LineOfBusinessAudit() { }
 

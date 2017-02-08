@@ -90,12 +90,6 @@
     <Compile Include="ContractsAndBaseClasses\entBase_IEntityAudit.cs" />
     <Compile Include="ContractsAndBaseClasses\entBase_IEntityRead.cs" />
     <Compile Include="ContractsAndBaseClasses\entBase_IEntityWrite.cs" />
-    <Compile Include="ContractsAndBaseClasses\entIAppAudit.cs" />
-    <Compile Include="ContractsAndBaseClasses\entIAppWrite.cs" />
-    <Compile Include="ContractsAndBaseClasses\entIAppRead.cs" />
-    <Compile Include="ContractsAndBaseClasses\entIConfigParamRead.cs" />
-    <Compile Include="ContractsAndBaseClasses\entIConfigParamWrite.cs" />
-    <Compile Include="ContractsAndBaseClasses\entIConfigParamAudit.cs" />
     <Compile Include="ContractsAndBaseClasses\entIJ_App_Plan.cs" />
     <Compile Include="ContractsAndBaseClasses\entIJ_Config_Executable.cs" />
     <Compile Include="ContractsAndBaseClasses\entIJ_Config_JPlanLOB.cs" />
@@ -105,9 +99,9 @@
     <Compile Include="ContractsAndBaseClasses\data_IDataRead.cs" />
     <Compile Include="ContractsAndBaseClasses\data_IDataWrite.cs" />
     <Compile Include="ContractsAndBaseClasses\data_Constants.cs" />
-    <Compile Include="ContractsAndBaseClasses\entIApp_Base.cs" />
+    <Compile Include="ContractsAndBaseClasses\entIApp.cs" />
     <Compile Include="ContractsAndBaseClasses\entIConfig.cs" />
-    <Compile Include="ContractsAndBaseClasses\entIConfigParam_Base.cs" />
+    <Compile Include="ContractsAndBaseClasses\entIConfigParam.cs" />
     <Compile Include="DTO\DTOPlanLOB.cs" />
     <Compile Include="ContractsAndBaseClasses\entConfigParamConsolidated.cs" />
     <Compile Include="ContractsAndBaseClasses\entIConfigParamConsolidated.cs" />

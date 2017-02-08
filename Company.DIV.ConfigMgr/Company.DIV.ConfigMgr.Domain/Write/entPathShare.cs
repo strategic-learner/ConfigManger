@@ -2,7 +2,7 @@
 
 namespace Company.DIV.ConfigMgr.Domain.Write
     {
-    public class PathShare : EntityWrite, IPathShare
+    public class PathShare : EntityWrite, IPathShareWrite
         {
         private PathShare() { }
 

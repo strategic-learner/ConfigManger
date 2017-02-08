@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class LineOfBusiness : EntityRead, ILineOfBusiness
+    public class LineOfBusiness : EntityRead, ILineOfBusinessRead
         {
         private LineOfBusiness() { }
         //public LineOfBusiness( MockUsers user )

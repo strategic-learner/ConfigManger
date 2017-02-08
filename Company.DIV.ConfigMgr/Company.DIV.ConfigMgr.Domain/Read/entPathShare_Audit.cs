@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class PathShareAudit : EntityAudit, IPathShare
+    public class PathShareAudit : EntityAudit, IPathShareAudit
         {
         private PathShareAudit() { }
 

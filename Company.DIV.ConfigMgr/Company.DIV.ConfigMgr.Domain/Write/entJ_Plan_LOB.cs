@@ -3,7 +3,7 @@
 namespace Company.DIV.ConfigMgr.Domain.Write
     {
 
-    public class JPlanLOB : EntityWrite, IJPlanLOB
+    public class JPlanLOB : EntityWrite, IJPlanLOBWrite
         {
         private JPlanLOB() { }
 

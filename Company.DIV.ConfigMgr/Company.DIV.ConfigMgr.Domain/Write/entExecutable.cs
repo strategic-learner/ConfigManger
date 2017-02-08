@@ -2,7 +2,7 @@
 
 namespace Company.DIV.ConfigMgr.Domain.Write
     {
-    public class Executable : EntityWrite, IExecutable
+    public class Executable : EntityWrite, IExecutableWrite
         {
         private Executable() { }
         

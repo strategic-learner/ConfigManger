@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
 
-    public class JConfigExecutable : EntityRead, IJConfigExecutable
+    public class JConfigExecutable : EntityRead, IJConfigExecutableRead
         {
         private JConfigExecutable() { }
         //public JConfigExecutable( MockUsers user )

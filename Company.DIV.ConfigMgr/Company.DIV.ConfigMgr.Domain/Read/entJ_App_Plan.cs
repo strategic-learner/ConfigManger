@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
 
-    public class JAppPlan : EntityRead, IJAppPlan
+    public class JAppPlan : EntityRead, IJAppPlanRead
         {
         private JAppPlan() { }
         //public JAppPlan( MockUsers user )

@@ -2,7 +2,7 @@
 
 namespace Company.DIV.ConfigMgr.Domain.Write
     {
-    public class PrimaryFunction : EntityWrite, IPrimaryFunction
+    public class PrimaryFunction : EntityWrite, IPrimaryFunctionWrite
         {
         private PrimaryFunction() { }
 

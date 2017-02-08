@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class PlanAudit : EntityAudit, IPlan
+    public class PlanAudit : EntityAudit, IPlanAudit
         {
         private PlanAudit() { }
 

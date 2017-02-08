@@ -3,7 +3,7 @@
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
 
-    public class JAppPlanAudit : EntityAudit, IJAppPlan
+    public class JAppPlanAudit : EntityAudit, IJAppPlanAudit
         {
         private JAppPlanAudit() { }
 

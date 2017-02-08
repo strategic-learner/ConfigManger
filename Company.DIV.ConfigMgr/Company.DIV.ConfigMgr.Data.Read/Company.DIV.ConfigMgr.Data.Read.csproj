@@ -136,7 +136,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="_DbInitializer.cs" />
     <Compile Include="_SeedData.cs" />
-    <Compile Include="__Main_HelperFEFMigAndDsgntm.cs" />
+    <Compile Include="__Main_Helper_EFMigAndDsgnTim.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

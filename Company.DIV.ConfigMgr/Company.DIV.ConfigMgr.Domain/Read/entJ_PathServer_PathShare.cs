@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
 
-    public class JPathServerPathShare : EntityRead, IJPathServerPathShare
+    public class JPathServerPathShare : EntityRead, IJPathServerPathShareRead
         {
         private JPathServerPathShare() { }
         //public JPathServerPathShare( MockUsers user )

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Company.DIV.ConfigMgr.Domain.Write
     {
-    public class ParamDefinition : EntityWrite, IParamDefinition
+    public class ParamDefinition : EntityWrite, IParamDefinitionWrite
         {
         private ParamDefinition() { }
 

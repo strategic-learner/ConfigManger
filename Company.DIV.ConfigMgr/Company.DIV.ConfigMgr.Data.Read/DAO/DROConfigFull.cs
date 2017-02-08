@@ -12,7 +12,7 @@ using System.Diagnostics;
 
 namespace Company.DIV.ConfigMgr.Data.Read.DAO
     {
-    public class DROConfigFull : DAOConfigFull<Config , ParamVersion , ParamDefinition , App , Executable , ConfigParam>
+    public class DROConfigFull : DAOConfigFull<Config , ParamVersion , ParamDefinition , App , Executable>
         {
         private ConfigMgrReadContext _db;
         List<Guid> _ConfigIDsAll;
@@ -631,13 +631,6 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
             {
             this.config = _DROConfigFull.config;
             this.app = _DROConfigFull.app;
-            this.configParamPROD = _DROConfigFull.configParamPROD;
-            this.configParamSTG1 = _DROConfigFull.configParamSTG1;
-            this.configParamSTG2 = _DROConfigFull.configParamSTG2;
-            this.configParamQA1 = _DROConfigFull.configParamQA1;
-            this.configParamQA2 = _DROConfigFull.configParamQA2;
-            this.configParamDEV1 = _DROConfigFull.configParamDEV1;
-            this.configParamDEV2 = _DROConfigFull.configParamDEV2;
             this.executable = _DROConfigFull.executable;
             this.paramDefinition = _DROConfigFull.paramDefinition;
             this.paramVersion = _DROConfigFull.paramVersion;

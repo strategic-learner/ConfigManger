@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class ParamType : EntityRead, IParamType
+    public class ParamType : EntityRead, IParamTypeRead
         {
         private ParamType() { }
         //public ParamType( MockUsers user )

@@ -3,7 +3,7 @@
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
 
-    public class JPathServerPathShareAudit : EntityAudit, IJPathServerPathShare
+    public class JPathServerPathShareAudit : EntityAudit, IJPathServerPathShareAudit
         {
         private JPathServerPathShareAudit() { }
 

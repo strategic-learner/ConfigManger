@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class PrimaryFunctionAudit : EntityAudit, IPrimaryFunction 
+    public class PrimaryFunctionAudit : EntityAudit, IPrimaryFunctionAudit
         {
         private PrimaryFunctionAudit() { }
 

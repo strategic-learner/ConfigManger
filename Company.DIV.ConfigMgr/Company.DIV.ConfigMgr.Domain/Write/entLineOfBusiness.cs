@@ -2,7 +2,7 @@
 
 namespace Company.DIV.ConfigMgr.Domain.Write
     {
-    public class LineOfBusiness : EntityWrite, ILineOfBusiness
+    public class LineOfBusiness : EntityWrite, ILineOfBusinessWrite
         {
         private LineOfBusiness() { }
 

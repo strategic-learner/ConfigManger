@@ -2,7 +2,7 @@
 
 namespace Company.DIV.ConfigMgr.Domain.Write
     {
-    public class ParamVersion : EntityWrite, IParamVersion
+    public class ParamVersion : EntityWrite, IParamVersionWrite
         {
         private ParamVersion() { }
 

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class PrimaryFunction : EntityRead, IPrimaryFunction
+    public class PrimaryFunction : EntityRead, IPrimaryFunctionRead
         {
         private PrimaryFunction() { }
         //public PrimaryFunction( MockUsers user )

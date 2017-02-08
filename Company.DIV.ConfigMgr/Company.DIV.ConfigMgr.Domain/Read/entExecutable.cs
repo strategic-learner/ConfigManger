@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class Executable : EntityRead, IExecutable
+    public class Executable : EntityRead, IExecutableRead
         {
         private Executable() { }
         //public Executable( MockUsers user )

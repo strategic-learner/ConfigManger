@@ -2,7 +2,12 @@
 
 namespace Company.DIV.ConfigMgr.Domain
     {
-    public interface IParamDefinition
+    public interface IParamDefinitionRead : IEntityRead, IParamDefinitionBase { }
+    public interface IParamDefinitionWrite : IEntityWrite, IParamDefinitionBase { }
+    public interface IParamDefinitionAudit : IEntityAudit, IParamDefinitionBase { }
+
+
+    public interface IParamDefinitionBase
         {
          Guid ParamVersionID { get; }
          int ParamSequence { get; }

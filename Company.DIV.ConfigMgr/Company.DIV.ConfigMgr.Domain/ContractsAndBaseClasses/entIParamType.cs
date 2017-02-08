@@ -2,10 +2,14 @@
 
 namespace Company.DIV.ConfigMgr.Domain
     {
+    public interface IParamTypeRead : IEntityRead, IParamTypeBase { }
+    public interface IParamTypeWrite : IEntityWrite, IParamTypeBase { }
+    public interface IParamTypeAudit : IEntityAudit, IParamTypeBase { }
+
     /// <DomainNotes>
-    /// This could have been an Enum, but for the ability to build App-independant Sql queries
+    /// This could have been an Enum, but prefer to allow the building of Sql queries independant of this app
     /// </DomainNotes>
-	public interface IParamType
+	public interface IParamTypeBase
         {
         string type { get; }
 

@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class PathShare : EntityRead, IPathShare
+    public class PathShare : EntityRead, IPathShareRead
         {
         private PathShare() { }
         //public PathShare( MockUsers user )

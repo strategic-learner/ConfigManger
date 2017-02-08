@@ -3,7 +3,7 @@
 namespace Company.DIV.ConfigMgr.Domain.Write
     {
 
-    public class JPathServerPathShare : EntityWrite, IJPathServerPathShare
+    public class JPathServerPathShare : EntityWrite, IJPathServerPathShareWrite
         {
         private JPathServerPathShare() { }
 

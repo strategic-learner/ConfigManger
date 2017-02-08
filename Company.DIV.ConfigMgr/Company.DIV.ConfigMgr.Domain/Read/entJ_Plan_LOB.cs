@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
 
-    public class JPlanLOB : EntityRead, IJPlanLOB
+    public class JPlanLOB : EntityRead, IJPlanLOBRead
         {
         private JPlanLOB() { }
         //public JPlanLOB( MockUsers user )

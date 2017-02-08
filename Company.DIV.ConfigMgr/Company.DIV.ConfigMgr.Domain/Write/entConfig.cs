@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Company.DIV.ConfigMgr.Domain.Write
     {
-    public class Config : EntityWrite, IConfig
+    public class Config : EntityWrite, IConfigWrite
         {
         private Config() { }
 

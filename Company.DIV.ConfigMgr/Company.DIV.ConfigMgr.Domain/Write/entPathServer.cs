@@ -2,7 +2,7 @@
 
 namespace Company.DIV.ConfigMgr.Domain.Write
     {
-    public class PathServer : EntityWrite, IPathServer
+    public class PathServer : EntityWrite, IPathServerWrite
         {
         private PathServer() { }
 

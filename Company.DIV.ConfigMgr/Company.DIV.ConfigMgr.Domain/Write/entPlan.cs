@@ -2,7 +2,7 @@
 
 namespace Company.DIV.ConfigMgr.Domain.Write
     {
-    public class Plan : EntityWrite, IPlan
+    public class Plan : EntityWrite, IPlanWrite
         {
         private Plan() { }
 

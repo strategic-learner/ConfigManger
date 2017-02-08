@@ -3,7 +3,7 @@
 namespace Company.DIV.ConfigMgr.Domain.Write
     {
 
-    public class JAppPlan : EntityWrite, IJAppPlan
+    public class JAppPlan : EntityWrite, IJAppPlanWrite
         {
         private JAppPlan() { }
         

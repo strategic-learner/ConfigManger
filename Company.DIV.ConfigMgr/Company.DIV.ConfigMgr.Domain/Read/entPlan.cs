@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class Plan : EntityRead, IPlan
+    public class Plan : EntityRead, IPlanRead
         {
         private Plan() { }
         //public Plan( MockUsers user ) 

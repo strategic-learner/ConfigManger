@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
 
-    public class JExecutablePathServer : EntityRead, IJExecutablePathServer
+    public class JExecutablePathServer : EntityRead, IJExecutablePathServerRead
         {
         private JExecutablePathServer() { }
         //public JExecutablePathServer( MockUsers user )

@@ -6,7 +6,7 @@ using Company.DIV.ConfigMgr.Domain.DTO;
 
 namespace Company.DIV.ConfigMgr.Data.Write.DAO
     {
-    public class DWOConfigFull : DAOConfigFull<Config , ParamVersion , ParamDefinition , App , Executable , ConfigParam>
+    public class DWOConfigFull : DAOConfigFull<Config , ParamVersion , ParamDefinition , App , Executable >
         {
 
         private IConfigMgrWriteContext db;

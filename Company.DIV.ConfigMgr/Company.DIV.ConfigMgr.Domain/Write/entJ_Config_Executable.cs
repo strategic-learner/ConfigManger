@@ -3,7 +3,7 @@
 namespace Company.DIV.ConfigMgr.Domain.Write
     {
 
-    public class JConfigExecutable : EntityWrite, IJConfigExecutable
+    public class JConfigExecutable : EntityWrite, IJConfigExecutableWrite
         {
         private JConfigExecutable() { }
 

@@ -3,7 +3,7 @@
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
 
-    public class JExecutablePrimaryFunctionAudit : EntityAudit, IJExecutablePrimaryFunction
+    public class JExecutablePrimaryFunctionAudit : EntityAudit, IJExecutablePrimaryFunctionAudit
         {
         private JExecutablePrimaryFunctionAudit() { }
 

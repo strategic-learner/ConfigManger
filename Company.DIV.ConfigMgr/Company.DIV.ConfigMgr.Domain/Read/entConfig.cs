@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class Config : EntityRead, IConfig
+    public class Config : EntityRead, IConfigRead
         {
         private Config() { }
    //     public Config( MockUsers user ) 

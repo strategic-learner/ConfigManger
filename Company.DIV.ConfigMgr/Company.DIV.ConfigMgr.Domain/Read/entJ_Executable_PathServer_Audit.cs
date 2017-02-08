@@ -3,7 +3,7 @@
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
 
-    public class JExecutablePathServerAudit : EntityAudit, IJExecutablePathServer
+    public class JExecutablePathServerAudit : EntityAudit, IJExecutablePathServerAudit
         {
         private JExecutablePathServerAudit() { }
 

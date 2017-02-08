@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class PathServerAudit : EntityAudit, IPathServer
+    public class PathServerAudit : EntityAudit, IPathServerAudit
         {
         private PathServerAudit() { }
 

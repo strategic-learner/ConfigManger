@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Company.DIV.ConfigMgr.Domain.Read
     {
-    public class PathServer : EntityRead, IPathServer
+    public class PathServer : EntityRead, IPathServerRead
         {
         private PathServer() { }
         //public PathServer( MockUsers user )

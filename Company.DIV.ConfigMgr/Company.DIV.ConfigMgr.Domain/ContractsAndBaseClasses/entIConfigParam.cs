@@ -2,6 +2,13 @@
 
 namespace Company.DIV.ConfigMgr.Domain
     {
+    public interface IConfigParamRead : IEntityRead, IConfigParamBase
+        { }
+    public interface IConfigParamWrite : IEntityWrite, IConfigParamBase
+        { }
+    public interface IConfigParamAudit : IEntityAudit, IConfigParamBase
+        { }
+
 
     public interface IConfigParamBase
         {
