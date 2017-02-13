@@ -14,49 +14,46 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
     {
     public class DROConfigFull : DAOConfigFull<Config , ParamVersion , ParamDefinition , App , Executable>
         {
-        private ConfigMgrReadContext _db;
-        List<Guid> _ConfigIDsAll;
-        List<int> _JobIDsInput;
-        List<int> _JobIDsAll;
+        private IConfigFullReadContext _db;
+        public List<Guid> _ConfigIDsAll;
+        public List<int> _JobIDsInput;
+        public List<int> _JobIDsAll;
 
-        public DROConfigFull( ConfigMgrReadContext db , JobIDList jobIDList )
+        public DROConfigFull( IConfigFullReadContext db , JobIDList jobIDsToAddList )
             {
             if ( db == null )
                 {
                 Debug.Print("input parameter db cannot be null");
                 throw new NullReferenceException("input parameter db cannot be null");
                 }
-            if ( jobIDList == null )
+            if ( jobIDsToAddList == null )
                 {
                 Debug.Print("input parameter jobIDList cannot be null");
                 throw new NullReferenceException("input parameter jobIDList cannot be null");
                 }
-            if ( jobIDList.IDs.Count<=0 )
+            if ( jobIDsToAddList.IDs.Count<=0 )
                 {
                 Debug.Print("input parameter jobIDList.IDs.Count must be GT 0");
                 throw new Exception("input parameter jobIDList.IDs.Count must be GT 0");
                 }
 
-            Debug.Print("__________ctor new start");
-            db.Configuration.AutoDetectChangesEnabled = false;
-            this._db = db as ConfigMgrReadContext;
-            _JobIDsInput = jobIDList.IDs;
-            Debug.Print("__________ctor new end");
+            this._db = db;
+            _JobIDsInput = jobIDsToAddList.IDs;
             }
 
-        public DROConfigFull( ConfigMgrReadContext db , JobIDList jobIDList , DROConfigFull _DROConfigFull )
+        public DROConfigFull( IConfigFullReadContext db , JobIDList jobIDsToAddList , DROConfigFull _DROConfigFull )
             {
             if ( db == null )
                 {
                 Debug.Print("input parameter db cannot be null");
                 throw new NullReferenceException("input parameter db cannot be null");
                 }
-            if ( jobIDList == null )
+            if ( jobIDsToAddList.IDs == null )
                 {
                 Debug.Print("input parameter jobIDList cannot be null");
                 throw new NullReferenceException("input parameter jobIDList cannot be null");
                 }
-            if ( jobIDList.IDs.Count <= 0 )
+            if ( jobIDsToAddList.IDs.Count <= 0 )
                 {
                 Debug.Print("input parameter jobIDList.IDs.Count must be GT 0");
                 throw new Exception("input parameter jobIDList.IDs.Count must be GT 0");
@@ -67,49 +64,25 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
                 throw new NullReferenceException("input parameter _DROConfigFull cannot be null");
                 }
 
-
-
-            Debug.Print("__________ctor from existing start");
-            db.Configuration.AutoDetectChangesEnabled = false;
             this._db = db as ConfigMgrReadContext;
-            _JobIDsInput = jobIDList.IDs;
+            _JobIDsInput = jobIDsToAddList.IDs;
             InitializeFromExisting(_DROConfigFull);
-            Debug.Print("__________ctor from existing end");
             }
-
 
         public async Task<bool> LoadAllAsync()
             {
-            //Debug.Print("__________LoadAllAsync() start");
-            //Debug.Print("__________bf await ConfigsLoadAllAsync()");
             await ConfigsLoadAllAsync();
             await AppsLoadAllAsync();
             await ParamVersionAndDefinitionsLoadAllAsync();
             await ExecutablesLoadAllAsync();
             await PlanLOBsLoadAll();
             await ConfigParamLoadAll();
-            //Debug.Print("__________bf Task[] LoadAll");
 
-            //Cant do this using shared DbContext, not thread safe - would have to create new instance of DbContext per parallel Task.
-            //parallel might be worth object size if using mini-fied IDbContext per load operation IConfigContext, IAppContext...
-            //Task<bool>[] LoadAll = new Task<bool>[] // have to get used to this... The Tasks start firing here...
-            //{
-            //AppsLoadAllAsync()
-            //,ParamVersionAndDefinitionsLoadAllAsync()
-            //,ExecutablesLoadAllAsync()
-            //};
-            //await Task.WhenAll(LoadAll);  
-            //Task.WaitAll(LoadAll);  // can't await this   //this may deadlock!? which might explain some things... (PluralSight: Getting Started with Asynchronous Programming in .NET  by Filip Ekberg)
-
-
-            //Debug.Print("__________LoadAllAsync() END");
             return true;
             }
 
-
         private async Task<bool> ConfigsLoadAllAsync()
             {
-            //Debug.Print("__________ConfigsLoadAllAsync() Start");
             List<int> existingJobIDs =
                 this.config?
                 .Select(x => x.jobID)
@@ -117,22 +90,17 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
                 ??
                 EmptyListTint();
 
-            //Debug.Print("__________ConfigsLoadAllAsync() 1");
             List<int> JobIDsToAdd =
                 _JobIDsInput.Except(existingJobIDs).ToList();
 
-            //Debug.Print("__________ConfigsLoadAllAsync() 2");
             try
                 {
-                //Debug.Print("__________ConfigsLoadAllAsync() 3"); 
-                //when calling this via "await DROConfigInstance.LoadAllAsync();" instead of via "DROConfigFull1.LoadAllAsync().Wait();" the MainReal() Method exits, and no exeptions are Caught!?
                 var configsToAdd =
                 await _db.config
                             .AsNoTracking()
                             .Where(cfg => JobIDsToAdd.Contains(cfg.jobID))
                             .ToListAsync();
 
-                //Debug.Print("__________ConfigsLoadAllAsync() 4");
                 this.config =
                     this.config?.AsEnumerable()
                     .Union(configsToAdd).ToList()
@@ -141,14 +109,6 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
                 }
             catch ( Exception ex )
                 {
-                //Debug.Print("________________entireException");
-                //Debug.Print(ex.ToString());
-                //Debug.Print("________________StackTrace");
-                //Debug.Print(ex.StackTrace.ToString());
-                //Debug.Print("________________InnerException");
-                //Debug.Print(ex.InnerException.ToString());
-                //Debug.Print("________________Data");
-                //Debug.Print(ex.Data.ToString());
                 }
             finally
                 {
@@ -157,19 +117,10 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
 
             try
                 {
-                //Debug.Print("__________ConfigsLoadAllAsync() 5");
                 _ConfigIDsAll = this.config.Select(c => c.ID).ToList();
                 }
             catch ( Exception ex )
                 {
-                //Debug.Print("________________entireException");
-                //Debug.Print(ex.ToString());
-                //Debug.Print("________________StackTrace");
-                //Debug.Print(ex.StackTrace.ToString());
-                //Debug.Print("________________InnerException");
-                //Debug.Print(ex.InnerException.ToString());
-                //Debug.Print("________________Data");
-                //Debug.Print(ex.Data.ToString());                
                 }
             finally
                 {
@@ -177,34 +128,22 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
 
             try
                 {
-                //Debug.Print("__________ConfigsLoadAllAsync() 6");
                 _JobIDsAll = this.config.Select(c => c.jobID).ToList();
                 }
             catch(Exception ex)
                 {
-                //Debug.Print("________________entireException");
-                //Debug.Print(ex.ToString());
-                //Debug.Print("________________StackTrace");
-                //Debug.Print(ex.StackTrace.ToString());
-                //Debug.Print("________________InnerException");
-                //Debug.Print(ex.InnerException.ToString());
-                //Debug.Print("________________Data");
-                //Debug.Print(ex.Data.ToString());
                 }
             finally
                 {
                 }
-            //Debug.Print("__________ConfigsLoadAllAsync() END");
             return true;
             }
 
         private async Task<bool> AppsLoadAllAsync()
             {
-            //Debug.Print("__________AppsLoadAllAsync() Start");
             List<Guid> appIDsAll = 
                 this.config.Select(c => c.AppID).Distinct().ToList();
 
-            //Debug.Print("__________AppsLoadAllAsync() 1");
             List<Guid> appIDsExisting =
                 this.app?.AsEnumerable().Select(x => x.ID)
                 .Union(
@@ -213,33 +152,27 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
                     ??
                     EmptyListTGuid();
 
-            //Debug.Print("__________AppsLoadAllAsync() 2");
             List<Guid> appIDsToAdd = appIDsAll.Except(appIDsExisting).ToList();
 
-            //Debug.Print("__________AppsLoadAllAsync() 3");
             var appsAll = await _db.app
                 .AsNoTracking()
                 .Where(x => appIDsToAdd.Contains(x.ID))
                 .ToListAsync();
 
-            //Debug.Print("__________AppsLoadAllAsync() 4");
             this.app =
                 this.app?.AsEnumerable()
                 .Union(appsAll).ToList()
                 ??
                 appsAll;
 
-            //Debug.Print("__________AppsLoadAllAsync() END");
             return true;
             }
 
         private async Task<bool> ParamVersionAndDefinitionsLoadAllAsync()
             {
-            //Debug.Print("__________ParamVersionAndDefinitionsLoadAllAsync() Start");
             List<Guid> paramVersionIDsAll = 
                 this.config.Select(c => c.ParamVersionID).Distinct().ToList();
 
-            //Debug.Print("__________ParamVersionAndDefinitionsLoadAllAsync() 1");
             List<Guid> paramVersionIDsExisting =
                 this.paramVersion?
                 .Select(x => x.ID)
@@ -248,18 +181,15 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
                 ??
                 EmptyListTGuid();
 
-            //Debug.Print("__________ParamVersionAndDefinitionsLoadAllAsync() 2");
             List<Guid> paramVersionIDsToAdd =
                 paramVersionIDsAll.Except(paramVersionIDsExisting).ToList();
 
-            //Debug.Print("__________ParamVersionAndDefinitionsLoadAllAsync() 3");
             var paramVersionsToAdd =
                 await _db.paramVersion
                             .AsNoTracking()
                             .Where(x => paramVersionIDsToAdd.Contains(x.ID))
                             .ToListAsync();
 
-            //Debug.Print("__________ParamVersionAndDefinitionsLoadAllAsync() 4");
             this.paramVersion =
                 this.paramVersion?.AsEnumerable()
                 .Union(
@@ -268,7 +198,6 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
                     ??
                     paramVersionsToAdd;
 
-            //Debug.Print("__________ParamVersionAndDefinitionsLoadAllAsync() 5");
             var paramDefinitionsToAdd =
                 await _db.paramDefinition
                 .AsNoTracking()
@@ -277,7 +206,6 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
                 .ThenBy(pd => pd.ParamSequence)
                 .ToListAsync();
 
-            //Debug.Print("__________ParamVersionAndDefinitionsLoadAllAsync() 6");
             this.paramDefinition =
                 this.paramDefinition?.AsEnumerable()
                 .Union(
@@ -286,22 +214,18 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
                     ??
                     paramDefinitionsToAdd;
 
-            //Debug.Print("__________ParamVersionAndDefinitionsLoadAllAsync() END");
             return true;
             }
 
         private async Task<bool> ExecutablesLoadAllAsync()
             {
-            //Debug.Print("__________ExecutablesLoadAllAsync() start");
             List<Guid> executableIDsAll = new List<Guid>();
             List<Guid> executableIDsExisting = new List<Guid>();
             List<Guid> executableIDsToAdd = new List<Guid>();
-            //Debug.Print("__________ExecutablesLoadAllAsync() End fields");
 
             ///Attach the M2M NavProps
             try
                 {
-                //Debug.Print("__________ExecutablesLoadAllAsync() var jConfigExecutableAll");
                 var jConfigExecutableAll =
                     await _db.jConfigExecutable
                     .AsNoTracking()
@@ -312,7 +236,6 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
 
                 foreach ( Config cfg in this.config )
                     {
-                    //Debug.Print("__________ExecutablesLoadAllAsync() forEach Start");
                     List<Guid> jConfigExecutableIDsExisting =
                         cfg.JConfigExecutables?.Select(x => x.ID)
                         .Distinct()
@@ -320,7 +243,6 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
                         ??
                         EmptyListTGuid();
 
-                    //Debug.Print("__________ExecutablesLoadAllAsync() forEach Mid");
                     cfg.JConfigExecutables =
                         cfg.JConfigExecutables?.AsEnumerable()
                         .Union(
@@ -332,31 +254,21 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
                         jConfigExecutableAll
                         .Where(j => j.ConfigID == cfg.ID)
                         .ToList();
-                    //Debug.Print("__________ExecutablesLoadAllAsync() forEach End");
                     }
 
-                //Debug.Print("__________ExecutablesLoadAllAsync() executableIDsAll");
                 executableIDsAll =
                     jConfigExecutableAll
                     .Select(jcea => jcea.ExecutableID)
                     .ToList();
 
-                //Debug.Print("__________ExecutablesLoadAllAsync() ");
-                //if ( !executableIDsAll.Any() )
-                //    { executableIDsAll = EmptyListTGuid(); }
                 }
             catch ( Exception ex )
                 {
-                //Debug.Print("__________ExecutablesLoadAllAsync() Catch 1");
-                //Exception thrown: 'System.NotSupportedException' in EntityFramework.dll
                 }
             finally
                 {
-                //Debug.Print("__________ExecutablesLoadAllAsync() Finally 1");
                 }
 
-
-            //Debug.Print("__________ExecutablesLoadAllAsync() executableIDsExisting");
             //Get the Executables
             executableIDsExisting =
                 this.executable?.Select(e => e.ID)
@@ -365,20 +277,17 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
                 ??
                 EmptyListTGuid();
 
-            //Debug.Print("__________ExecutablesLoadAllAsync() executableIDsToAdd");
             executableIDsToAdd = 
                 executableIDsAll.Except(executableIDsExisting).ToList();
 
             try
                 {
-                //Debug.Print("__________ExecutablesLoadAllAsync() executablesToAdd");
                 var executablesToAdd =
                     await _db.executable
                     .AsNoTracking()
                     .Where(e => executableIDsToAdd.Contains(e.ID))
                     .ToListAsync();
 
-                //Debug.Print("__________ExecutablesLoadAllAsync() this.executable");
                 this.executable =
                     this.executable?.AsEnumerable()
                     .Union(
@@ -389,25 +298,20 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
                 }
             catch(Exception ex)
                 {
-                //Debug.Print("__________ExecutablesLoadAllAsync() catch 2");
                 }
             finally
                 {
-                //Debug.Print("__________ExecutablesLoadAllAsync() finally 2");
                 }
 
             return true;
             }
-
-
+        
         private async Task<bool> JConfigJPlanLOBsLoadAll()
             {
-            //Debug.Print("__________JConfigJPlanLOBsLoadAll()  start");
 
             ///Attach the M2M NavProps
             try
                 {
-                //Debug.Print("__________JConfigJPlanLOBsLoadAll() var jConfigJPlanLOBAll");
                 var jConfigJPlanLOBAll =
                     await _db.jConfigJPlanLOB
                     .AsNoTracking()
@@ -418,7 +322,6 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
 
                 foreach ( Config cfg in this.config )
                     {
-                    //Debug.Print("__________JConfigJPlanLOBsLoadAll() forEach Start");
                     List<Guid> jConfigJPlanLOBIDsExisting =
                         cfg.JConfigJPlanLOBs?.Select(x => x.ID)
                         .Distinct()
@@ -426,7 +329,6 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
                         ??
                         EmptyListTGuid();
 
-                    //Debug.Print("__________JConfigJPlanLOBsLoadAll() forEach Mid");
                     cfg.JConfigJPlanLOBs =
                         cfg.JConfigJPlanLOBs?.AsEnumerable()
                         .Union(
@@ -438,19 +340,14 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
                         jConfigJPlanLOBAll
                         .Where(j => j.ConfigID == cfg.ID)
                         .ToList();
-                    //Debug.Print("__________JConfigJPlanLOBsLoadAll() forEach End");
                     }
 
-                //Debug.Print("__________JConfigJPlanLOBsLoadAll() ");
                 }
             catch ( Exception ex )
                 {
-                //Debug.Print("__________JConfigJPlanLOBsLoadAll() Catch");
-                //Exception thrown: 'System.NotSupportedException' in EntityFramework.dll
                 }
             finally
                 {
-                //Debug.Print("__________JConfigJPlanLOBsLoadAll() Finally");
                 }
 
             return true;
@@ -482,9 +379,7 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
 
             return true;
             }
-
-
-
+        
         private async Task<bool> ConfigParamLoadAll()
             {
             IEnumerable<ConfigParamConsolidated> AllParams = await ConfigParamGetAll();
@@ -534,7 +429,7 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
                     cfg.ConfigParamDEV2.Select(x => x.ID);
 
 
-                //2 Segregate by env & select new to add
+                //2 Divide Consolidated by env & select new to add for this Config
                 IEnumerable<ConfigParamConsolidated> paramsToAddPROD =
                     AllParams.Where(x => x.ConfigID == cfg.ID && x.Environ == "PROD" && !paramIDsExistingPROD.Contains(x.ID));
 
@@ -614,8 +509,6 @@ namespace Company.DIV.ConfigMgr.Data.Read.DAO
 
             return ConfigParamsAll;
             }
-
-
 
 
         private static List<Guid> GuidDotEmptyListOf()

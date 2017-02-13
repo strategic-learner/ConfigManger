@@ -26,30 +26,28 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
         [Required]
         [Index("NDX_UNIQUE_ParamVersionID_ParamSequence" , 1 , IsUnique = true, IsClustered =false)] 
-        //[ForeignKey("ParamVersion")]
         public Guid ParamVersionID { get; private set; }
 
         [Required]
         [Index("NDX_UNIQUE_ParamVersionID_ParamSequence" , 2 , IsUnique = true , IsClustered = false)]
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]  this was wrong big-time! can't cleanly Undo Identiy on a column, and didn't want it anyways
         public int ParamSequence { get; private set; }
 
+        ///data type for validations
         [Required]
-        public Guid ParamTypeID { get; private set; }  //data type for validations
+        public Guid ParamTypeID { get; private set; }  
 
         [Required]
         [MaxLength(50)]
         public string variableName { get; private set; }
 
+        ///Specify intended usage of the ConfigParam's value
         [Required]
         [MaxLength(500)]
-        public string intendedUse { get; private set; } //Specify intended usage of the ConfigParam's value
+        public string intendedUse { get; private set; } 
 
 
         #region NavigationProperties
 
-        //public ParamVersion ParamVersion { get; private set; }  //Trying OneWay Nav
-        //public ParamType ParamType { get; private set; }  //Trying OneWay Nav
         public ICollection<ConfigParamPROD> ConfigParamPROD { get; private set; }
         public ICollection<ConfigParamSTG1> ConfigParamSTG1 { get; private set; }
         public ICollection<ConfigParamSTG2> ConfigParamSTG2 { get; private set; }

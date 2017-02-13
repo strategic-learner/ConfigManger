@@ -15,7 +15,7 @@ namespace Company.DIV.ConfigMgr.Domain.DTO
         public virtual List<TParamVersion> paramVersion { get; protected set; }
         public virtual List<TParamDefinition> paramDefinition { get; protected set; } 
         public virtual List<TApp> app { get; protected set; }
-        public virtual List<DTOPlanLOB> planLOB { get; protected set; }
         public virtual List<TExecutable> executable { get; protected set; }
+        public virtual List<DTOPlanLOB> planLOB { get; protected set; }
         }
     }

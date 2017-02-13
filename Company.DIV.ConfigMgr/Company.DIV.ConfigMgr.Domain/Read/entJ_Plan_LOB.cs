@@ -32,16 +32,8 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
         #region NavigationProperties
 
-        //public Plan Plans { get; private set; }  //Trying OneWay Nav
-        //public LineOfBusiness LineOfBusiness { get; private set; }  //Trying OneWay Nav
         public ICollection<JConfigJPlanLOB> JConfigJPlanLOBs { get; private set; }
 
         #endregion
-
-
-        
-        
-
-        
         }
     }

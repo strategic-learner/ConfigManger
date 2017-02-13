@@ -4,14 +4,36 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using Company.DIV.ConfigMgr.Domain;
 using Company.DIV.ConfigMgr.Domain.DTO;
 using Company.DIV.ConfigMgr.Domain.Read;
-//using Company.DIV.ConfigMgr.Domain;
+
 
 
 namespace Company.DIV.ConfigMgr.Data.Read
     {
     public interface IConfigMgrReadContext {/* for DI */}
+    public interface IConfigFullReadContext : IDisposable
+        {
+        DbSet<Config> config { get; set; }
+        DbSet<ConfigAudit> configAudit { get; }
+        DbSet<ConfigParamPROD> configParamPROD { get; set; }
+         DbSet<ConfigParamSTG1> configParamSTG1 { get; set; }
+         DbSet<ConfigParamSTG2> configParamSTG2 { get; set; }
+         DbSet<ConfigParamQA1> configParamQA1 { get; set; }
+         DbSet<ConfigParamQA2> configParamQA2 { get; set; }
+         DbSet<ConfigParamDEV1> configParamDEV1 { get; set; }
+         DbSet<ConfigParamDEV2> configParamDEV2 { get; set; }
+         DbSet<Executable> executable { get; set; }
+        DbSet<App> app { get; set; }
+         DbSet<JConfigExecutable> jConfigExecutable { get; set; }
+         DbSet<JConfigJPlanLOB> jConfigJPlanLOB { get; set; }
+         DbSet<JPlanLOB> jPlanLOB { get; set; }
+         DbSet<LineOfBusiness> lineOfBusiness { get; set; }
+         DbSet<ParamDefinition> paramDefinition { get; set; }
+         DbSet<ParamType> paramType { get; set; }
+         DbSet<ParamVersion> paramVersion { get; set; }
+         DbSet<Plan> plan { get; set; }
+        }
 
-    public sealed class ConfigMgrReadContext : DbContext, IConfigMgrReadContext
+    public sealed class ConfigMgrReadContext : DbContext, IConfigMgrReadContext, IConfigFullReadContext
         {
         public ConfigMgrReadContext() :
         base("name=ConfigMgr") //--HOLY WTW: PowerTools can only find the connString with this!!!???
@@ -31,7 +53,7 @@ namespace Company.DIV.ConfigMgr.Data.Read
         protected override void OnModelCreating( DbModelBuilder modelBuilder )
             {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            //very little if anything should ever be deleted - mostly deactivated (ConfigParam data is an exception, but no dependency concern)
+            ///very little if anything should ever be deleted - mostly deactivated (ConfigParam data is an exception, but no dependency concern)
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
 
@@ -63,8 +85,9 @@ namespace Company.DIV.ConfigMgr.Data.Read
 
             #region GeneralConventionNDefaultOverrides
 
+            ///Just a default
             modelBuilder.Properties<String>()
-                .Configure(s => s.HasMaxLength(20)); //Just a default
+                .Configure(s => s.HasMaxLength(20)); 
 
 
 
@@ -96,7 +119,7 @@ namespace Company.DIV.ConfigMgr.Data.Read
             //Ignored classes  (code-first table settings)
             modelBuilder.Ignore<EntityAudit>();
             modelBuilder.Ignore<EntityRead>();
-            modelBuilder.Ignore<EntityWrite>(); //just in case
+            modelBuilder.Ignore<EntityWrite>();
             modelBuilder.Ignore<ConfigParam>();
             modelBuilder.Ignore<EntityStateDisconnected>();
             modelBuilder.Ignore<DTOPlanLOB>();
@@ -107,8 +130,6 @@ namespace Company.DIV.ConfigMgr.Data.Read
 
             //App (code-first table settings)
             modelBuilder.Entity<App>().MapToStoredProcedures();
-            //modelBuilder.Entity<App>()
-            //    .Property(p => p.createUser).IsRequired();
 
             modelBuilder.Entity<App>()
                 .HasMany(a => a.Configs)
@@ -380,63 +401,58 @@ namespace Company.DIV.ConfigMgr.Data.Read
 
 
 
-        //Audit Entities should have no setters - they have purely db-generated data
-
         public DbSet<App> app { get; set; }
-        public DbSet<AppAudit> appAudit { get; }
+        public DbSet<AppAudit> appAudit { get { return Set<AppAudit>(); } }
         public DbSet<Config> config { get; set; }
-        public DbSet<ConfigAudit> configAudit { get;  }
-
+        public DbSet<ConfigAudit> configAudit  { get { return Set<ConfigAudit>(); } }
         public DbSet<ConfigParamPROD> configParamPROD { get; set; }
-        public DbSet<ConfigParamPRODAudit> configParamPRODAudit { get; }
+        public DbSet<ConfigParamPRODAudit> configParamPRODAudit  { get { return Set<ConfigParamPRODAudit>(); } }
         public DbSet<ConfigParamSTG1> configParamSTG1 { get; set; }
-        public DbSet<ConfigParamSTG1Audit> configParamSTG1Audit { get;  }
+        public DbSet<ConfigParamSTG1Audit> configParamSTG1Audit  { get { return Set<ConfigParamSTG1Audit>(); } }
         public DbSet<ConfigParamSTG2> configParamSTG2 { get; set; }
-        public DbSet<ConfigParamSTG2Audit> configParamSTG2Audit { get;  }
+        public DbSet<ConfigParamSTG2Audit> configParamSTG2Audit  { get { return Set<ConfigParamSTG2Audit>(); } }
         public DbSet<ConfigParamQA1> configParamQA1 { get; set; }
-        public DbSet<ConfigParamQA1Audit> configParamQA1Audit { get; }
+        public DbSet<ConfigParamQA1Audit> configParamQA1Audit  { get { return Set< ConfigParamQA1Audit > (); } }
         public DbSet<ConfigParamQA2> configParamQA2 { get; set; }
-        public DbSet<ConfigParamQA2Audit> configParamQA2Audit { get; }
+        public DbSet<ConfigParamQA2Audit> configParamQA2Audit  { get { return Set< ConfigParamQA2Audit > (); } }
         public DbSet<ConfigParamDEV1> configParamDEV1 { get; set; }
-        public DbSet<ConfigParamDEV1Audit> configParamDEV1Audit { get; }
+        public DbSet<ConfigParamDEV1Audit> configParamDEV1Audit  { get { return Set< ConfigParamDEV1Audit > (); } }
         public DbSet<ConfigParamDEV2> configParamDEV2 { get; set; }
-        public DbSet<ConfigParamDEV2Audit> configParamDEV2Audit { get; }
+        public DbSet<ConfigParamDEV2Audit> configParamDEV2Audit  { get { return Set< ConfigParamDEV2Audit > (); } }
         
         public DbSet<Executable> executable { get; set; }
-        public DbSet<ExecutableAudit> executableAudit { get; }
+        public DbSet<ExecutableAudit> executableAudit  { get { return Set< ExecutableAudit> (); } }
 
         public DbSet<JAppPlan> jAppPlan { get; set; }
-        public DbSet<JAppPlanAudit> jAppPlanAudit { get; }
+        public DbSet<JAppPlanAudit> jAppPlanAudit  { get { return Set<JAppPlanAudit>(); } }
         public DbSet<JConfigExecutable> jConfigExecutable { get; set; }
-        public DbSet<JConfigExecutableAudit> jConfigExecutableAudit { get;  }
+        public DbSet<JConfigExecutableAudit> jConfigExecutableAudit  { get { return Set<JConfigExecutableAudit>(); } }
         public DbSet<JConfigJPlanLOB> jConfigJPlanLOB { get; set; }
-        public DbSet<JConfigJPlanLOBAudit> jConfigJPlanLOBAudit { get;  }
+        public DbSet<JConfigJPlanLOBAudit> jConfigJPlanLOBAudit  { get { return Set<JConfigJPlanLOBAudit>(); } }
         public DbSet<JExecutablePathServer> jExecutablePathServer { get; set; }
-        public DbSet<JExecutablePathServerAudit> jExecutablePathServerAudit { get;  }
+        public DbSet<JExecutablePathServerAudit> jExecutablePathServerAudit  { get { return Set<JExecutablePathServerAudit>(); } }
         public DbSet<JExecutablePrimaryFunction> jExecutablePrimaryFunction { get; set; }
-        public DbSet<JExecutablePrimaryFunctionAudit> jExecutablePrimaryFunctionAudit { get;  }
+        public DbSet<JExecutablePrimaryFunctionAudit> jExecutablePrimaryFunctionAudit  { get { return Set<JExecutablePrimaryFunctionAudit>(); } }
         public DbSet<JPathServerPathShare> jPathServerPathShare { get; set; }
-        public DbSet<JPathServerPathShareAudit> jPathServerPathShareAudit { get;  }
+        public DbSet<JPathServerPathShareAudit> jPathServerPathShareAudit  { get { return Set<JPathServerPathShareAudit>(); } }
         public DbSet<JPlanLOB> jPlanLOB { get; set; }
-        public DbSet<JPlanLOBAudit> jPlanLOBAudit { get;  }
+        public DbSet<JPlanLOBAudit> jPlanLOBAudit  { get { return Set<JPlanLOBAudit>(); } }
 
         public DbSet<LineOfBusiness> lineOfBusiness { get; set; }
-        public DbSet<LineOfBusinessAudit> lineOfBusinessAudit { get; }
+        public DbSet<LineOfBusinessAudit> lineOfBusinessAudit  { get { return Set<LineOfBusinessAudit>(); } }
         public DbSet<PrimaryFunction> executableFunction { get; set; }
-        public DbSet<PrimaryFunctionAudit> executableFunctionAudit { get; }
+        public DbSet<PrimaryFunctionAudit> executableFunctionAudit  { get { return Set<PrimaryFunctionAudit>(); } }
         public DbSet<ParamDefinition> paramDefinition { get; set; }
-        public DbSet<ParamDefinitionAudit> paramDefinitionAudit { get; }
+        public DbSet<ParamDefinitionAudit> paramDefinitionAudit  { get { return Set<ParamDefinitionAudit>(); } }
         public DbSet<ParamType> paramType { get; set; }
-        public DbSet<ParamTypeAudit> paramTypeAudit { get; }
+        public DbSet<ParamTypeAudit> paramTypeAudit  { get { return Set<ParamTypeAudit>(); } }
         public DbSet<ParamVersion> paramVersion { get; set; }
-        public DbSet<ParamVersionAudit> paramVersionAudit { get; }
+        public DbSet<ParamVersionAudit> paramVersionAudit  { get { return Set<ParamVersionAudit>(); } }
         public DbSet<PathServer> pathServer { get; set; }
-        public DbSet<PathServerAudit> pathServerAudit { get; }
+        public DbSet<PathServerAudit> pathServerAudit  { get { return Set<PathServerAudit>(); } }
         public DbSet<PathShare> pathShare { get; set; }
-        public DbSet<PathShareAudit> pathShareAudit { get; }
+        public DbSet<PathShareAudit> pathShareAudit  { get { return Set<PathShareAudit>(); } }
         public DbSet<Plan> plan { get; set; }
-        public DbSet<PlanAudit> planAudit { get; }
-
+        public DbSet<PlanAudit> planAudit  { get { return Set<PlanAudit>(); } }
         }
-
     }

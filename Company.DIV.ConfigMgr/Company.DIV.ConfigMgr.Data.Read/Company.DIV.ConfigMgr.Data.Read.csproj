@@ -113,7 +113,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAO\AppRead.cs" />
     <Compile Include="DAO\DROConfigFull.cs" />
     <Compile Include="Migrations\201701180225518_Initial.cs" />
     <Compile Include="Migrations\201701180225518_Initial.Designer.cs">

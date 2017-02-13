@@ -28,15 +28,6 @@ namespace Company.DIV.ConfigMgr.Domain.Read
 
         #region NavigationProperties
 
-        //public Executable Executable { get; private set; }  //Trying OneWay Nav
-        //public PathServer PathServer { get; private set; }  //Trying OneWay Nav
-
         #endregion
-
-
-
-
-
-
         }
     }

@@ -66,10 +66,11 @@ namespace Company.DIV.ConfigMgr.Data.Read
             DAO.DROConfigFull DROConfigFull3;
             Debug.Print("__________MainDeclarationsEnd");
 
-            using ( ConfigMgrReadContext dbcontext = new ConfigMgrReadContext() )
+            using ( IConfigFullReadContext dbcontext1 = new ConfigMgrReadContext()  )
                 {
+                //dbcontext1.Configuration.AutoDetectChangesEnabled = false;
                 Debug.Print("__________DROConfigFull1_Start");
-                DROConfigFull1 = new Company.DIV.ConfigMgr.Data.Read.DAO.DROConfigFull(dbcontext , jobIDList);
+                DROConfigFull1 = new Company.DIV.ConfigMgr.Data.Read.DAO.DROConfigFull(dbcontext1 , jobIDList);
                 //var load1 = DROConfigFull1.LoadAllAsync();
                 //await load1;
                 
@@ -102,10 +103,11 @@ namespace Company.DIV.ConfigMgr.Data.Read
                 Debug.Print("__________DROConfigFull1_End");
                 }
 
-            using ( ConfigMgrReadContext dbcontext = new ConfigMgrReadContext() )
+            using ( ConfigMgrReadContext dbcontext2 = new ConfigMgrReadContext() )
                 {
+                dbcontext2.Configuration.AutoDetectChangesEnabled = false;
                 Debug.Print("__________DROConfigFull2_Start");
-                DROConfigFull2 = new Company.DIV.ConfigMgr.Data.Read.DAO.DROConfigFull(dbcontext , jobIDList , DROConfigFull1);
+                DROConfigFull2 = new Company.DIV.ConfigMgr.Data.Read.DAO.DROConfigFull(dbcontext2 , jobIDList , DROConfigFull1);
                 //var load2 = DROConfigFull2.LoadAllAsync();
                 //await load2;
                 
@@ -136,10 +138,11 @@ namespace Company.DIV.ConfigMgr.Data.Read
                 Debug.Print("__________DROConfigFull2_End");
                 }
 
-            using ( ConfigMgrReadContext dbcontext = new ConfigMgrReadContext() )
+            using ( ConfigMgrReadContext dbcontext3 = new ConfigMgrReadContext() )
                 {
+                dbcontext3.Configuration.AutoDetectChangesEnabled = false;
                 Debug.Print("__________DROConfigFull3_Start");
-                DROConfigFull3 = new Company.DIV.ConfigMgr.Data.Read.DAO.DROConfigFull(dbcontext , jobIDList2 , DROConfigFull1);
+                DROConfigFull3 = new Company.DIV.ConfigMgr.Data.Read.DAO.DROConfigFull(dbcontext3 , jobIDList2 , DROConfigFull1);
                 //var load3 = DROConfigFull3.LoadAllAsync();
                 //await load3;
 

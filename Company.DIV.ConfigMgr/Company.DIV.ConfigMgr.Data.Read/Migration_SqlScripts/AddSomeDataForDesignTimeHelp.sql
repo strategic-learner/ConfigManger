@@ -487,10 +487,19 @@ INSERT INTO  [AD].[J_Config_Executable]
 	) x
 	where x.ID is not null
 
-
-
 GO
 
+Select DescriptionShort ,* from  [AD].[ConfigAudit]
+
+/*  when Triggers aren't setup/Active  */
+--Insert [AD].[ConfigAudit]
+--(/*AuditID,*/ AuditDT, AuditType, AuditSUserSName, [ID] ,[jobID] ,[AppID] ,[ParamVersionID] ,[Active] ,[DescriptionShort] ,[DescriptionFull] ,[effDT] ,[trmDT] ,[updateDT] ,[updateUser])
+--Select getdate(),1,SUSER_SNAME(),
+--[ID] ,[jobID] ,[AppID] ,[ParamVersionID] ,[Active] ,[DescriptionShort] ,[DescriptionFull] ,[effDT] ,[trmDT] ,[updateDT] ,[updateUser]
+--From  [AD].[Config]
+	
+
+GO
 
 select * from [AD].[Config] x order by x.JobID
 select * from [AD].[App] x order by x.abbr

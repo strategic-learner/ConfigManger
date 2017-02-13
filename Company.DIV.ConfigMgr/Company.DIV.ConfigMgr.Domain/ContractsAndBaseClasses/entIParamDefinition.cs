@@ -11,8 +11,10 @@ namespace Company.DIV.ConfigMgr.Domain
         {
          Guid ParamVersionID { get; }
          int ParamSequence { get; }
-         Guid ParamTypeID { get; }  //data type for validations
+        ///data type for validations
+        Guid ParamTypeID { get; }  
          string variableName { get; }
-         string intendedUse { get; } //Specify intended usage of the ConfigParam's value
+        ///Specify intended usage of the ConfigParam's value
+        string intendedUse { get; } 
         }
     }
